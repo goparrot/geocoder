@@ -1,0 +1,11 @@
+test
+.gitattributes
+.travis.yml
+.prettierignore
+.prettierrc.json
+tsconfig.spec.json
+
+package-lock.json
+tslint.json
+tsconfig.json
+.prettierrc

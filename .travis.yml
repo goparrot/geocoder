@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- '8'
+- '10'
+- '11'
+cache:
+  directories:
+  - node_modules
+git:
+  depth: 5
+before_install:
+- openssl aes-256-cbc -K $encrypted_78a1249b0419_key -iv $encrypted_78a1249b0419_iv
+  -in .env.enc -out .env -d
+install:
+- npm i
+script:
+- npm run lint
+- npm run test:ci
+after_success: npm run coverage:ci

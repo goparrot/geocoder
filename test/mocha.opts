@@ -1,0 +1,6 @@
+-r ts-node/register
+-r source-map-support/register
+-r dotenv/config
+--full-trace
+--recursive
+--exit

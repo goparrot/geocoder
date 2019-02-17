@@ -1,0 +1,58 @@
+import { plainToClass } from 'class-transformer';
+import { validateOrReject } from 'class-validator';
+import countryStates from '../../data/country-states/country-states.json';
+import { WorldCountryState } from './world-country-state';
+import { WorldCountryStateQuery } from './world-country-state-query';
+import { WorldCountryStateQueryInterface } from './world-country-state-query.interface';
+import { WorldCountryStateInterface } from './world-country-state.interface';
+
+export class WorldCountryStateUtil {
+    /**
+     * Returns result only if all fields matched
+     */
+    private static match(state: WorldCountryState, filters: WorldCountryStateQuery): boolean {
+        if (
+            (filters.stateCode && state.stateCode.toLowerCase() === filters.stateCode.toLowerCase()) ||
+            (filters.name && state.name.toLowerCase() === filters.name.toLowerCase())
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    static async find(_query: WorldCountryStateQueryInterface): Promise<WorldCountryState | undefined> {
+        const query: WorldCountryStateQuery = plainToClass<WorldCountryStateQuery, WorldCountryStateQueryInterface>(WorldCountryStateQuery, _query);
+
+        // clear undefined/empty values
+        for (const key of Object.keys(query)) {
+            if (!query[key]) {
+                delete query[key];
+            }
+        }
+
+        try {
+            await validateOrReject(query, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+                validationError: { target: false, value: false },
+            });
+        } catch (err) {
+            return;
+        }
+
+        const stateData: WorldCountryStateInterface | undefined = (countryStates as WorldCountryStateInterface[]).find(
+            (plainState: WorldCountryStateInterface) => {
+                const state: WorldCountryState = plainToClass<WorldCountryState, WorldCountryStateInterface>(WorldCountryState, plainState);
+
+                return WorldCountryStateUtil.match(state, query);
+            },
+        );
+
+        if (!stateData) {
+            return;
+        }
+
+        return plainToClass<WorldCountryState, WorldCountryStateInterface>(WorldCountryState, stateData);
+    }
+}

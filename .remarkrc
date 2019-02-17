@@ -1,0 +1,13 @@
+{
+    "settings": {
+        "emphasis": "*",
+        "strong": "*",
+        "bullet": "*"
+    },
+    "plugins": [
+        "remark-lint-emphasis-marker",
+        "remark-lint-strong-marker",
+        "remark-github",
+        "remark-frontmatter"
+    ]
+}

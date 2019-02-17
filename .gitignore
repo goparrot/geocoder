@@ -1,0 +1,19 @@
+# dependencies
+dist/
+node_modules/
+package-lock.json
+
+# IDE
+/.idea
+/.vscode
+
+# misc
+.DS_Store
+
+# tests
+test.ts
+/test-reports
+/coverage
+/.nyc_output
+/log
+.env

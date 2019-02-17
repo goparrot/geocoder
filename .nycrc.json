@@ -1,0 +1,9 @@
+{
+    "extension": [".ts"],
+    "include": ["src/**/*.ts"],
+    "exclude": ["**/*.d.ts", "src/**/*.interface.ts"],
+    "require": ["./node_modules/reflect-metadata/Reflect.js", "ts-node/register", "source-map-support/register"],
+    "reporter": ["text-summary", "html"],
+    "cache": false,
+    "all": true
+}

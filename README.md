@@ -4,6 +4,7 @@
   <a href="https://github.com/go-parrot/geocoder" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/OpenStreetMap-Logo-2006.svg" width="354" alt="Geocoder Logo" /></a>
 </p>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/01c5b9bf03814e27b806be7c3984bd01)](https://app.codacy.com/app/go-parrot/geocoder?utm_source=github.com&utm_medium=referral&utm_content=go-parrot/geocoder&utm_campaign=Badge_Grade_Settings)
 [![Build Status](https://travis-ci.com/go-parrot/geocoder.svg?branch=master)](https://travis-ci.com/go-parrot/geocoder)
 [![Coverage Status](https://coveralls.io/repos/github/go-parrot/geocoder/badge.svg?branch=master)](https://coveralls.io/github/go-parrot/geocoder?branch=master&service=github)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)

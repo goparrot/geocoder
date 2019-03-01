@@ -2,8 +2,8 @@
 name: Feature Request
 about: Want us to add any features to Geocoder?
 title: 'feat: '
-labels: feature
-assignees: 'ruscon'
+labels: ''
+assignees: ruscon
 
 ---
 

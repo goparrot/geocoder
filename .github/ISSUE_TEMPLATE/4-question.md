@@ -2,7 +2,7 @@
 name: Question
 about: Have any questions about how Geocoder works?
 title: 'question: '
-labels: 'question'
+labels: question
 assignees: ''
 
 ---

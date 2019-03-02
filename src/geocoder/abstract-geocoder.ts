@@ -3,7 +3,7 @@ import { validateOrReject } from 'class-validator';
 import { UnsupportedAccuracyException, ValidationException } from '../exception';
 import { GeocodeQueryInterface, GeocoderInterface, ReverseQueryInterface } from '../interface';
 import { LoggerInterface, NullLogger } from '../logger';
-import { AbstractProvider, AccuracyEnum, Address, GeocodeQuery, Query, ReverseQuery } from '../model';
+import { AbstractProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
 import { WorldCountry, WorldCountryState, WorldCountryStateUtil, WorldCountryUtil } from '../util';
 
 export abstract class AbstractGeocoder implements GeocoderInterface {
@@ -35,7 +35,7 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
 
         let addresses: Address[] = await provider.geocode(query);
 
-        addresses = await this.addMissingAddressProperties(addresses, query);
+        addresses = await this.addMissingAddressProperties(addresses);
         addresses = this.filterByAccuracy(addresses, query.accuracy);
 
         if (addresses.length > query.limit) {
@@ -60,7 +60,7 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
 
         let addresses: Address[] = await provider.reverse(query);
 
-        addresses = await this.addMissingAddressProperties(addresses, query);
+        addresses = await this.addMissingAddressProperties(addresses);
         addresses = this.filterByAccuracy(addresses, query.accuracy);
 
         if (addresses.length > query.limit) {
@@ -70,11 +70,7 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
         return addresses;
     }
 
-    private async addMissingAddressProperties(addresses: Address[], query: Query): Promise<Address[]> {
-        if (!query.fillMissingQueryProperties) {
-            return addresses;
-        }
-
+    private async addMissingAddressProperties(addresses: Address[]): Promise<Address[]> {
         for (const address of addresses) {
             if (!address.countryCode || !address.country) {
                 try {

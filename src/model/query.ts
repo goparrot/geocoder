@@ -44,12 +44,14 @@ export class Query {
     language: string = Query.DEFAULT_RESULT_LANGUAGE;
 
     /**
-     * Auto fill undefined optional query properties using other optional properties: country, countryCode, zipcode
+     * TODO not implemented
+     *
+     * Auto fill undefined optional query properties using other optional properties: country, countryCode, postalCode
      * @example You provide country
-     * Library search countryCode and zipcode by country
+     * Library search countryCode and postalCode by country
      *
      * @example You provide state
-     * Library search country, countryCode, stateCode and zipcode by country
+     * Library search country, countryCode, stateCode and postalCode by country
      */
     @IsBoolean()
     @Transform((v: boolean) => !!v, { toClassOnly: true })

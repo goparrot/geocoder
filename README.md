@@ -106,7 +106,7 @@ axios.interceptors.request.use((request: AxiosRequestConfig) => {
 
 // You can log all responses
 axios.interceptors.response.use(
-    (response: AxiosResponse<any>): AxiosResponse<any> => {
+    (response: AxiosResponse): AxiosResponse => {
         logger.debug(`api response ${response.status}`, response.data);
 
         return response;

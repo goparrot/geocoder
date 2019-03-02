@@ -21,7 +21,7 @@ describe('ValidationException (unit)', () => {
         });
 
         it('should return right message', async () => {
-            return new ValidationException([]).should.have.property('message', 'Validation error');
+            return new ValidationException([]).should.have.property('message', 'Validation Failed.');
         });
     });
 

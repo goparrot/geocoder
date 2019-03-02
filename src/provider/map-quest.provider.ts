@@ -50,7 +50,7 @@ export class MapQuestProvider extends AbstractHttpProvider {
     }
 
     /**
-     * @link {https://developer.mapquest.com/documentation/geocoding-api/address/post/}
+     * @link {https://developer.mapquest.com/documentation/geocoding-api/address/get/}
      */
     async geocode(query: GeocodeQuery): Promise<Address[]> {
         const response: AxiosResponse = await this.getHttpClient().get(this.geocodeUrl, {

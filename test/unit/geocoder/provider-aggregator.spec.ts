@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { ProviderNotRegisteredException } from '../../../src/exception/provider-not-registered.exception';
+import { ProviderNotRegisteredException } from '../../../src/exception';
 import { ProviderAggregator } from '../../../src/geocoder';
 import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
 import { GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';

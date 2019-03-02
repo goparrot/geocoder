@@ -88,7 +88,7 @@ describe('Geocoder (2e2)', () => {
                 const accuracy: string = `string`;
                 geocodeQueryFixture.accuracy = accuracy as AccuracyEnum;
 
-                return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(ValidationException, 'Validation error');
+                return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(ValidationException, 'Validation Failed.');
             });
         });
     });

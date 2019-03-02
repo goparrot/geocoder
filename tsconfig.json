@@ -15,7 +15,7 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "sourceMap": false,
-        "declaration": false,
+        "declaration": true,
         "noImplicitAny": false,
         "removeComments": true,
         "noLib": false,

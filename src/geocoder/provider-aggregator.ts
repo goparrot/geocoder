@@ -1,5 +1,5 @@
 import { AbstractDecider, CircularDecider } from '../decider';
-import { ProviderNotRegisteredException } from '../exception/provider-not-registered.exception';
+import { ProviderNotRegisteredException } from '../exception';
 import { GeocodeQueryInterface, ReverseQueryInterface, Type } from '../interface';
 import { LoggerInterface } from '../logger';
 import { AbstractProvider, Address } from '../model';

@@ -7,7 +7,7 @@ export abstract class AbstractHttpProvider extends AbstractProvider {
         super();
 
         this.httpClient.interceptors.response.use(
-            (response: AxiosResponse<any>): AxiosResponse<any> => {
+            (response: AxiosResponse): AxiosResponse => {
                 if (!response.data) {
                     throw new InvalidServerResponseException(`Invalid server response: ${response.config.url}`);
                 }

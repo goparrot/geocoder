@@ -12,7 +12,7 @@ You MUST run the `npm test` command.
 
 You MUST write (or update) unit tests.
 
-You MUST run the `npm run pre-commit` hook.
+You MUST run the `npm run commit` hook to add a new commit.
 
 You SHOULD write documentation.
 

@@ -38,7 +38,7 @@ describe('HereProvider (2e2)', () => {
             return geocoder.geocode(geocodeQueryFixture).should.become(plainParsedResponseObject);
         });
 
-        it('should return InvalidServerResponseException on empty response', async () => {
+        it('should throw InvalidServerResponseException on empty response', async () => {
             mock.onGet(provider.geocodeUrl).reply(200, '');
 
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
@@ -60,25 +60,25 @@ describe('HereProvider (2e2)', () => {
             return geocoder.geocode(geocodeQueryFixture).should.become([]);
         });
 
-        it('should return InvalidCredentialsException', async () => {
+        it('should throw InvalidCredentialsException', async () => {
             mock.onGet(provider.geocodeUrl).reply(401);
 
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
         });
 
-        it('should return InvalidCredentialsException', async () => {
+        it('should throw InvalidCredentialsException', async () => {
             mock.onGet(provider.geocodeUrl).reply(403);
 
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
         });
 
-        it('should return QuotaExceededException', async () => {
+        it('should throw QuotaExceededException', async () => {
             mock.onGet(provider.geocodeUrl).reply(429);
 
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(QuotaExceededException, 'Quota exceeded');
         });
 
-        it('should return InvalidServerResponseException', async () => {
+        it('should throw InvalidServerResponseException', async () => {
             mock.onGet(provider.geocodeUrl).reply(500);
 
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidServerResponseException);
@@ -92,7 +92,7 @@ describe('HereProvider (2e2)', () => {
             return geocoder.reverse(reverseQueryFixture).should.become(plainParsedResponseObject);
         });
 
-        it('should return InvalidServerResponseException on empty response', async () => {
+        it('should throw InvalidServerResponseException on empty response', async () => {
             mock.onGet(provider.reverseUrl).reply(200, '');
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
@@ -114,25 +114,25 @@ describe('HereProvider (2e2)', () => {
             return geocoder.reverse(reverseQueryFixture).should.become([]);
         });
 
-        it('should return InvalidCredentialsException', async () => {
+        it('should throw InvalidCredentialsException', async () => {
             mock.onGet(provider.reverseUrl).reply(401);
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
         });
 
-        it('should return InvalidCredentialsException', async () => {
+        it('should throw InvalidCredentialsException', async () => {
             mock.onGet(provider.reverseUrl).reply(403);
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
         });
 
-        it('should return QuotaExceededException', async () => {
+        it('should throw QuotaExceededException', async () => {
             mock.onGet(provider.reverseUrl).reply(429);
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(QuotaExceededException, 'Quota exceeded');
         });
 
-        it('should return InvalidServerResponseException', async () => {
+        it('should throw InvalidServerResponseException', async () => {
             mock.onGet(provider.reverseUrl).reply(500);
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException);

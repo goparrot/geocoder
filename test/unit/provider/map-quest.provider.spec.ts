@@ -28,6 +28,12 @@ describe('MapQuestProvider (unit)', () => {
         });
     });
 
+    describe('#maxAccuracy', () => {
+        it('should be typeof AccuracyEnum', async () => {
+            return provider.maxAccuracy.should.be.deep.eq(AccuracyEnum.STREET_NAME);
+        });
+    });
+
     describe('#geocode', () => {
         it('should be instance of Function', async () => {
             return provider.geocode.should.be.instanceOf(Function);
@@ -95,7 +101,7 @@ describe('MapQuestProvider (unit)', () => {
             return provider.accuracyFilter(fixture, AccuracyEnum.HOUSE_NUMBER).should.be.eq(false);
         });
 
-        it('should return UnsupportedAccuracyException for unsupported accuracy value', async () => {
+        it('should throw UnsupportedAccuracyException for unsupported accuracy value', async () => {
             const accuracy: AccuracyEnum = 'WRONG_VALUE' as AccuracyEnum;
 
             return ((): any => provider.accuracyFilter(fixture, accuracy as AccuracyEnum)).should.throw(

@@ -1,6 +1,6 @@
 -r ts-node/register
 -r source-map-support/register
+-r tsconfig-paths/register
+-r ./node_modules/reflect-metadata/Reflect.js
+--project tsconfig.spec.json
 -r dotenv/config
---full-trace
---recursive
---exit

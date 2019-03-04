@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../exception';
-import { AbstractHttpProvider, Address, GeocodeQuery, ReverseQuery } from '../model';
+import { AbstractHttpProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
 import { AddressBuilder } from '../model/address-builder';
 
 export interface GoogleMapsProviderGeocodeParamsInterface {
@@ -35,6 +35,10 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
         if (!this.apiKey) {
             throw new InvalidCredentialsException('Invalid or missing api key.');
         }
+    }
+
+    get maxAccuracy(): AccuracyEnum {
+        return AccuracyEnum.HOUSE_NUMBER;
     }
 
     get geocodeUrl(): string {

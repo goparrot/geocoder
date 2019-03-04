@@ -13,6 +13,13 @@ export class ChainProvider extends AbstractProvider {
     async geocode(query: GeocodeQuery): Promise<Address[]> {
         for (const provider of this.providers) {
             try {
+                if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
+                    this.logger.debug(
+                        `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${provider.maxAccuracy}")`,
+                    );
+                    continue;
+                }
+
                 const addresses: Address[] = await provider.geocode(query);
 
                 if (addresses.length) {
@@ -29,6 +36,13 @@ export class ChainProvider extends AbstractProvider {
     async reverse(query: ReverseQuery): Promise<Address[]> {
         for (const provider of this.providers) {
             try {
+                if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
+                    this.logger.debug(
+                        `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${provider.maxAccuracy}")`,
+                    );
+                    continue;
+                }
+
                 const addresses: Address[] = await provider.reverse(query);
 
                 if (addresses.length) {

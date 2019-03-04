@@ -39,7 +39,7 @@ describe('ProviderAggregator (unit)', () => {
             return geocoder.geocode.should.be.instanceOf(Function);
         });
 
-        it('should return ProviderNotRegisteredException if provider not registered', async () => {
+        it('should throw ProviderNotRegisteredException if provider not registered', async () => {
             return geocoder.geocode(geocodeQueryFixture).should.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
         });
     });
@@ -49,7 +49,7 @@ describe('ProviderAggregator (unit)', () => {
             return geocoder.reverse.should.be.instanceOf(Function);
         });
 
-        it('should return ProviderNotRegisteredException if provider not registered', async () => {
+        it('should throw ProviderNotRegisteredException if provider not registered', async () => {
             return geocoder.reverse(reverseQueryFixture).should.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
         });
     });
@@ -125,14 +125,14 @@ describe('ProviderAggregator (unit)', () => {
                 .should.be.instanceOf(ProviderAggregator);
         });
 
-        it('should return ProviderNotRegisteredException if provider not registered', async () => {
+        it('should throw ProviderNotRegisteredException if provider not registered', async () => {
             return ((): any => geocoder.using(MapQuestProvider)).should.throw(
                 ProviderNotRegisteredException,
                 'Provider "MapQuestProvider" is not registered, so you cannot use it. Did you forget to register it or made a typo?',
             );
         });
 
-        it('should return ProviderNotRegisteredException if a class does not inherit AbstractProvider.', async () => {
+        it('should throw ProviderNotRegisteredException if a class does not inherit AbstractProvider.', async () => {
             return ((): any => geocoder.using(ProviderAggregator)).should.throw(
                 ProviderNotRegisteredException,
                 'The class "ProviderAggregator" does not inherit AbstractProvider.',

@@ -2,7 +2,7 @@
     "extension": [".ts"],
     "include": ["src/**/*.ts"],
     "exclude": ["**/*.d.ts", "src/**/*.interface.ts"],
-    "require": ["./node_modules/reflect-metadata/Reflect.js", "ts-node/register", "source-map-support/register"],
+    "require": ["ts-node/register", "source-map-support/register", "tsconfig-paths/register", "dotenv/config", "./node_modules/reflect-metadata/Reflect.js"],
     "reporter": ["text-summary", "html"],
     "cache": false,
     "all": true

@@ -41,6 +41,10 @@ export class MapQuestProvider extends AbstractHttpProvider {
         }
     }
 
+    get maxAccuracy(): AccuracyEnum {
+        return AccuracyEnum.STREET_NAME;
+    }
+
     get geocodeUrl(): string {
         return `https://www.mapquestapi.com/geocoding/v1/address?key=${this.apiKey}`;
     }
@@ -132,19 +136,15 @@ export class MapQuestProvider extends AbstractHttpProvider {
                 builder.countryCode = location.adminArea1;
                 if (2 === location.adminArea3.length) {
                     builder.stateCode = location.adminArea3;
+                    builder.state = undefined;
                 } else {
+                    builder.stateCode = undefined;
                     builder.state = location.adminArea3;
                 }
                 builder.city = location.adminArea5;
+                builder.streetName = location.street;
+                builder.houseNumber = undefined;
                 builder.postalCode = location.postalCode;
-
-                if ([MapQuestLocationQualityEnum.POINT, MapQuestLocationQualityEnum.ADDRESS].includes(location.geocodeQuality)) {
-                    const words: [] = location.street.split(' ');
-                    builder.houseNumber = words.shift();
-                    builder.streetName = words.join(' ');
-                } else {
-                    builder.streetName = location.street;
-                }
 
                 return builder.build();
             },

@@ -38,7 +38,7 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.geocode(geocodeQueryFixture).should.become(plainParsedResponseObject);
         });
 
-        it('should return InvalidServerResponseException on empty response', async () => {
+        it('should throw InvalidServerResponseException on empty response', async () => {
             mock.onGet(provider.geocodeUrl).reply(200, '');
 
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
@@ -50,7 +50,7 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.geocode(geocodeQueryFixture).should.become([]);
         });
 
-        it('should return InvalidCredentialsException', async () => {
+        it('should throw InvalidCredentialsException', async () => {
             mock.onGet(provider.geocodeUrl).reply(200, {
                 status: 'REQUEST_DENIED',
                 error_message: 'The provided API key is invalid.',
@@ -59,7 +59,7 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
         });
 
-        it('should return InvalidServerResponseException', async () => {
+        it('should throw InvalidServerResponseException', async () => {
             mock.onGet(provider.geocodeUrl).reply(200, {
                 status: 'REQUEST_DENIED',
                 error_message: 'Some other error',
@@ -68,7 +68,7 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidServerResponseException, 'Some other error');
         });
 
-        it('should return QuotaExceededException', async () => {
+        it('should throw QuotaExceededException', async () => {
             mock.onGet(provider.geocodeUrl).reply(200, {
                 status: 'OVER_QUERY_LIMIT',
             });
@@ -76,7 +76,7 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(QuotaExceededException);
         });
 
-        it('should return InvalidServerResponseException', async () => {
+        it('should throw InvalidServerResponseException', async () => {
             mock.onGet(provider.geocodeUrl).reply(500);
 
             return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(InvalidServerResponseException);
@@ -90,13 +90,13 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.reverse(reverseQueryFixture).should.become(plainParsedResponseObject);
         });
 
-        it('should return InvalidServerResponseException on empty response', async () => {
+        it('should throw InvalidServerResponseException on empty response', async () => {
             mock.onGet(provider.reverseUrl).reply(200, '');
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
         });
 
-        it('should return InvalidServerResponseException', async () => {
+        it('should throw InvalidServerResponseException', async () => {
             mock.onGet(provider.reverseUrl).reply(200, {
                 status: 'REQUEST_DENIED',
                 error_message: 'Some other error',
@@ -105,7 +105,7 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException, 'Some other error');
         });
 
-        it('should return QuotaExceededException', async () => {
+        it('should throw QuotaExceededException', async () => {
             mock.onGet(provider.reverseUrl).reply(200, {
                 status: 'OVER_QUERY_LIMIT',
             });
@@ -113,7 +113,7 @@ describe('GoogleMapsProvider (2e2)', () => {
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(QuotaExceededException);
         });
 
-        it('should return InvalidServerResponseException', async () => {
+        it('should throw InvalidServerResponseException', async () => {
             mock.onGet(provider.reverseUrl).reply(500);
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException);

@@ -2,6 +2,7 @@ import Axios, { AxiosInstance } from 'axios';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import { InvalidCredentialsException } from '../../../src/exception';
+import { AccuracyEnum } from '../../../src/model';
 import { GoogleMapsProvider } from '../../../src/provider';
 
 chai.use(chaiAsPromised);
@@ -24,6 +25,12 @@ describe('GoogleMapsProvider (unit)', () => {
 
         it('should throw InvalidCredentialsException on empty appKey', async () => {
             return ((): any => new GoogleMapsProvider(client, '')).should.throw(InvalidCredentialsException, 'Invalid or missing api key.');
+        });
+    });
+
+    describe('#maxAccuracy', () => {
+        it('should be typeof AccuracyEnum', async () => {
+            return provider.maxAccuracy.should.be.deep.eq(AccuracyEnum.HOUSE_NUMBER);
         });
     });
 

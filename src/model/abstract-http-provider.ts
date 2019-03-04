@@ -1,5 +1,5 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import { AbstractProvider, Address, GeocodeQuery, ReverseQuery } from '.';
+import { AbstractProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '.';
 import { InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../exception';
 
 export abstract class AbstractHttpProvider extends AbstractProvider {
@@ -32,6 +32,12 @@ export abstract class AbstractHttpProvider extends AbstractProvider {
         );
     }
 
+    /**
+     * @example If the provider doesn't provide separate information about house number, then AccuracyEnum.STREET_NAME should be set.
+     * @important This information will be used to ignore the provider if query.accuracy is specified.
+     */
+    abstract get maxAccuracy(): AccuracyEnum;
+
     abstract get geocodeUrl(): string;
 
     abstract get reverseUrl(): string;
@@ -42,5 +48,10 @@ export abstract class AbstractHttpProvider extends AbstractProvider {
 
     protected getHttpClient(): AxiosInstance {
         return this.httpClient;
+    }
+
+    isProvidesAccuracy(accuracy: AccuracyEnum): boolean {
+        const accuracies: string[] = Object.values(AccuracyEnum);
+        return accuracies.slice(accuracies.indexOf(this.maxAccuracy)).includes(accuracy);
     }
 }

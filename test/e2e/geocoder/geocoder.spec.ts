@@ -2,13 +2,13 @@ import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { InvalidServerResponseException, QuotaExceededException, ValidationException } from '../../../src/exception';
+import { InvalidServerResponseException, UnsupportedAccuracyException, ValidationException } from '../../../src/exception';
 import { Geocoder } from '../../../src/geocoder';
 import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
-import { GoogleMapsProvider } from '../../../src/provider';
+import { MapQuestProvider } from '../../../src/provider';
 import { plainFullFilledGeocodeQueryObject, plainFullFilledReverseQueryObject } from '../../fixture/model/query.fixture';
-import { plainFullFilledResponseObject, plainParsedResponseObject } from '../../fixture/provider/google.fixture';
+import { plainFullFilledResponseObject, plainParsedResponseObject } from '../../fixture/provider/map-quest.fixture';
 
 chai.use(chaiAsPromised);
 chai.should();
@@ -17,7 +17,7 @@ describe('Geocoder (2e2)', () => {
     let geocodeQueryFixture: GeocodeQueryInterface;
     let reverseQueryFixture: ReverseQueryInterface;
     let geocoder: Geocoder;
-    let provider: GoogleMapsProvider;
+    let provider: MapQuestProvider;
     let mock: MockAdapter;
 
     beforeEach(() => {
@@ -27,7 +27,7 @@ describe('Geocoder (2e2)', () => {
         const client: AxiosInstance = Axios.create();
         mock = new MockAdapter(client);
 
-        provider = new GoogleMapsProvider(client, 'test');
+        provider = new MapQuestProvider(client, 'test');
 
         geocoder = new Geocoder(provider);
     });
@@ -79,13 +79,18 @@ describe('Geocoder (2e2)', () => {
 
                 geocodeQueryFixture.accuracy = AccuracyEnum.HOUSE_NUMBER;
 
-                return geocoder.geocode(geocodeQueryFixture).should.become(plainParsedResponseObject);
+                return geocoder
+                    .geocode(geocodeQueryFixture)
+                    .should.be.rejectedWith(
+                        UnsupportedAccuracyException,
+                        `provider MapQuestProvider doesn't support "houseNumber" accuracy (max accuracy is "streetName")`,
+                    );
             });
 
             it('should throw ValidationException', async () => {
                 mock.onGet(provider.geocodeUrl).reply(200, plainFullFilledResponseObject);
 
-                const accuracy: string = `string`;
+                const accuracy: string = 'string';
                 geocodeQueryFixture.accuracy = accuracy as AccuracyEnum;
 
                 return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(ValidationException, 'Validation Failed.');
@@ -100,33 +105,25 @@ describe('Geocoder (2e2)', () => {
             return geocoder.reverse(reverseQueryFixture).should.become(plainParsedResponseObject);
         });
 
-        it('should return InvalidServerResponseException on empty response', async () => {
+        it('should throw InvalidServerResponseException on empty response', async () => {
             mock.onGet(provider.reverseUrl).reply(200, '');
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
         });
 
-        it('should return InvalidServerResponseException', async () => {
-            mock.onGet(provider.reverseUrl).reply(200, {
-                status: 'REQUEST_DENIED',
-                error_message: 'Some other error',
-            });
-
-            return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException, 'Some other error');
-        });
-
-        it('should return QuotaExceededException', async () => {
-            mock.onGet(provider.reverseUrl).reply(200, {
-                status: 'OVER_QUERY_LIMIT',
-            });
-
-            return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(QuotaExceededException);
-        });
-
-        it('should return InvalidServerResponseException', async () => {
+        it('should throw InvalidServerResponseException', async () => {
             mock.onGet(provider.reverseUrl).reply(500);
 
             return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(InvalidServerResponseException);
+        });
+
+        it('should throw ValidationException', async () => {
+            mock.onGet(provider.reverseUrl).reply(200, plainFullFilledResponseObject);
+
+            const accuracy: string = 'string';
+            reverseQueryFixture.accuracy = accuracy as AccuracyEnum;
+
+            return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(ValidationException, 'Validation Failed.');
         });
     });
 });

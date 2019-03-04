@@ -3,7 +3,7 @@ import { validateOrReject } from 'class-validator';
 import { UnsupportedAccuracyException, ValidationException } from '../exception';
 import { GeocodeQueryInterface, GeocoderInterface, ReverseQueryInterface } from '../interface';
 import { LoggerInterface, NullLogger } from '../logger';
-import { AbstractProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
+import { AbstractHttpProvider, AbstractProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
 import { WorldCountry, WorldCountryState, WorldCountryStateUtil, WorldCountryUtil } from '../util';
 
 export abstract class AbstractGeocoder implements GeocoderInterface {
@@ -33,6 +33,14 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
             throw new ValidationException(err);
         }
 
+        if (query.accuracy && provider instanceof AbstractHttpProvider && !provider.isProvidesAccuracy(query.accuracy)) {
+            const message: string = `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${
+                provider.maxAccuracy
+            }")`;
+            this.logger.error(message);
+            throw new UnsupportedAccuracyException(message);
+        }
+
         let addresses: Address[] = await provider.geocode(query);
 
         addresses = await this.addMissingAddressProperties(addresses);
@@ -56,6 +64,14 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
             });
         } catch (err) {
             throw new ValidationException(err);
+        }
+
+        if (query.accuracy && provider instanceof AbstractHttpProvider && !provider.isProvidesAccuracy(query.accuracy)) {
+            const message: string = `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${
+                provider.maxAccuracy
+            }")`;
+            this.logger.error(message);
+            throw new UnsupportedAccuracyException(message);
         }
 
         let addresses: Address[] = await provider.reverse(query);

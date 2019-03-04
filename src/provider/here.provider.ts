@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { InvalidCredentialsException } from '../exception';
-import { AbstractHttpProvider, Address, GeocodeQuery, ReverseQuery } from '../model';
+import { AbstractHttpProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
 import { AddressBuilder } from '../model/address-builder';
 import { WorldCountry, WorldCountryUtil } from '../util';
 
@@ -48,6 +48,10 @@ export class HereProvider extends AbstractHttpProvider {
         if (!this.appId || !this.appCode) {
             throw new InvalidCredentialsException('Invalid or missing api key.');
         }
+    }
+
+    get maxAccuracy(): AccuracyEnum {
+        return AccuracyEnum.HOUSE_NUMBER;
     }
 
     /**

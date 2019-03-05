@@ -1,4 +1,4 @@
-import { AbstractDecider, CircularDecider } from '../decider';
+import { AbstractDecider, StatelessDecider } from '../decider';
 import { ProviderNotRegisteredException } from '../exception';
 import { GeocodeQueryInterface, ReverseQueryInterface, Type } from '../interface';
 import { LoggerInterface } from '../logger';
@@ -13,25 +13,17 @@ export class ProviderAggregator extends AbstractGeocoder {
     constructor(decider?: AbstractDecider, logger?: LoggerInterface) {
         super(logger);
 
-        this.decider = decider || new CircularDecider();
+        this.decider = decider || new StatelessDecider();
     }
 
     async geocode(query: GeocodeQueryInterface): Promise<Address[]> {
-        if (!this.providers.length) {
-            throw ProviderNotRegisteredException.noProviderRegistered();
-        }
-
-        const provider: AbstractProvider = await this.decider.geocode(query, this.providers, this.provider);
+        const provider: AbstractProvider = await this.decider.getProvider(this.providers, this.provider);
 
         return this.geocodeByProvider(provider, query);
     }
 
     async reverse(query: ReverseQueryInterface): Promise<Address[]> {
-        if (!this.providers.length) {
-            throw ProviderNotRegisteredException.noProviderRegistered();
-        }
-
-        const provider: AbstractProvider = await this.decider.reverse(query, this.providers, this.provider);
+        const provider: AbstractProvider = await this.decider.getProvider(this.providers, this.provider);
 
         return this.reverseByProvider(provider, query);
     }

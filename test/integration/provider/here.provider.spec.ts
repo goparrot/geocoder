@@ -22,7 +22,7 @@ describe('HereProvider (integration)', () => {
 
         client = Axios.create();
 
-        const provider: HereProvider = new HereProvider(client, `${process.env.HERE_APP_ID}`, `${process.env.HERE_APP_CODE}`, true);
+        const provider: HereProvider = new HereProvider(client, `${process.env.HERE_APP_ID}`, `${process.env.HERE_APP_CODE}`);
 
         geocoder = new Geocoder(provider);
     });

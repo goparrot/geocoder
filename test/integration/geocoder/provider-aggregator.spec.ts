@@ -2,7 +2,6 @@ import Axios, { AxiosInstance } from 'axios';
 import * as chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import { ProviderAggregator } from '../../../src/geocoder';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 import { HereProvider } from '../../../src/provider';
 import { plainFullFilledGeocodeQueryObject, plainFullFilledReverseQueryObject } from '../../fixture/model/query.fixture';
@@ -12,16 +11,11 @@ chai.should();
 
 describe('ProviderAggregator (integration)', () => {
     let geocoder: ProviderAggregator;
-    let geocodeQueryFixture: GeocodeQueryInterface;
-    let reverseQueryFixture: ReverseQueryInterface;
 
     beforeEach(() => {
-        geocodeQueryFixture = { ...plainFullFilledGeocodeQueryObject };
-        reverseQueryFixture = { ...plainFullFilledReverseQueryObject };
-
         const client: AxiosInstance = Axios.create();
 
-        const provider: HereProvider = new HereProvider(client, `${process.env.HERE_APP_ID}`, `${process.env.HERE_APP_CODE}`, true);
+        const provider: HereProvider = new HereProvider(client, `${process.env.HERE_APP_ID}`, `${process.env.HERE_APP_CODE}`);
 
         geocoder = new ProviderAggregator();
         geocoder.registerProvider(provider);
@@ -30,7 +24,7 @@ describe('ProviderAggregator (integration)', () => {
     describe('#geocode', () => {
         it('should return expected response', async () => {
             return geocoder
-                .geocode(geocodeQueryFixture)
+                .geocode(plainFullFilledGeocodeQueryObject)
                 .should.eventually.be.an('array')
                 .with.lengthOf(1);
         });
@@ -39,7 +33,7 @@ describe('ProviderAggregator (integration)', () => {
     describe('#reverse', () => {
         it('should return expected response', async () => {
             return geocoder
-                .reverse(reverseQueryFixture)
+                .reverse(plainFullFilledReverseQueryObject)
                 .should.eventually.be.an('array')
                 .with.lengthOf(Query.DEFAULT_RESULT_LIMIT);
         });

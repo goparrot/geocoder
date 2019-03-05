@@ -1,14 +1,19 @@
-# [0.4.0](https://github.com/goparrot/geocoder/compare/v0.2.0...v0.4.0) (2019-03-05)
+# [0.4.0](https://github.com/goparrot/geocoder/compare/v0.3.0...v0.4.0) (2019-03-05)
 
 ### Features
 
 *   **decider:** rm CircularDecider, add StatefulDecider, StatelessDecider ([46c8455](https://github.com/goparrot/geocoder/commit/46c8455))
-*   **provider:** add StatefulChainProvider ([d038545](https://github.com/goparrot/geocoder/commit/d038545))
 
 ### BREAKING CHANGES
 
 *   **decider:** ProviderAggregator by default works with StatefulDecider (before was
     CircularDecider)
+
+# [0.3.0](https://github.com/goparrot/geocoder/compare/v0.2.0...v0.3.0) (2019-03-05)
+
+### Features
+
+*   **provider:** add StatefulChainProvider ([d038545](https://github.com/goparrot/geocoder/commit/d038545))
 
 # [0.2.0](https://github.com/goparrot/geocoder/compare/0.1.1...v0.2.0) (2019-03-04)
 

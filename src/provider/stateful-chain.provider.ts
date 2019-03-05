@@ -2,24 +2,27 @@ import { InvalidArgumentException } from '../exception';
 import { LoggerInterface, NullLogger } from '../logger';
 import { AbstractHttpProvider, AbstractProvider, Address, GeocodeQuery, ReverseQuery } from '../model';
 
-export class ChainProvider extends AbstractProvider {
+export class StatefulChainProvider extends AbstractProvider {
+    private nextProvider: AbstractHttpProvider;
     private readonly logger: LoggerInterface;
 
     constructor(private readonly providers: AbstractHttpProvider[], logger?: LoggerInterface) {
         super();
 
-        if (!this.providers.length) {
+        if (!providers.length) {
             throw new InvalidArgumentException('provider array should not be empty');
         }
 
+        this.setNextProvider();
         this.logger = logger || new NullLogger();
     }
 
     async geocode(query: GeocodeQuery): Promise<Address[]> {
-        for (const provider of this.providers) {
+        for (const provider of this.getOrderedProvidersList()) {
             try {
+                this.setNextProvider();
                 if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
-                    this.logger.debug(
+                    this.logger.info(
                         `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${provider.maxAccuracy}")`,
                     );
                     continue;
@@ -39,10 +42,11 @@ export class ChainProvider extends AbstractProvider {
     }
 
     async reverse(query: ReverseQuery): Promise<Address[]> {
-        for (const provider of this.providers) {
+        for (const provider of this.getOrderedProvidersList()) {
             try {
+                this.setNextProvider();
                 if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
-                    this.logger.debug(
+                    this.logger.info(
                         `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${provider.maxAccuracy}")`,
                     );
                     continue;
@@ -77,5 +81,27 @@ export class ChainProvider extends AbstractProvider {
         }
 
         return this;
+    }
+
+    private setNextProvider(): this {
+        if (!this.nextProvider) {
+            this.nextProvider = this.providers[0];
+        } else {
+            const currentProviderIndex: number = this.providers.indexOf(this.nextProvider);
+            this.nextProvider = this.providers[currentProviderIndex + 1] || this.providers[0];
+        }
+
+        return this;
+    }
+
+    /**
+     * Queue of providers
+     */
+    private getOrderedProvidersList(): AbstractHttpProvider[] {
+        const nextProviderIndex: number = this.providers.indexOf(this.nextProvider);
+
+        return this.getProviders()
+            .slice(nextProviderIndex)
+            .concat(this.getProviders().slice(0, nextProviderIndex));
     }
 }

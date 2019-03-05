@@ -4,28 +4,28 @@ import chaiAsPromised from 'chai-as-promised';
 import { plainToClass } from 'class-transformer';
 import { InvalidArgumentException } from '../../../src/exception';
 import { GeocodeQuery, ReverseQuery } from '../../../src/model';
-import { ChainProvider, GoogleMapsProvider, HereProvider, MapQuestProvider } from '../../../src/provider';
+import { GoogleMapsProvider, HereProvider, MapQuestProvider, StatefulChainProvider } from '../../../src/provider';
 
 chai.use(chaiAsPromised);
 chai.should();
 
-describe('ChainProvider (unit)', () => {
+describe('StatefulChainProvider (unit)', () => {
     let client: AxiosInstance;
-    let provider: ChainProvider;
+    let provider: StatefulChainProvider;
 
     beforeEach(() => {
         client = Axios.create();
 
-        provider = new ChainProvider([new HereProvider(client, 'test', 'test')]);
+        provider = new StatefulChainProvider([new HereProvider(client, 'test', 'test')]);
     });
 
     describe('#constructor', () => {
-        it('should be instance of ChainProvider', async () => {
-            return provider.should.be.instanceOf(ChainProvider);
+        it('should be instance of StatefulChainProvider', async () => {
+            return provider.should.be.instanceOf(StatefulChainProvider);
         });
 
         it('should throw InvalidArgumentException if provider array is empty', async () => {
-            return ((): any => new ChainProvider([])).should.throw(InvalidArgumentException, 'provider array should not be empty');
+            return ((): any => new StatefulChainProvider([])).should.throw(InvalidArgumentException, 'provider array should not be empty');
         });
     });
 
@@ -82,7 +82,7 @@ describe('ChainProvider (unit)', () => {
         });
 
         it('should return this', async () => {
-            return provider.registerProvider(new GoogleMapsProvider(client, 'test')).should.be.instanceOf(ChainProvider);
+            return provider.registerProvider(new GoogleMapsProvider(client, 'test')).should.be.instanceOf(StatefulChainProvider);
         });
 
         it('should register provider', async () => {
@@ -98,7 +98,7 @@ describe('ChainProvider (unit)', () => {
         });
 
         it('should return this', async () => {
-            return provider.registerProviders([new GoogleMapsProvider(client, 'test')]).should.be.instanceOf(ChainProvider);
+            return provider.registerProviders([new GoogleMapsProvider(client, 'test')]).should.be.instanceOf(StatefulChainProvider);
         });
 
         it('should do nothing', async () => {

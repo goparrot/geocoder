@@ -1,2 +1,2 @@
 export * from './abstract-decider';
-export * from './сircular-decider';
+export * from './circular-decider';

@@ -28,6 +28,6 @@ export class CircularDecider extends AbstractDecider {
     private getNextProvider(providers: AbstractProvider[], provider: AbstractProvider): AbstractProvider {
         const providerIndex: number = providers.indexOf(provider);
 
-        return providers[providerIndex + 1] ? providers[providerIndex + 1] : providers[0];
+        return providers[providerIndex + 1] || providers[0];
     }
 }

@@ -1,3 +1,17 @@
+# [0.5.0](https://github.com/goparrot/geocoder/compare/v0.4.0...v0.5.0) (2019-03-06)
+
+### Bug Fixes
+
+*   **changelog:** fix changelog for v0.3.0 and v0.4.0 ([ab1b826](https://github.com/goparrot/geocoder/commit/ab1b826))
+
+### Code Refactoring
+
+*   chagne class name from Adress to Location ([7225728](https://github.com/goparrot/geocoder/commit/7225728))
+
+### BREAKING CHANGES
+
+*   chagne class name from Adress to Location and AddressBuilder to LocationBuilder
+
 # [0.4.0](https://github.com/goparrot/geocoder/compare/v0.3.0...v0.4.0) (2019-03-05)
 
 ### Features

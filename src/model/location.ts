@@ -1,8 +1,8 @@
 import { classToPlain, Exclude, Expose } from 'class-transformer';
-import { AddressInterface } from '../interface';
+import { LocationInterface } from '../interface';
 
 @Exclude()
-export class Address implements AddressInterface {
+export class Location implements LocationInterface {
     /**
      * @example 1200 E 89th St, Chicago, IL 60619, USA
      * @example 1158 E 89th St, Chicago, Illinois 60619, US
@@ -64,7 +64,7 @@ export class Address implements AddressInterface {
                   .join(', ');
     }
 
-    toObject(): AddressInterface {
-        return classToPlain<Address>(this) as AddressInterface;
+    toObject(): LocationInterface {
+        return classToPlain<Location>(this) as LocationInterface;
     }
 }

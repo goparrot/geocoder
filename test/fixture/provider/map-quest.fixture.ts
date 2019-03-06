@@ -1,4 +1,4 @@
-import { AddressInterface } from '../../../src/interface';
+import { LocationInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 import { MapQuestProvider } from '../../../src/provider';
 
@@ -41,7 +41,7 @@ export const plainFullFilledResponseObject: any = {
     ],
 };
 
-export const plainParsedResponseObject: AddressInterface[] = [
+export const plainParsedResponseObject: LocationInterface[] = [
     {
         latitude: 40.635334,
         longitude: -73.901844,

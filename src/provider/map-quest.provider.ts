@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { InvalidCredentialsException, UnsupportedAccuracyException } from '../exception';
-import { AbstractHttpProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
-import { AddressBuilder } from '../model/address-builder';
+import { AbstractHttpProvider, AccuracyEnum, GeocodeQuery, Location, ReverseQuery } from '../model';
+import { LocationBuilder } from '../model/location-builder';
 import { sliceFrom } from '../util';
 
 export interface MapQuestProviderGeocodeParamsInterface {
@@ -56,7 +56,7 @@ export class MapQuestProvider extends AbstractHttpProvider {
     /**
      * @link {https://developer.mapquest.com/documentation/geocoding-api/address/get/}
      */
-    async geocode(query: GeocodeQuery): Promise<Address[]> {
+    async geocode(query: GeocodeQuery): Promise<Location[]> {
         const response: AxiosResponse = await this.getHttpClient().get(this.geocodeUrl, {
             params: await this.buildGeocodeQuery(query),
         });
@@ -67,7 +67,7 @@ export class MapQuestProvider extends AbstractHttpProvider {
     /**
      * @link {https://developer.mapquest.com/documentation/geocoding-api/reverse/get/}
      */
-    async reverse(query: ReverseQuery): Promise<Address[]> {
+    async reverse(query: ReverseQuery): Promise<Location[]> {
         const response: AxiosResponse = await this.getHttpClient().get(this.reverseUrl, {
             params: await this.buildReverseQuery(query),
         });
@@ -76,7 +76,7 @@ export class MapQuestProvider extends AbstractHttpProvider {
     }
 
     private async buildGeocodeQuery(query: GeocodeQuery): Promise<MapQuestProviderGeocodeParamsInterface> {
-        // TODO Only for search by Address object and post request
+        // TODO Only for search by Location object and post request
         // const location: any = {};
         //
         // if (query.countryCode || query.country) {
@@ -118,7 +118,7 @@ export class MapQuestProvider extends AbstractHttpProvider {
         };
     }
 
-    private async parseResponse(response: any, accuracy?: AccuracyEnum): Promise<Address[]> {
+    private async parseResponse(response: any, accuracy?: AccuracyEnum): Promise<Location[]> {
         if (!Array.isArray(response.results) || !response.results.length) {
             return [];
         }
@@ -129,8 +129,8 @@ export class MapQuestProvider extends AbstractHttpProvider {
         }
 
         return locations.map(
-            (location: any): Address => {
-                const builder: AddressBuilder = new AddressBuilder(MapQuestProvider);
+            (location: any): Location => {
+                const builder: LocationBuilder = new LocationBuilder(MapQuestProvider);
                 builder.latitude = location.latLng.lat;
                 builder.longitude = location.latLng.lng;
                 builder.countryCode = location.adminArea1;

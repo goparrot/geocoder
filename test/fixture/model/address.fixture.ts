@@ -1,7 +1,7 @@
-import { AddressInterface } from '../../../src/interface';
+import { LocationInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
 
-export const plainFullFilledAddressObject: AddressInterface = {
+export const plainFullFilledLocationObject: LocationInterface = {
     formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
     latitude: 41.7332379,
     longitude: -87.5959685,

@@ -1,4 +1,4 @@
-import { AddressInterface } from '../../../src/interface';
+import { LocationInterface } from '../../../src/interface';
 import { HereProvider } from '../../../src/provider';
 
 export const plainFullFilledResponseObject: any = {
@@ -49,7 +49,7 @@ export const plainFullFilledResponseObject: any = {
     },
 };
 
-export const plainParsedResponseObject: AddressInterface[] = [
+export const plainParsedResponseObject: LocationInterface[] = [
     {
         latitude: 41.7332379,
         longitude: -87.5959685,

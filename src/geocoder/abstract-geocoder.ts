@@ -3,7 +3,7 @@ import { validateOrReject } from 'class-validator';
 import { UnsupportedAccuracyException, ValidationException } from '../exception';
 import { GeocodeQueryInterface, GeocoderInterface, ReverseQueryInterface } from '../interface';
 import { LoggerInterface, NullLogger } from '../logger';
-import { AbstractHttpProvider, AbstractProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
+import { AbstractHttpProvider, AbstractProvider, AccuracyEnum, GeocodeQuery, Location, ReverseQuery } from '../model';
 import { WorldCountry, WorldCountryState, WorldCountryStateUtil, WorldCountryUtil } from '../util';
 
 export abstract class AbstractGeocoder implements GeocoderInterface {
@@ -13,14 +13,14 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
         this.logger = logger || new NullLogger();
     }
 
-    abstract async geocode(query: GeocodeQueryInterface): Promise<Address[]>;
+    abstract async geocode(query: GeocodeQueryInterface): Promise<Location[]>;
 
-    abstract async reverse(query: ReverseQueryInterface): Promise<Address[]>;
+    abstract async reverse(query: ReverseQueryInterface): Promise<Location[]>;
 
     /**
      * @throws {GeocoderException}
      */
-    protected async geocodeByProvider(provider: AbstractProvider, _query: GeocodeQueryInterface): Promise<Address[]> {
+    protected async geocodeByProvider(provider: AbstractProvider, _query: GeocodeQueryInterface): Promise<Location[]> {
         const query: GeocodeQuery = plainToClass<GeocodeQuery, GeocodeQueryInterface>(GeocodeQuery, _query);
 
         try {
@@ -41,19 +41,19 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
             throw new UnsupportedAccuracyException(message);
         }
 
-        let addresses: Address[] = await provider.geocode(query);
+        let locations: Location[] = await provider.geocode(query);
 
-        addresses = await this.addMissingAddressProperties(addresses);
-        addresses = this.filterByAccuracy(addresses, query.accuracy);
+        locations = await this.addMissingLocationProperties(locations);
+        locations = this.filterByAccuracy(locations, query.accuracy);
 
-        if (addresses.length > query.limit) {
-            return addresses.slice(0, query.limit);
+        if (locations.length > query.limit) {
+            return locations.slice(0, query.limit);
         }
 
-        return addresses;
+        return locations;
     }
 
-    protected async reverseByProvider(provider: AbstractProvider, _query: ReverseQueryInterface): Promise<Address[]> {
+    protected async reverseByProvider(provider: AbstractProvider, _query: ReverseQueryInterface): Promise<Location[]> {
         const query: ReverseQuery = plainToClass<ReverseQuery, ReverseQueryInterface>(ReverseQuery, _query);
 
         try {
@@ -74,74 +74,74 @@ export abstract class AbstractGeocoder implements GeocoderInterface {
             throw new UnsupportedAccuracyException(message);
         }
 
-        let addresses: Address[] = await provider.reverse(query);
+        let locations: Location[] = await provider.reverse(query);
 
-        addresses = await this.addMissingAddressProperties(addresses);
-        addresses = this.filterByAccuracy(addresses, query.accuracy);
+        locations = await this.addMissingLocationProperties(locations);
+        locations = this.filterByAccuracy(locations, query.accuracy);
 
-        if (addresses.length > query.limit) {
-            return addresses.slice(0, query.limit);
+        if (locations.length > query.limit) {
+            return locations.slice(0, query.limit);
         }
 
-        return addresses;
+        return locations;
     }
 
-    private async addMissingAddressProperties(addresses: Address[]): Promise<Address[]> {
-        for (const address of addresses) {
-            if (!address.countryCode || !address.country) {
+    private async addMissingLocationProperties(locations: Location[]): Promise<Location[]> {
+        for (const location of locations) {
+            if (!location.countryCode || !location.country) {
                 try {
                     const country: WorldCountry | undefined = await WorldCountryUtil.find({
-                        cca2: address.countryCode,
-                        name: address.country,
+                        cca2: location.countryCode,
+                        name: location.country,
                     });
 
                     if (country) {
-                        address.countryCode = country.cca2;
-                        address.country = country.name.common;
+                        location.countryCode = country.cca2;
+                        location.country = country.name.common;
                     }
                 } catch (err) {
-                    this.logger.error(err, { address });
+                    this.logger.error(err, { location });
                 }
             }
 
-            if (address.countryCode) {
+            if (location.countryCode) {
                 try {
                     const state: WorldCountryState | undefined = await WorldCountryStateUtil.find({
-                        countryCode: address.countryCode,
-                        stateCode: address.stateCode,
-                        name: address.state,
+                        countryCode: location.countryCode,
+                        stateCode: location.stateCode,
+                        name: location.state,
                     });
 
                     if (state) {
-                        address.state = state.name;
-                        address.stateCode = state.stateCode;
+                        location.state = state.name;
+                        location.stateCode = state.stateCode;
                     }
                 } catch (err) {
-                    this.logger.error(err, { address });
+                    this.logger.error(err, { location });
                 }
             }
         }
 
-        return addresses;
+        return locations;
     }
 
-    private filterByAccuracy(addresses: Address[], accuracy?: AccuracyEnum): Address[] {
+    private filterByAccuracy(locations: Location[], accuracy?: AccuracyEnum): Location[] {
         if (!accuracy) {
-            return addresses;
+            return locations;
         }
 
-        return addresses.filter((address: Address) => {
+        return locations.filter((location: Location) => {
             switch (accuracy) {
                 case AccuracyEnum.HOUSE_NUMBER:
-                    return !!address.houseNumber;
+                    return !!location.houseNumber;
                 case AccuracyEnum.STREET_NAME:
-                    return !!address.streetName;
+                    return !!location.streetName;
                 case AccuracyEnum.CITY:
-                    return !!address.city;
+                    return !!location.city;
                 case AccuracyEnum.STATE:
-                    return !!address.state || !!address.stateCode;
+                    return !!location.state || !!location.stateCode;
                 case AccuracyEnum.COUNTRY:
-                    return !!address.country || !!address.countryCode;
+                    return !!location.country || !!location.countryCode;
                 default:
                     throw new UnsupportedAccuracyException(`Unsupported "${accuracy}" accuracy.`);
             }

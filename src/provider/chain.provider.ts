@@ -1,6 +1,6 @@
 import { InvalidArgumentException } from '../exception';
 import { LoggerInterface, NullLogger } from '../logger';
-import { AbstractHttpProvider, AbstractProvider, Address, GeocodeQuery, ReverseQuery } from '../model';
+import { AbstractHttpProvider, AbstractProvider, GeocodeQuery, Location, ReverseQuery } from '../model';
 
 export class ChainProvider extends AbstractProvider {
     private readonly logger: LoggerInterface;
@@ -15,7 +15,7 @@ export class ChainProvider extends AbstractProvider {
         this.logger = logger || new NullLogger();
     }
 
-    async geocode(query: GeocodeQuery): Promise<Address[]> {
+    async geocode(query: GeocodeQuery): Promise<Location[]> {
         for (const provider of this.providers) {
             try {
                 if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
@@ -25,10 +25,10 @@ export class ChainProvider extends AbstractProvider {
                     continue;
                 }
 
-                const addresses: Address[] = await provider.geocode(query);
+                const locations: Location[] = await provider.geocode(query);
 
-                if (addresses.length) {
-                    return addresses;
+                if (locations.length) {
+                    return locations;
                 }
             } catch (err) {
                 this.logger.error(err);
@@ -38,7 +38,7 @@ export class ChainProvider extends AbstractProvider {
         return [];
     }
 
-    async reverse(query: ReverseQuery): Promise<Address[]> {
+    async reverse(query: ReverseQuery): Promise<Location[]> {
         for (const provider of this.providers) {
             try {
                 if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
@@ -48,10 +48,10 @@ export class ChainProvider extends AbstractProvider {
                     continue;
                 }
 
-                const addresses: Address[] = await provider.reverse(query);
+                const locations: Location[] = await provider.reverse(query);
 
-                if (addresses.length) {
-                    return addresses;
+                if (locations.length) {
+                    return locations;
                 }
             } catch (err) {
                 this.logger.error(err);

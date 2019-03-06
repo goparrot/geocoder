@@ -1,4 +1,4 @@
-import { AddressInterface } from '../../../src/interface';
+import { LocationInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
 
 export const plainFullFilledResponseObject: any = {
@@ -31,7 +31,7 @@ export const plainFullFilledResponseObject: any = {
     status: 'OK',
 };
 
-export const plainParsedResponseObject: AddressInterface[] = [
+export const plainParsedResponseObject: LocationInterface[] = [
     {
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, USA',
         latitude: 41.7340186,

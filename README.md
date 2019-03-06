@@ -41,7 +41,7 @@ In the code snippet below we use Google provider.
 
 ```typescript
 import 'reflect-metadata';
-import { Address, Geocoder, GoogleMapsProvider } from '@goparrot/geocoder';
+import { Location, Geocoder, GoogleMapsProvider } from '@goparrot/geocoder';
 import Axios, { AxiosInstance } from 'axios';
 
 const axios: AxiosInstance = Axios.create();
@@ -52,22 +52,22 @@ const geocoder: Geocoder = new Geocoder(provider);
 
 (async () => {
     try {
-        const addresses: Address[] = await geocoder.geocode({
+        const locations: Location[] = await geocoder.geocode({
             address: '1158 E 89th St, Chicago, IL 60619, USA',
         });
 
-        console.info('addresses', addresses);
+        console.info('locations', locations);
     } catch (err) {
         console.error(err);
     }
 
     try {
-        const addresses: Address[] = await geocoder.reverse({
+        const locations: Location[] = await geocoder.reverse({
             lat: 40.74185,
             lon: -74,
         });
 
-        console.info('addresses', addresses);
+        console.info('locations', locations);
     } catch (err) {
         console.error(err);
     }
@@ -80,7 +80,7 @@ In the code snippet below we use Here provider.
 
 ```typescript
 import 'reflect-metadata';
-import { Address, Geocoder, HereProvider, LoggerInterface } from '@goparrot/geocoder';
+import { Location, Geocoder, HereProvider, LoggerInterface } from '@goparrot/geocoder';
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import * as winston from 'winston';
 
@@ -125,7 +125,7 @@ const geocoder: Geocoder = new Geocoder(provider, logger);
 
 (async () => {
     try {
-        const addresses: Address[] = await geocoder.geocode({
+        const locations: Location[] = await geocoder.geocode({
             // accuracy: AccuracyEnum.HOUSE_NUMBER,
             address: '1158 E 89th St, Chicago, IL 60619, USA',
             countryCode: 'US',
@@ -138,13 +138,13 @@ const geocoder: Geocoder = new Geocoder(provider, logger);
             // fillMissingQueryProperties: true, // default
         });
 
-        logger.info('addresses', addresses);
+        logger.info('locations', locations);
     } catch (err) {
         logger.error(err);
     }
 
     try {
-        const addresses: Address[] = await geocoder.reverse({
+        const locations: Location[] = await geocoder.reverse({
             // accuracy: AccuracyEnum.HOUSE_NUMBER,
             lat: 40.74185,
             lon: -74,
@@ -152,7 +152,7 @@ const geocoder: Geocoder = new Geocoder(provider, logger);
             // limit: 10, // default            
         });
 
-        console.info('addresses', addresses);
+        console.info('locations', locations);
     } catch (err) {
         console.error(err);
     }
@@ -169,7 +169,7 @@ Legend:
 *   🆘 - Need help with implementation
 *   🔍️ - Need to investigate if supported by provider
 
-### Address
+### Location
 
 #### World
 
@@ -203,7 +203,7 @@ when a provider returns a result.
 ```typescript
 import 'reflect-metadata';
 import Axios, { AxiosInstance } from 'axios';
-import { Address, ChainProvider, HereProvider, MapQuestProvider, ProviderAggregator } from '@goparrot/geocoder';
+import { Location, ChainProvider, HereProvider, MapQuestProvider, ProviderAggregator } from '@goparrot/geocoder';
 
 const axios: AxiosInstance = Axios.create({
     timeout: 5000,
@@ -220,11 +220,11 @@ geocoder.registerProvider(chainProvider);
 
 (async () => {
     try {
-        const addresses: Address[] = await geocoder.geocode({
+        const locations: Location[] = await geocoder.geocode({
             address: '1158 E 89th St, Chicago, IL 60619, USA',
         });
 
-        console.info(addresses);
+        console.info(locations);
     } catch (err) {
         console.error(err);
     }
@@ -239,7 +239,7 @@ manualy decide which provider to use later on.
 ```typescript
 import 'reflect-metadata';
 import Axios, { AxiosInstance } from 'axios';
-import { Address, GoogleMapsProvider, HereProvider, ProviderAggregator, MapQuestProvider } from '@goparrot/geocoder';
+import { Location, GoogleMapsProvider, HereProvider, ProviderAggregator, MapQuestProvider } from '@goparrot/geocoder';
 
 const axios: AxiosInstance = Axios.create({
     timeout: 5000,
@@ -256,11 +256,11 @@ geocoder.registerProvider(new GoogleMapsProvider(axios, 'YOUR_API_KEY'));
 
 (async () => {
     try {
-        const addresses: Address[] = await geocoder.using(GoogleMapsProvider).geocode({
+        const locations: Location[] = await geocoder.using(GoogleMapsProvider).geocode({
             address: '1158 E 89th St, Chicago, IL 60619, USA',
         });
 
-        console.info(addresses);
+        console.info(locations);
     } catch (err) {
         console.error(err);
     }
@@ -270,7 +270,7 @@ geocoder.registerProvider(new GoogleMapsProvider(axios, 'YOUR_API_KEY'));
 The `ProviderAggregator`'s API is fluent, meaning you can write:
 
 ```typescript
-const addresses: Address[] = geocoder
+const locations: Location[] = geocoder
     .registerProvider(new MyCustomProvider(axios))
     .using(MyCustomProvider)
     .geocode( ... );

@@ -1,5 +1,5 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
-import { AbstractProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '.';
+import { AbstractProvider, AccuracyEnum, GeocodeQuery, Location, ReverseQuery } from '.';
 import { InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../exception';
 
 export abstract class AbstractHttpProvider extends AbstractProvider {
@@ -42,9 +42,9 @@ export abstract class AbstractHttpProvider extends AbstractProvider {
 
     abstract get reverseUrl(): string;
 
-    abstract async geocode(query: GeocodeQuery): Promise<Address[]>;
+    abstract async geocode(query: GeocodeQuery): Promise<Location[]>;
 
-    abstract async reverse(query: ReverseQuery): Promise<Address[]>;
+    abstract async reverse(query: ReverseQuery): Promise<Location[]>;
 
     protected getHttpClient(): AxiosInstance {
         return this.httpClient;

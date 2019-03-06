@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { InvalidCredentialsException } from '../exception';
-import { AbstractHttpProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
-import { AddressBuilder } from '../model/address-builder';
+import { AbstractHttpProvider, AccuracyEnum, GeocodeQuery, Location, ReverseQuery } from '../model';
+import { LocationBuilder } from '../model/location-builder';
 import { WorldCountry, WorldCountryUtil } from '../util';
 
 export interface HereProviderGeocodeParamsInterface {
@@ -71,7 +71,7 @@ export class HereProvider extends AbstractHttpProvider {
     /**
      * @link {https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}
      */
-    async geocode(query: GeocodeQuery): Promise<Address[]> {
+    async geocode(query: GeocodeQuery): Promise<Location[]> {
         const response: AxiosResponse = await this.getHttpClient().get(this.geocodeUrl, {
             params: await this.buildGeocodeQuery(query),
         });
@@ -83,7 +83,7 @@ export class HereProvider extends AbstractHttpProvider {
      * @link {https://developer.here.com/documentation/geocoder/topics/resource-reverse-geocode.html}
      * @param query
      */
-    async reverse(query: ReverseQuery): Promise<Address[]> {
+    async reverse(query: ReverseQuery): Promise<Location[]> {
         const response: AxiosResponse = await this.getHttpClient().get(this.reverseUrl, {
             params: await this.buildReverseQuery(query),
         });
@@ -144,7 +144,7 @@ export class HereProvider extends AbstractHttpProvider {
         };
     }
 
-    private async parseResponse(response: any): Promise<Address[]> {
+    private async parseResponse(response: any): Promise<Location[]> {
         if (!response.Response) {
             return [];
         }
@@ -155,15 +155,15 @@ export class HereProvider extends AbstractHttpProvider {
 
         const results: any = response.Response.View[0].Result;
 
-        return Promise.all<Address>(
+        return Promise.all<Location>(
             results.map(
-                async (result: any): Promise<Address> => {
-                    // const address: AddressBuilder<HereProvider> = new AddressBuilder(HereProvider);
+                async (result: any): Promise<Location> => {
+                    // const address: LocationBuilder<HereProvider> = new LocationBuilder(HereProvider);
 
                     const location: any = result.Location || {};
                     const hereAddress: any = location.Address || {};
 
-                    const builder: AddressBuilder = new AddressBuilder(HereProvider);
+                    const builder: LocationBuilder = new LocationBuilder(HereProvider);
                     builder.formattedAddress = hereAddress.Label;
                     builder.latitude = location.DisplayPosition.Latitude;
                     builder.longitude = location.DisplayPosition.Longitude;

@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../exception';
-import { AbstractHttpProvider, AccuracyEnum, Address, GeocodeQuery, ReverseQuery } from '../model';
-import { AddressBuilder } from '../model/address-builder';
+import { AbstractHttpProvider, AccuracyEnum, GeocodeQuery, Location, ReverseQuery } from '../model';
+import { LocationBuilder } from '../model/location-builder';
 
 export interface GoogleMapsProviderGeocodeParamsInterface {
     sensor: boolean;
@@ -53,7 +53,7 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
      * TODO implement all statuses https://developers.google.com/maps/documentation/geocoding/intro#StatusCodes
      * @link {https://developers.google.com/maps/documentation/geocoding/intro#GeocodingRequests}
      */
-    async geocode(query: GeocodeQuery): Promise<Address[]> {
+    async geocode(query: GeocodeQuery): Promise<Location[]> {
         const response: AxiosResponse = await this.getHttpClient().get(this.geocodeUrl, {
             params: await this.buildGeocodeQuery(query),
         });
@@ -65,7 +65,7 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
      * TODO implement result_type and location_type
      * @link {https://developers.google.com/maps/documentation/geocoding/intro#ReverseGeocoding}
      */
-    async reverse(query: ReverseQuery): Promise<Address[]> {
+    async reverse(query: ReverseQuery): Promise<Location[]> {
         const response: AxiosResponse = await this.getHttpClient().get(this.reverseUrl, {
             params: await this.buildReverseQuery(query),
         });
@@ -110,7 +110,7 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
         };
     }
 
-    private async parseResponse(response: any): Promise<Address[]> {
+    private async parseResponse(response: any): Promise<Location[]> {
         this.validateResponse(response);
 
         if ('OK' !== response.status || !Array.isArray(response.results) || !response.results.length) {
@@ -118,9 +118,9 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
         }
 
         return response.results.map(
-            (result: any): Address => {
+            (result: any): Location => {
                 // TODO Do need to implement postal_code_suffix options ?
-                const builder: AddressBuilder = new AddressBuilder(GoogleMapsProvider);
+                const builder: LocationBuilder = new LocationBuilder(GoogleMapsProvider);
                 builder.formattedAddress = result.formatted_address;
                 builder.latitude = result.geometry.location.lat;
                 builder.longitude = result.geometry.location.lng;
@@ -149,7 +149,7 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
         }
     }
 
-    private updateAddressComponent(builder: AddressBuilder, type: string, addressComponent: any): void {
+    private updateAddressComponent(builder: LocationBuilder, type: string, addressComponent: any): void {
         switch (type) {
             case 'country':
                 builder.country = addressComponent.long_name;

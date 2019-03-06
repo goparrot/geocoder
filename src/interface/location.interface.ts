@@ -1,4 +1,4 @@
-export interface AddressInterface {
+export interface LocationInterface {
     latitude: number;
     longitude: number;
     formattedAddress?: string;

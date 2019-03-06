@@ -1,9 +1,9 @@
 import { plainToClass } from 'class-transformer';
-import { AddressInterface, Type } from '../interface';
+import { LocationInterface, Type } from '../interface';
 import { AbstractHttpProvider } from './abstract-http-provider';
-import { Address } from './address';
+import { Location } from './location';
 
-export class AddressBuilder<T extends AbstractHttpProvider = any> implements AddressInterface {
+export class LocationBuilder<T extends AbstractHttpProvider = any> implements LocationInterface {
     latitude: number;
     longitude: number;
     formattedAddress?: string;
@@ -19,15 +19,15 @@ export class AddressBuilder<T extends AbstractHttpProvider = any> implements Add
 
     constructor(private readonly providerClass: Type<T>) {}
 
-    build(): Address {
+    build(): Location {
         this.provider = this.providerClass.name;
 
-        const address: Address = plainToClass(Address, this);
+        const location: Location = plainToClass(Location, this);
 
-        if (!address.formattedAddress) {
-            address.formattedAddress = address.generateFormattedAddress();
+        if (!location.formattedAddress) {
+            location.formattedAddress = location.generateFormattedAddress();
         }
 
-        return address;
+        return location;
     }
 }

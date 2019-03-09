@@ -106,7 +106,7 @@
         "rimraf": "2.6.3",
         "sinon": "7.2.7",
         "source-map-support": "0.5.10",
-        "supertest": "3.4.2",
+        "supertest": "4.0.0",
         "ts-node": "8.0.3",
         "tsconfig-paths": "3.8.0",
         "tslint": "5.13.1",

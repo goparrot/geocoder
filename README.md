@@ -134,7 +134,7 @@ const geocoder: Geocoder = new Geocoder(provider, logger);
             // stateCode: 'IL',
             // city: 'Chicago',
             // language: 'en', // default
-            // limit: 10, // default
+            // limit: 5, // default
             // fillMissingQueryProperties: true, // default
         });
 
@@ -149,7 +149,7 @@ const geocoder: Geocoder = new Geocoder(provider, logger);
             lat: 40.74185,
             lon: -74,
             // language: 'en', // default
-            // limit: 10, // default            
+            // limit: 5, // default            
         });
 
         console.info('locations', locations);

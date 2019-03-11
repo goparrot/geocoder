@@ -1,9 +1,4 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { GeocoderException, UnsupportedAccuracyException } from '../../../src/exception';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('UnsupportedAccuracyException (unit)', () => {
     describe('#constructor', () => {

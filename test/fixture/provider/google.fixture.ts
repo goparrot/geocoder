@@ -1,7 +1,7 @@
 import { LocationInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
 
-export const plainFullFilledResponseObject: any = {
+export const providerRawResponse: Readonly<any> = Object.freeze({
     results: [
         {
             address_components: [
@@ -29,9 +29,9 @@ export const plainFullFilledResponseObject: any = {
         },
     ],
     status: 'OK',
-};
+});
 
-export const plainParsedResponseObject: LocationInterface[] = [
+export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze([
     {
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, USA',
         latitude: 41.7340186,
@@ -46,4 +46,4 @@ export const plainParsedResponseObject: LocationInterface[] = [
         postalCode: '60619',
         provider: GoogleMapsProvider.name,
     },
-];
+]);

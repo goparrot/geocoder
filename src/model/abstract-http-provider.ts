@@ -19,7 +19,7 @@ export abstract class AbstractHttpProvider extends AbstractProvider {
                     const statusCode: number = err.response.status;
 
                     if (401 === statusCode || 403 === statusCode) {
-                        throw new InvalidCredentialsException(`API key is invalid'`);
+                        throw new InvalidCredentialsException(`API key is invalid`);
                     } else if (429 === statusCode) {
                         throw new QuotaExceededException('Quota exceeded');
                     }

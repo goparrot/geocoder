@@ -1,9 +1,4 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { WorldCountryState, WorldCountryStateUtil } from '../../../../src/util/world-country-state';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('WorldCountryStateUtil (unit)', () => {
     const worldCountryStateFixture: WorldCountryState = {

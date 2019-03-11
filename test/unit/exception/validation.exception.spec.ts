@@ -1,10 +1,5 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { ValidationError } from 'class-validator';
 import { GeocoderException, ValidationException } from '../../../src/exception';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('ValidationException (unit)', () => {
     describe('#constructor', () => {
@@ -35,13 +30,13 @@ describe('ValidationException (unit)', () => {
         it('should return empty array', async () => {
             const exception: ValidationException = new ValidationException([]);
 
-            return exception.getValidationErrors().should.have.lengthOf(0);
+            return exception.getValidationErrors().should.have.length(0);
         });
 
         it('should return array of ValidationError', async () => {
             const exception: ValidationException = new ValidationException([new ValidationError()]);
 
-            return exception.getValidationErrors().should.have.lengthOf(1);
+            return exception.getValidationErrors().should.have.length(1);
         });
     });
 });

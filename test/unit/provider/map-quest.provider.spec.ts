@@ -1,12 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { InvalidCredentialsException, UnsupportedAccuracyException } from '../../../src/exception';
 import { AccuracyEnum } from '../../../src/model';
 import { MapQuestProvider } from '../../../src/provider';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('MapQuestProvider (unit)', () => {
     let client: AxiosInstance;

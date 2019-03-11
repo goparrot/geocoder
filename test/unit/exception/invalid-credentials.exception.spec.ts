@@ -1,9 +1,4 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { GeocoderException, InvalidCredentialsException } from '../../../src/exception';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('InvalidCredentialsException (unit)', () => {
     describe('#constructor', () => {

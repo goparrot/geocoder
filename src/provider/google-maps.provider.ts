@@ -141,7 +141,7 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
      */
     private validateResponse(response: any): void {
         if ('REQUEST_DENIED' === response.status && 'The provided API key is invalid.' === response.error_message) {
-            throw new InvalidCredentialsException(`API key is invalid'`);
+            throw new InvalidCredentialsException(`API key is invalid`);
         } else if ('REQUEST_DENIED' === response.status) {
             throw new InvalidServerResponseException(`API key is invalid. Message: ${response.error_message}`);
         } else if ('OVER_QUERY_LIMIT' === response.status) {

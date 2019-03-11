@@ -1,9 +1,4 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { NullLogger } from '../../../src/logger';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('NullLogger (unit)', () => {
     let logger: NullLogger;

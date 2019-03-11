@@ -1,11 +1,6 @@
 import Axios, { AxiosInstance } from 'axios';
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { Geocoder } from '../../../src/geocoder';
 import { HereProvider } from '../../../src/provider';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('Geocoder (unit)', () => {
     let client: AxiosInstance;

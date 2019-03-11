@@ -1,9 +1,4 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { GeocoderException, InvalidServerResponseException } from '../../../src/exception';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('InvalidServerResponseException (unit)', () => {
     describe('#constructor', () => {

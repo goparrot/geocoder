@@ -1,12 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { StatefulDecider } from '../../../src/decider';
 import { ProviderNotRegisteredException } from '../../../src/exception';
 import { GoogleMapsProvider, HereProvider } from '../../../src/provider';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('StatefulDecider (unit)', () => {
     let decider: StatefulDecider;

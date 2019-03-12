@@ -1,9 +1,4 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { sliceFrom } from '../../../src/util';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('util (unit)', () => {
     describe('#sliceFrom', () => {

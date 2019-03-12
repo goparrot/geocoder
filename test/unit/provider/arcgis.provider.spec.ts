@@ -1,31 +1,26 @@
 import Axios, { AxiosInstance } from 'axios';
-import { InvalidCredentialsException } from '../../../src/exception';
 import { AccuracyEnum } from '../../../src/model';
-import { MapQuestProvider } from '../../../src/provider';
+import { ArcgisProvider } from '../../../src/provider';
 
-describe('MapQuestProvider (unit)', () => {
+describe('ArcgisProvider (unit)', () => {
     let client: AxiosInstance;
-    let provider: MapQuestProvider;
+    let provider: ArcgisProvider;
 
     beforeEach(() => {
         client = Axios.create();
 
-        provider = new MapQuestProvider(client, 'test');
+        provider = new ArcgisProvider(client);
     });
 
     describe('#constructor', () => {
-        it('should be instance of MapQuestProvider', async () => {
-            return provider.should.be.instanceOf(MapQuestProvider);
-        });
-
-        it('should throw InvalidCredentialsException on empty appKey', async () => {
-            return ((): any => new MapQuestProvider(client, '')).should.throw(InvalidCredentialsException, 'Invalid or missing api key.');
+        it('should be instance of ArcgisProvider', async () => {
+            return provider.should.be.instanceOf(ArcgisProvider);
         });
     });
 
     describe('#maxAccuracy', () => {
         it('should be typeof AccuracyEnum', async () => {
-            return provider.maxAccuracy.should.be.deep.eq(AccuracyEnum.STREET_NAME);
+            return provider.maxAccuracy.should.be.deep.eq(AccuracyEnum.HOUSE_NUMBER);
         });
     });
 

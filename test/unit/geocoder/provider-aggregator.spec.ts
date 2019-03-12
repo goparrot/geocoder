@@ -1,25 +1,15 @@
 import Axios, { AxiosInstance } from 'axios';
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { ProviderNotRegisteredException } from '../../../src/exception';
 import { ProviderAggregator } from '../../../src/geocoder';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
 import { GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
-import { plainFullFilledGeocodeQueryObject, plainFullFilledReverseQueryObject } from '../../fixture/model/query.fixture';
-
-chai.use(chaiAsPromised);
-chai.should();
+import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
 
 describe('ProviderAggregator (unit)', () => {
     let geocoder: ProviderAggregator;
     let mapQuestProvider: MapQuestProvider;
     let googleProvider: GoogleMapsProvider;
-    let geocodeQueryFixture: GeocodeQueryInterface;
-    let reverseQueryFixture: ReverseQueryInterface;
 
     beforeEach(() => {
-        geocodeQueryFixture = { ...plainFullFilledGeocodeQueryObject };
-        reverseQueryFixture = { ...plainFullFilledReverseQueryObject };
         const client: AxiosInstance = Axios.create();
 
         mapQuestProvider = new MapQuestProvider(client, 'test');
@@ -64,14 +54,14 @@ describe('ProviderAggregator (unit)', () => {
         });
 
         it('should have zero provider', async () => {
-            return geocoder.getProviders().should.have.lengthOf(0);
+            return geocoder.getProviders().should.have.length(0);
         });
 
         it('should have one providers', async () => {
             const providerAggregator: ProviderAggregator = new ProviderAggregator();
             providerAggregator.registerProviders([googleProvider]);
 
-            return providerAggregator.getProviders().should.have.lengthOf(1);
+            return providerAggregator.getProviders().should.have.length(1);
         });
     });
 
@@ -87,7 +77,7 @@ describe('ProviderAggregator (unit)', () => {
         it('should register provider', async () => {
             geocoder.registerProvider(googleProvider);
 
-            return geocoder.getProviders().should.have.lengthOf(1);
+            return geocoder.getProviders().should.have.length(1);
         });
     });
 
@@ -103,13 +93,13 @@ describe('ProviderAggregator (unit)', () => {
         it('should do nothing', async () => {
             geocoder.registerProviders([]);
 
-            return geocoder.getProviders().should.have.lengthOf(0);
+            return geocoder.getProviders().should.have.length(0);
         });
 
         it('should register two providers', async () => {
             geocoder.registerProviders([googleProvider, mapQuestProvider]);
 
-            return geocoder.getProviders().should.have.lengthOf(2);
+            return geocoder.getProviders().should.have.length(2);
         });
     });
 

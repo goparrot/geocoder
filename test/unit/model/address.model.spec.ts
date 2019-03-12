@@ -1,21 +1,13 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { classToPlain, plainToClass } from 'class-transformer';
 import { LocationInterface } from '../../../src/interface';
 import { Location } from '../../../src/model';
-import { plainFullFilledLocationObject } from '../../fixture/model/address.fixture';
-
-chai.use(chaiAsPromised);
-chai.should();
+import { locationFixture } from '../../fixture/model/address.fixture';
 
 describe('Location (unit)', () => {
-    let plainFullFilledLocationFixture: LocationInterface;
-    let locationModelFixture: Location;
+    let location: Location;
 
     beforeEach(() => {
-        plainFullFilledLocationFixture = plainFullFilledLocationObject;
-
-        locationModelFixture = plainToClass<Location, LocationInterface>(Location, plainFullFilledLocationFixture);
+        location = plainToClass<Location, LocationInterface>(Location, locationFixture);
     });
 
     describe('#constructor', () => {
@@ -26,13 +18,13 @@ describe('Location (unit)', () => {
 
     describe('#street', () => {
         it('should generate valid street', async () => {
-            locationModelFixture.street.should.eq('1158 E 89th St');
+            location.street.should.eq('1158 E 89th St');
         });
     });
 
     describe('#toObject', () => {
         it('should generate valid object', async () => {
-            return locationModelFixture.toObject().should.be.deep.eq(plainFullFilledLocationFixture);
+            return location.toObject().should.be.deep.eq(locationFixture);
         });
     });
 
@@ -44,45 +36,45 @@ describe('Location (unit)', () => {
         });
 
         it('should return valid formattedAddress if formattedAddress, stateCode and country are empty', async () => {
-            delete locationModelFixture.formattedAddress;
-            delete locationModelFixture.stateCode;
-            delete locationModelFixture.country;
+            delete location.formattedAddress;
+            delete location.stateCode;
+            delete location.country;
 
-            return locationModelFixture.generateFormattedAddress().should.be.deep.eq('1158 E 89th St, Chicago, Illinois 60619, US');
+            return location.generateFormattedAddress().should.be.deep.eq('1158 E 89th St, Chicago, Illinois 60619, US');
         });
 
         it('should return valid formattedAddress if formattedAddress, postalCode and country are empty', async () => {
-            delete locationModelFixture.formattedAddress;
-            delete locationModelFixture.postalCode;
-            delete locationModelFixture.country;
+            delete location.formattedAddress;
+            delete location.postalCode;
+            delete location.country;
 
-            return locationModelFixture.generateFormattedAddress().should.be.deep.eq('1158 E 89th St, Chicago, IL, US');
+            return location.generateFormattedAddress().should.be.deep.eq('1158 E 89th St, Chicago, IL, US');
         });
     });
 
     describe('spread operator', () => {
         it('should generate the same result as plain object', async () => {
-            return { ...locationModelFixture }.should.be.deep.eq(plainFullFilledLocationFixture);
+            return { ...location }.should.be.deep.eq(locationFixture);
         });
 
         it('should generate the same result as #toObject', async () => {
-            return { ...locationModelFixture }.should.be.deep.eq(locationModelFixture.toObject());
+            return { ...location }.should.be.deep.eq(location.toObject());
         });
     });
 
     describe('classToPlain', () => {
         it('should use #generateFormattedAddress if formattedAddress is empty', async () => {
-            delete locationModelFixture.formattedAddress;
-            delete locationModelFixture.postalCode;
-            delete locationModelFixture.country;
+            delete location.formattedAddress;
+            delete location.postalCode;
+            delete location.country;
 
-            const addressPlainObject: LocationInterface = classToPlain<Location>(locationModelFixture) as LocationInterface;
+            const addressPlainObject: LocationInterface = classToPlain<Location>(location) as LocationInterface;
 
             return (addressPlainObject.formattedAddress as string).should.be.deep.eq('1158 E 89th St, Chicago, IL, US');
         });
 
         it('should not generate street property', async () => {
-            const addressPlainObject: any = classToPlain<Location>(locationModelFixture) as LocationInterface;
+            const addressPlainObject: any = classToPlain<Location>(location) as LocationInterface;
 
             return (typeof addressPlainObject.street).should.be.eq('undefined');
         });
@@ -94,7 +86,7 @@ describe('Location (unit)', () => {
                 Location,
                 // @ts-ignore
                 {
-                    ...plainFullFilledLocationFixture,
+                    ...locationFixture,
                     ...{
                         unsupported: true,
                     },
@@ -102,7 +94,7 @@ describe('Location (unit)', () => {
             );
 
             locationModel.should.be.instanceOf(Location);
-            return locationModel.should.be.deep.eq(locationModelFixture);
+            return locationModel.should.be.deep.eq(location);
         });
     });
 });

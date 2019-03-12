@@ -1,13 +1,8 @@
 import Axios, { AxiosInstance } from 'axios';
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { plainToClass } from 'class-transformer';
 import { InvalidArgumentException } from '../../../src/exception';
 import { GeocodeQuery, ReverseQuery } from '../../../src/model';
 import { ChainProvider, GoogleMapsProvider, HereProvider, MapQuestProvider } from '../../../src/provider';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('ChainProvider (unit)', () => {
     let client: AxiosInstance;
@@ -72,7 +67,7 @@ describe('ChainProvider (unit)', () => {
         });
 
         it('should have one provider', async () => {
-            return provider.getProviders().should.have.lengthOf(1);
+            return provider.getProviders().should.have.length(1);
         });
     });
 
@@ -88,7 +83,7 @@ describe('ChainProvider (unit)', () => {
         it('should register provider', async () => {
             provider.registerProvider(new GoogleMapsProvider(client, 'test'));
 
-            return provider.getProviders().should.have.lengthOf(2);
+            return provider.getProviders().should.have.length(2);
         });
     });
 
@@ -104,13 +99,13 @@ describe('ChainProvider (unit)', () => {
         it('should do nothing', async () => {
             provider.registerProviders([]);
 
-            return provider.getProviders().should.have.lengthOf(1);
+            return provider.getProviders().should.have.length(1);
         });
 
         it('should register two providers', async () => {
             provider.registerProviders([new GoogleMapsProvider(client, 'test'), new MapQuestProvider(client, 'test')]);
 
-            return provider.getProviders().should.have.lengthOf(3);
+            return provider.getProviders().should.have.length(3);
         });
     });
 });

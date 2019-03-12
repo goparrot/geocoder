@@ -52,7 +52,6 @@
         "test:unit": "mocha 'test/unit/**/*.spec.ts'",
         "test:e2e": "mocha 'test/e2e/**/*.spec.ts'",
         "test:integration": "mocha --timeout 15000 'test/integration/**/*.spec.ts'",
-        "test:watch": "mocha --watch 'test/unit/**/*.spec.ts' 'test/e2e/**/*.spec.ts'",
         "test:all": "mocha --timeout 15000 'test/**/*.spec.ts'",
         "coverage": "nyc npm test",
         "coverage:all": "nyc npm run test:all",

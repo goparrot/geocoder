@@ -1,9 +1,4 @@
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { GeocoderException } from '../../../src/exception';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('GeocoderException (unit)', () => {
     describe('#constructor', () => {
@@ -30,7 +25,7 @@ describe('GeocoderException (unit)', () => {
         });
 
         it('should return empty array', async () => {
-            return new GeocoderException('', []).getPayload().should.have.lengthOf(0);
+            return new GeocoderException('', []).getPayload().should.have.length(0);
         });
 
         it('should return object', async () => {

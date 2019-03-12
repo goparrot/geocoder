@@ -2,7 +2,7 @@ import { LocationInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 import { MapQuestProvider } from '../../../src/provider';
 
-export const plainFullFilledResponseObject: any = {
+export const providerRawResponse: Readonly<any> = Object.freeze({
     info: {
         statuscode: 0,
         copyright: { text: '© 2019 MapQuest, Inc.', imageUrl: 'http://api.mqcdn.com/res/mqlogo.gif', imageAltText: '© 2019 MapQuest, Inc.' },
@@ -39,9 +39,9 @@ export const plainFullFilledResponseObject: any = {
             ],
         },
     ],
-};
+});
 
-export const plainParsedResponseObject: LocationInterface[] = [
+export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze([
     {
         latitude: 40.635334,
         longitude: -73.901844,
@@ -56,4 +56,4 @@ export const plainParsedResponseObject: LocationInterface[] = [
         postalCode: '11236-4763',
         provider: MapQuestProvider.name,
     },
-];
+]);

@@ -1,12 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { InvalidCredentialsException } from '../../../src/exception';
 import { AccuracyEnum } from '../../../src/model';
 import { HereProvider } from '../../../src/provider';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('HereProvider (unit)', () => {
     let client: AxiosInstance;

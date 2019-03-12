@@ -1,11 +1,6 @@
 import Axios from 'axios';
-import * as chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
 import { GeocoderException, ProviderNotRegisteredException } from '../../../src/exception';
 import { GoogleMapsProvider, HereProvider } from '../../../src/provider';
-
-chai.use(chaiAsPromised);
-chai.should();
 
 describe('ProviderNotRegisteredException (unit)', () => {
     let provider: GoogleMapsProvider;

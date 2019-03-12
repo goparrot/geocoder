@@ -1,10 +1,10 @@
 import Axios, { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
 import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
-import { MapQuestProvider } from '../../../src/provider';
+import { ArcgisProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
 
-describe('MapQuestProvider (integration)', () => {
+describe('ArcgisProvider (integration)', () => {
     let client: AxiosInstance;
     let geocoder: Geocoder;
     let geocodeQuery: GeocodeQueryInterface;
@@ -16,7 +16,7 @@ describe('MapQuestProvider (integration)', () => {
 
         client = Axios.create();
 
-        const provider: MapQuestProvider = new MapQuestProvider(client, `${process.env.MAP_QUEST_API_KEY}`);
+        const provider: ArcgisProvider = new ArcgisProvider(client);
 
         geocoder = new Geocoder(provider);
     });

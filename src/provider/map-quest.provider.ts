@@ -151,7 +151,7 @@ export class MapQuestProvider extends AbstractHttpProvider {
         );
     }
 
-    accuracyFilter(location: any, accuracy?: AccuracyEnum): boolean {
+    private accuracyFilter(location: any, accuracy?: AccuracyEnum): boolean {
         if (!accuracy) {
             return true;
         }
@@ -172,7 +172,7 @@ export class MapQuestProvider extends AbstractHttpProvider {
         }
     }
 
-    isQualityAppropriate(sliceToQuality: MapQuestLocationQualityEnum, locationQuality: string): boolean {
+    private isQualityAppropriate(sliceToQuality: MapQuestLocationQualityEnum, locationQuality: string): boolean {
         return sliceFrom(Object.values(MapQuestLocationQualityEnum), sliceToQuality).includes(locationQuality);
     }
 }

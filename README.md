@@ -176,7 +176,7 @@ Legend:
 | Provider                                                                                  | Geocode | Reverse | Autocomplete | Place |
 | :---------------------------------------------------------------------------------------- | :------ | :------ | :----------- | :---- |
 | [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘           | 🆘    |
-| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | 🆘      | 🆘️     | 🔍️          | 🔍    |
+| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | 🆘️          | 🆘    |
 | [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | 🆘           | 🆘    |

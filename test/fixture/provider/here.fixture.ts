@@ -1,7 +1,7 @@
 import { LocationInterface } from '../../../src/interface';
 import { HereProvider } from '../../../src/provider';
 
-export const plainFullFilledResponseObject: any = {
+export const providerRawResponse: Readonly<any> = Object.freeze({
     Response: {
         MetaInfo: { Timestamp: '2019-02-19T23:39:16.057+0000' },
         View: [
@@ -47,9 +47,9 @@ export const plainFullFilledResponseObject: any = {
             },
         ],
     },
-};
+});
 
-export const plainParsedResponseObject: LocationInterface[] = [
+export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze([
     {
         latitude: 41.7332379,
         longitude: -87.5959685,
@@ -64,4 +64,4 @@ export const plainParsedResponseObject: LocationInterface[] = [
         provider: HereProvider.name,
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
     },
-];
+]);

@@ -8,7 +8,7 @@ maintainers accept and merge your work.
 You MUST follow the [TypeScript](https://www.typescriptlang.org/docs/home.html) standards. If you don't know about any of them, you
 should really read the recommendations.
 
-You MUST run the `npm test` command.
+You MUST run the `npm run coverage` command.
 
 You MUST write (or update) unit tests.
 

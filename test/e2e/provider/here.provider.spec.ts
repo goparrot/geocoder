@@ -1,136 +1,102 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../../../src/exception';
-import { Geocoder } from '../../../src/geocoder';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
-import { HereProvider } from '../../../src/provider';
+import { LocationInterface, QueryInterface } from '../../../src/interface';
+import { AccuracyEnum } from '../../../src/model';
+import { HereGeocodeCommand, HereProvider, HereReverseCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
 import { providerParsedResponse, providerRawResponse } from '../../fixture/provider/here.fixture';
 
 describe('HereProvider (2e2)', () => {
-    let geocodeQuery: GeocodeQueryInterface;
-    let reverseQuery: ReverseQueryInterface;
-    let geocoder: Geocoder;
     let provider: HereProvider;
     let mock: MockAdapter;
 
     beforeEach(() => {
-        geocodeQuery = { ...geocodeQueryFixture };
-        reverseQuery = { ...reverseQueryFixture };
-
         const client: AxiosInstance = Axios.create();
         mock = new MockAdapter(client);
 
         provider = new HereProvider(client, 'test', 'test');
-
-        geocoder = new Geocoder(provider);
     });
 
-    describe('#geocode', () => {
-        it('should return success response', async () => {
-            mock.onGet(provider.geocodeUrl).reply(200, providerRawResponse);
+    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<LocationInterface>): void {
+        query = { ...query };
 
-            return geocoder.geocode(geocodeQuery).should.become(providerParsedResponse);
-        });
+        describe('#sharedBehaviours', () => {
+            it('should return success response', async () => {
+                mock.onGet(provider[url]).reply(200, rawResponse);
 
-        it('should throw InvalidServerResponseException on empty response', async () => {
-            mock.onGet(provider.geocodeUrl).reply(200, '');
-
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
-        });
-
-        it('should return empty results on response with empty json', async () => {
-            mock.onGet(provider.geocodeUrl).reply(200, {});
-
-            return geocoder.geocode(geocodeQuery).should.become([]);
-        });
-
-        it('should return response with empty array', async () => {
-            mock.onGet(provider.geocodeUrl).reply(200, {
-                Response: {
-                    View: [],
-                },
+                return provider[method](query).should.become(parsedResponse);
             });
 
-            return geocoder.geocode(geocodeQuery).should.become([]);
+            it('should return empty result on empty response', async () => {
+                mock.onGet(provider[url]).reply(200, '');
+
+                return provider[method](query).should.become([]);
+            });
+
+            it('should return empty result on response with empty json', async () => {
+                mock.onGet(provider[url]).reply(200, {});
+
+                return provider[method](query).should.become([]);
+            });
+
+            it('should return response with empty array', async () => {
+                mock.onGet(provider[url]).reply(200, {
+                    Response: {
+                        View: [],
+                    },
+                });
+
+                return provider[method](query).should.become([]);
+            });
+
+            it('should throw InvalidCredentialsException', async () => {
+                mock.onGet(provider[url]).reply(401);
+
+                return provider[method](query).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
+            });
+
+            it('should throw InvalidCredentialsException', async () => {
+                mock.onGet(provider[url]).reply(403);
+
+                return provider[method](query).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
+            });
+
+            it('should throw QuotaExceededException', async () => {
+                mock.onGet(provider[url]).reply(429);
+
+                return provider[method](query).should.be.rejectedWith(QuotaExceededException, 'Quota exceeded');
+            });
+
+            it('should throw InvalidServerResponseException', async () => {
+                mock.onGet(provider[url]).reply(500);
+
+                return provider[method](query).should.be.rejectedWith(InvalidServerResponseException);
+            });
+
+            describe('#sharedAccuracyBehaviours', () => {
+                for (const [key, accuracy] of Object.entries(AccuracyEnum)) {
+                    it(`should return correct values for AccuracyEnum.${key}`, async () => {
+                        query.accuracy = accuracy;
+
+                        mock.onGet(provider[url]).reply(200, providerRawResponse);
+
+                        return provider[method](query).should.fulfilled;
+                    });
+                }
+            });
         });
+    }
 
-        it('should throw InvalidCredentialsException', async () => {
-            mock.onGet(provider.geocodeUrl).reply(401);
+    describe('#geocode', () => {
+        const url: string = HereGeocodeCommand.getUrl();
 
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
-        });
-
-        it('should throw InvalidCredentialsException', async () => {
-            mock.onGet(provider.geocodeUrl).reply(403);
-
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
-        });
-
-        it('should throw QuotaExceededException', async () => {
-            mock.onGet(provider.geocodeUrl).reply(429);
-
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(QuotaExceededException, 'Quota exceeded');
-        });
-
-        it('should throw InvalidServerResponseException', async () => {
-            mock.onGet(provider.geocodeUrl).reply(500);
-
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(InvalidServerResponseException);
-        });
+        sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawResponse, providerParsedResponse);
     });
 
     describe('#reverse', () => {
-        it('should return success response', async () => {
-            mock.onGet(provider.reverseUrl).reply(200, providerRawResponse);
+        const url: string = HereReverseCommand.getUrl();
 
-            return geocoder.reverse(reverseQuery).should.become(providerParsedResponse);
-        });
-
-        it('should throw InvalidServerResponseException on empty response', async () => {
-            mock.onGet(provider.reverseUrl).reply(200, '');
-
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
-        });
-
-        it('should return empty results on response with empty json', async () => {
-            mock.onGet(provider.reverseUrl).reply(200, {});
-
-            return geocoder.reverse(reverseQuery).should.become([]);
-        });
-
-        it('should return response with empty array', async () => {
-            mock.onGet(provider.reverseUrl).reply(200, {
-                Response: {
-                    View: [],
-                },
-            });
-
-            return geocoder.reverse(reverseQuery).should.become([]);
-        });
-
-        it('should throw InvalidCredentialsException', async () => {
-            mock.onGet(provider.reverseUrl).reply(401);
-
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
-        });
-
-        it('should throw InvalidCredentialsException', async () => {
-            mock.onGet(provider.reverseUrl).reply(403);
-
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(InvalidCredentialsException, 'API key is invalid');
-        });
-
-        it('should throw QuotaExceededException', async () => {
-            mock.onGet(provider.reverseUrl).reply(429);
-
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(QuotaExceededException, 'Quota exceeded');
-        });
-
-        it('should throw InvalidServerResponseException', async () => {
-            mock.onGet(provider.reverseUrl).reply(500);
-
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(InvalidServerResponseException);
-        });
+        sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawResponse, providerParsedResponse);
     });
 });

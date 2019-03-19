@@ -1,9 +1,13 @@
-import { GeocodeQuery } from './geocode-query';
+import { GeocodeQueryInterface, ProviderInterface, ReverseQueryInterface } from '../interface';
+import { LoggableMixin } from '../logger';
 import { Location } from './location';
-import { ReverseQuery } from './reverse-query';
 
-export abstract class AbstractProvider {
-    abstract async geocode(query: GeocodeQuery): Promise<Location[]>;
+export abstract class AbstractProvider extends LoggableMixin(Object) implements ProviderInterface {
+    protected constructor() {
+        super();
+    }
 
-    abstract async reverse(query: ReverseQuery): Promise<Location[]>;
+    abstract async geocode(query: GeocodeQueryInterface): Promise<Location[]>;
+
+    abstract async reverse(query: ReverseQueryInterface): Promise<Location[]>;
 }

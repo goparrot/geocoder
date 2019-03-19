@@ -1,5 +1,6 @@
 import { plainToClass } from 'class-transformer';
-import { LocationInterface, Type } from '../interface';
+import { LocationInterface } from '../interface';
+import { Type } from '../types';
 import { AbstractHttpProvider } from './abstract-http-provider';
 import { Location } from './location';
 
@@ -15,13 +16,14 @@ export class LocationBuilder<T extends AbstractHttpProvider = any> implements Lo
     streetName?: string;
     houseNumber?: string;
     postalCode?: string;
-    provider: string;
 
-    constructor(private readonly providerClass: Type<T>) {}
+    readonly provider: string;
 
-    build(): Location {
+    constructor(readonly providerClass: Type<T>) {
         this.provider = this.providerClass.name;
+    }
 
+    async build(): Promise<Location> {
         const location: Location = plainToClass(Location, this);
 
         if (!location.formattedAddress) {

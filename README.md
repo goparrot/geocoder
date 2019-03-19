@@ -31,8 +31,6 @@ providing a powerful abstraction layer for geocoding manipulations.
 <sub>⚠️️ Each reflect-metadata installation has its own metadata storage, from which it reads and writes from.
 So if you had a project with multiple reflect-metadata packages, it could happen that in one file you write metadata in one reflect-metadata package and in another file you’re trying to retrieve this metadata accidently from the other reflect-metadata package, which of course doesn’t exist there.</sub>
 
-<sub>The only way is to list reflect-metadata in peerDependencies. In this case you would need to install it manually as well</sub>
-
 ## Usage
 
 ### Minimal
@@ -121,7 +119,8 @@ axios.interceptors.response.use(
 
 const provider: HereProvider = new HereProvider(axios, 'YOUR_APP_ID', 'YOUR_APP_CODE');
 
-const geocoder: Geocoder = new Geocoder(provider, logger);
+const geocoder: Geocoder = new Geocoder(provider);
+geocoder.setLogger(logger);
 
 (async () => {
     try {
@@ -215,7 +214,6 @@ const chainProvider: ChainProvider = new ChainProvider([
 ]);
 
 const geocoder: ProviderAggregator = new ProviderAggregator();
-
 geocoder.registerProvider(chainProvider);
 
 (async () => {

@@ -1,5 +1,4 @@
 import { LocationInterface } from '../../../src/interface';
-import { ArcgisProvider } from '../../../src/provider';
 
 export const providerRawGeocodeResponse: Readonly<any> = Object.freeze({
     spatialReference: {
@@ -83,7 +82,7 @@ export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = O
         streetName: 'E 89th St',
         houseNumber: '1158',
         postalCode: '60619',
-        provider: ArcgisProvider.name,
+        provider: 'ArcgisProvider',
     },
 ]);
 
@@ -95,7 +94,7 @@ export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = O
         country: 'United States',
         countryCode: 'US',
         state: 'New York',
-        stateCode: undefined,
+        stateCode: 'NY',
         city: 'New York',
         postalCode: '10011',
         streetName: 'W 18th St',

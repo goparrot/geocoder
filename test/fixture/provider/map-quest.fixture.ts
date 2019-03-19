@@ -1,6 +1,5 @@
 import { LocationInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
-import { MapQuestProvider } from '../../../src/provider';
 
 export const providerRawResponse: Readonly<any> = Object.freeze({
     info: {
@@ -54,6 +53,6 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         streetName: '1158 E 89th St',
         houseNumber: undefined,
         postalCode: '11236-4763',
-        provider: MapQuestProvider.name,
+        provider: 'MapQuestProvider',
     },
 ]);

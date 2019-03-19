@@ -1,6 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
 import { ProviderNotRegisteredException } from '../../../src/exception';
 import { ProviderAggregator } from '../../../src/geocoder';
+import { LoggerInterface, NullLogger } from '../../../src/logger';
 import { GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
 
@@ -8,6 +9,21 @@ describe('ProviderAggregator (unit)', () => {
     let geocoder: ProviderAggregator;
     let mapQuestProvider: MapQuestProvider;
     let googleProvider: GoogleMapsProvider;
+
+    class CustomLogger implements LoggerInterface {
+        debug(): any {
+            //
+        }
+        info(): any {
+            //
+        }
+        warn(): any {
+            //
+        }
+        error(): any {
+            //
+        }
+    }
 
     beforeEach(() => {
         const client: AxiosInstance = Axios.create();
@@ -127,6 +143,31 @@ describe('ProviderAggregator (unit)', () => {
                 ProviderNotRegisteredException,
                 'The class "ProviderAggregator" does not inherit AbstractProvider.',
             );
+        });
+    });
+
+    describe('#setLogger', () => {
+        it('should be instance of Function', async () => {
+            return geocoder.setLogger.should.be.instanceOf(Function);
+        });
+
+        it('should return instance of this', async () => {
+            return geocoder.setLogger(new CustomLogger()).should.be.instanceOf(ProviderAggregator);
+        });
+    });
+
+    describe('#getLogger', () => {
+        it('should be instance of Function', async () => {
+            return geocoder.getLogger.should.be.instanceOf(Function);
+        });
+
+        it('should return instance of NullLogger', async () => {
+            return geocoder.getLogger().should.be.instanceOf(NullLogger);
+        });
+
+        it('should return instance of CustomLogger', async () => {
+            geocoder.setLogger(new CustomLogger());
+            return geocoder.getLogger().should.be.instanceOf(CustomLogger);
         });
     });
 });

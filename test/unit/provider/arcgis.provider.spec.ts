@@ -1,5 +1,4 @@
 import Axios, { AxiosInstance } from 'axios';
-import { AccuracyEnum } from '../../../src/model';
 import { ArcgisProvider } from '../../../src/provider';
 
 describe('ArcgisProvider (unit)', () => {
@@ -15,12 +14,6 @@ describe('ArcgisProvider (unit)', () => {
     describe('#constructor', () => {
         it('should be instance of ArcgisProvider', async () => {
             return provider.should.be.instanceOf(ArcgisProvider);
-        });
-    });
-
-    describe('#maxAccuracy', () => {
-        it('should be typeof AccuracyEnum', async () => {
-            return provider.maxAccuracy.should.be.deep.eq(AccuracyEnum.HOUSE_NUMBER);
         });
     });
 

@@ -1,32 +1,28 @@
 import { InvalidArgumentException } from '../exception';
-import { LoggerInterface, NullLogger } from '../logger';
-import { AbstractHttpProvider, AbstractProvider, GeocodeQuery, Location, ReverseQuery } from '../model';
+import { GeocodeQueryInterface, ReverseQueryInterface } from '../interface';
+import { LoggerInterface } from '../logger';
+import { AbstractHttpProvider, AbstractProvider, Location } from '../model';
 
 export class StatefulChainProvider extends AbstractProvider {
     private nextProvider: AbstractHttpProvider;
-    private readonly logger: LoggerInterface;
+    private readonly providers: AbstractHttpProvider[] = [];
 
-    constructor(private readonly providers: AbstractHttpProvider[], logger?: LoggerInterface) {
+    constructor(providers: AbstractHttpProvider[]) {
         super();
 
         if (!providers.length) {
             throw new InvalidArgumentException('provider array should not be empty');
         }
 
+        this.registerProviders(providers);
+
         this.setNextProvider();
-        this.logger = logger || new NullLogger();
     }
 
-    async geocode(query: GeocodeQuery): Promise<Location[]> {
+    async geocode(query: GeocodeQueryInterface): Promise<Location[]> {
         for (const provider of this.getOrderedProvidersList()) {
             try {
                 this.setNextProvider();
-                if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
-                    this.logger.info(
-                        `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${provider.maxAccuracy}")`,
-                    );
-                    continue;
-                }
 
                 const locations: Location[] = await provider.geocode(query);
 
@@ -34,23 +30,17 @@ export class StatefulChainProvider extends AbstractProvider {
                     return locations;
                 }
             } catch (err) {
-                this.logger.error(err);
+                this.getLogger().error(err);
             }
         }
 
         return [];
     }
 
-    async reverse(query: ReverseQuery): Promise<Location[]> {
+    async reverse(query: ReverseQueryInterface): Promise<Location[]> {
         for (const provider of this.getOrderedProvidersList()) {
             try {
                 this.setNextProvider();
-                if (query.accuracy && !provider.isProvidesAccuracy(query.accuracy)) {
-                    this.logger.info(
-                        `provider ${provider.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${provider.maxAccuracy}")`,
-                    );
-                    continue;
-                }
 
                 const locations: Location[] = await provider.reverse(query);
 
@@ -58,7 +48,7 @@ export class StatefulChainProvider extends AbstractProvider {
                     return locations;
                 }
             } catch (err) {
-                this.logger.error(err);
+                this.getLogger().error(err);
             }
         }
 
@@ -78,6 +68,15 @@ export class StatefulChainProvider extends AbstractProvider {
     registerProviders(providers: AbstractHttpProvider[]): this {
         for (const provider of providers) {
             this.registerProvider(provider);
+        }
+
+        return this;
+    }
+
+    setLogger(logger: LoggerInterface): this {
+        super.setLogger(logger);
+        for (const provider of this.getProviders()) {
+            provider.setLogger(logger);
         }
 
         return this;

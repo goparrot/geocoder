@@ -1,11 +1,9 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../src/exception';
-import { Geocoder } from '../../../src/geocoder';
-import { GeocodeQueryInterface, LocationInterface, ReverseQueryInterface } from '../../../src/interface';
-import { QueryInterface } from '../../../src/interface/query.interface';
+import { GeocodeQueryInterface, LocationInterface, QueryInterface, ReverseQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
-import { ArcgisProvider } from '../../../src/provider';
+import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
 import {
     providerParsedGeocodeResponse,
@@ -13,11 +11,11 @@ import {
     providerRawGeocodeResponse,
     providerRawReverseResponse,
 } from '../../fixture/provider/arcgis.fixture';
+import { providerRawResponse } from '../../fixture/provider/here.fixture';
 
 describe('ArcgisProvider (2e2)', () => {
     let geocodeQuery: GeocodeQueryInterface;
     let reverseQuery: ReverseQueryInterface;
-    let geocoder: Geocoder;
     let provider: ArcgisProvider;
     let mock: MockAdapter;
 
@@ -29,11 +27,11 @@ describe('ArcgisProvider (2e2)', () => {
         mock = new MockAdapter(client);
 
         provider = new ArcgisProvider(client);
-
-        geocoder = new Geocoder(provider);
     });
 
     function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<LocationInterface>): void {
+        query = { ...query };
+
         describe('#sharedBehaviours', () => {
             it('should return success response', async () => {
                 mock.onGet(provider[url]).reply(200, rawResponse);
@@ -41,13 +39,13 @@ describe('ArcgisProvider (2e2)', () => {
                 return provider[method](query).should.become(parsedResponse);
             });
 
-            it('should throw InvalidServerResponseException on empty response', async () => {
+            it('should return empty result on empty response', async () => {
                 mock.onGet(provider[url]).reply(200, '');
 
-                return provider[method](query).should.be.rejectedWith(InvalidServerResponseException, /Invalid server response/);
+                return provider[method](query).should.become([]);
             });
 
-            it('should return empty results on response with empty json', async () => {
+            it('should return empty result on response with empty json', async () => {
                 mock.onGet(provider[url]).reply(200, {});
 
                 return provider[method](query).should.become([]);
@@ -100,38 +98,37 @@ describe('ArcgisProvider (2e2)', () => {
 
                 return provider[method](query).should.be.rejectedWith(InvalidServerResponseException, 'Some other error');
             });
+
+            describe('#sharedAccuracyBehaviours', () => {
+                for (const [key, accuracy] of Object.entries(AccuracyEnum)) {
+                    it(`should return correct values for AccuracyEnum.${key}`, async () => {
+                        query.accuracy = accuracy;
+
+                        mock.onGet(provider[url]).reply(200, providerRawResponse);
+
+                        return provider[method](query).should.fulfilled;
+                    });
+                }
+            });
         });
     }
 
     describe('#geocode', () => {
-        function sharedAccuracyBehaviours(): void {
-            describe('#sharedAccuracyBehaviours', () => {
-                for (const [key, accuracy] of Object.entries(AccuracyEnum)) {
-                    it(`should return correct values for AccuracyEnum.${key}`, async () => {
-                        geocodeQuery.accuracy = accuracy;
+        const url: string = ArcgisGeocodeCommand.getUrl();
 
-                        mock.onGet(provider.geocodeUrl).reply(200, providerRawGeocodeResponse);
-
-                        return geocoder.geocode(geocodeQuery).should.fulfilled;
-                    });
-                }
-            });
-        }
-
-        sharedBehaviours('geocodeUrl', 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
-        sharedAccuracyBehaviours();
+        sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
 
         it('should return response with empty array', async () => {
-            mock.onGet(provider.geocodeUrl).reply(200, {
+            mock.onGet(url).reply(200, {
                 candidates: [],
             });
 
-            return geocoder.geocode(geocodeQuery).should.become([]);
+            return provider.geocode(geocodeQuery).should.become([]);
         });
 
         // Covered by GeocodeQuery validation
         it.skip('should throw InvalidArgumentException', async () => {
-            mock.onGet(provider.geocodeUrl).reply(200, {
+            mock.onGet(url).reply(200, {
                 error: {
                     code: 400,
                     extendedCode: -2147467259,
@@ -142,30 +139,17 @@ describe('ArcgisProvider (2e2)', () => {
 
             geocodeQuery.address = 'VERY_LONG_ADDRESS_VERY_LONG_ADDRESS_VERY_LONG_ADDRESS_VERY_LONG_ADDRESS_VERY_LONG_ADDRESS_VERY_LONG_ADDRESS';
 
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(InvalidArgumentException, 'Unable to complete operation.');
+            return provider.geocode(geocodeQuery).should.be.rejectedWith(InvalidArgumentException, 'Unable to complete operation.');
         });
     });
 
     describe('#reverse', () => {
-        function sharedAccuracyBehaviours(): void {
-            describe('#sharedAccuracyBehaviours', () => {
-                for (const accuracy of Object.values(AccuracyEnum)) {
-                    it(`should return correct values for AccuracyEnum.${accuracy}`, async () => {
-                        reverseQuery.accuracy = accuracy;
+        const url: string = ArcgisReverseCommand.getUrl();
 
-                        mock.onGet(provider.reverseUrl).reply(200, providerRawReverseResponse);
-
-                        return geocoder.reverse(reverseQuery).should.fulfilled;
-                    });
-                }
-            });
-        }
-
-        sharedBehaviours('reverseUrl', 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
-        sharedAccuracyBehaviours();
+        sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
 
         it('should throw InvalidArgumentException', async () => {
-            mock.onGet(provider.reverseUrl).reply(200, {
+            mock.onGet(url).reply(200, {
                 error: {
                     code: 400,
                     extendedCode: -2147467259,
@@ -176,7 +160,7 @@ describe('ArcgisProvider (2e2)', () => {
 
             reverseQuery.lon = '' as any;
 
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(InvalidArgumentException, 'Unable to complete operation.');
+            return provider.reverse(reverseQuery).should.be.rejectedWith(InvalidArgumentException, 'Unable to complete operation.');
         });
     });
 });

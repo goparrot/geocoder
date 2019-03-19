@@ -1,6 +1,14 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { AccuracyEnum, Geocoder, MapQuestProvider, StatefulChainProvider } from '../../../src';
+import {
+    AccuracyEnum,
+    GoogleMapsGeocodeCommand,
+    GoogleMapsReverseCommand,
+    MapQuestGeocodeCommand,
+    MapQuestProvider,
+    MapQuestReverseCommand,
+    StatefulChainProvider,
+} from '../../../src';
 import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
@@ -8,7 +16,7 @@ import { providerParsedResponse, providerRawResponse } from '../../fixture/provi
 
 describe('StatefulChainProvider (2e2)', () => {
     let mock: MockAdapter;
-    let geocoder: Geocoder;
+    let provider: StatefulChainProvider;
     let geocodeQuery: GeocodeQueryInterface;
     let reverseQuery: ReverseQueryInterface;
     let mapQuestProvider: MapQuestProvider;
@@ -24,40 +32,40 @@ describe('StatefulChainProvider (2e2)', () => {
         mapQuestProvider = new MapQuestProvider(client, 'test');
         googleProvider = new GoogleMapsProvider(client, 'test');
 
-        geocoder = new Geocoder(new StatefulChainProvider([mapQuestProvider, googleProvider]));
+        provider = new StatefulChainProvider([mapQuestProvider, googleProvider]);
     });
 
     describe('#geocode', () => {
         it('should fail for MapQuestProvider (mock http status 401) and succeed for GoogleMapsProvider', async () => {
-            mock.onGet(mapQuestProvider.geocodeUrl).reply(401);
-            mock.onGet(googleProvider.geocodeUrl).reply(200, providerRawResponse);
+            mock.onGet(MapQuestGeocodeCommand.getUrl()).reply(401);
+            mock.onGet(GoogleMapsGeocodeCommand.getUrl()).reply(200, providerRawResponse);
 
-            return geocoder.geocode(geocodeQuery).should.become(providerParsedResponse);
+            return provider.geocode(geocodeQuery).should.become(providerParsedResponse);
         });
 
         it('should fail for MapQuestProvider (does not support AccuracyEnum.HOUSE_NUMBER) and succeed for GoogleMapsProvider', async () => {
             geocodeQuery.accuracy = AccuracyEnum.HOUSE_NUMBER;
 
-            mock.onGet(googleProvider.geocodeUrl).reply(200, providerRawResponse);
+            mock.onGet(GoogleMapsGeocodeCommand.getUrl()).reply(200, providerRawResponse);
 
-            return geocoder.geocode(geocodeQuery).should.become(providerParsedResponse);
+            return provider.geocode(geocodeQuery).should.become(providerParsedResponse);
         });
     });
 
     describe('#reverse', () => {
         it('should fail for MapQuestProvider (mock http status 401) and succeed for GoogleMapsProvider', async () => {
-            mock.onGet(mapQuestProvider.reverseUrl).reply(401);
-            mock.onGet(googleProvider.reverseUrl).reply(200, providerRawResponse);
+            mock.onGet(MapQuestReverseCommand.getUrl()).reply(401);
+            mock.onGet(GoogleMapsReverseCommand.getUrl()).reply(200, providerRawResponse);
 
-            return geocoder.reverse(reverseQuery).should.become(providerParsedResponse);
+            return provider.reverse(reverseQuery).should.become(providerParsedResponse);
         });
 
         it('should fail for MapQuestProvider (does not support AccuracyEnum.HOUSE_NUMBER) and succeed for GoogleMapsProvider', async () => {
             reverseQuery.accuracy = AccuracyEnum.HOUSE_NUMBER;
 
-            mock.onGet(googleProvider.reverseUrl).reply(200, providerRawResponse);
+            mock.onGet(GoogleMapsReverseCommand.getUrl()).reply(200, providerRawResponse);
 
-            return geocoder.reverse(reverseQuery).should.become(providerParsedResponse);
+            return provider.reverse(reverseQuery).should.become(providerParsedResponse);
         });
     });
 });

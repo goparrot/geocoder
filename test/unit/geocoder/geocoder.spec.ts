@@ -1,10 +1,26 @@
 import Axios, { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
+import { LoggerInterface, NullLogger } from '../../../src/logger';
 import { HereProvider } from '../../../src/provider';
 
 describe('Geocoder (unit)', () => {
     let client: AxiosInstance;
     let geocoder: Geocoder;
+
+    class CustomLogger implements LoggerInterface {
+        debug(): any {
+            //
+        }
+        info(): any {
+            //
+        }
+        warn(): any {
+            //
+        }
+        error(): any {
+            //
+        }
+    }
 
     beforeEach(() => {
         client = Axios.create();
@@ -27,6 +43,31 @@ describe('Geocoder (unit)', () => {
     describe('#reverse', () => {
         it('should be instance of Function', async () => {
             return geocoder.reverse.should.be.instanceOf(Function);
+        });
+    });
+
+    describe('#setLogger', () => {
+        it('should be instance of Function', async () => {
+            return geocoder.setLogger.should.be.instanceOf(Function);
+        });
+
+        it('should return instance of this', async () => {
+            return geocoder.setLogger(new CustomLogger()).should.be.instanceOf(Geocoder);
+        });
+    });
+
+    describe('#getLogger', () => {
+        it('should be instance of Function', async () => {
+            return geocoder.getLogger.should.be.instanceOf(Function);
+        });
+
+        it('should return instance of NullLogger', async () => {
+            return geocoder.getLogger().should.be.instanceOf(NullLogger);
+        });
+
+        it('should return instance of CustomLogger', async () => {
+            geocoder.setLogger(new CustomLogger());
+            return geocoder.getLogger().should.be.instanceOf(CustomLogger);
         });
     });
 });

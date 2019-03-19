@@ -65,15 +65,15 @@ export class ArcgisGeocodeCommand extends ArcgisCommonCommandMixin(GeocodeComman
 
         return Promise.all<Location>(
             response.data.candidates.map(
-                async (location: any): Promise<Location> => {
-                    const builder: LocationBuilder<ArcgisProvider> = new LocationBuilder(ArcgisProvider);
-                    builder.formattedAddress = location.attributes.LongLabel;
-                    builder.latitude = location.attributes.DisplayY;
-                    builder.longitude = location.attributes.DisplayX;
+                async (raw: any): Promise<Location> => {
+                    const builder: LocationBuilder<ArcgisProvider> = new LocationBuilder(ArcgisProvider, raw);
+                    builder.formattedAddress = raw.attributes.LongLabel;
+                    builder.latitude = raw.attributes.DisplayY;
+                    builder.longitude = raw.attributes.DisplayX;
 
-                    if (location.attributes.Country) {
+                    if (raw.attributes.Country) {
                         const country: WorldCountry | undefined = await WorldCountryUtil.find({
-                            cca3: location.attributes.Country,
+                            cca3: raw.attributes.Country,
                         });
 
                         if (country) {
@@ -82,15 +82,15 @@ export class ArcgisGeocodeCommand extends ArcgisCommonCommandMixin(GeocodeComman
                         }
                     }
 
-                    builder.stateCode = location.attributes.RegionAbbr;
-                    builder.state = location.attributes.Region;
-                    builder.city = location.attributes.City;
+                    builder.stateCode = raw.attributes.RegionAbbr;
+                    builder.state = raw.attributes.Region;
+                    builder.city = raw.attributes.City;
                     // StAddr always includes a house number
-                    builder.streetName = location.attributes.AddNum
-                        ? LocationUtil.removeHouseNumberFromStreetName(location.attributes.StAddr, location.attributes.AddNum)
-                        : location.attributes.StAddr;
-                    builder.houseNumber = location.attributes.AddNum;
-                    builder.postalCode = location.attributes.Postal;
+                    builder.streetName = raw.attributes.AddNum
+                        ? LocationUtil.removeHouseNumberFromStreetName(raw.attributes.StAddr, raw.attributes.AddNum)
+                        : raw.attributes.StAddr;
+                    builder.houseNumber = raw.attributes.AddNum;
+                    builder.postalCode = raw.attributes.Postal;
 
                     return builder.build();
                 },

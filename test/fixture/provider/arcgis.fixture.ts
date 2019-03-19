@@ -83,6 +83,7 @@ export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = O
         houseNumber: '1158',
         postalCode: '60619',
         provider: 'ArcgisProvider',
+        raw: providerRawGeocodeResponse.candidates[0],
     },
 ]);
 
@@ -100,5 +101,6 @@ export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = O
         streetName: 'W 18th St',
         houseNumber: '250',
         provider: 'ArcgisProvider',
+        raw: providerRawReverseResponse,
     },
 ]);

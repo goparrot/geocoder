@@ -49,29 +49,29 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractLoc
                 return [];
             }
 
-            const locations: any[] = response.data.results[0].locations.filter((location: any) => this.accuracyFilter(location, query.accuracy));
+            const locations: any[] = response.data.results[0].locations.filter((raw: any) => this.accuracyFilter(raw, query.accuracy));
             if (!Array.isArray(locations) || !locations.length) {
                 return [];
             }
 
             return Promise.all<Location>(
                 locations.map(
-                    async (location: any): Promise<Location> => {
-                        const builder: LocationBuilder<MapQuestProvider> = new LocationBuilder(MapQuestProvider);
-                        builder.latitude = location.latLng.lat;
-                        builder.longitude = location.latLng.lng;
-                        builder.countryCode = location.adminArea1;
-                        if (2 === location.adminArea3.length) {
-                            builder.stateCode = location.adminArea3;
+                    async (raw: any): Promise<Location> => {
+                        const builder: LocationBuilder<MapQuestProvider> = new LocationBuilder(MapQuestProvider, raw);
+                        builder.latitude = raw.latLng.lat;
+                        builder.longitude = raw.latLng.lng;
+                        builder.countryCode = raw.adminArea1;
+                        if (2 === raw.adminArea3.length) {
+                            builder.stateCode = raw.adminArea3;
                             builder.state = undefined;
                         } else {
                             builder.stateCode = undefined;
-                            builder.state = location.adminArea3;
+                            builder.state = raw.adminArea3;
                         }
-                        builder.city = location.adminArea5;
-                        builder.streetName = location.street;
+                        builder.city = raw.adminArea5;
+                        builder.streetName = raw.street;
                         builder.houseNumber = undefined;
-                        builder.postalCode = location.postalCode;
+                        builder.postalCode = raw.postalCode;
 
                         return builder.build();
                     },
@@ -79,7 +79,7 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractLoc
             );
         }
 
-        private accuracyFilter(location: any, accuracy?: AccuracyEnum): boolean {
+        private accuracyFilter(raw: any, accuracy?: AccuracyEnum): boolean {
             if (!accuracy) {
                 return true;
             }
@@ -89,13 +89,13 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractLoc
                 // case AccuracyEnum.HOUSE_NUMBER:
                 //     return this.isQualityAppropriate(MapQuestLocationQualityEnum.POINT, location.geocodeQuality);
                 case AccuracyEnum.STREET_NAME:
-                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.STREET, location.geocodeQuality);
+                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.STREET, raw.geocodeQuality);
                 case AccuracyEnum.CITY:
-                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.CITY, location.geocodeQuality);
+                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.CITY, raw.geocodeQuality);
                 case AccuracyEnum.STATE:
-                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.STATE, location.geocodeQuality);
+                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.STATE, raw.geocodeQuality);
                 case AccuracyEnum.COUNTRY:
-                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.COUNTRY, location.geocodeQuality);
+                    return this.isQualityAppropriate(MapQuestLocationQualityEnum.COUNTRY, raw.geocodeQuality);
             }
 
             // should never happen, as there is validation before

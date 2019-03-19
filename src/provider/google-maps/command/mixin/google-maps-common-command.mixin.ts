@@ -67,14 +67,14 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
 
             return Promise.all<Location>(
                 response.data.results.map(
-                    async (result: any): Promise<Location> => {
+                    async (raw: any): Promise<Location> => {
                         // TODO Do need to implement postal_code_suffix options ?
-                        const builder: LocationBuilder<GoogleMapsProvider> = new LocationBuilder(GoogleMapsProvider);
-                        builder.formattedAddress = result.formatted_address;
-                        builder.latitude = result.geometry.location.lat;
-                        builder.longitude = result.geometry.location.lng;
+                        const builder: LocationBuilder<GoogleMapsProvider> = new LocationBuilder(GoogleMapsProvider, raw);
+                        builder.formattedAddress = raw.formatted_address;
+                        builder.latitude = raw.geometry.location.lat;
+                        builder.longitude = raw.geometry.location.lng;
 
-                        for (const addressComponent of result.address_components) {
+                        for (const addressComponent of raw.address_components) {
                             for (const type of addressComponent.types) {
                                 this.updateAddressComponent(builder, type, addressComponent);
                             }

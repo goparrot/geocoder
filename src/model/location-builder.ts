@@ -4,7 +4,7 @@ import { Type } from '../types';
 import { AbstractHttpProvider } from './abstract-http-provider';
 import { Location } from './location';
 
-export class LocationBuilder<T extends AbstractHttpProvider = any> implements LocationInterface {
+export class LocationBuilder<T extends AbstractHttpProvider = any, R = any> implements LocationInterface<R> {
     latitude: number;
     longitude: number;
     formattedAddress?: string;
@@ -19,7 +19,7 @@ export class LocationBuilder<T extends AbstractHttpProvider = any> implements Lo
 
     readonly provider: string;
 
-    constructor(readonly providerClass: Type<T>) {
+    constructor(readonly providerClass: Type<T>, readonly raw: R) {
         this.provider = this.providerClass.name;
     }
 

@@ -54,5 +54,6 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         houseNumber: undefined,
         postalCode: '11236-4763',
         provider: 'MapQuestProvider',
+        raw: providerRawResponse.results[0].locations[0],
     },
 ]);

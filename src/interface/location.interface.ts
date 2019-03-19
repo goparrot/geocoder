@@ -1,4 +1,4 @@
-export interface LocationInterface {
+export interface LocationInterface<R = any> {
     latitude: number;
     longitude: number;
     formattedAddress?: string;
@@ -14,4 +14,5 @@ export interface LocationInterface {
     houseNumber?: string;
     postalCode?: string;
     provider: string;
+    raw: R;
 }

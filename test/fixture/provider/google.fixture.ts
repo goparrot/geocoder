@@ -44,5 +44,6 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         houseNumber: '1158',
         postalCode: '60619',
         provider: 'GoogleMapsProvider',
+        raw: providerRawResponse.results[0],
     },
 ]);

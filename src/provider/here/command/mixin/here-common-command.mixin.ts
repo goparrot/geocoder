@@ -39,14 +39,13 @@ export function HereCommonCommandMixin<TBase extends Constructor<AbstractCommand
 
             return Promise.all<Location>(
                 results.map(
-                    async (result: any): Promise<Location> => {
-                        const location: any = result.Location || {};
-                        const hereAddress: any = location.Address || {};
+                    async (raw: any): Promise<Location> => {
+                        const hereAddress: any = raw.Location.Address || {};
 
-                        const builder: LocationBuilder<HereProvider> = new LocationBuilder(HereProvider);
+                        const builder: LocationBuilder<HereProvider> = new LocationBuilder(HereProvider, raw);
                         builder.formattedAddress = hereAddress.Label;
-                        builder.latitude = location.DisplayPosition.Latitude;
-                        builder.longitude = location.DisplayPosition.Longitude;
+                        builder.latitude = raw.Location.DisplayPosition.Latitude;
+                        builder.longitude = raw.Location.DisplayPosition.Longitude;
                         // builder.countryCode = country ? country.cca2 : hereAddress.Country;
                         builder.state = hereAddress.State;
                         builder.stateCode = hereAddress.State;

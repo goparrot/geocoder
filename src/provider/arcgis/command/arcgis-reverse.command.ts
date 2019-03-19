@@ -55,12 +55,14 @@ export class ArcgisReverseCommand extends ArcgisCommonCommandMixin(ReverseComman
             return [];
         }
 
-        const builder: LocationBuilder<ArcgisProvider> = new LocationBuilder(ArcgisProvider);
-        builder.formattedAddress = response.data.address.LongLabel;
-        builder.latitude = response.data.location.y;
-        builder.longitude = response.data.location.x;
+        const raw: any = response.data;
 
-        const cca3: string = response.data.address.CountryCode;
+        const builder: LocationBuilder<ArcgisProvider> = new LocationBuilder(ArcgisProvider, raw);
+        builder.formattedAddress = raw.address.LongLabel;
+        builder.latitude = raw.location.y;
+        builder.longitude = raw.location.x;
+
+        const cca3: string = raw.address.CountryCode;
         if (cca3) {
             const country: WorldCountry | undefined = await WorldCountryUtil.find({
                 cca3,
@@ -73,14 +75,12 @@ export class ArcgisReverseCommand extends ArcgisCommonCommandMixin(ReverseComman
         }
 
         builder.stateCode = undefined;
-        builder.state = response.data.address.Region;
-        builder.city = response.data.address.City;
+        builder.state = raw.address.Region;
+        builder.city = raw.address.City;
         // Address always includes a house number
-        builder.streetName = response.data.address.AddNum
-            ? LocationUtil.removeHouseNumberFromStreetName(response.data.address.Address, response.data.address.AddNum)
-            : response.data.address.Address;
-        builder.houseNumber = response.data.address.AddNum;
-        builder.postalCode = response.data.address.Postal;
+        builder.streetName = raw.address.AddNum ? LocationUtil.removeHouseNumberFromStreetName(raw.address.Address, raw.address.AddNum) : raw.address.Address;
+        builder.houseNumber = raw.address.AddNum;
+        builder.postalCode = raw.address.Postal;
 
         return [await builder.build()];
     }

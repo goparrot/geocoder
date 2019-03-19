@@ -14,4 +14,5 @@ export const locationFixture: Readonly<LocationInterface> = Object.freeze({
     houseNumber: '1158',
     postalCode: '60619',
     provider: GoogleMapsProvider.name,
+    raw: {},
 });

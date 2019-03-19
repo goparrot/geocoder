@@ -62,5 +62,6 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         postalCode: '60619',
         provider: 'HereProvider',
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
+        raw: providerRawResponse.Response.View[0].Result[0],
     },
 ]);

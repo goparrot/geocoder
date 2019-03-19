@@ -35,7 +35,7 @@ describe('ArcgisProvider (integration)', () => {
             return geocoder
                 .reverse(reverseQuery)
                 .should.eventually.be.an('array')
-                .with.length(1);
+                .with.length(0);
         });
     });
 });

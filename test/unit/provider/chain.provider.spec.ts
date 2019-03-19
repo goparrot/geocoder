@@ -1,6 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { InvalidArgumentException } from '../../../src/exception';
+import { NullLogger } from '../../../src/logger';
 import { GeocodeQuery, ReverseQuery } from '../../../src/model';
 import { ChainProvider, GoogleMapsProvider, HereProvider, MapQuestProvider } from '../../../src/provider';
 
@@ -106,6 +107,31 @@ describe('ChainProvider (unit)', () => {
             provider.registerProviders([new GoogleMapsProvider(client, 'test'), new MapQuestProvider(client, 'test')]);
 
             return provider.getProviders().should.have.length(3);
+        });
+    });
+
+    describe('#setLogger', () => {
+        it('should be instance of Function', async () => {
+            return provider.setLogger.should.be.instanceOf(Function);
+        });
+
+        it('should return instance of this', async () => {
+            return provider.setLogger(new NullLogger()).should.be.instanceOf(ChainProvider);
+        });
+    });
+
+    describe('#getLogger', () => {
+        it('should be instance of Function', async () => {
+            return provider.getLogger.should.be.instanceOf(Function);
+        });
+
+        it('should return instance of NullLogger', async () => {
+            return provider.getLogger().should.be.instanceOf(NullLogger);
+        });
+
+        it('should return instance of CustomLogger', async () => {
+            provider.setLogger(new NullLogger());
+            return provider.getLogger().should.be.instanceOf(NullLogger);
         });
     });
 });

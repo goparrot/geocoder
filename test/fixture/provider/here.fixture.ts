@@ -1,5 +1,4 @@
 import { LocationInterface } from '../../../src/interface';
-import { HereProvider } from '../../../src/provider';
 
 export const providerRawResponse: Readonly<any> = Object.freeze({
     Response: {
@@ -61,7 +60,7 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         streetName: 'E 89th St',
         houseNumber: '1158',
         postalCode: '60619',
-        provider: HereProvider.name,
+        provider: 'HereProvider',
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
     },
 ]);

@@ -1,5 +1,6 @@
 import { Transform, Type } from 'class-transformer';
 import { IsBoolean, IsEnum, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { QueryInterface } from '../interface';
 
 export enum AccuracyEnum {
     HOUSE_NUMBER = 'houseNumber',
@@ -9,7 +10,7 @@ export enum AccuracyEnum {
     COUNTRY = 'country',
 }
 
-export class Query {
+export class Query implements QueryInterface {
     static readonly DEFAULT_RESULT_LIMIT: number = 5;
     static readonly DEFAULT_RESULT_LANGUAGE: string = 'en';
 

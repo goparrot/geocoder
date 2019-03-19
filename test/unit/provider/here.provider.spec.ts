@@ -1,6 +1,5 @@
 import Axios, { AxiosInstance } from 'axios';
 import { InvalidCredentialsException } from '../../../src/exception';
-import { AccuracyEnum } from '../../../src/model';
 import { HereProvider } from '../../../src/provider';
 
 describe('HereProvider (unit)', () => {
@@ -24,12 +23,6 @@ describe('HereProvider (unit)', () => {
 
         it('should throw InvalidCredentialsException on empty appCode', async () => {
             return ((): any => new HereProvider(client, '', 'test')).should.throw(InvalidCredentialsException, 'Invalid or missing api key.');
-        });
-    });
-
-    describe('#maxAccuracy', () => {
-        it('should be typeof AccuracyEnum', async () => {
-            return provider.maxAccuracy.should.be.deep.eq(AccuracyEnum.HOUSE_NUMBER);
         });
     });
 

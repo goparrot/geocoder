@@ -1,5 +1,4 @@
 import { LocationInterface } from '../../../src/interface';
-import { GoogleMapsProvider } from '../../../src/provider';
 
 export const providerRawResponse: Readonly<any> = Object.freeze({
     results: [
@@ -44,6 +43,6 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         streetName: 'East 89th Street',
         houseNumber: '1158',
         postalCode: '60619',
-        provider: GoogleMapsProvider.name,
+        provider: 'GoogleMapsProvider',
     },
 ]);

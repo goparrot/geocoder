@@ -1,7 +1,3 @@
-import { GeocodeQueryInterface, ReverseQueryInterface } from '.';
-import { Location } from '../model';
+import { ProviderInterface } from './provider.interface';
 
-export interface GeocoderInterface {
-    geocode(query: GeocodeQueryInterface): Promise<Location[]>;
-    reverse(query: ReverseQueryInterface): Promise<Location[]>;
-}
+export interface GeocoderInterface extends ProviderInterface {}

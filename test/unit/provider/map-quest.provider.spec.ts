@@ -1,6 +1,5 @@
 import Axios, { AxiosInstance } from 'axios';
 import { InvalidCredentialsException } from '../../../src/exception';
-import { AccuracyEnum } from '../../../src/model';
 import { MapQuestProvider } from '../../../src/provider';
 
 describe('MapQuestProvider (unit)', () => {
@@ -20,12 +19,6 @@ describe('MapQuestProvider (unit)', () => {
 
         it('should throw InvalidCredentialsException on empty appKey', async () => {
             return ((): any => new MapQuestProvider(client, '')).should.throw(InvalidCredentialsException, 'Invalid or missing api key.');
-        });
-    });
-
-    describe('#maxAccuracy', () => {
-        it('should be typeof AccuracyEnum', async () => {
-            return provider.maxAccuracy.should.be.deep.eq(AccuracyEnum.STREET_NAME);
         });
     });
 

@@ -19,8 +19,8 @@ export class LocationBuilder<T extends AbstractHttpProvider = any, R = any> impl
 
     readonly provider: string;
 
-    constructor(readonly providerClass: Type<T>, readonly raw: R) {
-        this.provider = this.providerClass.name;
+    constructor(providerClass: Type<T>, readonly raw: R) {
+        this.provider = providerClass.name;
     }
 
     async build(): Promise<Location> {

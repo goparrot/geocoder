@@ -1,3 +1,4 @@
+export * from './abstract-builder';
 export * from './abstract-provider';
 export * from './abstract-http-provider';
 export * from './location';

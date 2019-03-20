@@ -53,9 +53,20 @@ export class Query implements QueryInterface {
      *
      * @example You provide state
      * Library search country, countryCode, stateCode and postalCode by country
+     *
+     * @default true
      */
     @IsBoolean()
     @Transform((v: boolean) => !!v, { toClassOnly: true })
     @Type(() => Boolean)
     fillMissingQueryProperties: boolean = true;
+
+    /**
+     * If true - additionally return the locations with the original provider data
+     * @default false
+     */
+    @IsBoolean()
+    @Transform((v: boolean) => !!v, { toClassOnly: true })
+    @Type(() => Boolean)
+    withRaw: boolean = false;
 }

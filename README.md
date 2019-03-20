@@ -135,6 +135,7 @@ geocoder.setLogger(logger);
             // language: 'en', // default
             // limit: 5, // default
             // fillMissingQueryProperties: true, // default
+            // withRaw: false, // default
         });
 
         logger.info('locations', locations);
@@ -148,7 +149,8 @@ geocoder.setLogger(logger);
             lat: 40.74185,
             lon: -74,
             // language: 'en', // default
-            // limit: 5, // default            
+            // limit: 5, // default     
+            // withRaw: false, // default       
         });
 
         console.info('locations', locations);

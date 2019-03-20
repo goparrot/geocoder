@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import { AccuracyEnum, GeocodeQuery, Location, LocationBuilder } from '../../../model';
+import { AccuracyEnum, GeocodeQuery, LocationBuilder } from '../../../model';
 import { LocationUtil } from '../../../util/location';
 import { WorldCountry, WorldCountryUtil } from '../../../util/world-country';
 import { ArcgisProvider } from '../arcgis.provider';
@@ -58,14 +58,14 @@ export class ArcgisGeocodeCommand extends ArcgisCommonCommandMixin(GeocodeComman
         };
     }
 
-    protected async parseResponse(response: AxiosResponse): Promise<Location[]> {
+    protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<ArcgisProvider>[]> {
         if (!Array.isArray(response.data.candidates) || !response.data.candidates.length) {
             return [];
         }
 
-        return Promise.all<Location>(
+        return Promise.all<LocationBuilder<ArcgisProvider>>(
             response.data.candidates.map(
-                async (raw: any): Promise<Location> => {
+                async (raw: any): Promise<LocationBuilder<ArcgisProvider>> => {
                     const builder: LocationBuilder<ArcgisProvider> = new LocationBuilder(ArcgisProvider, raw);
                     builder.formattedAddress = raw.attributes.LongLabel;
                     builder.latitude = raw.attributes.DisplayY;
@@ -92,7 +92,7 @@ export class ArcgisGeocodeCommand extends ArcgisCommonCommandMixin(GeocodeComman
                     builder.houseNumber = raw.attributes.AddNum;
                     builder.postalCode = raw.attributes.Postal;
 
-                    return builder.build();
+                    return builder;
                 },
             ),
         );

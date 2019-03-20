@@ -2,7 +2,7 @@ import { AxiosInstance, AxiosResponse } from 'axios';
 import { AbstractLocationCommand } from '../../../../command';
 import { InvalidCredentialsException, UnsupportedAccuracyException } from '../../../../exception';
 import { QueryInterface } from '../../../../interface';
-import { AccuracyEnum, Location, LocationBuilder } from '../../../../model';
+import { AccuracyEnum, LocationBuilder } from '../../../../model';
 import { Constructor } from '../../../../types';
 import { sliceFrom } from '../../../../util';
 import { MapQuestProvider } from '../../map-quest.provider';
@@ -44,7 +44,7 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractLoc
             return AccuracyEnum.STREET_NAME;
         }
 
-        protected async parseResponse(response: AxiosResponse, query: QueryInterface): Promise<Location[]> {
+        protected async parseResponse(response: AxiosResponse, query: QueryInterface): Promise<LocationBuilder<MapQuestProvider>[]> {
             if (!Array.isArray(response.data.results) || !response.data.results.length) {
                 return [];
             }
@@ -54,9 +54,9 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractLoc
                 return [];
             }
 
-            return Promise.all<Location>(
+            return Promise.all<LocationBuilder<MapQuestProvider>>(
                 locations.map(
-                    async (raw: any): Promise<Location> => {
+                    async (raw: any): Promise<LocationBuilder<MapQuestProvider>> => {
                         const builder: LocationBuilder<MapQuestProvider> = new LocationBuilder(MapQuestProvider, raw);
                         builder.latitude = raw.latLng.lat;
                         builder.longitude = raw.latLng.lng;
@@ -73,7 +73,7 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractLoc
                         builder.houseNumber = undefined;
                         builder.postalCode = raw.postalCode;
 
-                        return builder.build();
+                        return builder;
                     },
                 ),
             );

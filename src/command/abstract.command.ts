@@ -2,11 +2,12 @@ import { AxiosInstance, AxiosResponse } from 'axios';
 import { InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException, UnsupportedAccuracyException } from '../exception';
 import { QueryInterface } from '../interface';
 import { LoggableInterface, LoggableMixin } from '../logger';
-import { AccuracyEnum } from '../model';
+import { AbstractBuilder, AccuracyEnum } from '../model';
 
 export abstract class AbstractCommand<
     GeocoderQueryType extends QueryInterface = any,
     GeocoderResponseType = any,
+    GeocoderBuilderType extends AbstractBuilder = any,
     ProviderRequestType = any,
     ProviderResponseType = any
 > extends LoggableMixin(Function) {
@@ -40,7 +41,7 @@ export abstract class AbstractCommand<
         throw new Error('AbstractCommand.validateResponse: not implemented');
     }
 
-    protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<GeocoderResponseType> {
+    protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<GeocoderBuilderType[]> {
         throw new Error('AbstractCommand.parseResponse: not implemented');
     }
 
@@ -50,7 +51,7 @@ export abstract class AbstractCommand<
         return accuracies.slice(accuracies.indexOf(this.getMaxAccuracy())).includes(accuracy);
     }
 
-    async execute(query: GeocoderQueryType): Promise<GeocoderResponseType> {
+    async execute(query: GeocoderQueryType): Promise<GeocoderResponseType[]> {
         if (query.accuracy && !this.constructor.isProvidesAccuracy(query.accuracy)) {
             throw new UnsupportedAccuracyException(
                 `Command ${this.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${this.constructor.getMaxAccuracy()}")`,
@@ -80,7 +81,17 @@ export abstract class AbstractCommand<
 
         await this.validateResponse(response);
 
-        return this.parseResponse(response, query);
+        const builders: GeocoderBuilderType[] = await this.parseResponse(response, query);
+
+        return Promise.all<GeocoderResponseType>(
+            builders.map(
+                async (builder: GeocoderBuilderType): Promise<GeocoderResponseType> => {
+                    return builder.build({
+                        groups: query.withRaw ? ['raw'] : undefined,
+                    });
+                },
+            ),
+        );
     }
 
     protected async getResponse(params: ProviderRequestType): Promise<AxiosResponse<ProviderResponseType>> {

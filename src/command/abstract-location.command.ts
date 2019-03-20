@@ -1,10 +1,11 @@
+import { AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
 import { validateOrReject } from 'class-validator';
 import { UnsupportedAccuracyException, ValidationException } from '../exception';
 import { QueryInterface } from '../interface';
 import { LoggableInterface } from '../logger';
-import { AccuracyEnum, Location } from '../model';
+import { AccuracyEnum, Location, LocationBuilder } from '../model';
 import { WorldCountry, WorldCountryUtil } from '../util/world-country';
 import { WorldCountryState, WorldCountryStateUtil } from '../util/world-country-state';
 import { AbstractCommand } from './abstract.command';
@@ -13,10 +14,14 @@ export abstract class AbstractLocationCommand<
     GeocoderQueryType extends QueryInterface = any,
     ProviderRequestType = any,
     ProviderResponseType = any
-> extends AbstractCommand<GeocoderQueryType, Location[], ProviderRequestType, ProviderResponseType> {
+> extends AbstractCommand<GeocoderQueryType, Location, LocationBuilder, ProviderRequestType, ProviderResponseType> {
     'constructor': Pick<typeof AbstractLocationCommand, keyof typeof AbstractLocationCommand> & { name: string } & LoggableInterface;
 
     abstract get queryClass(): ClassType<GeocoderQueryType>;
+
+    protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<LocationBuilder[]> {
+        throw new Error('AbstractCommand.parseResponse: not implemented');
+    }
 
     async execute(_query: GeocoderQueryType): Promise<Location[]> {
         const query: GeocoderQueryType = plainToClass<GeocoderQueryType, GeocoderQueryType>(this.queryClass, _query);

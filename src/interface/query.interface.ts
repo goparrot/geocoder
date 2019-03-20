@@ -5,4 +5,5 @@ export interface QueryInterface {
     language?: string;
     accuracy?: AccuracyEnum;
     fillMissingQueryProperties?: boolean;
+    withRaw?: boolean;
 }

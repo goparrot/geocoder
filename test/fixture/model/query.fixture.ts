@@ -11,6 +11,7 @@ export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freez
     language: 'en',
     limit: Query.DEFAULT_RESULT_LIMIT,
     fillMissingQueryProperties: true,
+    withRaw: true,
 });
 
 export const reverseQueryFixture: Readonly<ReverseQueryInterface> = Object.freeze({
@@ -18,4 +19,5 @@ export const reverseQueryFixture: Readonly<ReverseQueryInterface> = Object.freez
     lon: -74,
     limit: Query.DEFAULT_RESULT_LIMIT,
     language: Query.DEFAULT_RESULT_LANGUAGE,
+    withRaw: true,
 });

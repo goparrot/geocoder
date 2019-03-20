@@ -1,4 +1,4 @@
-import { classToPlain, Exclude, Expose } from 'class-transformer';
+import { classToPlain, ClassTransformOptions, Exclude, Expose } from 'class-transformer';
 import { LocationInterface } from '../interface';
 
 @Exclude()
@@ -46,8 +46,8 @@ export class Location<R = any> implements LocationInterface<R> {
     @Expose()
     provider: string;
 
-    @Expose()
-    raw: R;
+    @Expose({ groups: ['raw', 'all'] })
+    raw?: R;
 
     get street(): string {
         return `${this.houseNumber || ''} ${this.streetName || ''}`.trim();
@@ -67,7 +67,7 @@ export class Location<R = any> implements LocationInterface<R> {
                   .join(', ');
     }
 
-    toObject(): LocationInterface {
-        return classToPlain<Location>(this) as LocationInterface;
+    toObject(options?: ClassTransformOptions): LocationInterface {
+        return classToPlain<Location>(this, options) as LocationInterface;
     }
 }

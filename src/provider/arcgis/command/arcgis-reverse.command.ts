@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { ReverseCommand } from '../../../command';
-import { AccuracyEnum, Location, LocationBuilder, ReverseQuery } from '../../../model';
+import { AccuracyEnum, LocationBuilder, ReverseQuery } from '../../../model';
 import { LocationUtil } from '../../../util/location';
 import { WorldCountry, WorldCountryUtil } from '../../../util/world-country';
 import { ArcgisProvider } from '../arcgis.provider';
@@ -50,7 +50,7 @@ export class ArcgisReverseCommand extends ArcgisCommonCommandMixin(ReverseComman
         };
     }
 
-    protected async parseResponse(response: AxiosResponse): Promise<Location[]> {
+    protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<ArcgisProvider>[]> {
         if (!response.data.address || !response.data.location) {
             return [];
         }
@@ -82,6 +82,6 @@ export class ArcgisReverseCommand extends ArcgisCommonCommandMixin(ReverseComman
         builder.houseNumber = raw.address.AddNum;
         builder.postalCode = raw.address.Postal;
 
-        return [await builder.build()];
+        return [builder];
     }
 }

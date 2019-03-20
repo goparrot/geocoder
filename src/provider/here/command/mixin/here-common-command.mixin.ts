@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { AbstractCommand } from '../../../../command';
 import { InvalidCredentialsException } from '../../../../exception';
-import { AccuracyEnum, Location, LocationBuilder } from '../../../../model';
+import { AccuracyEnum, LocationBuilder } from '../../../../model';
 import { Constructor } from '../../../../types';
 import { WorldCountry, WorldCountryUtil } from '../../../../util/world-country';
 import { HereProvider } from '../../here.provider';
@@ -30,16 +30,16 @@ export function HereCommonCommandMixin<TBase extends Constructor<AbstractCommand
             //
         }
 
-        protected async parseResponse(response: AxiosResponse): Promise<Location[]> {
+        protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<HereProvider>[]> {
             if (!response.data.Response || !Array.isArray(response.data.Response.View) || !response.data.Response.View[0]) {
                 return [];
             }
 
             const results: any = response.data.Response.View[0].Result;
 
-            return Promise.all<Location>(
+            return Promise.all<LocationBuilder<HereProvider>>(
                 results.map(
-                    async (raw: any): Promise<Location> => {
+                    async (raw: any): Promise<LocationBuilder<HereProvider>> => {
                         const hereAddress: any = raw.Location.Address || {};
 
                         const builder: LocationBuilder<HereProvider> = new LocationBuilder(HereProvider, raw);
@@ -84,7 +84,7 @@ export function HereCommonCommandMixin<TBase extends Constructor<AbstractCommand
                             }
                         }
 
-                        return builder.build();
+                        return builder;
                     },
                 ),
             );

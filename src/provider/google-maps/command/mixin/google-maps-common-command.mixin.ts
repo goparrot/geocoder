@@ -2,7 +2,7 @@ import { AxiosInstance, AxiosResponse } from 'axios';
 import { isEmpty } from 'lodash';
 import { AbstractCommand } from '../../../../command';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../../../../exception';
-import { AccuracyEnum, Location, LocationBuilder } from '../../../../model';
+import { AccuracyEnum, LocationBuilder } from '../../../../model';
 import { Constructor } from '../../../../types';
 import { GoogleMapsProvider } from '../../google-maps.provider';
 
@@ -60,14 +60,14 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
             throw new InvalidServerResponseException(`Unknown status "${response.data.status}" error`, response);
         }
 
-        protected async parseResponse(response: AxiosResponse): Promise<Location[]> {
+        protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<GoogleMapsProvider>[]> {
             if (!Array.isArray(response.data.results) || !response.data.results.length) {
                 return [];
             }
 
-            return Promise.all<Location>(
+            return Promise.all<LocationBuilder<GoogleMapsProvider>>(
                 response.data.results.map(
-                    async (raw: any): Promise<Location> => {
+                    async (raw: any): Promise<LocationBuilder<GoogleMapsProvider>> => {
                         // TODO Do need to implement postal_code_suffix options ?
                         const builder: LocationBuilder<GoogleMapsProvider> = new LocationBuilder(GoogleMapsProvider, raw);
                         builder.formattedAddress = raw.formatted_address;
@@ -80,13 +80,13 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
                             }
                         }
 
-                        return builder.build();
+                        return builder;
                     },
                 ),
             );
         }
 
-        protected updateAddressComponent(builder: LocationBuilder, type: string, addressComponent: any): void {
+        protected updateAddressComponent(builder: LocationBuilder<GoogleMapsProvider>, type: string, addressComponent: any): void {
             switch (type) {
                 case 'country':
                     builder.country = addressComponent.long_name;

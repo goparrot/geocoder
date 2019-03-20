@@ -14,5 +14,5 @@ export interface LocationInterface<R = any> {
     houseNumber?: string;
     postalCode?: string;
     provider: string;
-    raw: R;
+    raw?: R;
 }

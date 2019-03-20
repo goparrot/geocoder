@@ -7,7 +7,9 @@ describe('Location (unit)', () => {
     let location: Location;
 
     beforeEach(() => {
-        location = plainToClass<Location, LocationInterface>(Location, locationFixture);
+        location = plainToClass<Location, LocationInterface>(Location, locationFixture, {
+            groups: ['raw']
+        });
     });
 
     describe('#constructor', () => {
@@ -24,7 +26,9 @@ describe('Location (unit)', () => {
 
     describe('#toObject', () => {
         it('should generate valid object', async () => {
-            return location.toObject().should.be.deep.eq(locationFixture);
+            return location.toObject({
+                groups: ['raw']
+            }).should.be.deep.eq(locationFixture);
         });
     });
 
@@ -58,7 +62,9 @@ describe('Location (unit)', () => {
         });
 
         it('should generate the same result as #toObject', async () => {
-            return { ...location }.should.be.deep.eq(location.toObject());
+            return { ...location }.should.be.deep.eq(location.toObject({
+                groups: ['raw']
+            }));
         });
     });
 
@@ -91,6 +97,9 @@ describe('Location (unit)', () => {
                         unsupported: true,
                     },
                 },
+                {
+                    groups: ['raw']
+                }
             );
 
             locationModel.should.be.instanceOf(Location);

@@ -4,7 +4,12 @@ import { LocationInterface, QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import { HereGeocodeCommand, HereProvider, HereReverseCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
-import { providerParsedResponse, providerRawResponse } from '../../fixture/provider/here.fixture';
+import {
+    providerParsedGeocodeResponse,
+    providerParsedReverseResponse,
+    providerRawGeocodeResponse,
+    providerRawReverseResponse,
+} from '../../fixture/provider/here.fixture';
 import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
 
 describe('HereProvider (2e2)', () => {
@@ -39,12 +44,12 @@ describe('HereProvider (2e2)', () => {
     describe('#geocode', () => {
         const url: string = HereGeocodeCommand.getUrl();
 
-        sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawResponse, providerParsedResponse);
+        sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
     });
 
     describe('#reverse', () => {
         const url: string = HereReverseCommand.getUrl();
 
-        sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawResponse, providerParsedResponse);
+        sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
     });
 });

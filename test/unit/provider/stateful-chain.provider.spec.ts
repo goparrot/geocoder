@@ -1,9 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
-import { plainToClass } from 'class-transformer';
-import { InvalidArgumentException } from '../../../src/exception';
+import { InvalidArgumentException, ValidationException } from '../../../src/exception';
 import { NullLogger } from '../../../src/logger';
-import { GeocodeQuery, ReverseQuery } from '../../../src/model';
-import { GoogleMapsProvider, HereProvider, MapQuestProvider, StatefulChainProvider } from '../../../src/provider';
+import { ArcgisProvider, GoogleMapsProvider, MapQuestProvider, StatefulChainProvider } from '../../../src/provider';
 
 describe('StatefulChainProvider (unit)', () => {
     let client: AxiosInstance;
@@ -12,8 +10,7 @@ describe('StatefulChainProvider (unit)', () => {
     beforeEach(() => {
         client = Axios.create();
 
-        provider = new StatefulChainProvider([new HereProvider(client, 'test', 'test')]);
-        provider.setLogger(new NullLogger());
+        provider = new StatefulChainProvider([new ArcgisProvider(client)]);
     });
 
     describe('#constructor', () => {
@@ -31,14 +28,12 @@ describe('StatefulChainProvider (unit)', () => {
             return provider.geocode.should.be.instanceOf(Function);
         });
 
-        it('should return empty result array', async () => {
+        it('should throw ValidationException on short address', async () => {
             return provider
-                .geocode(
-                    plainToClass(GeocodeQuery, {
-                        address: 'test',
-                    }),
-                )
-                .should.become([]);
+                .geocode({
+                    address: 'test',
+                })
+                .should.be.rejectedWith(ValidationException);
         });
     });
 
@@ -47,15 +42,36 @@ describe('StatefulChainProvider (unit)', () => {
             return provider.reverse.should.be.instanceOf(Function);
         });
 
-        it('should return empty result array', async () => {
+        it('should throw ValidationException on invalid lat option', async () => {
             return provider
-                .reverse(
-                    plainToClass(ReverseQuery, {
-                        lat: 123,
-                        lon: 123,
-                    }),
-                )
-                .should.become([]);
+                .reverse({
+                    lat: 123,
+                    lon: 123,
+                })
+                .should.be.rejectedWith(ValidationException);
+        });
+
+        it('should throw ValidationException on invalid lon option', async () => {
+            return provider
+                .reverse({
+                    lat: 90,
+                    lon: 200,
+                })
+                .should.be.rejectedWith(ValidationException);
+        });
+    });
+
+    describe('#suggest', () => {
+        it('should be instance of Function', async () => {
+            return provider.suggest.should.be.instanceOf(Function);
+        });
+
+        it('should throw ValidationException on short address', async () => {
+            return provider
+                .suggest({
+                    address: 'test',
+                })
+                .should.be.rejectedWith(ValidationException);
         });
     });
 

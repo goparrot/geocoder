@@ -1,4 +1,4 @@
-import { InvalidArgumentException } from '../exception';
+import { InvalidArgumentException, ValidationException } from '../exception';
 import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggerInterface } from '../logger';
 import { AbstractHttpProvider, AbstractProvider, Location, Suggestion } from '../model';
@@ -30,7 +30,11 @@ export class StatefulChainProvider extends AbstractProvider {
                     return locations;
                 }
             } catch (err) {
-                this.getLogger().error(err);
+                if (err instanceof ValidationException) {
+                    throw err;
+                }
+
+                this.getLogger().warn(err);
             }
         }
 
@@ -48,7 +52,11 @@ export class StatefulChainProvider extends AbstractProvider {
                     return locations;
                 }
             } catch (err) {
-                this.getLogger().error(err);
+                if (err instanceof ValidationException) {
+                    throw err;
+                }
+
+                this.getLogger().warn(err);
             }
         }
 
@@ -62,7 +70,11 @@ export class StatefulChainProvider extends AbstractProvider {
 
                 return await provider.suggest(query);
             } catch (err) {
-                this.getLogger().error(err);
+                if (err instanceof ValidationException) {
+                    throw err;
+                }
+
+                this.getLogger().warn(err);
             }
         }
 

@@ -60,6 +60,13 @@ describe('ChainProvider (2e2)', () => {
 
             return provider.geocode(geocodeQuery).should.become(providerParsedGeocodeResponse);
         });
+
+        it('should return empty array', async () => {
+            mock.onGet(ArcgisGeocodeCommand.getUrl()).reply(200, []);
+            mock.onGet(GoogleMapsGeocodeCommand.getUrl()).reply(200, []);
+
+            return provider.geocode(geocodeQuery).should.become([]);
+        });
     });
 
     describe('#reverse', () => {
@@ -79,6 +86,13 @@ describe('ChainProvider (2e2)', () => {
 
             return provider.reverse(reverseQuery).should.become(providerParsedReverseResponse);
         });
+
+        it('should return empty array', async () => {
+            mock.onGet(ArcgisReverseCommand.getUrl()).reply(200, []);
+            mock.onGet(GoogleMapsReverseCommand.getUrl()).reply(200, []);
+
+            return provider.reverse(reverseQuery).should.become([]);
+        });
     });
 
     describe('#suggest', () => {
@@ -97,6 +111,13 @@ describe('ChainProvider (2e2)', () => {
             mock.onGet(GoogleMapsSuggestCommand.getUrl()).reply(200, providerRawSuggestResponse);
 
             return provider.suggest(suggestQuery).should.become(providerParsedSuggestResponse);
+        });
+
+        it('should return empty array', async () => {
+            mock.onGet(ArcgisSuggestCommand.getUrl()).reply(500);
+            mock.onGet(GoogleMapsSuggestCommand.getUrl()).reply(500);
+
+            return provider.suggest(suggestQuery).should.become([]);
         });
     });
 });

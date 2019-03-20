@@ -46,7 +46,7 @@ describe('ProviderAggregator (unit)', () => {
         });
 
         it('should throw ProviderNotRegisteredException if provider not registered', async () => {
-            return geocoder.geocode(geocodeQueryFixture).should.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
+            return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
         });
     });
 
@@ -56,7 +56,7 @@ describe('ProviderAggregator (unit)', () => {
         });
 
         it('should throw ProviderNotRegisteredException if provider not registered', async () => {
-            return geocoder.reverse(reverseQueryFixture).should.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
+            return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
         });
     });
 

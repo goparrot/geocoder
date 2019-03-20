@@ -58,6 +58,7 @@ export class ProviderAggregator extends AbstractGeocoder {
     }
 
     registerProvider(provider: AbstractProvider): this {
+        provider.setLogger(this.getLogger());
         this.providers.push(provider);
 
         return this;

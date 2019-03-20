@@ -1,9 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
-import { plainToClass } from 'class-transformer';
-import { InvalidArgumentException } from '../../../src/exception';
+import { InvalidArgumentException, ValidationException } from '../../../src/exception';
 import { NullLogger } from '../../../src/logger';
-import { GeocodeQuery, ReverseQuery } from '../../../src/model';
-import { ChainProvider, GoogleMapsProvider, HereProvider, MapQuestProvider } from '../../../src/provider';
+import { ArcgisProvider, ChainProvider, GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
 
 describe('ChainProvider (unit)', () => {
     let client: AxiosInstance;
@@ -12,7 +10,7 @@ describe('ChainProvider (unit)', () => {
     beforeEach(() => {
         client = Axios.create();
 
-        provider = new ChainProvider([new HereProvider(client, 'test', 'test')]);
+        provider = new ChainProvider([new ArcgisProvider(client)]);
     });
 
     describe('#constructor', () => {
@@ -30,14 +28,12 @@ describe('ChainProvider (unit)', () => {
             return provider.geocode.should.be.instanceOf(Function);
         });
 
-        it('should return empty result array', async () => {
+        it('should throw ValidationException on short address', async () => {
             return provider
-                .geocode(
-                    plainToClass(GeocodeQuery, {
-                        address: 'test',
-                    }),
-                )
-                .should.become([]);
+                .geocode({
+                    address: 'test',
+                })
+                .should.be.rejectedWith(ValidationException);
         });
     });
 
@@ -46,15 +42,36 @@ describe('ChainProvider (unit)', () => {
             return provider.reverse.should.be.instanceOf(Function);
         });
 
-        it('should return empty result array', async () => {
+        it('should throw ValidationException on invalid lat option', async () => {
             return provider
-                .reverse(
-                    plainToClass(ReverseQuery, {
-                        lat: 123,
-                        lon: 123,
-                    }),
-                )
-                .should.become([]);
+                .reverse({
+                    lat: 123,
+                    lon: 123,
+                })
+                .should.be.rejectedWith(ValidationException);
+        });
+
+        it('should throw ValidationException on invalid lon option', async () => {
+            return provider
+                .reverse({
+                    lat: 90,
+                    lon: 200,
+                })
+                .should.be.rejectedWith(ValidationException);
+        });
+    });
+
+    describe('#suggest', () => {
+        it('should be instance of Function', async () => {
+            return provider.suggest.should.be.instanceOf(Function);
+        });
+
+        it('should throw ValidationException on short address', async () => {
+            return provider
+                .suggest({
+                    address: 'test',
+                })
+                .should.be.rejectedWith(ValidationException);
         });
     });
 

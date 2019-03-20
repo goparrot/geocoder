@@ -1,4 +1,5 @@
 export * from './geocoder.exception';
+export * from './exact-match-not-found.exception';
 export * from './invalid-argument.exception';
 export * from './invalid-credentials.exception';
 export * from './invalid-server-response.exception';

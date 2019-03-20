@@ -1,6 +1,6 @@
 import { LocationInterface } from '../../../src/interface';
 
-export const providerRawResponse: Readonly<any> = Object.freeze({
+const providerRawLocationResponse: Readonly<any> = Object.freeze({
     Response: {
         MetaInfo: { Timestamp: '2019-02-19T23:39:16.057+0000' },
         View: [
@@ -48,7 +48,7 @@ export const providerRawResponse: Readonly<any> = Object.freeze({
     },
 });
 
-export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
+const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
     {
         latitude: 41.7332379,
         longitude: -87.5959685,
@@ -62,6 +62,12 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         postalCode: '60619',
         provider: 'HereProvider',
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
-        raw: providerRawResponse.Response.View[0].Result[0],
+        raw: providerRawLocationResponse.Response.View[0].Result[0],
     },
 ]);
+
+export const providerRawGeocodeResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
+
+export const providerRawReverseResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;

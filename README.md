@@ -39,7 +39,7 @@ In the code snippet below we use Google provider.
 
 ```typescript
 import 'reflect-metadata';
-import { Location, Geocoder, GoogleMapsProvider } from '@goparrot/geocoder';
+import { Location, Geocoder, GoogleMapsProvider, Suggestion } from '@goparrot/geocoder';
 import Axios, { AxiosInstance } from 'axios';
 
 const axios: AxiosInstance = Axios.create();
@@ -61,14 +61,24 @@ const geocoder: Geocoder = new Geocoder(provider);
 
     try {
         const locations: Location[] = await geocoder.reverse({
-            lat: 40.74185,
-            lon: -74,
+            lat: 41.7340186,
+            lon: -87.5960762,
         });
 
         console.info('locations', locations);
     } catch (err) {
         console.error(err);
     }
+
+     try {
+            const suggestions: Suggestion[] = await geocoder.suggest({
+                address: '1158 E 89th St',
+            });
+    
+            console.info('suggestions', suggestions);
+        } catch (err) {
+            console.error(err);
+        }
 })();
 ```
 
@@ -146,8 +156,9 @@ geocoder.setLogger(logger);
     try {
         const locations: Location[] = await geocoder.reverse({
             // accuracy: AccuracyEnum.HOUSE_NUMBER,
-            lat: 40.74185,
-            lon: -74,
+            lat: 41.7340186,
+            lon: -87.5960762,
+            countryCode: 'US',
             // language: 'en', // default
             // limit: 5, // default     
             // withRaw: false, // default       
@@ -177,10 +188,10 @@ Legend:
 | Provider                                                                                  | Geocode | Reverse | Autocomplete | Place |
 | :---------------------------------------------------------------------------------------- | :------ | :------ | :----------- | :---- |
 | [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘           | 🆘    |
-| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | 🆘️          | 🆘    |
+| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | ✅️           | 🆘    |
 | [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | 🆘           | 🆘    |
+| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | ✅            | 🆘    |
 | [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅       | ✅       | 🔍           | 🔍️   |
 | [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️          | 🔍    |

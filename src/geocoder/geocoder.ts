@@ -1,6 +1,6 @@
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../interface';
+import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggerInterface } from '../logger';
-import { AbstractProvider, Location } from '../model';
+import { AbstractProvider, Location, Suggestion } from '../model';
 import { AbstractGeocoder } from './abstract-geocoder';
 
 export class Geocoder extends AbstractGeocoder {
@@ -14,6 +14,10 @@ export class Geocoder extends AbstractGeocoder {
 
     async reverse(query: ReverseQueryInterface): Promise<Location[]> {
         return this.reverseByProvider(this.provider, query);
+    }
+
+    async suggest(query: SuggestQueryInterface): Promise<Suggestion[]> {
+        return this.suggestByProvider(this.provider, query);
     }
 
     setLogger(logger: LoggerInterface): this {

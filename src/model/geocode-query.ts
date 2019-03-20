@@ -21,13 +21,6 @@ export class GeocodeQuery extends Query implements GeocodeQueryInterface {
     @IsOptional()
     @IsString()
     @MinLength(2)
-    @MaxLength(2)
-    @Type(() => String)
-    countryCode?: string;
-
-    @IsOptional()
-    @IsString()
-    @MinLength(2)
     @MaxLength(100)
     @Type(() => String)
     state?: string;

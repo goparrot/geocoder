@@ -1,95 +1,55 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { InvalidServerResponseException } from '../../../src/exception';
 import { Geocoder } from '../../../src/geocoder';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
+import { QueryInterface } from '../../../src/interface';
 import { NullLogger } from '../../../src/logger';
-import { MapQuestGeocodeCommand, MapQuestProvider, MapQuestReverseCommand } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
-import { providerParsedResponse, providerRawResponse } from '../../fixture/provider/map-quest.fixture';
+import { AccuracyEnum } from '../../../src/model';
+import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider';
+import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
+import {
+    providerParsedGeocodeResponse,
+    providerParsedReverseResponse,
+    providerParsedSuggestResponse,
+    providerRawGeocodeResponse,
+    providerRawReverseResponse,
+    providerRawSuggestResponse,
+} from '../../fixture/provider/arcgis.fixture';
+import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
 
 describe('Geocoder (2e2)', () => {
-    let geocodeQuery: GeocodeQueryInterface;
-    let reverseQuery: ReverseQueryInterface;
-    let geocoder: Geocoder;
-    let mock: MockAdapter;
+    const client: AxiosInstance = Axios.create();
+    const mock: MockAdapter = new MockAdapter(client);
+    const geocoder: Geocoder = new Geocoder(new ArcgisProvider(client));
 
-    beforeEach(() => {
-        geocodeQuery = { ...geocodeQueryFixture };
-        reverseQuery = { ...reverseQueryFixture };
+    geocoder.setLogger(new NullLogger());
 
-        const client: AxiosInstance = Axios.create();
-        mock = new MockAdapter(client);
-
-        geocoder = new Geocoder(new MapQuestProvider(client, 'test'));
-        geocoder.setLogger(new NullLogger());
+    afterEach(() => {
+        mock.reset();
     });
 
+    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<any>): void {
+        query = { ...query };
+
+        sharedCommandBehaviours(mock, geocoder, url, method, query, rawResponse, parsedResponse);
+
+        sharedAccuracyBehaviours(mock, geocoder, url, method, query, rawResponse, AccuracyEnum.HOUSE_NUMBER);
+    }
+
     describe('#geocode', () => {
-        const url: string = MapQuestGeocodeCommand.getUrl();
+        const url: string = ArcgisGeocodeCommand.getUrl();
 
-        it('should return success response', async () => {
-            mock.onGet(url).reply(200, providerRawResponse);
-
-            return geocoder.geocode(geocodeQuery).should.become(providerParsedResponse);
-        });
-
-        it('should return empty result on empty response', async () => {
-            mock.onGet(url).reply(200, '');
-
-            return geocoder.geocode(geocodeQuery).should.become([]);
-        });
-
-        it('should return empty result on response with empty json', async () => {
-            mock.onGet(url).reply(200, {});
-
-            return geocoder.geocode(geocodeQuery).should.become([]);
-        });
-
-        it('should throw InvalidServerResponseException on 500 http status', async () => {
-            mock.onGet(url).reply(500);
-
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(InvalidServerResponseException);
-        });
-
-        it('should throw InvalidServerResponseException on 0 http status', async () => {
-            mock.onGet(url).reply(0);
-
-            return geocoder.geocode(geocodeQuery).should.be.rejectedWith(InvalidServerResponseException);
-        });
+        sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
     });
 
     describe('#reverse', () => {
-        const url: string = MapQuestReverseCommand.getUrl();
+        const url: string = ArcgisReverseCommand.getUrl();
 
-        it('should return success response', async () => {
-            mock.onGet(url).reply(200, providerRawResponse);
+        sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
+    });
 
-            return geocoder.reverse(reverseQuery).should.become(providerParsedResponse);
-        });
+    describe('#suggest', () => {
+        const url: string = ArcgisSuggestCommand.getUrl();
 
-        it('should return empty result on empty response', async () => {
-            mock.onGet(url).reply(200, '');
-
-            return geocoder.reverse(reverseQuery).should.become([]);
-        });
-
-        it('should return empty result on response with empty json', async () => {
-            mock.onGet(url).reply(200, {});
-
-            return geocoder.reverse(reverseQuery).should.become([]);
-        });
-
-        it('should throw InvalidServerResponseException on 500 http status', async () => {
-            mock.onGet(url).reply(500);
-
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(InvalidServerResponseException);
-        });
-
-        it('should throw InvalidServerResponseException on 0 http status', async () => {
-            mock.onGet(url).reply(0);
-
-            return geocoder.reverse(reverseQuery).should.be.rejectedWith(InvalidServerResponseException);
-        });
+        sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
     });
 });

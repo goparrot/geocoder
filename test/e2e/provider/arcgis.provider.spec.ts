@@ -1,56 +1,47 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../src/exception';
-import { GeocodeQueryInterface, LocationInterface, QueryInterface, ReverseQueryInterface } from '../../../src/interface';
+import { GeocodeQueryInterface, QueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
-import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
+import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider';
+import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 import {
     providerParsedGeocodeResponse,
     providerParsedReverseResponse,
+    providerParsedSuggestResponse,
     providerRawGeocodeResponse,
     providerRawReverseResponse,
+    providerRawSuggestResponse,
 } from '../../fixture/provider/arcgis.fixture';
-import { providerRawResponse } from '../../fixture/provider/here.fixture';
+import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
 
 describe('ArcgisProvider (2e2)', () => {
+    const client: AxiosInstance = Axios.create();
+    const mock: MockAdapter = new MockAdapter(client);
+    const provider: ArcgisProvider = new ArcgisProvider(client);
+
     let geocodeQuery: GeocodeQueryInterface;
     let reverseQuery: ReverseQueryInterface;
-    let provider: ArcgisProvider;
-    let mock: MockAdapter;
+    let suggestQuery: SuggestQueryInterface;
 
     beforeEach(() => {
         geocodeQuery = { ...geocodeQueryFixture };
         reverseQuery = { ...reverseQueryFixture };
-
-        const client: AxiosInstance = Axios.create();
-        mock = new MockAdapter(client);
-
-        provider = new ArcgisProvider(client);
+        suggestQuery = { ...suggestQueryFixture };
     });
 
-    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<LocationInterface>): void {
+    afterEach(() => {
+        mock.reset();
+    });
+
+    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<any>): void {
         query = { ...query };
 
+        sharedCommandBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
+
+        sharedAccuracyBehaviours(mock, provider, url, method, query, rawResponse, AccuracyEnum.HOUSE_NUMBER);
+
         describe('#sharedBehaviours', () => {
-            it('should return success response', async () => {
-                mock.onGet(provider[url]).reply(200, rawResponse);
-
-                return provider[method](query).should.become(parsedResponse);
-            });
-
-            it('should return empty result on empty response', async () => {
-                mock.onGet(provider[url]).reply(200, '');
-
-                return provider[method](query).should.become([]);
-            });
-
-            it('should return empty result on response with empty json', async () => {
-                mock.onGet(provider[url]).reply(200, {});
-
-                return provider[method](query).should.become([]);
-            });
-
             it('should throw InvalidCredentialsException for code 403', async () => {
                 mock.onGet(provider[url]).reply(200, {
                     error: {
@@ -97,18 +88,6 @@ describe('ArcgisProvider (2e2)', () => {
                 });
 
                 return provider[method](query).should.be.rejectedWith(InvalidServerResponseException, 'Some other error');
-            });
-
-            describe('#sharedAccuracyBehaviours', () => {
-                for (const [key, accuracy] of Object.entries(AccuracyEnum)) {
-                    it(`should return correct values for AccuracyEnum.${key}`, async () => {
-                        query.accuracy = accuracy;
-
-                        mock.onGet(provider[url]).reply(200, providerRawResponse);
-
-                        return provider[method](query).should.fulfilled;
-                    });
-                }
             });
         });
     }
@@ -161,6 +140,20 @@ describe('ArcgisProvider (2e2)', () => {
             reverseQuery.lon = '' as any;
 
             return provider.reverse(reverseQuery).should.be.rejectedWith(InvalidArgumentException, 'Unable to complete operation.');
+        });
+    });
+
+    describe('#suggest', () => {
+        const url: string = ArcgisSuggestCommand.getUrl();
+
+        sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
+
+        it('should return response with empty array', async () => {
+            mock.onGet(url).reply(200, {
+                suggestions: [],
+            });
+
+            return provider.suggest(suggestQuery).should.become([]);
         });
     });
 });

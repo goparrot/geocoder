@@ -1,8 +1,18 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException, UnsupportedAccuracyException } from '../exception';
+import { plainToClass } from 'class-transformer';
+import { validateOrReject } from 'class-validator';
+import {
+    InvalidCredentialsException,
+    InvalidServerResponseException,
+    QuotaExceededException,
+    UnsupportedAccuracyException,
+    ValidationException,
+} from '../exception';
 import { QueryInterface } from '../interface';
 import { LoggableInterface, LoggableMixin } from '../logger';
 import { AbstractBuilder, AccuracyEnum } from '../model';
+import { Type } from '../types';
+import { getAvailableAccuracies } from '../util';
 
 export abstract class AbstractCommand<
     GeocoderQueryType extends QueryInterface = any,
@@ -15,6 +25,10 @@ export abstract class AbstractCommand<
 
     constructor(protected readonly httpClient: AxiosInstance) {
         super();
+    }
+
+    static queryClass(): Type<any> {
+        throw new Error('AbstractCommand.queryClass: not implemented');
     }
 
     /**
@@ -46,12 +60,24 @@ export abstract class AbstractCommand<
     }
 
     static isProvidesAccuracy(accuracy: AccuracyEnum): boolean {
-        const accuracies: string[] = Object.values(AccuracyEnum);
-
-        return accuracies.slice(accuracies.indexOf(this.getMaxAccuracy())).includes(accuracy);
+        return getAvailableAccuracies(this.getMaxAccuracy()).includes(accuracy);
     }
 
-    async execute(query: GeocoderQueryType): Promise<GeocoderResponseType[]> {
+    async execute(_query: GeocoderQueryType): Promise<GeocoderResponseType[]> {
+        const query: GeocoderQueryType = plainToClass<GeocoderQueryType, GeocoderQueryType>(this.constructor.queryClass(), _query);
+
+        try {
+            await validateOrReject(query, {
+                whitelist: true,
+                forbidNonWhitelisted: true,
+                validationError: { target: false, value: false },
+            });
+        } catch (err) {
+            this.getLogger().error(err, query);
+
+            throw new ValidationException(err);
+        }
+
         if (query.accuracy && !this.constructor.isProvidesAccuracy(query.accuracy)) {
             throw new UnsupportedAccuracyException(
                 `Command ${this.constructor.name} doesn't support "${query.accuracy}" accuracy (max accuracy is "${this.constructor.getMaxAccuracy()}")`,

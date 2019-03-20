@@ -1,14 +1,14 @@
 import { InvalidArgumentException } from '../exception';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../interface';
+import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggerInterface } from '../logger';
-import { AbstractHttpProvider, AbstractProvider, Location } from '../model';
+import { AbstractHttpProvider, AbstractProvider, Location, Suggestion } from '../model';
 
 export class ChainProvider extends AbstractProvider {
     constructor(private readonly providers: AbstractHttpProvider[]) {
         super();
 
         if (!this.providers.length) {
-            throw new InvalidArgumentException('provider array should not be empty');
+            throw new InvalidArgumentException('array of providers should not be empty');
         }
     }
 
@@ -36,6 +36,18 @@ export class ChainProvider extends AbstractProvider {
                 if (locations.length) {
                     return locations;
                 }
+            } catch (err) {
+                this.getLogger().error(err);
+            }
+        }
+
+        return [];
+    }
+
+    async suggest(query: SuggestQueryInterface): Promise<Suggestion[]> {
+        for (const provider of this.providers) {
+            try {
+                return await provider.suggest(query);
             } catch (err) {
                 this.getLogger().error(err);
             }

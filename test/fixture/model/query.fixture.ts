@@ -1,7 +1,7 @@
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
+import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 
-export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freeze({
+export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freeze<GeocodeQueryInterface>({
     address: '1158 E 89th St',
     countryCode: 'US',
     postalCode: '60619',
@@ -9,15 +9,25 @@ export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freez
     stateCode: 'IL',
     city: 'Chicago',
     language: 'en',
-    limit: Query.DEFAULT_RESULT_LIMIT,
+    limit: 3,
     fillMissingQueryProperties: true,
     withRaw: true,
 });
 
-export const reverseQueryFixture: Readonly<ReverseQueryInterface> = Object.freeze({
-    lat: 40.74185,
-    lon: -74,
-    limit: Query.DEFAULT_RESULT_LIMIT,
+export const reverseQueryFixture: Readonly<ReverseQueryInterface> = Object.freeze<ReverseQueryInterface>({
+    lat: 41.7340186,
+    lon: -87.5960762,
+    countryCode: 'US',
+    limit: 3,
     language: Query.DEFAULT_RESULT_LANGUAGE,
     withRaw: true,
 });
+
+export const suggestQueryFixture: Readonly<SuggestQueryInterface> = {
+    ...geocodeQueryFixture,
+    ...{
+        lat: 41.7340186,
+        lon: -87.5960762,
+        radius: 25000,
+    },
+};

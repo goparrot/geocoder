@@ -1,6 +1,6 @@
-import { LocationInterface } from '../../../src/interface';
+import { LocationInterface, SuggestionInterface } from '../../../src/interface';
 
-export const providerRawResponse: Readonly<any> = Object.freeze({
+const providerRawLocationResponse: Readonly<any> = Object.freeze({
     results: [
         {
             address_components: [
@@ -30,7 +30,7 @@ export const providerRawResponse: Readonly<any> = Object.freeze({
     status: 'OK',
 });
 
-export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze([
+const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
     {
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, USA',
         latitude: 41.7340186,
@@ -44,6 +44,67 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         houseNumber: '1158',
         postalCode: '60619',
         provider: 'GoogleMapsProvider',
-        raw: providerRawResponse.results[0],
+        raw: providerRawLocationResponse.results[0],
+    },
+]);
+
+export const providerRawGeocodeResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
+
+export const providerRawReverseResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
+
+export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
+    predictions: [
+        {
+            description: '1158 East 89th Street, Chicago, IL, USA',
+            id: 'e0a391cdbe024898ee821d3de48d13600934bed4',
+            matched_substrings: [
+                {
+                    length: 21,
+                    offset: 0,
+                },
+            ],
+            place_id: 'EicxMTU4IEVhc3QgODl0aCBTdHJlZXQsIENoaWNhZ28sIElMLCBVU0EiMRIvChQKEgnZemLiICYOiBFLQj1bGGLr7hCGCSoUChIJCQJVUComDogR4NP62uoauTA',
+            reference: 'EicxMTU4IEVhc3QgODl0aCBTdHJlZXQsIENoaWNhZ28sIElMLCBVU0EiMRIvChQKEgnZemLiICYOiBFLQj1bGGLr7hCGCSoUChIJCQJVUComDogR4NP62uoauTA',
+            structured_formatting: {
+                main_text: '1158 East 89th Street',
+                main_text_matched_substrings: [
+                    {
+                        length: 21,
+                        offset: 0,
+                    },
+                ],
+                secondary_text: 'Chicago, IL, USA',
+            },
+            terms: [
+                {
+                    offset: 0,
+                    value: '1158 East 89th Street',
+                },
+                {
+                    offset: 23,
+                    value: 'Chicago',
+                },
+                {
+                    offset: 32,
+                    value: 'IL',
+                },
+                {
+                    offset: 36,
+                    value: 'USA',
+                },
+            ],
+            types: ['route', 'geocode'],
+        },
+    ],
+    status: 'OK',
+});
+
+export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
+    {
+        formattedAddress: '1158 East 89th Street, Chicago, IL, USA',
+        provider: 'GoogleMapsProvider',
+        raw: providerRawSuggestResponse.predictions[0],
     },
 ]);

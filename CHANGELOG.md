@@ -1,3 +1,13 @@
+# [0.8.0](https://github.com/goparrot/geocoder/compare/v0.7.1...v0.8.0) (2019-03-20)
+
+### Features
+
+*   **query:** no raw data is returned by default ([6f708cd](https://github.com/goparrot/geocoder/commit/6f708cd))
+
+### BREAKING CHANGES
+
+*   **query:** in the previous version, the raw data was returned by default
+
 ## [0.7.1](https://github.com/goparrot/geocoder/compare/v0.7.0...v0.7.1) (2019-03-19)
 
 ### Bug Fixes

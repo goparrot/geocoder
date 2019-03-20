@@ -1,7 +1,7 @@
 import { LocationInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 
-export const providerRawResponse: Readonly<any> = Object.freeze({
+const providerRawLocationResponse: Readonly<any> = Object.freeze({
     info: {
         statuscode: 0,
         copyright: { text: '© 2019 MapQuest, Inc.', imageUrl: 'http://api.mqcdn.com/res/mqlogo.gif', imageAltText: '© 2019 MapQuest, Inc.' },
@@ -40,7 +40,7 @@ export const providerRawResponse: Readonly<any> = Object.freeze({
     ],
 });
 
-export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze([
+const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
     {
         latitude: 40.635334,
         longitude: -73.901844,
@@ -54,6 +54,12 @@ export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.f
         houseNumber: undefined,
         postalCode: '11236-4763',
         provider: 'MapQuestProvider',
-        raw: providerRawResponse.results[0].locations[0],
+        raw: providerRawLocationResponse.results[0].locations[0],
     },
 ]);
+
+export const providerRawGeocodeResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
+
+export const providerRawReverseResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;

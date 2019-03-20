@@ -2,12 +2,12 @@ import { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
 import { GeocodeQuery } from '../../../model';
 import { GoogleMapsGeocodeQueryInterface } from '../interface';
-import { GoogleMapsCommonCommandMixin } from './mixin';
+import { GoogleMapsLocationCommandMixin } from './mixin';
 
 /**
  * @link {https://developers.google.com/maps/documentation/geocoding/intro#GeocodingRequests}
  */
-export class GoogleMapsGeocodeCommand extends GoogleMapsCommonCommandMixin(GeocodeCommand)<GoogleMapsGeocodeQueryInterface> {
+export class GoogleMapsGeocodeCommand extends GoogleMapsLocationCommandMixin(GeocodeCommand)<GoogleMapsGeocodeQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
         // @ts-ignore
         super(httpClient, apiKey);
@@ -24,25 +24,29 @@ export class GoogleMapsGeocodeCommand extends GoogleMapsCommonCommandMixin(Geoco
             components.set('postal_code', query.postalCode);
         }
 
-        const country: string = query.countryCode || query.country || '';
+        const country: string | undefined = query.countryCode || query.country;
         if (country) {
             components.set('country', country);
         }
 
-        const state: string = query.stateCode || query.state || '';
+        const state: string | undefined = query.stateCode || query.state;
         if (state) {
             components.set('administrative_area', state);
         }
 
-        return {
+        const providerQuery: GoogleMapsGeocodeQueryInterface = {
             key: this.apiKey,
-            // TODO Do need to implement region options? https://developers.google.com/maps/documentation/geocoding/intro#geocoding
-            // region: '',
             address: query.address,
             components: [...components].map<string>((value: [string, string]) => `${value[0]}:${value[1]}`).join('|'),
             language: query.language,
             limit: query.limit,
             sensor: false,
         };
+
+        if (query.countryCode) {
+            providerQuery.region = `.${query.countryCode.toLowerCase()}`;
+        }
+
+        return providerQuery;
     }
 }

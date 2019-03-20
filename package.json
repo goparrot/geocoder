@@ -13,10 +13,21 @@
         "url": "https://github.com/goparrot/geocoder"
     },
     "keywords": [
-        "geocoder",
-        "geolocation",
         "node",
-        "typescript"
+        "typescript",
+        "geo",
+        "geocode",
+        "geocoder",
+        "geocoding",
+        "geolocation",
+        "reverse",
+        "suggest",
+        "autocomplete",
+        "places",
+        "google-maps",
+        "arcgis",
+        "here",
+        "mapquest"
     ],
     "engines": {
         "node": ">=8.9.0"

@@ -67,7 +67,7 @@ export class Location<R = any> implements LocationInterface<R> {
                   .join(', ');
     }
 
-    toObject(options?: ClassTransformOptions): LocationInterface {
-        return classToPlain<Location>(this, options) as LocationInterface;
+    toObject(options?: ClassTransformOptions): LocationInterface<R> {
+        return classToPlain<Location<R>>(this, options) as LocationInterface;
     }
 }

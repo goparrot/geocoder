@@ -1,7 +1,6 @@
 import Axios, { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
 import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
-import { Query } from '../../../src/model';
 import { HereProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
 
@@ -36,7 +35,7 @@ describe('HereProvider (integration)', () => {
             return geocoder
                 .reverse(reverseQuery)
                 .should.eventually.be.an('array')
-                .with.length(Query.DEFAULT_RESULT_LIMIT);
+                .with.length(3);
         });
     });
 });

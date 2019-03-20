@@ -17,8 +17,8 @@ export class LocationBuilder<T extends AbstractHttpProvider = any, R = any> exte
     houseNumber?: string;
     postalCode?: string;
 
-    async build(options?: ClassTransformOptions): Promise<Location> {
-        const location: Location = plainToClass(Location, this, options);
+    async build(options?: ClassTransformOptions): Promise<Location<R>> {
+        const location: Location = plainToClass<Location<R>, LocationInterface<R>>(Location, this, options);
 
         if (!location.formattedAddress) {
             location.formattedAddress = location.generateFormattedAddress();

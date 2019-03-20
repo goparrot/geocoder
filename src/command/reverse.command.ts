@@ -7,7 +7,7 @@ export class ReverseCommand<ProviderRequestType = any, ProviderResponseType = an
     ProviderRequestType,
     ProviderResponseType
 > {
-    get queryClass(): typeof ReverseQuery {
+    static queryClass(): typeof ReverseQuery {
         return ReverseQuery;
     }
 }

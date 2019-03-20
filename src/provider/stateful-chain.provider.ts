@@ -1,7 +1,7 @@
 import { InvalidArgumentException } from '../exception';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../interface';
+import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggerInterface } from '../logger';
-import { AbstractHttpProvider, AbstractProvider, Location } from '../model';
+import { AbstractHttpProvider, AbstractProvider, Location, Suggestion } from '../model';
 
 export class StatefulChainProvider extends AbstractProvider {
     private nextProvider: AbstractHttpProvider;
@@ -11,7 +11,7 @@ export class StatefulChainProvider extends AbstractProvider {
         super();
 
         if (!providers.length) {
-            throw new InvalidArgumentException('provider array should not be empty');
+            throw new InvalidArgumentException('array of providers should not be empty');
         }
 
         this.registerProviders(providers);
@@ -47,6 +47,20 @@ export class StatefulChainProvider extends AbstractProvider {
                 if (locations.length) {
                     return locations;
                 }
+            } catch (err) {
+                this.getLogger().error(err);
+            }
+        }
+
+        return [];
+    }
+
+    async suggest(query: SuggestQueryInterface): Promise<Suggestion[]> {
+        for (const provider of this.getOrderedProvidersList()) {
+            try {
+                this.setNextProvider();
+
+                return await provider.suggest(query);
             } catch (err) {
                 this.getLogger().error(err);
             }
@@ -94,7 +108,7 @@ export class StatefulChainProvider extends AbstractProvider {
     }
 
     /**
-     * Queue of providers
+     * The round robin queue of providers
      */
     private getOrderedProvidersList(): AbstractHttpProvider[] {
         const nextProviderIndex: number = this.providers.indexOf(this.nextProvider);

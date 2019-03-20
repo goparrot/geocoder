@@ -7,7 +7,7 @@ export class GeocodeCommand<ProviderRequestType = any, ProviderResponseType = an
     ProviderRequestType,
     ProviderResponseType
 > {
-    get queryClass(): typeof GeocodeQuery {
+    static queryClass(): typeof GeocodeQuery {
         return GeocodeQuery;
     }
 }

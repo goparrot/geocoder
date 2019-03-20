@@ -1,22 +1,24 @@
 import Axios, { AxiosInstance } from 'axios';
 import { ProviderAggregator } from '../../../src/geocoder';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
-import { Query } from '../../../src/model';
-import { HereProvider } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
+import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import { ArcgisProvider } from '../../../src/provider';
+import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 
 describe('ProviderAggregator (integration)', () => {
+    let geocoder: ProviderAggregator;
+
     let geocodeQuery: GeocodeQueryInterface;
     let reverseQuery: ReverseQueryInterface;
-    let geocoder: ProviderAggregator;
+    let suggestQuery: SuggestQueryInterface;
 
     beforeEach(() => {
         geocodeQuery = { ...geocodeQueryFixture };
         reverseQuery = { ...reverseQueryFixture };
+        suggestQuery = { ...suggestQueryFixture };
 
         const client: AxiosInstance = Axios.create();
 
-        const provider: HereProvider = new HereProvider(client, `${process.env.HERE_APP_ID}`, `${process.env.HERE_APP_CODE}`);
+        const provider: ArcgisProvider = new ArcgisProvider(client);
 
         geocoder = new ProviderAggregator();
         geocoder.registerProvider(provider);
@@ -36,7 +38,16 @@ describe('ProviderAggregator (integration)', () => {
             return geocoder
                 .reverse(reverseQuery)
                 .should.eventually.be.an('array')
-                .with.length(Query.DEFAULT_RESULT_LIMIT);
+                .with.length(1);
+        });
+    });
+
+    describe('#suggest', () => {
+        it('should return expected response', async () => {
+            return geocoder
+                .suggest(suggestQuery)
+                .should.eventually.be.an('array')
+                .with.length(3);
         });
     });
 });

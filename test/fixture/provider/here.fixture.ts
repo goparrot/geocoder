@@ -48,7 +48,7 @@ export const providerRawResponse: Readonly<any> = Object.freeze({
     },
 });
 
-export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze([
+export const providerParsedResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
     {
         latitude: 41.7332379,
         longitude: -87.5959685,

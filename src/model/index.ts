@@ -6,3 +6,6 @@ export * from './location-builder';
 export * from './geocode-query';
 export * from './query';
 export * from './reverse-query';
+export * from './suggest-query';
+export * from './suggestion';
+export * from './suggestion-builder';

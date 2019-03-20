@@ -21,7 +21,7 @@ describe('ChainProvider (unit)', () => {
         });
 
         it('should throw InvalidArgumentException if provider array is empty', async () => {
-            return ((): any => new ChainProvider([])).should.throw(InvalidArgumentException, 'provider array should not be empty');
+            return ((): any => new ChainProvider([])).should.throw(InvalidArgumentException, 'array of providers should not be empty');
         });
     });
 

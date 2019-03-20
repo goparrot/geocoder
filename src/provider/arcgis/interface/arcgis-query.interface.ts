@@ -12,8 +12,6 @@ export interface ArcgisQueryInterface {
      * https://developers.arcgis.com/rest/geocode/api-reference/geocoding-free-vs-paid.htm
      */
     forStorage: boolean;
-    maxLocations: number;
-    locationType: 'rooftop' | 'street';
     langCode: string;
     f: 'json';
 }

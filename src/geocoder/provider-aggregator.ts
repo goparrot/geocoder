@@ -1,8 +1,8 @@
 import { AbstractDecider, StatelessDecider } from '../decider';
 import { ProviderNotRegisteredException } from '../exception';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../interface';
+import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggerInterface } from '../logger';
-import { AbstractProvider, Location } from '../model';
+import { AbstractProvider, Location, Suggestion } from '../model';
 import { Type } from '../types';
 import { AbstractGeocoder } from './abstract-geocoder';
 
@@ -27,6 +27,12 @@ export class ProviderAggregator extends AbstractGeocoder {
         const provider: AbstractProvider = await this.decider.getProvider(this.providers, this.provider);
 
         return this.reverseByProvider(provider, query);
+    }
+
+    async suggest(query: SuggestQueryInterface): Promise<Suggestion[]> {
+        const provider: AbstractProvider = await this.decider.getProvider(this.providers, this.provider);
+
+        return this.suggestByProvider(provider, query);
     }
 
     using<T extends AbstractProvider>(providerClass: Type<T>): this {

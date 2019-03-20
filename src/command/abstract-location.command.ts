@@ -1,8 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { plainToClass } from 'class-transformer';
-import { ClassType } from 'class-transformer/ClassTransformer';
-import { validateOrReject } from 'class-validator';
-import { UnsupportedAccuracyException, ValidationException } from '../exception';
+import { UnsupportedAccuracyException } from '../exception';
 import { QueryInterface } from '../interface';
 import { LoggableInterface } from '../logger';
 import { AccuracyEnum, Location, LocationBuilder } from '../model';
@@ -17,27 +14,11 @@ export abstract class AbstractLocationCommand<
 > extends AbstractCommand<GeocoderQueryType, Location, LocationBuilder, ProviderRequestType, ProviderResponseType> {
     'constructor': Pick<typeof AbstractLocationCommand, keyof typeof AbstractLocationCommand> & { name: string } & LoggableInterface;
 
-    abstract get queryClass(): ClassType<GeocoderQueryType>;
-
     protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<LocationBuilder[]> {
-        throw new Error('AbstractCommand.parseResponse: not implemented');
+        throw new Error('AbstractLocationCommand.parseResponse: not implemented');
     }
 
-    async execute(_query: GeocoderQueryType): Promise<Location[]> {
-        const query: GeocoderQueryType = plainToClass<GeocoderQueryType, GeocoderQueryType>(this.queryClass, _query);
-
-        try {
-            await validateOrReject(query, {
-                whitelist: true,
-                forbidNonWhitelisted: true,
-                validationError: { target: false, value: false },
-            });
-        } catch (err) {
-            this.getLogger().error(err, query);
-
-            throw new ValidationException(err);
-        }
-
+    async execute(query: GeocoderQueryType): Promise<Location[]> {
         let locations: Location[] = await super.execute(query);
 
         locations = await this.addMissingLocationProperties(locations);

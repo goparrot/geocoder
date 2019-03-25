@@ -87,41 +87,42 @@ export function sharedCommandHttpStatusBehaviours(mock: MockAdapter, provider: A
     });
 }
 
-export function sharedGeocodeCommandBehaviours(
-    mock: MockAdapter,
-    provider: AbstractProvider,
-    url: string,
-    rawResponse: any,
-): void {
+export function sharedGeocodeCommandBehaviours(mock: MockAdapter, provider: AbstractProvider, url: string, rawResponse: any): void {
     describe('#sharedGeocodeCommandBehaviours', () => {
         describe('#exactMatch', () => {
             it('should throw ExactMatchNotFoundException with "More than one result" message', async () => {
                 mock.onGet(url).reply(200, rawResponse);
 
-                return provider.geocode({
-                    exactMatch: true,
-                    address: 'test123',
-                }).should.be.rejectedWith(ExactMatchNotFoundException, 'More than one result');
+                return provider
+                    .geocode({
+                        exactMatch: true,
+                        address: 'test123',
+                    })
+                    .should.be.rejectedWith(ExactMatchNotFoundException, 'More than one result');
             });
 
             it('should throw ExactMatchNotFoundException with "Does not match the terms of the query" message', async () => {
                 mock.onGet(url).reply(200, rawResponse);
 
-                return provider.geocode({
-                    exactMatch: true,
-                    address: 'test123',
-                    countryCode: 'AA',
-                }).should.be.rejectedWith(ExactMatchNotFoundException, 'Does not match the terms of the query');
+                return provider
+                    .geocode({
+                        exactMatch: true,
+                        address: 'test123',
+                        countryCode: 'AA',
+                    })
+                    .should.be.rejectedWith(ExactMatchNotFoundException, 'Does not match the terms of the query');
             });
 
             it('should throw ExactMatchNotFoundException with "Does not match the terms of the query" message', async () => {
                 mock.onGet(url).reply(200, rawResponse);
 
-                return provider.geocode({
-                    exactMatch: true,
-                    address: 'test123',
-                    stateCode: 'AA',
-                }).should.be.rejectedWith(ExactMatchNotFoundException, 'Does not match the terms of the query');
+                return provider
+                    .geocode({
+                        exactMatch: true,
+                        address: 'test123',
+                        stateCode: 'AA',
+                    })
+                    .should.be.rejectedWith(ExactMatchNotFoundException, 'Does not match the terms of the query');
             });
         });
     });

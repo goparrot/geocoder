@@ -1,4 +1,4 @@
-import { LocationInterface } from '../../../src/interface';
+import { LocationInterface, SuggestionInterface } from '../../../src/interface';
 
 const providerRawLocationResponse: Readonly<any> = Object.freeze({
     Response: {
@@ -71,3 +71,12 @@ export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = p
 
 export const providerRawReverseResponse: Readonly<any> = providerRawLocationResponse;
 export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
+
+export const providerRawSuggestResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
+    {
+        formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
+        provider: 'HereProvider',
+        raw: providerRawLocationResponse.Response.View[0].Result[0],
+    },
+]);

@@ -37,4 +37,10 @@ describe('HereProvider (unit)', () => {
             return provider.reverse.should.be.instanceOf(Function);
         });
     });
+
+    describe('#suggest', () => {
+        it('should be instance of Function', async () => {
+            return provider.suggest.should.be.instanceOf(Function);
+        });
+    });
 });

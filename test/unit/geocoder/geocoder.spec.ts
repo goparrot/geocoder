@@ -46,6 +46,12 @@ describe('Geocoder (unit)', () => {
         });
     });
 
+    describe('#suggest', () => {
+        it('should be instance of Function', async () => {
+            return geocoder.suggest.should.be.instanceOf(Function);
+        });
+    });
+
     describe('#setLogger', () => {
         it('should be instance of Function', async () => {
             return geocoder.setLogger.should.be.instanceOf(Function);

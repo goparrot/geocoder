@@ -9,4 +9,9 @@ export interface HereGeocodeQueryInterface extends HereQueryInterface {
     country?: string;
     state?: string;
     city?: string;
+
+    /**
+     * @example "lat,lon,radius"
+     */
+    prox?: string;
 }

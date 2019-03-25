@@ -1,3 +1,9 @@
+## [0.9.1](https://github.com/goparrot/geocoder/compare/v0.9.0...v0.9.1) (2019-03-25)
+
+### Bug Fixes
+
+*   **command geocode:** cannot read property 'countryCode' of undefined ([ecd79f4](https://github.com/goparrot/geocoder/commit/ecd79f4))
+
 # [0.9.0](https://github.com/goparrot/geocoder/compare/v0.8.1...v0.9.0) (2019-03-25)
 
 ### Features

@@ -1,3 +1,9 @@
+## [0.8.1](https://github.com/goparrot/geocoder/compare/v0.8.0...v0.8.1) (2019-03-25)
+
+### Bug Fixes
+
+*   **provider arcgis:** wrong reverse url ([e0e3a6d](https://github.com/goparrot/geocoder/commit/e0e3a6d))
+
 # [0.8.0](https://github.com/goparrot/geocoder/compare/v0.7.1...v0.8.0) (2019-03-20)
 
 ### Features

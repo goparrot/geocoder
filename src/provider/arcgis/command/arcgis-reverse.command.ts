@@ -16,7 +16,7 @@ export class ArcgisReverseCommand extends ArcgisCommonCommandMixin(ReverseComman
     }
 
     static getUrl(): string {
-        return 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates';
+        return 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode';
     }
 
     protected async buildQuery(query: ReverseQuery): Promise<ArcgisReverseQueryInterface> {

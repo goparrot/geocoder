@@ -1,3 +1,10 @@
+# [0.9.0](https://github.com/goparrot/geocoder/compare/v0.8.1...v0.9.0) (2019-03-25)
+
+### Features
+
+*   **geocode query:** add exactMatch option ([9480892](https://github.com/goparrot/geocoder/commit/9480892))
+*   **geocoder suggest:** add suggest method ([d4cb26c](https://github.com/goparrot/geocoder/commit/d4cb26c))
+
 ## [0.8.1](https://github.com/goparrot/geocoder/compare/v0.8.0...v0.8.1) (2019-03-25)
 
 ### Bug Fixes

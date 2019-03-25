@@ -24,7 +24,7 @@ export class GeocodeCommand<ProviderRequestType = any, ProviderResponseType = an
      * @throws {ExactMatchNotFoundException}
      */
     private validateExactMatchOption(query: GeocodeQueryInterface, locations: Location[]): void {
-        if (!query.exactMatch) {
+        if (!query.exactMatch || !locations.length) {
             return;
         }
 

@@ -185,14 +185,14 @@ Legend:
 
 #### World
 
-| Provider                                                                                  | Geocode | Reverse | Autocomplete | Place |
+| Provider                                                                                  | Geocode | Reverse | Suggest | Place |
 | :---------------------------------------------------------------------------------------- | :------ | :------ | :----------- | :---- |
 | [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘           | 🆘    |
 | [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | ✅️           | 🆘    |
 | [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | ✅            | 🆘    |
-| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅       | ✅       | 🔍           | 🔍️   |
+| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅       | ✅       | ✅           | 🔍️   |
 | [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️          | 🔍    |
 | [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅       | ✅       | 🔍️          | 🔍️   |

@@ -13,9 +13,6 @@ export class HereReverseCommand extends HereCommonCommandMixin(ReverseCommand)<H
         super(httpClient, appId, appCode);
     }
 
-    /**
-     * @link {https://developer.here.com/documentation/geocoder/common/request-cit-environment-rest.html}
-     */
     static getUrl(): string {
         return 'https://reverse.geocoder.api.here.com/6.2/reversegeocode.json';
     }

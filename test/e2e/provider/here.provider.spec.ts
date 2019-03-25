@@ -1,14 +1,16 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { LocationInterface, QueryInterface } from '../../../src/interface';
+import { QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
-import { HereGeocodeCommand, HereProvider, HereReverseCommand } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
+import { HereGeocodeCommand, HereProvider, HereReverseCommand, HereSuggestCommand } from '../../../src/provider';
+import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 import {
     providerParsedGeocodeResponse,
     providerParsedReverseResponse,
+    providerParsedSuggestResponse,
     providerRawGeocodeResponse,
     providerRawReverseResponse,
+    providerRawSuggestResponse,
 } from '../../fixture/provider/here.fixture';
 import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
 
@@ -21,7 +23,7 @@ describe('HereProvider (2e2)', () => {
         mock.reset();
     });
 
-    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<LocationInterface>): void {
+    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<any>): void {
         query = { ...query };
 
         sharedCommandBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
@@ -51,5 +53,11 @@ describe('HereProvider (2e2)', () => {
         const url: string = HereReverseCommand.getUrl();
 
         sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
+    });
+
+    describe('#suggest', () => {
+        const url: string = HereSuggestCommand.getUrl();
+
+        sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
     });
 });

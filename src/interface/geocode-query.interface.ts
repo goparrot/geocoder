@@ -48,4 +48,8 @@ export interface GeocodeQueryInterface extends QueryInterface {
      * @default not applicable
      */
     postalCode?: string;
+
+    lat?: number;
+    lon?: number;
+    radius?: number;
 }

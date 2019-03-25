@@ -1,5 +1,5 @@
 import { Transform, Type } from 'class-transformer';
-import { IsBoolean, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { GeocodeQueryInterface } from '../interface';
 import { IsExactMatchApplicable } from '../validation';
 import { Query } from './query';
@@ -52,4 +52,25 @@ export class GeocodeQuery extends Query implements GeocodeQueryInterface {
     @MaxLength(20)
     @Type(() => String)
     postalCode?: string;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(-90)
+    @Max(90)
+    @Type(() => Number)
+    lat?: number;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(-180)
+    @Max(180)
+    @Type(() => Number)
+    lon?: number;
+
+    @IsOptional()
+    @IsNumber()
+    @Min(0)
+    @Max(1000000)
+    @Type(() => Number)
+    radius?: number;
 }

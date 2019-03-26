@@ -2,13 +2,15 @@ import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
-import { MapQuestGeocodeCommand, MapQuestProvider, MapQuestReverseCommand } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
+import { GoogleMapsSuggestCommand, MapQuestGeocodeCommand, MapQuestProvider, MapQuestReverseCommand } from '../../../src/provider';
+import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 import {
     providerParsedGeocodeResponse,
     providerParsedReverseResponse,
+    providerParsedSuggestResponse,
     providerRawGeocodeResponse,
     providerRawReverseResponse,
+    providerRawSuggestResponse,
 } from '../../fixture/provider/map-quest.fixture';
 import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
 
@@ -36,18 +38,6 @@ describe('MapQuestProvider (2e2)', () => {
 
                 return provider[method](query).should.become([]);
             });
-
-            it('should return empty result on response with empty results[0].locations array', async () => {
-                mock.onGet(provider[url]).reply(200, {
-                    results: [
-                        {
-                            locations: [],
-                        },
-                    ],
-                });
-
-                return provider[method](query).should.become([]);
-            });
         });
     }
 
@@ -55,11 +45,49 @@ describe('MapQuestProvider (2e2)', () => {
         const url: string = MapQuestGeocodeCommand.getUrl();
 
         sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
+
+        it('should return empty result on response with empty results[0].locations array', async () => {
+            mock.onGet(provider[url]).reply(200, {
+                results: [
+                    {
+                        locations: [],
+                    },
+                ],
+            });
+
+            return provider.geocode(geocodeQueryFixture).should.become([]);
+        });
     });
 
     describe('#reverse', () => {
         const url: string = MapQuestReverseCommand.getUrl();
 
         sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
+
+        it('should return empty result on response with empty results[0].locations array', async () => {
+            mock.onGet(provider[url]).reply(200, {
+                results: [
+                    {
+                        locations: [],
+                    },
+                ],
+            });
+
+            return provider.reverse(reverseQueryFixture).should.become([]);
+        });
+    });
+
+    describe('#suggest', () => {
+        const url: string = GoogleMapsSuggestCommand.getUrl();
+
+        sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
+
+        it('should return empty result on response with empty results[0].locations array', async () => {
+            mock.onGet(provider[url]).reply(200, {
+                results: [],
+            });
+
+            return provider.suggest(suggestQueryFixture).should.become([]);
+        });
     });
 });

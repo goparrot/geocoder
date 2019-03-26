@@ -33,4 +33,10 @@ describe('MapQuestProvider (unit)', () => {
             return provider.reverse.should.be.instanceOf(Function);
         });
     });
+
+    describe('#reverse', () => {
+        it('should be instance of Function', async () => {
+            return provider.reverse.should.be.instanceOf(Function);
+        });
+    });
 });

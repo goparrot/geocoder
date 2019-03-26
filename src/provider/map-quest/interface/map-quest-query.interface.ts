@@ -1,6 +1,6 @@
 export interface MapQuestQueryInterface {
+    /**
+     * A valid and authorized MapQuest API key.
+     */
     key: string;
-    location: string;
-    thumbMaps: boolean;
-    outFormat: string;
 }

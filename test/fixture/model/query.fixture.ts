@@ -8,6 +8,9 @@ export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freez
     state: 'Illinois',
     stateCode: 'IL',
     city: 'Chicago',
+    lat: 41.7340186,
+    lon: -87.5960762,
+    radius: 25000,
     language: 'en',
     limit: 3,
     fillMissingQueryProperties: true,
@@ -23,11 +26,6 @@ export const reverseQueryFixture: Readonly<ReverseQueryInterface> = Object.freez
     withRaw: true,
 });
 
-export const suggestQueryFixture: Readonly<SuggestQueryInterface> = {
+export const suggestQueryFixture: Readonly<SuggestQueryInterface> = Object.freeze<SuggestQueryInterface>({
     ...geocodeQueryFixture,
-    ...{
-        lat: 41.7340186,
-        lon: -87.5960762,
-        radius: 25000,
-    },
-};
+});

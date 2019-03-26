@@ -1,4 +1,4 @@
-import { LocationInterface } from '../../../src/interface';
+import { LocationInterface, SuggestionInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 
 const providerRawLocationResponse: Readonly<any> = Object.freeze({
@@ -63,3 +63,113 @@ export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = p
 
 export const providerRawReverseResponse: Readonly<any> = providerRawLocationResponse;
 export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
+
+export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
+    request: {
+        q: '1158 E 89th St',
+        limit: 3,
+        location: {
+            long: -87.5960762,
+            lat: 41.7340186,
+        },
+        feedback: false,
+        collection: ['address'],
+        languageCode: 'en',
+        countryCode: ['US'],
+    },
+    results: [
+        {
+            id: 'address:1158_144a1ec42e9c88c9cf013e003cfef404',
+            displayString: '1158 E 89th St, Chicago, IL 60619-7017',
+            name: '1158 E 89th St',
+            recordType: 'address',
+            collection: ['address'],
+            slug: '/us/illinois/chicago/60619-7017/1158-e-89th-st-41.733137,-87.595598',
+            language: 'en',
+            place: {
+                type: 'Feature',
+                geometry: {
+                    coordinates: [-87.595598, 41.733137],
+                    type: 'Point',
+                },
+                properties: {
+                    city: 'Chicago',
+                    stateCode: 'IL',
+                    postalCode: '60619-7017',
+                    county: 'Cook',
+                    countryCode: 'US',
+                    street: '1158 E 89th St',
+                    type: 'address',
+                },
+            },
+        },
+        {
+            id: 'address:1158_48ae48d7816cd2cad4203b56dfe49df7',
+            displayString: '1158 E 89th St, Minneapolis, MN 55420',
+            name: '1158 E 89th St',
+            recordType: 'address',
+            collection: ['address'],
+            slug: '/us/minnesota/minneapolis/55420/1158-e-89th-st-44.842529,-93.273597',
+            language: 'en',
+            place: {
+                type: 'Feature',
+                geometry: {
+                    coordinates: [-93.273597, 44.842529],
+                    type: 'Point',
+                },
+                properties: {
+                    city: 'Minneapolis',
+                    stateCode: 'MN',
+                    postalCode: '55420',
+                    county: 'Hennepin',
+                    countryCode: 'US',
+                    street: '1158 E 89th St',
+                    type: 'address',
+                },
+            },
+        },
+        {
+            id: 'address:1158_f710ec0e9a6a396c9e2da3080bc5d913',
+            displayString: '1158 E 89th St, Kansas City, MO 64131-2749',
+            name: '1158 E 89th St',
+            recordType: 'address',
+            collection: ['address'],
+            slug: '/us/missouri/kansas-city/64131-2749/1158-e-89th-st-38.966144,-94.575587',
+            language: 'en',
+            place: {
+                type: 'Feature',
+                geometry: {
+                    coordinates: [-94.575587, 38.966144],
+                    type: 'Point',
+                },
+                properties: {
+                    city: 'Kansas City',
+                    stateCode: 'MO',
+                    postalCode: '64131-2749',
+                    county: 'Jackson',
+                    countryCode: 'US',
+                    street: '1158 E 89th St',
+                    type: 'address',
+                },
+            },
+        },
+    ],
+});
+
+export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
+    {
+        formattedAddress: '1158 E 89th St, Chicago, IL 60619-7017',
+        provider: 'MapQuestProvider',
+        raw: providerRawSuggestResponse.results[0],
+    },
+    {
+        formattedAddress: '1158 E 89th St, Minneapolis, MN 55420',
+        provider: 'MapQuestProvider',
+        raw: providerRawSuggestResponse.results[1],
+    },
+    {
+        formattedAddress: '1158 E 89th St, Kansas City, MO 64131-2749',
+        provider: 'MapQuestProvider',
+        raw: providerRawSuggestResponse.results[2],
+    },
+]);

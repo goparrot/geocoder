@@ -1,18 +1,20 @@
 import Axios, { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
-import { GeocodeQueryInterface, ReverseQueryInterface } from '../../../src/interface';
+import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { MapQuestProvider } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
+import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 
 describe('MapQuestProvider (integration)', () => {
     let client: AxiosInstance;
     let geocoder: Geocoder;
     let geocodeQuery: GeocodeQueryInterface;
     let reverseQuery: ReverseQueryInterface;
+    let suggestQuery: SuggestQueryInterface;
 
     beforeEach(() => {
         geocodeQuery = { ...geocodeQueryFixture };
         reverseQuery = { ...reverseQueryFixture };
+        suggestQuery = { ...suggestQueryFixture };
 
         client = Axios.create();
 
@@ -36,6 +38,15 @@ describe('MapQuestProvider (integration)', () => {
                 .reverse(reverseQuery)
                 .should.eventually.be.an('array')
                 .with.length(1);
+        });
+    });
+
+    describe('#suggest', () => {
+        it('should return expected response', async () => {
+            return geocoder
+                .suggest(suggestQuery)
+                .should.eventually.be.an('array')
+                .with.length(3);
         });
     });
 });

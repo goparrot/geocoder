@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { AbstractLocationCommand } from '../../../../command';
+import { AbstractCommand } from '../../../../command';
 import { InvalidCredentialsException, UnsupportedAccuracyException } from '../../../../exception';
 import { QueryInterface } from '../../../../interface';
 import { AccuracyEnum, LocationBuilder } from '../../../../model';
@@ -20,7 +20,7 @@ export enum MapQuestLocationQualityEnum {
     POINT = 'POINT',
 }
 
-export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractLocationCommand>>(Base: TBase): TBase {
+export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {
     abstract class MapQuestCommonCommand extends Base {
         protected readonly apiKey: any;
 

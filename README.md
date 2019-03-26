@@ -187,22 +187,22 @@ Legend:
 
 | Provider                                                                                  | Geocode | Reverse | Suggest | Place |
 | :---------------------------------------------------------------------------------------- | :------ | :------ | :----------- | :---- |
-| [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘           | 🆘    |
-| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | ✅️           | 🆘    |
-| [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | ✅            | 🆘    |
-| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅       | ✅       | ✅           | 🔍️   |
-| [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅       | ✅       | 🔍️          | 🔍️   |
-| [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [OpenCage](https://opencagedata.com/api)                                                  | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [Photon](http://doc-api.photonengine.com/en/PUN/current/)                                 | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [PickPoint](https://pickpoint.io/)                                                        | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [TomTom](https://developer.tomtom.com/maps-sdk-web/documentation)                         | 🆘      | 🆘️     | 🔍️          | 🔍    |
-| [Yandex](https://tech.yandex.com/maps/)                                                   | 🆘      | 🆘️     | 🔍️          | 🔍    |
+| [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️      | 🆘           | 🆘    |
+| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅      | ✅      | ✅️           | 🆘    |
+| [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅      | ✅      | ✅           | 🆘    |
+| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅      | ✅      | ✅           | 🔍️    |
+| [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅      | ✅      | ✅️           | 🆘️    |
+| [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [OpenCage](https://opencagedata.com/api)                                                  | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [Photon](http://doc-api.photonengine.com/en/PUN/current/)                                 | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [PickPoint](https://pickpoint.io/)                                                        | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [TomTom](https://developer.tomtom.com/maps-sdk-web/documentation)                         | 🆘      | 🆘️      | 🔍️           | 🔍    |
+| [Yandex](https://tech.yandex.com/maps/)                                                   | 🆘      | 🆘️      | 🔍️           | 🔍    |
 
 ## Special Geocoders and Providers
 

@@ -1,43 +1,38 @@
-import { GeocodeCommand, ReverseCommand, SuggestCommand } from '../command';
 import { UnsupportedOperationException } from '../exception';
-import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import { GeocodeQueryInterface, HttpProviderCommandsInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggerInterface } from '../logger';
 import { AbstractProvider } from './abstract-provider';
 import { Location } from './location';
 import { Suggestion } from './suggestion';
 
 export abstract class AbstractHttpProvider extends AbstractProvider {
-    protected constructor(
-        private readonly geocodeCommand: GeocodeCommand,
-        private readonly reverseCommand: ReverseCommand,
-        private readonly suggestCommand?: SuggestCommand,
-    ) {
+    protected constructor(private readonly commands: HttpProviderCommandsInterface) {
         super();
     }
 
     async geocode(query: GeocodeQueryInterface): Promise<Location[]> {
-        return this.geocodeCommand.execute(query);
+        return this.commands.geocode.execute(query);
     }
 
     async reverse(query: ReverseQueryInterface): Promise<Location[]> {
-        return this.reverseCommand.execute(query);
+        return this.commands.reverse.execute(query);
     }
 
     async suggest(query: SuggestQueryInterface): Promise<Suggestion[]> {
-        if (!this.suggestCommand) {
+        if (!this.commands.suggest) {
             throw new UnsupportedOperationException(`Provider ${this.constructor.name} doesn't support "suggest" method`);
         }
 
-        return this.suggestCommand.execute(query);
+        return this.commands.suggest.execute(query);
     }
 
     setLogger(logger: LoggerInterface): this {
         super.setLogger(logger);
-        this.geocodeCommand.setLogger(logger);
-        this.reverseCommand.setLogger(logger);
+        this.commands.geocode.setLogger(logger);
+        this.commands.reverse.setLogger(logger);
 
-        if (this.reverseCommand) {
-            this.reverseCommand.setLogger(logger);
+        if (this.commands.suggest) {
+            this.commands.suggest.setLogger(logger);
         }
 
         return this;

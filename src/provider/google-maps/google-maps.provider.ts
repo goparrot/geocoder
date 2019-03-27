@@ -4,10 +4,10 @@ import { GoogleMapsGeocodeCommand, GoogleMapsReverseCommand, GoogleMapsSuggestCo
 
 export class GoogleMapsProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, apiKey: string) {
-        super(
-            new GoogleMapsGeocodeCommand(httpClient, apiKey),
-            new GoogleMapsReverseCommand(httpClient, apiKey),
-            new GoogleMapsSuggestCommand(httpClient, apiKey),
-        );
+        super({
+            geocode: new GoogleMapsGeocodeCommand(httpClient, apiKey),
+            reverse: new GoogleMapsReverseCommand(httpClient, apiKey),
+            suggest: new GoogleMapsSuggestCommand(httpClient, apiKey),
+        });
     }
 }

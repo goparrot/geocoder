@@ -4,6 +4,10 @@ import { ArcgisGeocodeCommand, ArcgisReverseCommand, ArcgisSuggestCommand } from
 
 export class ArcgisProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, token?: string) {
-        super(new ArcgisGeocodeCommand(httpClient, token), new ArcgisReverseCommand(httpClient, token), new ArcgisSuggestCommand(httpClient, token));
+        super({
+            geocode: new ArcgisGeocodeCommand(httpClient, token),
+            reverse: new ArcgisReverseCommand(httpClient, token),
+            suggest: new ArcgisSuggestCommand(httpClient, token),
+        });
     }
 }

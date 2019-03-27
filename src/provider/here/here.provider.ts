@@ -4,10 +4,10 @@ import { HereGeocodeCommand, HereReverseCommand, HereSuggestCommand } from './co
 
 export class HereProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {
-        super(
-            new HereGeocodeCommand(httpClient, appId, appCode),
-            new HereReverseCommand(httpClient, appId, appCode),
-            new HereSuggestCommand(httpClient, appId, appCode),
-        );
+        super({
+            geocode: new HereGeocodeCommand(httpClient, appId, appCode),
+            reverse: new HereReverseCommand(httpClient, appId, appCode),
+            suggest: new HereSuggestCommand(httpClient, appId, appCode),
+        });
     }
 }

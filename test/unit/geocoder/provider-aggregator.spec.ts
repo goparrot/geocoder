@@ -2,13 +2,14 @@ import Axios, { AxiosInstance } from 'axios';
 import { ProviderNotRegisteredException } from '../../../src/exception';
 import { ProviderAggregator } from '../../../src/geocoder';
 import { LoggerInterface, NullLogger } from '../../../src/logger';
-import { GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture } from '../../fixture/model/query.fixture';
+import { ChainProvider, GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
 
 describe('ProviderAggregator (unit)', () => {
+    const client: AxiosInstance = Axios.create();
+    const mapQuestProvider: MapQuestProvider = new MapQuestProvider(client, 'test');
+    const googleProvider: GoogleMapsProvider = new GoogleMapsProvider(client, 'test');
+
     let geocoder: ProviderAggregator;
-    let mapQuestProvider: MapQuestProvider;
-    let googleProvider: GoogleMapsProvider;
 
     class CustomLogger implements LoggerInterface {
         debug(): any {
@@ -26,37 +27,18 @@ describe('ProviderAggregator (unit)', () => {
     }
 
     beforeEach(() => {
-        const client: AxiosInstance = Axios.create();
-
-        mapQuestProvider = new MapQuestProvider(client, 'test');
-        googleProvider = new GoogleMapsProvider(client, 'test');
-
-        geocoder = new ProviderAggregator();
-    });
-
-    describe('#constructor', () => {
-        it('should be instance of ProviderAggregator', async () => {
-            return geocoder.should.be.instanceOf(ProviderAggregator);
-        });
+        geocoder = new ProviderAggregator([mapQuestProvider]);
     });
 
     describe('#geocode', () => {
         it('should be instance of Function', async () => {
             return geocoder.geocode.should.be.instanceOf(Function);
         });
-
-        it('should throw ProviderNotRegisteredException if provider not registered', async () => {
-            return geocoder.geocode(geocodeQueryFixture).should.be.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
-        });
     });
 
     describe('#reverse', () => {
         it('should be instance of Function', async () => {
             return geocoder.reverse.should.be.instanceOf(Function);
-        });
-
-        it('should throw ProviderNotRegisteredException if provider not registered', async () => {
-            return geocoder.reverse(reverseQueryFixture).should.be.rejectedWith(ProviderNotRegisteredException, 'No provider registered.');
         });
     });
 
@@ -70,14 +52,7 @@ describe('ProviderAggregator (unit)', () => {
         });
 
         it('should have zero provider', async () => {
-            return geocoder.getProviders().should.have.length(0);
-        });
-
-        it('should have one providers', async () => {
-            const providerAggregator: ProviderAggregator = new ProviderAggregator();
-            providerAggregator.registerProviders([googleProvider]);
-
-            return providerAggregator.getProviders().should.have.length(1);
+            return geocoder.getProviders().should.have.length(1);
         });
     });
 
@@ -93,7 +68,7 @@ describe('ProviderAggregator (unit)', () => {
         it('should register provider', async () => {
             geocoder.registerProvider(googleProvider);
 
-            return geocoder.getProviders().should.have.length(1);
+            return geocoder.getProviders().should.have.length(2);
         });
     });
 
@@ -109,11 +84,11 @@ describe('ProviderAggregator (unit)', () => {
         it('should do nothing', async () => {
             geocoder.registerProviders([]);
 
-            return geocoder.getProviders().should.have.length(0);
+            return geocoder.getProviders().should.have.length(1);
         });
 
         it('should register two providers', async () => {
-            geocoder.registerProviders([googleProvider, mapQuestProvider]);
+            geocoder.registerProviders([googleProvider]);
 
             return geocoder.getProviders().should.have.length(2);
         });
@@ -124,25 +99,33 @@ describe('ProviderAggregator (unit)', () => {
             return geocoder.using.should.be.instanceOf(Function);
         });
 
-        it('should return this', async () => {
-            return geocoder
-                .registerProvider(mapQuestProvider)
-                .using(MapQuestProvider)
-                .should.be.instanceOf(ProviderAggregator);
+        it('should throw ProviderNotRegisteredException if a class does not inherit AbstractProvider', async () => {
+            const errorMessage: string = 'The class "ProviderAggregator" does not inherit AbstractProvider.';
+
+            return ((): any => geocoder.using(ProviderAggregator as any)).should.throw(ProviderNotRegisteredException, errorMessage);
         });
 
-        it('should throw ProviderNotRegisteredException if provider not registered', async () => {
-            return ((): any => geocoder.using(MapQuestProvider)).should.throw(
-                ProviderNotRegisteredException,
-                'Provider "MapQuestProvider" is not registered, so you cannot use it. Did you forget to register it or made a typo?',
-            );
+        it('should throw ProviderNotRegisteredException if used provider is not registered', async () => {
+            const errorMessage: string =
+                'Provider "GoogleMapsProvider" is not registered, so you cannot use it. Did you forget to register it or made a typo? Registered providers are: [MapQuestProvider]';
+
+            return ((): any => geocoder.using(GoogleMapsProvider)).should.throw(ProviderNotRegisteredException, errorMessage);
         });
 
-        it('should throw ProviderNotRegisteredException if a class does not inherit AbstractProvider.', async () => {
-            return ((): any => geocoder.using(ProviderAggregator)).should.throw(
-                ProviderNotRegisteredException,
-                'The class "ProviderAggregator" does not inherit AbstractProvider.',
-            );
+        it('should return chosen provider instance', async () => {
+            return geocoder.using(MapQuestProvider).should.be.instanceOf(MapQuestProvider);
+        });
+
+        it('should return chosen provider instance from the chain provider', async () => {
+            const customGeocoder: ProviderAggregator = new ProviderAggregator([new ChainProvider([mapQuestProvider])]);
+
+            return customGeocoder.using(MapQuestProvider).should.be.instanceOf(MapQuestProvider);
+        });
+
+        it('should return chosen provider instance from the chain provider', async () => {
+            const customGeocoder: ProviderAggregator = new ProviderAggregator([new ChainProvider([googleProvider]), mapQuestProvider]);
+
+            return customGeocoder.using(MapQuestProvider).should.be.instanceOf(MapQuestProvider);
         });
     });
 

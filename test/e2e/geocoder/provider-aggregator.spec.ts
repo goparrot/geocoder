@@ -14,13 +14,12 @@ import {
     providerRawReverseResponse,
     providerRawSuggestResponse,
 } from '../../fixture/provider/arcgis.fixture';
-import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
+import { sharedAccuracyBehaviours, sharedCommandBehaviours, sharedProvidableBehaviours } from '../common/shared';
 
 describe('ProviderAggregator (2e2)', () => {
     const client: AxiosInstance = Axios.create();
     const mock: MockAdapter = new MockAdapter(client);
-    const geocoder: ProviderAggregator = new ProviderAggregator();
-    geocoder.registerProvider(new ArcgisProvider(client));
+    const geocoder: ProviderAggregator = new ProviderAggregator([new ArcgisProvider(client)]);
 
     geocoder.setLogger(new NullLogger());
 
@@ -35,6 +34,8 @@ describe('ProviderAggregator (2e2)', () => {
 
         sharedAccuracyBehaviours(mock, geocoder, url, method, query, rawResponse, AccuracyEnum.HOUSE_NUMBER);
     }
+
+    sharedProvidableBehaviours(ProviderAggregator as any);
 
     describe('#geocode', () => {
         const url: string = ArcgisGeocodeCommand.getUrl();

@@ -20,8 +20,7 @@ describe('ProviderAggregator (integration)', () => {
 
         const provider: ArcgisProvider = new ArcgisProvider(client);
 
-        geocoder = new ProviderAggregator();
-        geocoder.registerProvider(provider);
+        geocoder = new ProviderAggregator([provider]);
     });
 
     describe('#geocode', () => {

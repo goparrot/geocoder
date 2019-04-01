@@ -24,7 +24,7 @@ export interface ArcgisGeocodeQueryInterface extends ArcgisQueryInterface {
     // The standard postal code for an address, typically, a 3–6-digit alphanumeric code.
     postal?: string;
     matchOutOfRange: boolean;
-    outFields: string;
+    outFields?: string;
     maxLocations: number;
     locationType: 'rooftop' | 'street';
 }

@@ -3,12 +3,19 @@ import MockAdapter from 'axios-mock-adapter';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../../../src/exception';
 import { QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
-import { GoogleMapsGeocodeCommand, GoogleMapsProvider, GoogleMapsReverseCommand, GoogleMapsSuggestCommand } from '../../../src/provider';
+import {
+    GoogleMapsGeocodeCommand,
+    GoogleMapsPlaceDetailsCommand,
+    GoogleMapsProvider,
+    GoogleMapsReverseCommand,
+    GoogleMapsSuggestCommand,
+} from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 import {
     providerParsedGeocodeResponse,
     providerParsedReverseResponse,
     providerParsedSuggestResponse,
+    providerPlaceDetailsQueryFixture,
     providerRawGeocodeResponse,
     providerRawReverseResponse,
     providerRawSuggestResponse,
@@ -24,12 +31,8 @@ describe('GoogleMapsProvider (2e2)', () => {
         mock.reset();
     });
 
-    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<any>): void {
+    function sharedBehaviours(url: string, method: string, query: QueryInterface): void {
         query = { ...query };
-
-        sharedCommandBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
-
-        sharedAccuracyBehaviours(mock, provider, url, method, query, rawResponse, AccuracyEnum.HOUSE_NUMBER);
 
         describe('#sharedBehaviours', () => {
             it('should throw InvalidCredentialsException', async () => {
@@ -102,21 +105,37 @@ describe('GoogleMapsProvider (2e2)', () => {
         });
     }
 
+    function allSharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<any>): void {
+        query = { ...query };
+
+        sharedBehaviours(url, method, query);
+
+        sharedCommandBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
+
+        sharedAccuracyBehaviours(mock, provider, url, method, query, rawResponse, AccuracyEnum.HOUSE_NUMBER);
+    }
+
     describe('#geocode', () => {
         const url: string = GoogleMapsGeocodeCommand.getUrl();
 
-        sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
+        allSharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
     });
 
     describe('#reverse', () => {
         const url: string = GoogleMapsReverseCommand.getUrl();
 
-        sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
+        allSharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
     });
 
     describe('#suggest', () => {
         const url: string = GoogleMapsSuggestCommand.getUrl();
 
-        sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
+        allSharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
+    });
+
+    describe('#placeDetails', () => {
+        const url: string = GoogleMapsPlaceDetailsCommand.getUrl();
+
+        sharedBehaviours(url, 'placeDetails', providerPlaceDetailsQueryFixture);
     });
 });

@@ -1,8 +1,9 @@
 import Axios, { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
-import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { HereProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
+import { providerParsedPlaceDetailsResponse, providerPlaceDetailsQueryFixture } from '../../fixture/provider/here.fixture';
 
 describe('HereProvider (integration)', () => {
     let client: AxiosInstance;
@@ -10,11 +11,13 @@ describe('HereProvider (integration)', () => {
     let geocodeQuery: GeocodeQueryInterface;
     let reverseQuery: ReverseQueryInterface;
     let suggestQuery: SuggestQueryInterface;
+    let placeDetailsQuery: PlaceDetailsQueryInterface;
 
     beforeEach(() => {
         geocodeQuery = { ...geocodeQueryFixture };
         reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
+        placeDetailsQuery = { ...providerPlaceDetailsQueryFixture };
 
         client = Axios.create();
 
@@ -47,6 +50,15 @@ describe('HereProvider (integration)', () => {
                 .suggest(suggestQuery)
                 .should.eventually.be.an('array')
                 .with.length(1);
+        });
+    });
+
+    describe('#placeDetails', () => {
+        it('should return expected response', async () => {
+            return geocoder
+                .using(HereProvider)
+                .placeDetails(placeDetailsQuery)
+                .should.become(providerParsedPlaceDetailsResponse);
         });
     });
 });

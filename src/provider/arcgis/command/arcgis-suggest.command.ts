@@ -57,6 +57,7 @@ export class ArcgisSuggestCommand extends ArcgisCommonCommandMixin(SuggestComman
                     const builder: SuggestionBuilder<ArcgisProvider, ArcgisSuggestionInterface> = new SuggestionBuilder(ArcgisProvider, suggestion);
 
                     builder.formattedAddress = suggestion.text;
+                    builder.placeId = suggestion.magicKey;
 
                     return builder;
                 },

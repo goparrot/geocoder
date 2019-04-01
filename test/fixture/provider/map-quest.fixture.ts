@@ -53,6 +53,7 @@ const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.
         streetName: '1158 E 89th St',
         houseNumber: undefined,
         postalCode: '11236-4763',
+        placeId: undefined,
         provider: 'MapQuestProvider',
         raw: providerRawLocationResponse.results[0].locations[0],
     },
@@ -159,16 +160,19 @@ export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
 export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
     {
         formattedAddress: '1158 E 89th St, Chicago, IL 60619-7017',
+        placeId: providerRawSuggestResponse.results[0].id,
         provider: 'MapQuestProvider',
         raw: providerRawSuggestResponse.results[0],
     },
     {
         formattedAddress: '1158 E 89th St, Minneapolis, MN 55420',
+        placeId: providerRawSuggestResponse.results[1].id,
         provider: 'MapQuestProvider',
         raw: providerRawSuggestResponse.results[1],
     },
     {
         formattedAddress: '1158 E 89th St, Kansas City, MO 64131-2749',
+        placeId: providerRawSuggestResponse.results[2].id,
         provider: 'MapQuestProvider',
         raw: providerRawSuggestResponse.results[2],
     },

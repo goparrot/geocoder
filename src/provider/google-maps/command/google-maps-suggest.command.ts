@@ -64,6 +64,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
                 async (raw: any): Promise<SuggestionBuilder<GoogleMapsProvider>> => {
                     const builder: SuggestionBuilder<GoogleMapsProvider> = new SuggestionBuilder(GoogleMapsProvider, raw);
                     builder.formattedAddress = raw.description;
+                    builder.placeId = raw.place_id;
 
                     return builder;
                 },

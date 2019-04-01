@@ -41,7 +41,7 @@ describe('MapQuestProvider (integration)', () => {
         });
     });
 
-    describe('#suggest', () => {
+    describe.skip('#suggest', () => {
         it('should return expected response', async () => {
             return geocoder
                 .suggest(suggestQuery)

@@ -16,6 +16,7 @@ export class LocationBuilder<T extends AbstractHttpProvider = any, R = any> exte
     streetName?: string;
     houseNumber?: string;
     postalCode?: string;
+    placeId?: string;
 
     async build(options?: ClassTransformOptions): Promise<Location<R>> {
         const location: Location = plainToClass<Location<R>, LocationInterface<R>>(Location, this, options);

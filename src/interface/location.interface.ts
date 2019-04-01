@@ -13,6 +13,7 @@ export interface LocationInterface<R = any> {
     streetName?: string;
     houseNumber?: string;
     postalCode?: string;
+    placeId?: string;
     provider: string;
     raw?: R;
 }

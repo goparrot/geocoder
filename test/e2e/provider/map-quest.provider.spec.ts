@@ -77,7 +77,7 @@ describe('MapQuestProvider (2e2)', () => {
         });
     });
 
-    describe('#suggest', () => {
+    describe.skip('#suggest', () => {
         const url: string = GoogleMapsSuggestCommand.getUrl();
 
         sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);

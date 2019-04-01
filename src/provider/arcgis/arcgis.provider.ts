@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { AbstractHttpProvider } from '../../model';
-import { ArcgisGeocodeCommand, ArcgisReverseCommand, ArcgisSuggestCommand } from './command';
+import { ArcgisGeocodeCommand, ArcgisPlaceDatailsCommand, ArcgisReverseCommand, ArcgisSuggestCommand } from './command';
 
 export class ArcgisProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, token?: string) {
@@ -8,6 +8,7 @@ export class ArcgisProvider extends AbstractHttpProvider {
             geocode: new ArcgisGeocodeCommand(httpClient, token),
             reverse: new ArcgisReverseCommand(httpClient, token),
             suggest: new ArcgisSuggestCommand(httpClient, token),
+            placeDetails: new ArcgisPlaceDatailsCommand(httpClient, token),
         });
     }
 }

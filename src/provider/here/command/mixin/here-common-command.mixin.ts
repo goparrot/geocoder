@@ -53,6 +53,7 @@ export function HereCommonCommandMixin<TBase extends Constructor<AbstractCommand
                         builder.postalCode = hereAddress.PostalCode;
                         builder.streetName = hereAddress.Street;
                         builder.houseNumber = hereAddress.HouseNumber;
+                        builder.placeId = raw.Location.LocationId;
 
                         for (const additionalData of hereAddress.AdditionalData) {
                             switch (additionalData.key) {

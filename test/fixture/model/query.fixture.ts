@@ -1,4 +1,4 @@
-import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 
 export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freeze<GeocodeQueryInterface>({
@@ -28,4 +28,11 @@ export const reverseQueryFixture: Readonly<ReverseQueryInterface> = Object.freez
 
 export const suggestQueryFixture: Readonly<SuggestQueryInterface> = Object.freeze<SuggestQueryInterface>({
     ...geocodeQueryFixture,
+});
+
+export const placeDetailsQueryFixture: Readonly<PlaceDetailsQueryInterface> = Object.freeze<PlaceDetailsQueryInterface>({
+    placeId: '', // you must set placeId in the specific test
+    countryCode: 'US',
+    language: Query.DEFAULT_RESULT_LANGUAGE,
+    withRaw: true,
 });

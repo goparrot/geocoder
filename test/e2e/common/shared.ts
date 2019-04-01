@@ -1,6 +1,6 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { Type } from '../../../src';
+import { GeocoderInterface, Type } from '../../../src';
 import {
     ExactMatchNotFoundException,
     InvalidCredentialsException,
@@ -18,7 +18,7 @@ import { getAvailableAccuracies } from '../../../src/util';
 
 export function sharedCommandBehaviours(
     mock: MockAdapter,
-    provider: ProviderInterface,
+    provider: GeocoderInterface,
     url: string,
     method: string,
     query: QueryInterface,
@@ -31,7 +31,7 @@ export function sharedCommandBehaviours(
 
 export function sharedCommandResultBehaviours(
     mock: MockAdapter,
-    provider: ProviderInterface,
+    provider: GeocoderInterface,
     url: string,
     method: string,
     query: QueryInterface,
@@ -59,8 +59,8 @@ export function sharedCommandResultBehaviours(
     });
 }
 
-export function sharedCommandHttpStatusBehaviours(mock: MockAdapter, provider: ProviderInterface, url: string, method: string, query: QueryInterface): void {
-    describe('#sharedCommandBehaviours', () => {
+export function sharedCommandHttpStatusBehaviours(mock: MockAdapter, provider: GeocoderInterface, url: string, method: string, query: QueryInterface): void {
+    describe('#sharedCommandHttpStatusBehaviours', () => {
         it('should throw InvalidCredentialsException on 401 http status', async () => {
             mock.onGet(provider[url]).reply(401);
 
@@ -136,7 +136,7 @@ export function sharedGeocodeCommandBehaviours(mock: MockAdapter, provider: Abst
 
 export function sharedAccuracyBehaviours(
     mock: MockAdapter,
-    provider: ProviderInterface,
+    provider: GeocoderInterface,
     url: string,
     method: string,
     query: QueryInterface,

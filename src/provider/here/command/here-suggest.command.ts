@@ -32,6 +32,7 @@ export class HereSuggestCommand extends HereLocationCommandMixin(SuggestCommand)
 
                     const builder: SuggestionBuilder<HereProvider> = new SuggestionBuilder(HereProvider, raw);
                     builder.formattedAddress = hereAddress.Label;
+                    builder.placeId = raw.Location.LocationId;
 
                     return builder;
                 },

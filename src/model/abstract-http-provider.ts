@@ -1,5 +1,5 @@
 import { UnsupportedOperationException } from '../exception';
-import { GeocodeQueryInterface, HttpProviderCommandsInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import { GeocodeQueryInterface, HttpProviderCommandsInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggerInterface } from '../logger';
 import { AbstractProvider } from './abstract-provider';
 import { Location } from './location';
@@ -26,13 +26,19 @@ export abstract class AbstractHttpProvider extends AbstractProvider {
         return this.commands.suggest.execute(query);
     }
 
+    async placeDetails(query: PlaceDetailsQueryInterface): Promise<Location> {
+        if (!this.commands.placeDetails) {
+            throw new UnsupportedOperationException(`Provider ${this.constructor.name} doesn't support "placeId" method`);
+        }
+
+        return (await this.commands.placeDetails.execute(query))[0];
+    }
+
     setLogger(logger: LoggerInterface): this {
         super.setLogger(logger);
-        this.commands.geocode.setLogger(logger);
-        this.commands.reverse.setLogger(logger);
 
-        if (this.commands.suggest) {
-            this.commands.suggest.setLogger(logger);
+        for (const command of Object.values(this.commands)) {
+            command.setLogger(logger);
         }
 
         return this;

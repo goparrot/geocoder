@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { AbstractHttpProvider } from '../../model';
-import { GoogleMapsGeocodeCommand, GoogleMapsReverseCommand, GoogleMapsSuggestCommand } from './command';
+import { GoogleMapsGeocodeCommand, GoogleMapsPlaceDetailsCommand, GoogleMapsReverseCommand, GoogleMapsSuggestCommand } from './command';
 
 export class GoogleMapsProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, apiKey: string) {
@@ -8,6 +8,7 @@ export class GoogleMapsProvider extends AbstractHttpProvider {
             geocode: new GoogleMapsGeocodeCommand(httpClient, apiKey),
             reverse: new GoogleMapsReverseCommand(httpClient, apiKey),
             suggest: new GoogleMapsSuggestCommand(httpClient, apiKey),
+            placeDetails: new GoogleMapsPlaceDetailsCommand(httpClient, apiKey),
         });
     }
 }

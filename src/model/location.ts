@@ -44,6 +44,9 @@ export class Location<R = any> implements LocationInterface<R> {
     houseNumber?: string;
 
     @Expose()
+    placeId?: string;
+
+    @Expose()
     provider: string;
 
     @Expose({ groups: ['raw', 'all'] })

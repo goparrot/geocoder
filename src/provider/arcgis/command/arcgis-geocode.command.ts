@@ -1,16 +1,13 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import { AccuracyEnum, GeocodeQuery, LocationBuilder } from '../../../model';
-import { LocationUtil } from '../../../util/location';
-import { WorldCountry, WorldCountryUtil } from '../../../util/world-country';
-import { ArcgisProvider } from '../arcgis.provider';
+import { AccuracyEnum, GeocodeQuery } from '../../../model';
 import { ArcgisGeocodeQueryInterface } from '../interface';
-import { ArcgisCommonCommandMixin } from './mixin';
+import { ArcgisGeocodeCommandMixin } from './mixin';
 
 /**
  * @link {https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm}
  */
-export class ArcgisGeocodeCommand extends ArcgisCommonCommandMixin(GeocodeCommand)<ArcgisGeocodeQueryInterface> {
+export class ArcgisGeocodeCommand extends ArcgisGeocodeCommandMixin(GeocodeCommand)<ArcgisGeocodeQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly token?: string) {
         super(httpClient);
     }
@@ -56,45 +53,5 @@ export class ArcgisGeocodeCommand extends ArcgisCommonCommandMixin(GeocodeComman
             outFields: 'Addr_type,LongLabel,AddNum,StAddr,City,RegionAbbr,Region,Country,Postal,DisplayX,DisplayY',
             f: 'json',
         };
-    }
-
-    protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<ArcgisProvider>[]> {
-        if (!Array.isArray(response.data.candidates) || !response.data.candidates.length) {
-            return [];
-        }
-
-        return Promise.all<LocationBuilder<ArcgisProvider>>(
-            response.data.candidates.map(
-                async (raw: any): Promise<LocationBuilder<ArcgisProvider>> => {
-                    const builder: LocationBuilder<ArcgisProvider> = new LocationBuilder(ArcgisProvider, raw);
-                    builder.formattedAddress = raw.attributes.LongLabel;
-                    builder.latitude = raw.attributes.DisplayY;
-                    builder.longitude = raw.attributes.DisplayX;
-
-                    if (raw.attributes.Country) {
-                        const country: WorldCountry | undefined = await WorldCountryUtil.find({
-                            cca3: raw.attributes.Country,
-                        });
-
-                        if (country) {
-                            builder.country = country.name.common;
-                            builder.countryCode = country.cca2;
-                        }
-                    }
-
-                    builder.stateCode = raw.attributes.RegionAbbr;
-                    builder.state = raw.attributes.Region;
-                    builder.city = raw.attributes.City;
-                    // StAddr always includes a house number
-                    builder.streetName = raw.attributes.AddNum
-                        ? LocationUtil.removeHouseNumberFromStreetName(raw.attributes.StAddr, raw.attributes.AddNum)
-                        : raw.attributes.StAddr;
-                    builder.houseNumber = raw.attributes.AddNum;
-                    builder.postalCode = raw.attributes.Postal;
-
-                    return builder;
-                },
-            ),
-        );
     }
 }

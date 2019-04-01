@@ -6,6 +6,7 @@ export * from './providable.interface';
 export * from './providable.mixin';
 export * from './location';
 export * from './location-builder';
+export * from './place-details-query';
 export * from './geocode-query';
 export * from './query';
 export * from './reverse-query';

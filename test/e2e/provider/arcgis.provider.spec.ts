@@ -9,6 +9,7 @@ import {
     providerParsedGeocodeResponse,
     providerParsedReverseResponse,
     providerParsedSuggestResponse,
+    providerPlaceDetailsQueryFixture,
     providerRawGeocodeResponse,
     providerRawReverseResponse,
     providerRawSuggestResponse,
@@ -34,12 +35,8 @@ describe('ArcgisProvider (2e2)', () => {
         mock.reset();
     });
 
-    function sharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<any>): void {
+    function sharedBehaviours(url: string, method: string, query: QueryInterface): void {
         query = { ...query };
-
-        sharedCommandBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
-
-        sharedAccuracyBehaviours(mock, provider, url, method, query, rawResponse, AccuracyEnum.HOUSE_NUMBER);
 
         describe('#sharedBehaviours', () => {
             it('should throw InvalidCredentialsException for code 403', async () => {
@@ -92,10 +89,20 @@ describe('ArcgisProvider (2e2)', () => {
         });
     }
 
+    function allSharedBehaviours(url: string, method: string, query: QueryInterface, rawResponse: any, parsedResponse: ReadonlyArray<any>): void {
+        query = { ...query };
+
+        sharedBehaviours(url, method, query);
+
+        sharedCommandBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
+
+        sharedAccuracyBehaviours(mock, provider, url, method, query, rawResponse, AccuracyEnum.HOUSE_NUMBER);
+    }
+
     describe('#geocode', () => {
         const url: string = ArcgisGeocodeCommand.getUrl();
 
-        sharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
+        allSharedBehaviours(url, 'geocode', geocodeQueryFixture, providerRawGeocodeResponse, providerParsedGeocodeResponse);
 
         it('should return response with empty array', async () => {
             mock.onGet(url).reply(200, {
@@ -125,7 +132,7 @@ describe('ArcgisProvider (2e2)', () => {
     describe('#reverse', () => {
         const url: string = ArcgisReverseCommand.getUrl();
 
-        sharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
+        allSharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
 
         it('should throw InvalidArgumentException', async () => {
             mock.onGet(url).reply(200, {
@@ -146,7 +153,7 @@ describe('ArcgisProvider (2e2)', () => {
     describe('#suggest', () => {
         const url: string = ArcgisSuggestCommand.getUrl();
 
-        sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
+        allSharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
 
         it('should return response with empty array', async () => {
             mock.onGet(url).reply(200, {
@@ -155,5 +162,11 @@ describe('ArcgisProvider (2e2)', () => {
 
             return provider.suggest(suggestQuery).should.become([]);
         });
+    });
+
+    describe('#placeDetails', () => {
+        const url: string = ArcgisSuggestCommand.getUrl();
+
+        sharedBehaviours(url, 'placeDetails', providerPlaceDetailsQueryFixture);
     });
 });

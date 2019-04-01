@@ -1,12 +1,7 @@
-import { Location, Suggestion } from '../model';
-import { GeocodeQueryInterface } from './geocode-query.interface';
-import { ReverseQueryInterface } from './reverse-query.interface';
-import { SuggestQueryInterface } from './suggest-query.interface';
+import { Location } from '../model';
+import { GeocoderInterface } from './geocoder.interface';
+import { PlaceDetailsQueryInterface } from './place-details-query.interface';
 
-export interface ProviderInterface {
-    geocode(query: GeocodeQueryInterface): Promise<Location[]>;
-
-    reverse(query: ReverseQueryInterface): Promise<Location[]>;
-
-    suggest(query: SuggestQueryInterface): Promise<Suggestion[]>;
+export interface ProviderInterface extends GeocoderInterface {
+    placeDetails(query: PlaceDetailsQueryInterface): Promise<Location>;
 }

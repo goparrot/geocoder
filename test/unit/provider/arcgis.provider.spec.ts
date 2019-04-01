@@ -28,4 +28,10 @@ describe('ArcgisProvider (unit)', () => {
             return provider.reverse.should.be.instanceOf(Function);
         });
     });
+
+    describe('#placeDetails', () => {
+        it('should be instance of Function', async () => {
+            return provider.placeDetails.should.be.instanceOf(Function);
+        });
+    });
 });

@@ -7,6 +7,9 @@ export class Suggestion<R = any> implements SuggestionInterface<R> {
     formattedAddress: string;
 
     @Expose()
+    placeId: string;
+
+    @Expose()
     provider: string;
 
     @Expose({ groups: ['raw', 'all'] })

@@ -3,18 +3,7 @@
     // make sure "tslint-config-prettier" is at the end
     "extends": ["tslint:latest", "tslint-config-prettier"],
     "rules": {
-        "typedef": [
-            true,
-            "call-signature",
-            "arrow-call-signature",
-            "parameter",
-            "arrow-parameter",
-            "property-declaration",
-            "variable-declaration",
-            "member-variable-declaration",
-            "object-destructuring",
-            "array-destructuring"
-        ],
+        "deprecation": true,
         "no-implicit-dependencies": [true, "dev"],
         "no-submodule-imports": false,
         "eofline": false,
@@ -40,7 +29,19 @@
         "no-null-keyword": true,
         "no-return-await": true,
         "match-default-export-name": true,
-        "prefer-readonly": true
+        "prefer-readonly": true,
+        "typedef": [
+            true,
+            "call-signature",
+            "arrow-call-signature",
+            "parameter",
+            "arrow-parameter",
+            "property-declaration",
+            "variable-declaration",
+            "member-variable-declaration",
+            "object-destructuring",
+            "array-destructuring"
+        ]
     },
     "rulesDirectory": []
 }

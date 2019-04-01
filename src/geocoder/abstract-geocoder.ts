@@ -23,30 +23,38 @@ export abstract class AbstractGeocoder extends ProvidableMixin(LoggableMixin(Obj
         return provider.suggest(query);
     }
 
-    using<T extends AbstractHttpProvider>(providerClass: Type<T>): AbstractHttpProvider {
-        if (!(providerClass.prototype instanceof AbstractHttpProvider)) {
-            throw ProviderNotRegisteredException.doesNotInheritAbstractProvider(providerClass.name);
+    using<T extends AbstractHttpProvider>(providerClass: Type<T> | string): AbstractHttpProvider {
+        let providerClassName: string;
+
+        if (typeof providerClass === 'function') {
+            if (!(providerClass.prototype instanceof AbstractHttpProvider)) {
+                throw ProviderNotRegisteredException.doesNotInheritAbstractProvider(providerClass.name);
+            }
+
+            providerClassName = providerClass.name;
+        } else {
+            providerClassName = providerClass;
         }
 
         for (const provider of this.getProviders()) {
-            const foundProvider: AbstractHttpProvider | undefined = this.findHttpProviderRecursive(providerClass, provider);
+            const foundProvider: AbstractHttpProvider | undefined = this.findHttpProviderRecursive(providerClassName, provider);
 
             if (foundProvider) {
                 return foundProvider;
             }
         }
 
-        throw ProviderNotRegisteredException.create(providerClass.name, this.getProviders());
+        throw ProviderNotRegisteredException.create(providerClassName, this.getProviders());
     }
 
-    private findHttpProviderRecursive<T extends AbstractHttpProvider>(providerClass: Type<T>, provider: AbstractProvider): AbstractHttpProvider | undefined {
-        if (provider instanceof AbstractHttpProvider && providerClass.name === provider.constructor.name) {
+    private findHttpProviderRecursive(providerClassName: string, provider: AbstractProvider): AbstractHttpProvider | undefined {
+        if (provider instanceof AbstractHttpProvider && providerClassName === provider.constructor.name) {
             return provider;
         }
 
         if (provider instanceof AbstractChainProvider) {
             for (const internalProvider of provider.getProviders()) {
-                const foundProvider: AbstractHttpProvider | undefined = this.findHttpProviderRecursive(providerClass, internalProvider);
+                const foundProvider: AbstractHttpProvider | undefined = this.findHttpProviderRecursive(providerClassName, internalProvider);
                 if (foundProvider) {
                     return foundProvider;
                 }

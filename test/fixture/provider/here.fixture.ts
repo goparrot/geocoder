@@ -1,4 +1,5 @@
-import { LocationInterface, SuggestionInterface } from '../../../src/interface';
+import { LocationInterface, PlaceDetailsQueryInterface, SuggestionInterface } from '../../../src/interface';
+import { placeDetailsQueryFixture } from '../model/query.fixture';
 
 const providerRawLocationResponse: Readonly<any> = Object.freeze({
     Response: {
@@ -60,6 +61,7 @@ const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.
         streetName: 'E 89th St',
         houseNumber: '1158',
         postalCode: '60619',
+        placeId: 'NT_.4F.1wbQ1kZP.RMjIh-x1A_xETN4A',
         provider: 'HereProvider',
         formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
         raw: providerRawLocationResponse.Response.View[0].Result[0],
@@ -75,8 +77,102 @@ export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = p
 export const providerRawSuggestResponse: Readonly<any> = providerRawLocationResponse;
 export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
     {
-        formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',
+        formattedAddress: providerRawLocationResponse.Response.View[0].Result[0].Location.Address.Label,
+        placeId: providerRawLocationResponse.Response.View[0].Result[0].Location.LocationId,
         provider: 'HereProvider',
         raw: providerRawLocationResponse.Response.View[0].Result[0],
     },
 ]);
+
+export const providerPlaceDetailsQueryFixture: Readonly<PlaceDetailsQueryInterface> = Object.freeze<PlaceDetailsQueryInterface>({
+    ...placeDetailsQueryFixture,
+    ...{
+        placeId: providerParsedLocationResponse[0].placeId!,
+    },
+});
+
+export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
+    Response: {
+        MetaInfo: {
+            Timestamp: '2019-04-03T15:46:01.349+0000',
+        },
+        View: [
+            {
+                _type: 'SearchResultsViewType',
+                ViewId: 0,
+                Result: [
+                    {
+                        Relevance: 0,
+                        MatchLevel: 'houseNumber',
+                        MatchType: 'interpolated',
+                        Location: {
+                            LocationId: 'NT_.4F.1wbQ1kZP.RMjIh-x1A_xETN4A',
+                            LocationType: 'address',
+                            DisplayPosition: {
+                                Latitude: 41.7332379,
+                                Longitude: -87.5959685,
+                            },
+                            NavigationPosition: [
+                                {
+                                    Latitude: 41.7331031,
+                                    Longitude: -87.5959614,
+                                },
+                            ],
+                            MapView: {
+                                TopLeft: {
+                                    Latitude: 41.734362,
+                                    Longitude: -87.5974749,
+                                },
+                                BottomRight: {
+                                    Latitude: 41.7321137,
+                                    Longitude: -87.5944621,
+                                },
+                            },
+                            Address: {
+                                Label: '1158 E 89th St, Chicago, IL 60619, United States',
+                                Country: 'USA',
+                                State: 'IL',
+                                County: 'Cook',
+                                City: 'Chicago',
+                                District: 'Burnside',
+                                Street: 'E 89th St',
+                                HouseNumber: '1158',
+                                PostalCode: '60619',
+                                AdditionalData: [
+                                    {
+                                        value: 'US',
+                                        key: 'Country2',
+                                    },
+                                    {
+                                        value: 'United States',
+                                        key: 'CountryName',
+                                    },
+                                    {
+                                        value: 'Illinois',
+                                        key: 'StateName',
+                                    },
+                                    {
+                                        value: 'Cook',
+                                        key: 'CountyName',
+                                    },
+                                    {
+                                        value: 'N',
+                                        key: 'PostalCodeType',
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+});
+
+export const providerParsedPlaceDetailsResponse: Readonly<LocationInterface> = Object.freeze<LocationInterface>({
+    ...providerParsedGeocodeResponse[0],
+    ...{
+        placeId: providerPlaceDetailsQueryFixture.placeId,
+        raw: providerRawPlaceDetailsResponse.Response.View[0].Result[0],
+    },
+});

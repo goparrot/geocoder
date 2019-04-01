@@ -60,4 +60,10 @@ describe('HereProvider (2e2)', () => {
 
         sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
     });
+    //
+    // describe('#placeDetails', () => {
+    //     const url: string = HerePlaceDatailsCommand.getUrl();
+    //
+    //     sharedBehaviours(url, 'placeDetails', providerPlaceDetailsQueryFixture, providerRawPlaceDetailsResponse, providerParsedPlaceDetailsResponse);
+    // });
 });

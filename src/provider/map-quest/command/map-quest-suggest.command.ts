@@ -50,6 +50,7 @@ export class MapQuestSuggestCommand extends MapQuestCommonCommandMixin(SuggestCo
                 async (raw: any): Promise<SuggestionBuilder<MapQuestProvider>> => {
                     const builder: SuggestionBuilder<MapQuestProvider> = new SuggestionBuilder(MapQuestProvider, raw);
                     builder.formattedAddress = raw.displayString;
+                    builder.placeId = raw.id;
 
                     return builder;
                 },

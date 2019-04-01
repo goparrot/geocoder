@@ -13,23 +13,24 @@ export function GoogleMapsLocationCommandMixin<TBase extends Constructor<Abstrac
             }
 
             return Promise.all<LocationBuilder<GoogleMapsProvider>>(
-                response.data.results.map(
-                    async (raw: any): Promise<LocationBuilder<GoogleMapsProvider>> => {
-                        const builder: LocationBuilder<GoogleMapsProvider> = new LocationBuilder(GoogleMapsProvider, raw);
-                        builder.formattedAddress = raw.formatted_address;
-                        builder.latitude = raw.geometry.location.lat;
-                        builder.longitude = raw.geometry.location.lng;
-
-                        for (const addressComponent of raw.address_components) {
-                            for (const type of addressComponent.types) {
-                                this.updateAddressComponent(builder, type, addressComponent);
-                            }
-                        }
-
-                        return builder;
-                    },
-                ),
+                response.data.results.map(async (raw: any): Promise<LocationBuilder<GoogleMapsProvider>> => this.parseOneResult(raw)),
             );
+        }
+
+        protected async parseOneResult(raw: any): Promise<LocationBuilder<GoogleMapsProvider>> {
+            const builder: LocationBuilder<GoogleMapsProvider> = new LocationBuilder(GoogleMapsProvider, raw);
+            builder.formattedAddress = raw.formatted_address;
+            builder.latitude = raw.geometry.location.lat;
+            builder.longitude = raw.geometry.location.lng;
+            builder.placeId = raw.place_id;
+
+            for (const addressComponent of raw.address_components) {
+                for (const type of addressComponent.types) {
+                    this.updateAddressComponent(builder, type, addressComponent);
+                }
+            }
+
+            return builder;
         }
 
         protected updateAddressComponent(builder: LocationBuilder<GoogleMapsProvider>, type: string, addressComponent: any): void {

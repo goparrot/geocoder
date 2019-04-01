@@ -1,4 +1,5 @@
-import { LocationInterface, SuggestionInterface } from '../../../src/interface';
+import { LocationInterface, PlaceDetailsQueryInterface, SuggestionInterface } from '../../../src/interface';
+import { placeDetailsQueryFixture } from '../model/query.fixture';
 
 export const providerRawGeocodeResponse: Readonly<any> = Object.freeze({
     spatialReference: {
@@ -49,6 +50,7 @@ export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = O
         streetName: 'E 89th St',
         houseNumber: '1158',
         postalCode: '60619',
+        placeId: undefined,
         provider: 'ArcgisProvider',
         raw: providerRawGeocodeResponse.candidates[0],
     },
@@ -100,6 +102,7 @@ export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = O
         postalCode: '10011',
         streetName: 'W 18th St',
         houseNumber: '250',
+        placeId: undefined,
         provider: 'ArcgisProvider',
         raw: providerRawReverseResponse,
     },
@@ -108,23 +111,18 @@ export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = O
 export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
     suggestions: [
         {
-            text: '300 N LaSalle Dr, Chicago, IL, 60654, USA',
-            magicKey: 'dHA9MCNsb2M9Njk0MDEyNiNsbmc9MzMjaG49MzAwI2xicz0xMDk6MjAzODA3NTA=',
+            text: '1158 E 89th St, Brooklyn, NY, 11236, USA',
+            magicKey: 'dHA9MCNsb2M9NTAxMzE2MCNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
             isCollection: false,
         },
         {
-            text: '300 Lasalle Dr, Richmond, VA, 23225, USA',
-            magicKey: 'dHA9MCNsb2M9NjAyMDE2MSNsbmc9MzMjaG49MzAwI2xicz0xMDk6NDA5ODA3OTA=',
+            text: '1158 E 89th St, Chicago, IL, 60619, USA',
+            magicKey: 'dHA9MCNsb2M9Njk0MDM2MCNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
             isCollection: false,
         },
         {
-            text: '300 NW Lasalle Dr, Bentonville, AR, 72712, USA',
-            magicKey: 'dHA9MCNsb2M9MTAyNTg5MSNsbmc9MzMjaG49MzAwI2xicz0xMDk6MjA1NjY4MTU=',
-            isCollection: false,
-        },
-        {
-            text: '300 Lasalle St, New Orleans, LA, 70112, USA',
-            magicKey: 'dHA9MCNsb2M9NjgyMTc2I2xuZz0zMyNobj0zMDAjbGJzPTEwOTo0MDk4MDgwNjs5OjIxMDI3OTA2',
+            text: '1158 E 89th St, Kansas City, MO, 64131, USA',
+            magicKey: 'dHA9MCNsb2M9MTE2NTQ3OSNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
             isCollection: false,
         },
     ],
@@ -132,30 +130,52 @@ export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
 
 export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
     {
-        formattedAddress: '300 N LaSalle Dr, Chicago, IL, 60654, USA',
+        formattedAddress: '1158 E 89th St, Brooklyn, NY, 11236, USA',
+        placeId: 'dHA9MCNsb2M9NTAxMzE2MCNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
         provider: 'ArcgisProvider',
         raw: {
-            text: '300 N LaSalle Dr, Chicago, IL, 60654, USA',
-            magicKey: 'dHA9MCNsb2M9Njk0MDEyNiNsbmc9MzMjaG49MzAwI2xicz0xMDk6MjAzODA3NTA=',
+            text: '1158 E 89th St, Brooklyn, NY, 11236, USA',
+            magicKey: 'dHA9MCNsb2M9NTAxMzE2MCNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
             isCollection: false,
         },
     },
     {
-        formattedAddress: '300 Lasalle Dr, Richmond, VA, 23225, USA',
+        formattedAddress: '1158 E 89th St, Chicago, IL, 60619, USA',
+        placeId: 'dHA9MCNsb2M9Njk0MDM2MCNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
         provider: 'ArcgisProvider',
         raw: {
-            text: '300 Lasalle Dr, Richmond, VA, 23225, USA',
-            magicKey: 'dHA9MCNsb2M9NjAyMDE2MSNsbmc9MzMjaG49MzAwI2xicz0xMDk6NDA5ODA3OTA=',
+            text: '1158 E 89th St, Chicago, IL, 60619, USA',
+            magicKey: 'dHA9MCNsb2M9Njk0MDM2MCNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
             isCollection: false,
         },
     },
     {
-        formattedAddress: '300 NW Lasalle Dr, Bentonville, AR, 72712, USA',
+        formattedAddress: '1158 E 89th St, Kansas City, MO, 64131, USA',
+        placeId: 'dHA9MCNsb2M9MTE2NTQ3OSNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
         provider: 'ArcgisProvider',
         raw: {
-            text: '300 NW Lasalle Dr, Bentonville, AR, 72712, USA',
-            magicKey: 'dHA9MCNsb2M9MTAyNTg5MSNsbmc9MzMjaG49MzAwI2xicz0xMDk6MjA1NjY4MTU=',
+            text: '1158 E 89th St, Kansas City, MO, 64131, USA',
+            magicKey: 'dHA9MCNsb2M9MTE2NTQ3OSNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',
             isCollection: false,
         },
     },
 ]);
+
+export const providerPlaceDetailsQueryFixture: Readonly<PlaceDetailsQueryInterface> = Object.freeze<PlaceDetailsQueryInterface>({
+    ...placeDetailsQueryFixture,
+    ...{
+        placeId: providerParsedSuggestResponse[1].placeId,
+    },
+});
+
+export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
+    result: providerRawGeocodeResponse.candidates[0],
+    status: 'OK',
+});
+
+export const providerParsedPlaceDetailsResponse: Readonly<LocationInterface> = Object.freeze<LocationInterface>({
+    ...providerParsedGeocodeResponse[0],
+    ...{
+        placeId: providerParsedSuggestResponse[1].placeId,
+    },
+});

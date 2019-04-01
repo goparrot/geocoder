@@ -90,16 +90,9 @@ In the code snippet below we use Here provider.
 import 'reflect-metadata';
 import { Location, Geocoder, HereProvider, LoggerInterface } from '@goparrot/geocoder';
 import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import * as winston from 'winston';
 
 // You can use any logger that fits the LoggerInterface
-const logger: LoggerInterface = winston.createLogger({
-    level: 'debug',
-    format: winston.format.simple(),
-    transports: [
-        new winston.transports.Console(),
-    ]
-});
+const logger: LoggerInterface = console;
 
 // Set timeout for all requests
 const axios: AxiosInstance = Axios.create({
@@ -185,24 +178,24 @@ Legend:
 
 #### World
 
-| Provider                                                                                  | Geocode | Reverse | Suggest | Place |
-| :---------------------------------------------------------------------------------------- | :------ | :------ | :------ | :---- |
-| [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘      | 🆘    |
-| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | ✅️      | 🆘    |
-| [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | ✅       | 🆘    |
-| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅       | ✅       | ✅       | 🔍️   |
-| [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅       | ✅       | ✅️      | 🆘️   |
-| [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [OpenCage](https://opencagedata.com/api)                                                  | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [Photon](http://doc-api.photonengine.com/en/PUN/current/)                                 | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [PickPoint](https://pickpoint.io/)                                                        | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [TomTom](https://developer.tomtom.com/maps-sdk-web/documentation)                         | 🆘      | 🆘️     | 🔍️     | 🔍    |
-| [Yandex](https://tech.yandex.com/maps/)                                                   | 🆘      | 🆘️     | 🔍️     | 🔍    |
+| Provider                                                                                  | Geocode | Reverse | Suggest | Place Details |
+| :---------------------------------------------------------------------------------------- | :------ | :------ | :------ | :------------ |
+| [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘      | 🆘            |
+| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | ✅️      | ✅             |
+| [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️     | 🆘            |
+| [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️     | 🆘            |
+| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | ✅       | ✅             |
+| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅       | ✅       | ✅       | ✅             |
+| [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅       | ✅       | 🚫️     | 🚫            |
+| [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [OpenCage](https://opencagedata.com/api)                                                  | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [Photon](http://doc-api.photonengine.com/en/PUN/current/)                                 | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [PickPoint](https://pickpoint.io/)                                                        | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [TomTom](https://developer.tomtom.com/maps-sdk-web/documentation)                         | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| [Yandex](https://tech.yandex.com/maps/)                                                   | 🆘      | 🆘️     | 🔍️     | 🔍            |
 
 ## Special Geocoders and Providers
 
@@ -226,8 +219,7 @@ const chainProvider: ChainProvider = new ChainProvider([
     new HereProvider(axios, 'YOUR_APP_ID', 'YOUR_APP_CODE'),
 ]);
 
-const geocoder: ProviderAggregator = new ProviderAggregator();
-geocoder.registerProvider(chainProvider);
+const geocoder: ProviderAggregator = new ProviderAggregator([chainProvider]);
 
 (async () => {
     try {
@@ -256,9 +248,7 @@ const axios: AxiosInstance = Axios.create({
     timeout: 5000,
 });
 
-const geocoder: ProviderAggregator = new ProviderAggregator();
-
-geocoder.registerProviders([
+const geocoder: ProviderAggregator = new ProviderAggregator([
     new MapQuestProvider(axios, 'YOUR_API_KEY'),
     new HereProvider(axios, 'YOUR_APP_ID', 'YOUR_APP_CODE'),
 ]);
@@ -307,7 +297,7 @@ In order to run the test suite, install the development dependencies:
 
 Then, run the following command:
 
-    $ npm test
+    $ npm run coverage
 
 ## Background
 

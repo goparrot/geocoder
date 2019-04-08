@@ -120,7 +120,7 @@
         "remark-lint-strong-marker": "1.0.2",
         "rimraf": "2.6.3",
         "sinon": "7.3.0",
-        "source-map-support": "0.5.11",
+        "source-map-support": "0.5.12",
         "supertest": "4.0.2",
         "ts-node": "8.0.3",
         "tsconfig-paths": "3.8.0",

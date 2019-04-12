@@ -1,3 +1,11 @@
+# [0.10.0](https://github.com/goparrot/geocoder/compare/v0.9.1...v0.10.0) (2019-04-12)
+
+### Features
+
+*   **geocoder:** add placeDetails method ([10ef077](https://github.com/goparrot/geocoder/commit/10ef077))
+*   **provider here:** add suggest method ([1c05fe9](https://github.com/goparrot/geocoder/commit/1c05fe9))
+*   **provider map-quest:** add suggest method ([cff7600](https://github.com/goparrot/geocoder/commit/cff7600))
+
 ## [0.9.1](https://github.com/goparrot/geocoder/compare/v0.9.0...v0.9.1) (2019-03-25)
 
 ### Bug Fixes

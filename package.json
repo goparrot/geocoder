@@ -122,7 +122,7 @@
         "sinon": "^7.3.0",
         "source-map-support": "^0.5.11",
         "supertest": "^4.0.2",
-        "ts-node": "^7.0.1",
+        "ts-node": "^8.1.0",
         "tsconfig-paths": "^3.8.0",
         "tslint": "^5.14.0",
         "tslint-config-prettier": "^1.18.0",

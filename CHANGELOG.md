@@ -1,3 +1,9 @@
+# [1.0.0](https://github.com/goparrot/geocoder/compare/v0.10.0...v1.0.0) (2019-05-03)
+
+### Bug Fixes
+
+*   **test:** fix google integration test ([21aa9b3](https://github.com/goparrot/geocoder/commit/21aa9b3))
+
 # [0.10.0](https://github.com/goparrot/geocoder/compare/v0.9.1...v0.10.0) (2019-04-12)
 
 ### Features

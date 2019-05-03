@@ -24,7 +24,7 @@ const providerRawLocationResponse: Readonly<any> = Object.freeze({
                     southwest: { lat: 41.7326696197085, lng: -87.59742518029151 },
                 },
             },
-            place_id: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIbEhkKFAoSCdl6YuIgJg6IEUtCPVsYYuvuEIYJ',
+            place_id: 'EicxMTU4IEVhc3QgODl0aCBTdHJlZXQsIENoaWNhZ28sIElMLCBVU0EiMRIvChQKEgmfSpDiICYOiBGJDfMooYwZwBCGCSoUChIJCQJVUComDogR4NP62uoauTA',
             types: ['street_address'],
         },
     ],
@@ -67,8 +67,8 @@ export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
                     offset: 0,
                 },
             ],
-            place_id: 'EicxMTU4IEVhc3QgODl0aCBTdHJlZXQsIENoaWNhZ28sIElMLCBVU0EiMRIvChQKEgnZemLiICYOiBFLQj1bGGLr7hCGCSoUChIJCQJVUComDogR4NP62uoauTA',
-            reference: 'EicxMTU4IEVhc3QgODl0aCBTdHJlZXQsIENoaWNhZ28sIElMLCBVU0EiMRIvChQKEgnZemLiICYOiBFLQj1bGGLr7hCGCSoUChIJCQJVUComDogR4NP62uoauTA',
+            place_id: 'EicxMTU4IEVhc3QgODl0aCBTdHJlZXQsIENoaWNhZ28sIElMLCBVU0EiMRIvChQKEgmfSpDiICYOiBGJDfMooYwZwBCGCSoUChIJCQJVUComDogR4NP62uoauTA',
+            reference: 'EicxMTU4IEVhc3QgODl0aCBTdHJlZXQsIENoaWNhZ28sIElMLCBVU0EiMRIvChQKEgmfSpDiICYOiBGJDfMooYwZwBCGCSoUChIJCQJVUComDogR4NP62uoauTA',
             structured_formatting: {
                 main_text: '1158 East 89th Street',
                 main_text_matched_substrings: [
@@ -105,7 +105,7 @@ export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
 
 export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
     {
-        formattedAddress: '1158 East 89th Street, Chicago, IL, USA',
+        formattedAddress: providerRawSuggestResponse.predictions[0].description,
         placeId: providerRawSuggestResponse.predictions[0].place_id,
         provider: 'GoogleMapsProvider',
         raw: providerRawSuggestResponse.predictions[0],
@@ -115,7 +115,7 @@ export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> =
 export const providerPlaceDetailsQueryFixture: Readonly<PlaceDetailsQueryInterface> = Object.freeze<PlaceDetailsQueryInterface>({
     ...placeDetailsQueryFixture,
     ...{
-        placeId: providerParsedLocationResponse[0].placeId!,
+        placeId: providerParsedSuggestResponse[0].placeId,
     },
 });
 
@@ -174,28 +174,28 @@ export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
         formatted_address: '1158 E 89th St, Chicago, IL 60619, USA',
         geometry: {
             location: {
-                lat: 41.7340225,
-                lng: -87.596065,
+                lat: 41.7340226,
+                lng: -87.5960578,
             },
             viewport: {
                 northeast: {
-                    lat: 41.7349281802915,
-                    lng: -87.59470811970849,
+                    lat: 41.73492828029151,
+                    lng: -87.59470091970849,
                 },
                 southwest: {
-                    lat: 41.73223021970851,
-                    lng: -87.59740608029149,
+                    lat: 41.73223031970851,
+                    lng: -87.5973988802915,
                 },
             },
         },
         icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
-        id: '7c27096b7015688e63224fb58a6360765d03343d',
+        id: 'bbbfd42eed9385648e42f6f331d54eac2d61cbca',
         name: '1158 E 89th St',
-        place_id: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIbEhkKFAoSCdl6YuIgJg6IEUtCPVsYYuvuEIYJ',
-        reference: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIbEhkKFAoSCdl6YuIgJg6IEUtCPVsYYuvuEIYJ',
+        place_id: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIxEi8KFAoSCZ9KkOIgJg6IEYkN8yihjBnAEIYJKhQKEgkJAlVQKiYOiBHg0_ra6hq5MA',
+        reference: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIxEi8KFAoSCZ9KkOIgJg6IEYkN8yihjBnAEIYJKhQKEgkJAlVQKiYOiBHg0_ra6hq5MA',
         scope: 'GOOGLE',
         types: ['street_address'],
-        url: 'https://maps.google.com/?q=1158+E+89th+St,+Chicago,+IL+60619,+USA&ftid=0x880e2620e2627ad9:0x7e8c3fcf04b191c8',
+        url: 'https://maps.google.com/?q=1158+E+89th+St,+Chicago,+IL+60619,+USA&ftid=0x880e2620e2904a9f:0x8850f56fdf8a5429',
         utc_offset: -300,
         vicinity: 'Chicago',
     },
@@ -204,8 +204,8 @@ export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
 
 export const providerParsedPlaceDetailsResponse: Readonly<LocationInterface> = Object.freeze<LocationInterface>({
     formattedAddress: '1158 E 89th St, Chicago, IL 60619, USA',
-    latitude: 41.7340225,
-    longitude: -87.596065,
+    latitude: 41.7340226,
+    longitude: -87.5960578,
     country: 'United States',
     countryCode: 'US',
     state: 'Illinois',

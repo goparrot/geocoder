@@ -1,8 +1,20 @@
+<a name="1.0.1"></a>
+
+## [1.0.1](https://github.com/goparrot/geocoder/compare/v1.0.0...v1.0.1) (2019-05-08)
+
+### Bug Fixes
+
+*   **placeDetails:** fix PlaceDetailsQuery interface ([9ad6ec7](https://github.com/goparrot/geocoder/commit/9ad6ec7))
+
+<a name="1.0.0"></a>
+
 # [1.0.0](https://github.com/goparrot/geocoder/compare/v0.10.0...v1.0.0) (2019-05-03)
 
 ### Bug Fixes
 
 *   **test:** fix google integration test ([21aa9b3](https://github.com/goparrot/geocoder/commit/21aa9b3))
+
+<a name="0.10.0"></a>
 
 # [0.10.0](https://github.com/goparrot/geocoder/compare/v0.9.1...v0.10.0) (2019-04-12)
 
@@ -12,11 +24,15 @@
 *   **provider here:** add suggest method ([1c05fe9](https://github.com/goparrot/geocoder/commit/1c05fe9))
 *   **provider map-quest:** add suggest method ([cff7600](https://github.com/goparrot/geocoder/commit/cff7600))
 
+<a name="0.9.1"></a>
+
 ## [0.9.1](https://github.com/goparrot/geocoder/compare/v0.9.0...v0.9.1) (2019-03-25)
 
 ### Bug Fixes
 
 *   **command geocode:** cannot read property 'countryCode' of undefined ([ecd79f4](https://github.com/goparrot/geocoder/commit/ecd79f4))
+
+<a name="0.9.0"></a>
 
 # [0.9.0](https://github.com/goparrot/geocoder/compare/v0.8.1...v0.9.0) (2019-03-25)
 
@@ -25,11 +41,15 @@
 *   **geocode query:** add exactMatch option ([9480892](https://github.com/goparrot/geocoder/commit/9480892))
 *   **geocoder suggest:** add suggest method ([d4cb26c](https://github.com/goparrot/geocoder/commit/d4cb26c))
 
+<a name="0.8.1"></a>
+
 ## [0.8.1](https://github.com/goparrot/geocoder/compare/v0.8.0...v0.8.1) (2019-03-25)
 
 ### Bug Fixes
 
 *   **provider arcgis:** wrong reverse url ([e0e3a6d](https://github.com/goparrot/geocoder/commit/e0e3a6d))
+
+<a name="0.8.0"></a>
 
 # [0.8.0](https://github.com/goparrot/geocoder/compare/v0.7.1...v0.8.0) (2019-03-20)
 
@@ -41,11 +61,15 @@
 
 *   **query:** in the previous version, the raw data was returned by default
 
+<a name="0.7.1"></a>
+
 ## [0.7.1](https://github.com/goparrot/geocoder/compare/v0.7.0...v0.7.1) (2019-03-19)
 
 ### Bug Fixes
 
 *   **location-builder:** fix types ([bc4cb43](https://github.com/goparrot/geocoder/commit/bc4cb43))
+
+<a name="0.7.0"></a>
 
 # [0.7.0](https://github.com/goparrot/geocoder/compare/v0.6.0...v0.7.0) (2019-03-19)
 
@@ -54,11 +78,15 @@
 *   **provider:** abstract logic for provider's actions ([d705119](https://github.com/goparrot/geocoder/commit/d705119))
 *   **provider:** add raw data to the Location object ([e65e652](https://github.com/goparrot/geocoder/commit/e65e652))
 
+<a name="0.6.0"></a>
+
 # [0.6.0](https://github.com/goparrot/geocoder/compare/v0.5.0...v0.6.0) (2019-03-13)
 
 ### Features
 
 *   **provider:** add ArcgisProvider ([4d7cbba](https://github.com/goparrot/geocoder/commit/4d7cbba))
+
+<a name="0.5.0"></a>
 
 # [0.5.0](https://github.com/goparrot/geocoder/compare/v0.4.0...v0.5.0) (2019-03-06)
 
@@ -74,6 +102,8 @@
 
 *   chagne class name from Adress to Location and AddressBuilder to LocationBuilder
 
+<a name="0.4.0"></a>
+
 # [0.4.0](https://github.com/goparrot/geocoder/compare/v0.3.0...v0.4.0) (2019-03-05)
 
 ### Features
@@ -85,11 +115,15 @@
 *   **decider:** ProviderAggregator by default works with StatefulDecider (before was
     CircularDecider)
 
+<a name="0.3.0"></a>
+
 # [0.3.0](https://github.com/goparrot/geocoder/compare/v0.2.0...v0.3.0) (2019-03-05)
 
 ### Features
 
 *   **provider:** add StatefulChainProvider ([d038545](https://github.com/goparrot/geocoder/commit/d038545))
+
+<a name="0.2.0"></a>
 
 # [0.2.0](https://github.com/goparrot/geocoder/compare/0.1.1...v0.2.0) (2019-03-04)
 
@@ -100,6 +134,8 @@
 ### BREAKING CHANGES
 
 *   **provider:** contains a breaking change for MapQuestProvider and for general business logic
+
+<a name="0.1.1"></a>
 
 ## [0.1.1](https://github.com/goparrot/geocoder/compare/d9c2391...0.1.1) (2019-03-02)
 

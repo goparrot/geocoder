@@ -21,7 +21,7 @@ export abstract class AbstractCommand<
     ProviderRequestType = any,
     ProviderResponseType = any
 > extends LoggableMixin(Function) {
-    'constructor': Pick<typeof AbstractCommand, keyof typeof AbstractCommand> & { name: string } & LoggableInterface;
+    ['constructor']: Pick<typeof AbstractCommand, keyof typeof AbstractCommand> & { name: string } & LoggableInterface;
 
     constructor(protected readonly httpClient: AxiosInstance) {
         super();

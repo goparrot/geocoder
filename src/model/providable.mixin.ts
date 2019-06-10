@@ -6,8 +6,6 @@ import { ProvidableInterface } from './providable.interface';
 
 export function ProvidableMixin<TBase extends Constructor<LoggableInterface>>(Base: TBase): TBase & Constructor<ProvidableInterface> {
     return class extends Base {
-        'constructor': Pick<typeof Base, keyof typeof Base> & ProvidableInterface;
-
         private readonly providers: AbstractProvider[] = [];
 
         constructor(...args: any[]) {

@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios';
 import { QueryInterface } from '../interface';
-import { LoggableInterface } from '../logger';
 import { Suggestion, SuggestionBuilder } from '../model';
 import { AbstractCommand } from './abstract.command';
 
@@ -9,8 +8,6 @@ export abstract class AbstractSuggestCommand<
     ProviderRequestType = any,
     ProviderResponseType = any
 > extends AbstractCommand<GeocoderQueryType, Suggestion, SuggestionBuilder, ProviderRequestType, ProviderResponseType> {
-    'constructor': Pick<typeof AbstractSuggestCommand, keyof typeof AbstractSuggestCommand> & { name: string } & LoggableInterface;
-
     protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<SuggestionBuilder[]> {
         throw new Error('AbstractSuggestCommand.parseResponse: not implemented');
     }

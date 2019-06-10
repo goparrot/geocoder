@@ -5,8 +5,6 @@ import { NullLogger } from './null.logger';
 
 export function LoggableMixin<TBase extends Constructor>(Base: TBase): TBase & Constructor<LoggableInterface> {
     return class extends Base {
-        'constructor': Pick<typeof Base, keyof typeof Base> & LoggableInterface;
-
         /* tslint:disable:prefer-readonly */
         private logger: LoggerInterface = new NullLogger();
 

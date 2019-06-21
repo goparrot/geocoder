@@ -1,6 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
 import { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import { Location } from '../../../src/model';
 import { GoogleMapsProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 import { providerParsedPlaceDetailsResponse, providerPlaceDetailsQueryFixture } from '../../fixture/provider/google.fixture';
@@ -55,10 +56,13 @@ describe('GoogleMapsProvider (integration)', () => {
 
     describe('#placeDetails', () => {
         it('should return expected response', async () => {
-            return geocoder
-                .using(GoogleMapsProvider)
-                .placeDetails(placeDetailsQuery)
-                .should.become(providerParsedPlaceDetailsResponse);
+            const location: Location = await geocoder.using(GoogleMapsProvider).placeDetails(placeDetailsQuery);
+
+            // sometimes this field is not returned
+            delete location.raw.id;
+            delete location.raw.scope;
+
+            return location.should.be.deep.eq(providerParsedPlaceDetailsResponse);
         });
     });
 });

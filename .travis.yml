@@ -25,7 +25,7 @@ before_install:
 
 # Retry install on fail to avoid failing a build on network/disk/external errors
 install:
-  - travis_retry npm ci
+  - travis_retry npm i
 
 script:
   - npm run lint

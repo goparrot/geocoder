@@ -16,3 +16,4 @@ test.ts
 /.nyc_output
 /log
 .env
+package-lock.json

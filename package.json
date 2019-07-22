@@ -79,7 +79,7 @@
         "postversion": "git push && git push --tags"
     },
     "dependencies": {
-        "axios": "^0.18.1 || ^0.19.0",
+        "axios": ">=0.18.0",
         "class-transformer": "^0.2.0",
         "class-validator": "^0.9.1",
         "lodash": "^4.17.14",

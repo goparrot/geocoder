@@ -26,7 +26,7 @@ providing a powerful abstraction layer for geocoding manipulations.
 
 ## Installation
 
-    $ npm i @goparrot/geocoder reflect-metadata
+    $ npm i @goparrot/geocoder reflect-metadata axios class-transformer class-validator
 
 <sub>⚠️️ Each reflect-metadata installation has its own metadata storage, from which it reads and writes from.
 So if you had a project with multiple reflect-metadata packages, it could happen that in one file you write metadata in one reflect-metadata package and in another file you’re trying to retrieve this metadata accidently from the other reflect-metadata package, which of course doesn’t exist there.</sub>

@@ -3,6 +3,9 @@ import { LocationInterface } from '../interface';
 
 @Exclude()
 export class Location<R = any> implements LocationInterface<R> {
+    @Expose()
+    provider: string;
+
     /**
      * @example 1200 E 89th St, Chicago, IL 60619, USA
      * @example 1158 E 89th St, Chicago, Illinois 60619, US
@@ -45,9 +48,6 @@ export class Location<R = any> implements LocationInterface<R> {
 
     @Expose()
     placeId?: string;
-
-    @Expose()
-    provider: string;
 
     @Expose({ groups: ['raw', 'all'] })
     raw?: R;

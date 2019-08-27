@@ -15,5 +15,6 @@ test.ts
 /coverage
 /.nyc_output
 /log
+!/bin
 .env
 package-lock.json

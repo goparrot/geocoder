@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash.isempty';
 import { AbstractCommand } from '../../../../command';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../../../../exception';
 import { AccuracyEnum } from '../../../../model';

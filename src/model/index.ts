@@ -1,6 +1,7 @@
 export * from './abstract-builder';
 export * from './abstract-chain-provider';
 export * from './abstract-provider';
+export * from './accuracy.enum';
 export * from './abstract-http-provider';
 export * from './providable.interface';
 export * from './providable.mixin';

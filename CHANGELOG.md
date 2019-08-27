@@ -1,3 +1,15 @@
+<a name="2.0.0"></a>
+
+# [2.0.0](https://github.com/goparrot/geocoder/compare/v1.0.6...v2.0.0) (2019-08-27)
+
+### Bug Fixes
+
+*   **dependencies:** fix dependencies ([600e2b7](https://github.com/goparrot/geocoder/commit/600e2b7))
+
+### BREAKING CHANGES
+
+*   **dependencies:** axios, class-transformer and class-validator removed from dependencies and moved to peerDependencies
+
 <a name="1.0.6"></a>
 
 ## [1.0.6](https://github.com/goparrot/geocoder/compare/v1.0.5...v1.0.6) (2019-07-22)

@@ -1,3 +1,11 @@
+<a name="2.1.0"></a>
+
+# [2.1.0](https://github.com/goparrot/geocoder/compare/v2.0.0...v2.1.0) (2019-09-02)
+
+### Features
+
+*   **google suggest:** add suggest accuracy ([027691e](https://github.com/goparrot/geocoder/commit/027691e))
+
 <a name="2.0.0"></a>
 
 # [2.0.0](https://github.com/goparrot/geocoder/compare/v1.0.6...v2.0.0) (2019-08-27)

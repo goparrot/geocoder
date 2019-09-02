@@ -1,6 +1,7 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import { SuggestionBuilder, SuggestQuery } from '../../../model';
+import { SuggestQueryInterface } from '../../../interface';
+import { AccuracyEnum, SuggestionBuilder, SuggestQuery } from '../../../model';
 import { GoogleMapsProvider } from '../google-maps.provider';
 import { GoogleMapsSuggestQueryInterface } from '../interface';
 import { GoogleMapsCommonCommandMixin } from './mixin';
@@ -34,7 +35,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
             input: query.address,
             components: [...components].map<string>((value: [string, string]) => `${value[0]}:${value[1]}`).join('|'),
             language: query.language,
-            types: 'address',
+            types: this.castAccuracyToRequestType(query.accuracy),
             sensor: false,
         };
 
@@ -54,13 +55,18 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
         return providerQuery;
     }
 
-    protected async parseResponse(response: AxiosResponse): Promise<SuggestionBuilder<GoogleMapsProvider>[]> {
+    protected async parseResponse(response: AxiosResponse, query: SuggestQueryInterface): Promise<SuggestionBuilder<GoogleMapsProvider>[]> {
         if (!Array.isArray(response.data.predictions) || !response.data.predictions.length) {
             return [];
         }
 
+        const rawSuggestions: any[] = response.data.predictions.filter((raw: any) => this.filterByAccuracy(raw, query.accuracy));
+        if (!rawSuggestions.length) {
+            return [];
+        }
+
         return Promise.all<SuggestionBuilder<GoogleMapsProvider>>(
-            response.data.predictions.map(
+            rawSuggestions.map(
                 async (raw: any): Promise<SuggestionBuilder<GoogleMapsProvider>> => {
                     const builder: SuggestionBuilder<GoogleMapsProvider> = new SuggestionBuilder(GoogleMapsProvider, raw);
                     builder.formattedAddress = raw.description;
@@ -70,5 +76,45 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
                 },
             ),
         );
+    }
+
+    private castAccuracyToRequestType(accuracy?: AccuracyEnum): GoogleMapsSuggestQueryInterface['types'] {
+        switch (accuracy) {
+            case AccuracyEnum.HOUSE_NUMBER:
+                return 'address';
+            case AccuracyEnum.STREET_NAME:
+                return 'geocode';
+            case AccuracyEnum.CITY:
+                return '(cities)';
+            case AccuracyEnum.STATE:
+            case AccuracyEnum.COUNTRY:
+                return '(regions)';
+            default:
+                return;
+        }
+    }
+
+    /**
+     * Mapping between google location types and our
+     */
+    private filterByAccuracy({ types }: { types: string[] }, accuracy?: AccuracyEnum): boolean {
+        if (!accuracy) {
+            return true;
+        }
+
+        switch (accuracy) {
+            case AccuracyEnum.HOUSE_NUMBER:
+                return types.includes('street_address');
+            case AccuracyEnum.STREET_NAME:
+                return types.includes('route');
+            case AccuracyEnum.CITY:
+                return types.includes('locality');
+            case AccuracyEnum.STATE:
+                return types.includes('administrative_area_level_1');
+            case AccuracyEnum.COUNTRY:
+                return types.includes('country');
+        }
+
+        return false;
     }
 }

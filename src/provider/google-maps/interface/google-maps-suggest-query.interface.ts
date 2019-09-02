@@ -12,7 +12,7 @@ export interface GoogleMapsSuggestQueryInterface extends GoogleMapsQueryInterfac
      * The types of place results to return. See Place Types below. If no type is specified, all types will be returned.
      * @link {https://developers.google.com/places/web-service/autocomplete#place_types}
      */
-    types: 'geocode' | 'address' | 'establishment' | '(regions)' | '(cities)' | string;
+    types?: 'geocode' | 'address' | 'establishment' | '(regions)' | '(cities)' | string;
     /**
      * The point around which you wish to retrieve place information. Must be specified as latitude,longitude.
      */

@@ -1,10 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { AbstractCommand } from '../../../../command';
 import { InvalidCredentialsException } from '../../../../exception';
-import { AccuracyEnum, LocationBuilder } from '../../../../model';
+import { AccuracyEnum, LocationBuilder, Query } from '../../../../model';
 import { Constructor } from '../../../../types';
 import { WorldCountry, WorldCountryUtil } from '../../../../util/world-country';
 import { HereProvider } from '../../here.provider';
+import { filterByAccuracy } from '../../util';
 
 export function HereCommonCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {
     abstract class HereCommonCommand extends Base {
@@ -30,12 +31,17 @@ export function HereCommonCommandMixin<TBase extends Constructor<AbstractCommand
             //
         }
 
-        protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<HereProvider>[]> {
+        protected async parseResponse(response: AxiosResponse, query: Query): Promise<LocationBuilder<HereProvider>[]> {
             if (!response.data.Response || !Array.isArray(response.data.Response.View) || !response.data.Response.View[0]) {
                 return [];
             }
 
-            const results: any = response.data.Response.View[0].Result;
+            let results: any[] = response.data.Response.View[0].Result;
+
+            results = results.filter((raw: any) => filterByAccuracy(raw, query.accuracy));
+            if (!results.length) {
+                return [];
+            }
 
             return Promise.all<LocationBuilder<HereProvider>>(
                 results.map(

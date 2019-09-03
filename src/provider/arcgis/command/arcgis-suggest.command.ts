@@ -31,7 +31,7 @@ export class ArcgisSuggestCommand extends ArcgisCommonCommandMixin(SuggestComman
             }
         }
 
-        return {
+        const providerQuery: ArcgisSuggestQueryInterface = {
             token: this.token,
             forStorage: !!this.token,
             text: query.address,
@@ -42,6 +42,12 @@ export class ArcgisSuggestCommand extends ArcgisCommonCommandMixin(SuggestComman
             isCollection: false,
             f: 'json',
         };
+
+        if (query.lat && query.lon) {
+            providerQuery.location = `${query.lon},${query.lat}`;
+        }
+
+        return providerQuery;
     }
 
     protected async parseResponse(

@@ -1,8 +1,10 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
+import { SuggestQueryInterface } from '../../../interface';
 import { SuggestionBuilder } from '../../../model';
 import { HereProvider } from '../here.provider';
 import { HereSuggestQueryInterface } from '../interface';
+import { filterByAccuracy } from '../util';
 import { HereLocationCommandMixin } from './mixin';
 
 /**
@@ -18,12 +20,17 @@ export class HereSuggestCommand extends HereLocationCommandMixin(SuggestCommand)
         return 'https://geocoder.api.here.com/6.2/search.json';
     }
 
-    protected async parseResponse(response: AxiosResponse): Promise<SuggestionBuilder<HereProvider>[]> {
+    protected async parseResponse(response: AxiosResponse, query: SuggestQueryInterface): Promise<SuggestionBuilder<HereProvider>[]> {
         if (!response.data.Response || !Array.isArray(response.data.Response.View) || !response.data.Response.View[0]) {
             return [];
         }
 
-        const results: any = response.data.Response.View[0].Result;
+        let results: any[] = response.data.Response.View[0].Result;
+
+        results = results.filter((raw: any) => filterByAccuracy(raw, query.accuracy));
+        if (!results.length) {
+            return [];
+        }
 
         return Promise.all<SuggestionBuilder<HereProvider>>(
             results.map(

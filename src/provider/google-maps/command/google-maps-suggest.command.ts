@@ -35,7 +35,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
             input: query.address,
             components: [...components].map<string>((value: [string, string]) => `${value[0]}:${value[1]}`).join('|'),
             language: query.language,
-            types: this.castAccuracyToRequestType(query.accuracy),
+            types: this.getRequestTypeByAccuracy(query.accuracy),
             sensor: false,
         };
 
@@ -60,13 +60,15 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
             return [];
         }
 
-        const rawSuggestions: any[] = response.data.predictions.filter((raw: any) => this.filterByAccuracy(raw, query.accuracy));
-        if (!rawSuggestions.length) {
+        let results: any[] = response.data.predictions;
+
+        results = results.filter((raw: any) => this.filterByAccuracy(raw, query.accuracy));
+        if (!results.length) {
             return [];
         }
 
         return Promise.all<SuggestionBuilder<GoogleMapsProvider>>(
-            rawSuggestions.map(
+            results.map(
                 async (raw: any): Promise<SuggestionBuilder<GoogleMapsProvider>> => {
                     const builder: SuggestionBuilder<GoogleMapsProvider> = new SuggestionBuilder(GoogleMapsProvider, raw);
                     builder.formattedAddress = raw.description;
@@ -78,7 +80,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
         );
     }
 
-    private castAccuracyToRequestType(accuracy?: AccuracyEnum): GoogleMapsSuggestQueryInterface['types'] {
+    private getRequestTypeByAccuracy(accuracy?: AccuracyEnum): GoogleMapsSuggestQueryInterface['types'] {
         switch (accuracy) {
             case AccuracyEnum.HOUSE_NUMBER:
                 return 'address';

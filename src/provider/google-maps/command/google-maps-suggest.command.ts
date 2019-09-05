@@ -92,7 +92,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
             case AccuracyEnum.COUNTRY:
                 return '(regions)';
             default:
-                return;
+                return '';
         }
     }
 
@@ -106,7 +106,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
 
         switch (accuracy) {
             case AccuracyEnum.HOUSE_NUMBER:
-                return types.includes('street_address');
+                return types.includes('street_address') || types.includes('premise');
             case AccuracyEnum.STREET_NAME:
                 return types.includes('route');
             case AccuracyEnum.CITY:

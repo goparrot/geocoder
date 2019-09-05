@@ -1,3 +1,15 @@
+<a name="2.2.0"></a>
+
+# [2.2.0](https://github.com/goparrot/geocoder/compare/v2.1.0...v2.2.0) (2019-09-05)
+
+### Bug Fixes
+
+*   **google suggest:** allow `premise` type as HOUSE_NUMBER accuracy ([9eaab20](https://github.com/goparrot/geocoder/commit/9eaab20))
+
+### Features
+
+*   **suggest:** add suggestion accuracy for `arcgis` and `here` providers ([6e898e3](https://github.com/goparrot/geocoder/commit/6e898e3))
+
 <a name="2.1.0"></a>
 
 # [2.1.0](https://github.com/goparrot/geocoder/compare/v2.0.0...v2.1.0) (2019-09-02)

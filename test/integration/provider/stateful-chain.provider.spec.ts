@@ -55,8 +55,8 @@ describe('StatefulChainProvider (integration)', () => {
             return geocoder
                 .reverse({
                     accuracy: AccuracyEnum.HOUSE_NUMBER,
-                    lat: 0,
-                    lon: 0,
+                    lat: -1,
+                    lon: -1,
                 })
                 .should.eventually.be.an('array')
                 .with.length(0);

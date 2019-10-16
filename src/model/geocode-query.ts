@@ -8,7 +8,7 @@ export class GeocodeQuery extends Query implements GeocodeQueryInterface {
     @IsString()
     @IsNotEmpty()
     @MinLength(5)
-    @MaxLength(100)
+    @MaxLength(150)
     @Type(() => String)
     address: string;
 

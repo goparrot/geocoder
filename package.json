@@ -1,7 +1,7 @@
 {
     "name": "@goparrot/geocoder",
     "description": "TypeScript GeoCoder, node geocoding library, supports google maps, mapquest, here, open street map, tom tom",
-    "version": "2.2.0",
+    "version": "2.2.1",
     "author": "Coroliov Oleg",
     "license": "MIT",
     "private": false,

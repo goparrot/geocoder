@@ -1,3 +1,11 @@
+<a name="2.2.1"></a>
+
+## [2.2.1](https://github.com/goparrot/geocoder/compare/v2.2.0...v2.2.1) (2019-10-16)
+
+### Bug Fixes
+
+*   **geocode:** query address max length from 100 to 150 ([d08076d](https://github.com/goparrot/geocoder/commit/d08076d))
+
 <a name="2.2.0"></a>
 
 # [2.2.0](https://github.com/goparrot/geocoder/compare/v2.1.0...v2.2.0) (2019-09-05)

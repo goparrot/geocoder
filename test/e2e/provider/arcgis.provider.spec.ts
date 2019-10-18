@@ -1,7 +1,7 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../src/exception';
-import { GeocodeQueryInterface, QueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import { GeocodeQueryInterface, QueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
@@ -22,12 +22,10 @@ describe('ArcgisProvider (2e2)', () => {
     const provider: ArcgisProvider = new ArcgisProvider(client);
 
     let geocodeQuery: GeocodeQueryInterface;
-    let reverseQuery: ReverseQueryInterface;
     let suggestQuery: SuggestQueryInterface;
 
     beforeEach(() => {
         geocodeQuery = { ...geocodeQueryFixture };
-        reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
     });
 
@@ -133,21 +131,6 @@ describe('ArcgisProvider (2e2)', () => {
         const url: string = ArcgisReverseCommand.getUrl();
 
         allSharedBehaviours(url, 'reverse', reverseQueryFixture, providerRawReverseResponse, providerParsedReverseResponse);
-
-        it('should throw InvalidArgumentException', async () => {
-            mock.onGet(url).reply(200, {
-                error: {
-                    code: 400,
-                    extendedCode: -2147467259,
-                    message: 'Unable to complete operation.',
-                    details: [],
-                },
-            });
-
-            reverseQuery.lon = '' as any;
-
-            return provider.reverse(reverseQuery).should.be.rejectedWith(InvalidArgumentException, 'Unable to complete operation.');
-        });
     });
 
     describe('#suggest', () => {

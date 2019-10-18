@@ -1,4 +1,4 @@
-import { Exclude, Expose, Transform, Type } from 'class-transformer';
+import { Exclude, Expose, Transform } from 'class-transformer';
 import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import { WorldCountryStateInterface } from './world-country-state.interface';
 
@@ -7,7 +7,6 @@ export class WorldCountryState implements WorldCountryStateInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Type(() => String)
     @Transform((v: string) =>
         v
             .toString()
@@ -21,7 +20,6 @@ export class WorldCountryState implements WorldCountryStateInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Type(() => String)
     @Transform((v: string) =>
         v
             .toString()
@@ -33,7 +31,6 @@ export class WorldCountryState implements WorldCountryStateInterface {
 
     @IsOptional()
     @IsString()
-    @Type(() => String)
     @Transform((v: string) => v.toString().trim())
     @Expose()
     name: string;

@@ -1,6 +1,12 @@
 import Axios, { AxiosInstance } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../../../src/exception';
+import {
+    InvalidArgumentException,
+    InvalidCredentialsException,
+    InvalidServerResponseException,
+    NotFoundException,
+    QuotaExceededException,
+} from '../../../src/exception';
 import { QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import {
@@ -51,6 +57,14 @@ describe('GoogleMapsProvider (2e2)', () => {
                 });
 
                 return provider[method](query).should.be.rejectedWith(InvalidServerResponseException, 'API key is invalid');
+            });
+
+            it('should throw NotFoundException on NOT_FOUND', async () => {
+                mock.onGet(provider[url]).reply(200, {
+                    status: 'NOT_FOUND',
+                });
+
+                return provider[method](query).should.be.rejectedWith(NotFoundException, 'Not found');
             });
 
             it('should throw QuotaExceededException on OVER_QUERY_LIMIT', async () => {

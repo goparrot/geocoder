@@ -1,7 +1,13 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import isEmpty from 'lodash.isempty';
 import { AbstractCommand } from '../../../../command';
-import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException, QuotaExceededException } from '../../../../exception';
+import {
+    InvalidArgumentException,
+    InvalidCredentialsException,
+    InvalidServerResponseException,
+    NotFoundException,
+    QuotaExceededException,
+} from '../../../../exception';
 import { AccuracyEnum } from '../../../../model';
 import { Constructor } from '../../../../types';
 
@@ -37,7 +43,9 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
                 return;
             }
 
-            if ('REQUEST_DENIED' === response.data.status && 'The provided API key is invalid.' === response.data.error_message) {
+            if ('NOT_FOUND' === response.data.status) {
+                throw new NotFoundException('Not found', response);
+            } else if ('REQUEST_DENIED' === response.data.status && 'The provided API key is invalid.' === response.data.error_message) {
                 throw new InvalidCredentialsException('API key is invalid', response);
             } else if ('REQUEST_DENIED' === response.data.status) {
                 throw new InvalidServerResponseException('API key is invalid', response);

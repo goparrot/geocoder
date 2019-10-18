@@ -14,7 +14,6 @@ export class WorldCountry implements WorldCountryInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Type(() => String)
     @Expose()
     cca2: string;
 
@@ -22,7 +21,6 @@ export class WorldCountry implements WorldCountryInterface {
     @IsString()
     @MinLength(3)
     @MaxLength(3)
-    @Type(() => String)
     @Expose()
     cca3: string;
 
@@ -31,7 +29,6 @@ export class WorldCountry implements WorldCountryInterface {
     @IsNumberString()
     @MinLength(3)
     @MaxLength(3)
-    @Type(() => String)
     @Expose()
     ccn3: string;
 }

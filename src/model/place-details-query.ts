@@ -1,4 +1,3 @@
-import { Type } from 'class-transformer';
 import { IsNotEmpty, IsString, Length } from 'class-validator';
 import { PlaceDetailsQueryInterface } from '../interface';
 import { Query } from './query';
@@ -7,6 +6,5 @@ export class PlaceDetailsQuery extends Query implements PlaceDetailsQueryInterfa
     @IsString()
     @IsNotEmpty()
     @Length(5, 255)
-    @Type(() => String)
     placeId: string;
 }

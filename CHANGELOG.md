@@ -1,3 +1,11 @@
+<a name="2.2.3"></a>
+
+## [2.2.3](https://github.com/goparrot/geocoder/compare/v2.2.2...v2.2.3) (2019-10-22)
+
+### Bug Fixes
+
+*   **place-details:** return NotFoundException if more then one result ([53dd4f4](https://github.com/goparrot/geocoder/commit/53dd4f4))
+
 <a name="2.2.2"></a>
 
 ## [2.2.2](https://github.com/goparrot/geocoder/compare/v2.2.1...v2.2.2) (2019-10-18)

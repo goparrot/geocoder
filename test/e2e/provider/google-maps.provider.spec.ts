@@ -109,13 +109,15 @@ describe('GoogleMapsProvider (2e2)', () => {
                 return provider[method](query).should.be.rejectedWith(InvalidServerResponseException, `Unknown status "${status}" error`);
             });
 
-            it('should not throw any Exception', async () => {
-                mock.onGet(provider[url]).reply(200, {
-                    status: 'ZERO_RESULTS',
-                });
+            if ('placeDetails' !== method) {
+                it('should not throw any Exception', async () => {
+                    mock.onGet(provider[url]).reply(200, {
+                        status: 'ZERO_RESULTS',
+                    });
 
-                return provider[method](query).should.be.fulfilled;
-            });
+                    return provider[method](query).should.be.fulfilled;
+                });
+            }
         });
     }
 
@@ -151,5 +153,14 @@ describe('GoogleMapsProvider (2e2)', () => {
         const url: string = GoogleMapsPlaceDetailsCommand.getUrl();
 
         sharedBehaviours(url, 'placeDetails', providerPlaceDetailsQueryFixture);
+
+        it('should throw NotFoundException', async () => {
+            mock.onGet(provider[url]).reply(200, {
+                status: 'ZERO_RESULTS',
+            });
+
+            return provider.placeDetails(providerPlaceDetailsQueryFixture).should.be.rejectedWith(NotFoundException);
+        });
     });
 });
+

@@ -1,3 +1,4 @@
+import { NotFoundException } from '../exception';
 import { PlaceDetailsQueryInterface } from '../interface';
 import { Location, LocationBuilder, PlaceDetailsQuery } from '../model';
 import { AbstractLocationCommand } from './abstract-location.command';
@@ -21,6 +22,10 @@ export class PlaceDetailsCommand<ProviderRequestType = any, ProviderResponseType
 
             return location;
         });
+
+        if (locations.length !== 1) {
+            throw new NotFoundException(`Place by id "${query.placeId}" not found`);
+        }
 
         return locations;
     }

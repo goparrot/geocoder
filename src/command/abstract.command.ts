@@ -10,14 +10,15 @@ import {
 } from '../exception';
 import { QueryInterface } from '../interface';
 import { LoggableInterface, LoggableMixin } from '../logger';
-import { AbstractBuilder, AccuracyEnum } from '../model';
+import { AccuracyEnum } from '../model';
+import { AbstractTransformer } from '../transformer';
 import { Type } from '../types';
 import { getAvailableAccuracies } from '../util';
 
 export abstract class AbstractCommand<
     GeocoderQueryType extends QueryInterface = any,
     GeocoderResponseType = any,
-    GeocoderBuilderType extends AbstractBuilder = any,
+    GeocoderTransformerType extends AbstractTransformer = any,
     ProviderRequestType = any,
     ProviderResponseType = any
 > extends LoggableMixin(Function) {
@@ -55,7 +56,7 @@ export abstract class AbstractCommand<
         throw new Error('AbstractCommand.validateResponse: not implemented');
     }
 
-    protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<GeocoderBuilderType[]> {
+    protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<GeocoderTransformerType[]> {
         throw new Error('AbstractCommand.parseResponse: not implemented');
     }
 
@@ -107,12 +108,12 @@ export abstract class AbstractCommand<
 
         await this.validateResponse(response);
 
-        const builders: GeocoderBuilderType[] = await this.parseResponse(response, query);
+        const transformers: GeocoderTransformerType[] = await this.parseResponse(response, query);
 
         return Promise.all<GeocoderResponseType>(
-            builders.map(
-                async (builder: GeocoderBuilderType): Promise<GeocoderResponseType> => {
-                    return builder.build({
+            transformers.map(
+                async (transformer: GeocoderTransformerType): Promise<GeocoderResponseType> => {
+                    return transformer.transform({
                         groups: query.withRaw ? ['raw'] : undefined,
                     });
                 },

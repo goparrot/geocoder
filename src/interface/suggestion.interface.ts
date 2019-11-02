@@ -1,6 +1,6 @@
-export interface SuggestionInterface<R = any> {
+export interface SuggestionInterface<ProviderRawEntryType = any> {
     formattedAddress: string;
     placeId: string;
     provider: string;
-    raw?: R;
+    raw?: ProviderRawEntryType;
 }

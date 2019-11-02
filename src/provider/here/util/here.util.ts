@@ -1,6 +1,7 @@
 import { AccuracyEnum } from '../../../model';
+import { HereOneResultType } from '../interface';
 
-export function filterByAccuracy({ MatchLevel: matchLevel }: { MatchLevel: string }, accuracy?: AccuracyEnum): boolean {
+export function filterByAccuracy({ MatchLevel: matchLevel }: HereOneResultType, accuracy?: AccuracyEnum): boolean {
     if (!accuracy) {
         return true;
     }

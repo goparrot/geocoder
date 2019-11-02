@@ -1,9 +1,11 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import { AccuracyEnum, SuggestionBuilder, SuggestQuery } from '../../../model';
+import { AccuracyEnum, SuggestQuery } from '../../../model';
+import { AbstractSuggestionTransformer } from '../../../transformer';
 import { WorldCountry, WorldCountryUtil } from '../../../util/world-country';
 import { ArcgisProvider } from '../arcgis.provider';
 import { ArcgisSuggestionInterface, ArcgisSuggestQueryInterface, ArcgisSuggestResponseInterface } from '../interface';
+import { ArcgisSuggestionTransformer } from '../transformer';
 import { ArcgisCommonCommandMixin } from './mixin';
 
 /**
@@ -52,21 +54,15 @@ export class ArcgisSuggestCommand extends ArcgisCommonCommandMixin(SuggestComman
 
     protected async parseResponse(
         response: AxiosResponse<ArcgisSuggestResponseInterface>,
-    ): Promise<SuggestionBuilder<ArcgisProvider, ArcgisSuggestionInterface>[]> {
+    ): Promise<AbstractSuggestionTransformer<ArcgisProvider, ArcgisSuggestionInterface>[]> {
         if (!Array.isArray(response.data.suggestions)) {
             return [];
         }
 
-        return Promise.all<SuggestionBuilder<ArcgisProvider, ArcgisSuggestionInterface>>(
+        return Promise.all<AbstractSuggestionTransformer<ArcgisProvider, ArcgisSuggestionInterface>>(
             response.data.suggestions.map(
-                async (suggestion: ArcgisSuggestionInterface): Promise<SuggestionBuilder<ArcgisProvider, ArcgisSuggestionInterface>> => {
-                    const builder: SuggestionBuilder<ArcgisProvider, ArcgisSuggestionInterface> = new SuggestionBuilder(ArcgisProvider, suggestion);
-
-                    builder.formattedAddress = suggestion.text;
-                    builder.placeId = suggestion.magicKey;
-
-                    return builder;
-                },
+                async (suggestion: ArcgisSuggestionInterface): Promise<AbstractSuggestionTransformer<ArcgisProvider, ArcgisSuggestionInterface>> =>
+                    new ArcgisSuggestionTransformer(suggestion),
             ),
         );
     }

@@ -1,9 +1,11 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
 import { SuggestQueryInterface } from '../../../interface';
-import { AccuracyEnum, SuggestionBuilder, SuggestQuery } from '../../../model';
+import { AccuracyEnum, SuggestQuery } from '../../../model';
+import { AbstractSuggestionTransformer } from '../../../transformer';
 import { GoogleMapsProvider } from '../google-maps.provider';
 import { GoogleMapsSuggestQueryInterface } from '../interface';
+import { GoogleMapsSuggestionTransformer } from '../transformer';
 import { GoogleMapsCommonCommandMixin } from './mixin';
 
 /**
@@ -55,7 +57,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
         return providerQuery;
     }
 
-    protected async parseResponse(response: AxiosResponse, query: SuggestQueryInterface): Promise<SuggestionBuilder<GoogleMapsProvider>[]> {
+    protected async parseResponse(response: AxiosResponse, query: SuggestQueryInterface): Promise<AbstractSuggestionTransformer<GoogleMapsProvider>[]> {
         if (!Array.isArray(response.data.predictions) || !response.data.predictions.length) {
             return [];
         }
@@ -67,16 +69,8 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
             return [];
         }
 
-        return Promise.all<SuggestionBuilder<GoogleMapsProvider>>(
-            results.map(
-                async (raw: any): Promise<SuggestionBuilder<GoogleMapsProvider>> => {
-                    const builder: SuggestionBuilder<GoogleMapsProvider> = new SuggestionBuilder(GoogleMapsProvider, raw);
-                    builder.formattedAddress = raw.description;
-                    builder.placeId = raw.place_id;
-
-                    return builder;
-                },
-            ),
+        return Promise.all<AbstractSuggestionTransformer<GoogleMapsProvider>>(
+            results.map(async (raw: any): Promise<AbstractSuggestionTransformer<GoogleMapsProvider>> => new GoogleMapsSuggestionTransformer(raw)),
         );
     }
 
@@ -110,6 +104,7 @@ export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(Sugge
             case AccuracyEnum.STREET_NAME:
                 return types.includes('route');
             case AccuracyEnum.CITY:
+                // @todo check sublocality ?
                 return types.includes('locality');
             case AccuracyEnum.STATE:
                 return types.includes('administrative_area_level_1');

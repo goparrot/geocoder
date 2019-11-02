@@ -3,7 +3,7 @@ import { AbstractProvider } from '../model';
 import { AbstractDecider } from './abstract-decider';
 
 export class StatefulDecider extends AbstractDecider {
-    private currentProvider: AbstractProvider | undefined;
+    private currentProvider?: AbstractProvider;
 
     async getProvider(providers: AbstractProvider[], forceProvider?: AbstractProvider): Promise<AbstractProvider> {
         if (forceProvider) {

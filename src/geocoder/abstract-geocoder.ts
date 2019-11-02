@@ -23,7 +23,7 @@ export abstract class AbstractGeocoder extends ProvidableMixin(LoggableMixin(Obj
         return provider.suggest(query);
     }
 
-    using<T extends AbstractHttpProvider>(providerClass: Type<T> | string): AbstractHttpProvider {
+    using<HttpProviderClass extends AbstractHttpProvider>(providerClass: Type<HttpProviderClass> | string): AbstractHttpProvider {
         let providerClassName: string;
 
         if (typeof providerClass === 'function') {

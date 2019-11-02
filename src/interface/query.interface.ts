@@ -40,7 +40,7 @@ export interface QueryInterface {
     /**
      * This option will be useful to those who want to get additional data that the library cannot provide with a common interface.
      *
-     * If true - AbstractBuilder additionally returns result with the original provider data in the `raw` property
+     * If true - AbstractTransformer additionally returns result with the original provider data in the `raw` property
      *
      * @default false
      */

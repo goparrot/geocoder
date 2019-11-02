@@ -1,14 +1,14 @@
-export interface LocationInterface<R = any> {
+export interface LocationInterface<ProviderRawEntryType = any> {
     provider: string;
 
     latitude: number;
     longitude: number;
     formattedAddress?: string;
-    country: string;
+    country?: string;
     /**
      * ISO 3166-1 alpha-2
      */
-    countryCode: string;
+    countryCode?: string;
     state?: string;
     stateCode?: string;
     city?: string;
@@ -16,5 +16,5 @@ export interface LocationInterface<R = any> {
     houseNumber?: string;
     postalCode?: string;
     placeId?: string;
-    raw?: R;
+    raw?: ProviderRawEntryType;
 }

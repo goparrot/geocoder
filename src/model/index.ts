@@ -1,4 +1,3 @@
-export * from './abstract-builder';
 export * from './abstract-chain-provider';
 export * from './abstract-provider';
 export * from './accuracy.enum';
@@ -6,11 +5,9 @@ export * from './abstract-http-provider';
 export * from './providable.interface';
 export * from './providable.mixin';
 export * from './location';
-export * from './location-builder';
 export * from './place-details-query';
 export * from './geocode-query';
 export * from './query';
 export * from './reverse-query';
 export * from './suggest-query';
 export * from './suggestion';
-export * from './suggestion-builder';

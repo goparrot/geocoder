@@ -58,6 +58,7 @@
         "test:unit": "mocha 'test/unit/**/*.spec.ts'",
         "test:e2e": "mocha 'test/e2e/**/*.spec.ts'",
         "test:integration": "mocha --timeout 15000 'test/integration/**/*.spec.ts'",
+        "test:integration:fast": "mocha --timeout 15000 'test/integration/**/*.spec.ts'",
         "test:all": "mocha --timeout 15000 'test/**/*.spec.ts'",
         "test:all:fast": "TS_NODE_TRANSPILE_ONLY=true mocha --timeout 15000 'test/**/*.spec.ts'",
         "coverage": "nyc npm test",
@@ -67,11 +68,11 @@
         "coveralls": "nyc report --reporter=text-lcov | coveralls",
         "format": "prettier \"**/*.{ts,js,json}\" --write",
         "format:staged": "lint-staged",
-        "lint": "npm run lint:config:check && tslint -c tslint.json -p tsconfig.json --format stylish && tslint -c tslint.json -p tsconfig.spec.json --format stylish",
+        "lint": "npm run lint:config:check && tslint -c tslint.json -p tsconfig.json --format stylish",
         "lint:config:check": "tslint-config-prettier-check ./tslint.json",
-        "build": "rimraf dist && tsc",
+        "build": "rimraf dist && tsc -p tsconfig.build.json",
         "remark": "remark README.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md .github/ -o -f -q",
-        "pre-commit": "git add . && npm run format:staged && npm run remark && npm run lint && npm run coverage && npm run build",
+        "pre-commit": "git add . && npm run format:staged && npm run remark && npm run lint && npm run coverage:all && npm run build",
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && remark CHANGELOG.md -o -f -q && git add CHANGELOG.md",
         "prepublishOnly": "echo \"use 'npm run publish'\" && exit 1",
         "publish": "npm run build && node bin/prepublish.js && npm publish dist",
@@ -81,6 +82,12 @@
         "version": "npm run changelog",
         "postversion": "git push && git push --tags"
     },
+    "peerDependencies": {
+        "axios": ">=0.18",
+        "class-transformer": ">=0.2",
+        "class-validator": ">=0.9",
+        "reflect-metadata": ">=0.1.12"
+    },
     "dependencies": {
         "lodash.isempty": "^4.4.0",
         "world-countries": "^2.1.0"
@@ -89,11 +96,12 @@
         "@commitlint/cli": "^8.2.0",
         "@commitlint/config-conventional": "^8.2.0",
         "@commitlint/travis-cli": "^8.2.0",
-        "@types/chai": "^4.2.3",
+        "@types/chai": "^4.2.4",
         "@types/chai-as-promised": "^7.1.2",
+        "@types/heremaps": "^3.0.15",
         "@types/lodash.isempty": "^4.4.6",
         "@types/mocha": "^5.2.7",
-        "@types/node": "^12.11.1",
+        "@types/node": "^12.12.5",
         "@types/sinon": "^7.5.0",
         "@types/supertest": "^2.0.8",
         "axios": "^0.18.1",
@@ -109,7 +117,7 @@
         "dotenv": "^8.2.0",
         "husky": "^3.0.9",
         "lint-staged": "^9.4.2",
-        "mocha": "^6.2.1",
+        "mocha": "^6.2.2",
         "mocha-junit-reporter": "^1.23.0",
         "nyc": "^14.1.1",
         "prettier": "^1.18.2",
@@ -121,18 +129,12 @@
         "remark-lint-strong-marker": "^1.0.3",
         "rimraf": "^3.0.0",
         "sinon": "^7.5.0",
-        "source-map-support": "^0.5.13",
+        "source-map-support": "^0.5.16",
         "supertest": "^4.0.2",
         "ts-node": "^8.4.1",
         "tsconfig-paths": "^3.9.0",
         "tslint": "^5.20.0",
         "tslint-config-prettier": "^1.18.0",
         "typescript": "^3.6.4"
-    },
-    "peerDependencies": {
-        "axios": "^0.18.0 || ^0.19.0",
-        "class-transformer": "^0.2.0",
-        "class-validator": "^0.9.0 || ^0.10.0",
-        "reflect-metadata": "^0.1.12"
     }
 }

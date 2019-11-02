@@ -1,13 +1,13 @@
 import { AxiosInstance } from 'axios';
 import { PlaceDetailsCommand } from '../../../command';
 import { PlaceDetailsQuery } from '../../../model';
-import { HerePlaceDetailsQueryInterface } from '../interface';
+import { HerePlaceDetailsQueryInterface, HereResponseType } from '../interface';
 import { HereLocationCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.here.com/documentation/geocoder/topics/resource-search.html}
  */
-export class HerePlaceDatailsCommand extends HereLocationCommandMixin(PlaceDetailsCommand)<HerePlaceDetailsQueryInterface> {
+export class HerePlaceDetailsCommand extends HereLocationCommandMixin(PlaceDetailsCommand)<HerePlaceDetailsQueryInterface, HereResponseType> {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {
         // @ts-ignore
         super(httpClient, appId, appCode);

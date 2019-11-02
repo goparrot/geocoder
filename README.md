@@ -138,7 +138,7 @@ geocoder.setLogger(logger);
             // language: 'en', // default
             // limit: 5, // default
             // fillMissingQueryProperties: true, // default
-            // withRaw: false, // default
+            withRaw: true, // default false
         });
 
         logger.info('locations', locations);

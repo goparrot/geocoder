@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { UnsupportedAccuracyException } from '../exception';
 import { QueryInterface } from '../interface';
-import { AccuracyEnum, Location, LocationBuilder } from '../model';
+import { AccuracyEnum, Location } from '../model';
+import { AbstractLocationTransformer } from '../transformer';
 import { WorldCountry, WorldCountryUtil } from '../util/world-country';
 import { WorldCountryState, WorldCountryStateUtil } from '../util/world-country-state';
 import { AbstractCommand } from './abstract.command';
@@ -10,8 +11,8 @@ export abstract class AbstractLocationCommand<
     GeocoderQueryType extends QueryInterface = any,
     ProviderRequestType = any,
     ProviderResponseType = any
-> extends AbstractCommand<GeocoderQueryType, Location, LocationBuilder, ProviderRequestType, ProviderResponseType> {
-    protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<LocationBuilder[]> {
+> extends AbstractCommand<GeocoderQueryType, Location, AbstractLocationTransformer, ProviderRequestType, ProviderResponseType> {
+    protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<AbstractLocationTransformer[]> {
         throw new Error('AbstractLocationCommand.parseResponse: not implemented');
     }
 
@@ -72,19 +73,37 @@ export abstract class AbstractLocationCommand<
             return locations;
         }
 
-        // @todo add check for all properties
         return locations.filter((location: Location) => {
             switch (accuracy) {
                 case AccuracyEnum.HOUSE_NUMBER:
-                    return !!location.houseNumber;
+                    return !!(
+                        location.houseNumber &&
+                        location.postalCode &&
+                        location.streetName &&
+                        location.city &&
+                        location.state &&
+                        location.stateCode &&
+                        location.country &&
+                        location.countryCode &&
+                        location.provider
+                    );
                 case AccuracyEnum.STREET_NAME:
-                    return !!location.streetName;
+                    return !!(
+                        location.postalCode &&
+                        location.streetName &&
+                        location.city &&
+                        location.state &&
+                        location.stateCode &&
+                        location.country &&
+                        location.countryCode &&
+                        location.provider
+                    );
                 case AccuracyEnum.CITY:
-                    return !!location.city;
+                    return !!(location.city && location.state && location.stateCode && location.country && location.countryCode && location.provider);
                 case AccuracyEnum.STATE:
-                    return !!location.state || !!location.stateCode;
+                    return !!(location.state && location.stateCode && location.country && location.countryCode && location.provider);
                 case AccuracyEnum.COUNTRY:
-                    return !!location.country || !!location.countryCode;
+                    return !!(location.country && location.countryCode && location.provider);
                 default:
                     throw new UnsupportedAccuracyException(`Unsupported "${accuracy}" accuracy.`);
             }

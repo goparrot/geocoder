@@ -1,21 +1,25 @@
 import { AxiosResponse } from 'axios';
 import { AbstractCommand } from '../../../../command';
-import { LocationBuilder } from '../../../../model';
+import { AbstractLocationTransformer } from '../../../../transformer';
 import { Constructor } from '../../../../types';
-import { GoogleMapsLocationBuilder } from '../../builder';
 import { GoogleMapsProvider } from '../../google-maps.provider';
+import { GoogleMapsLocationTransformer } from '../../transformer';
 import { GoogleMapsCommonCommandMixin } from './google-maps-common-command.mixin';
 
 export function GoogleMapsLocationCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {
     abstract class GoogleMapsLocationCommand extends GoogleMapsCommonCommandMixin(Base) {
-        protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<GoogleMapsProvider>[]> {
+        protected async parseResponse(response: AxiosResponse): Promise<AbstractLocationTransformer<GoogleMapsProvider>[]> {
             if (!Array.isArray(response.data.results) || !response.data.results.length) {
                 return [];
             }
 
-            return Promise.all<LocationBuilder<GoogleMapsProvider>>(
-                response.data.results.map(async (raw: any): Promise<LocationBuilder<GoogleMapsProvider>> => new GoogleMapsLocationBuilder(raw)),
+            return Promise.all<AbstractLocationTransformer<GoogleMapsProvider>>(
+                response.data.results.map(async (raw: any): Promise<AbstractLocationTransformer<GoogleMapsProvider>> => this.parseOneResult(raw)),
             );
+        }
+
+        protected async parseOneResult(raw: any): Promise<AbstractLocationTransformer<GoogleMapsProvider>> {
+            return new GoogleMapsLocationTransformer(raw);
         }
     }
 

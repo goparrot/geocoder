@@ -1,32 +1,32 @@
-import { LocationBuilder } from '../../../model';
+import { AbstractLocationTransformer } from '../../../transformer';
 import { GoogleMapsProvider } from '../google-maps.provider';
 
-export class GoogleMapsLocationBuilder extends LocationBuilder<GoogleMapsProvider> {
-    constructor(readonly raw: any) {
+export class GoogleMapsLocationTransformer extends AbstractLocationTransformer<GoogleMapsProvider> {
+    constructor(raw: any) {
         super(GoogleMapsProvider, raw);
     }
 
-    get formattedAddress(): string {
+    async getFormattedAddress(): Promise<string> {
         return this.raw.formatted_address;
     }
 
-    get latitude(): number {
+    async getLatitude(): Promise<number> {
         return this.raw.geometry.location.lat;
     }
 
-    get longitude(): number {
+    async getLongitude(): Promise<number> {
         return this.raw.geometry.location.lng;
     }
 
-    get country(): string {
+    async getCountry(): Promise<string> {
         return this.getAddressComponentsOfType('country').pop()!.long_name;
     }
 
-    get countryCode(): string {
+    async getCountryCode(): Promise<string> {
         return this.getAddressComponentsOfType('country').pop()!.short_name;
     }
 
-    get state(): string | undefined {
+    async getState(): Promise<string | undefined> {
         const component: any | undefined = this.getAddressComponentsOfType('administrative_area_level_1').pop();
 
         if (component) {
@@ -34,7 +34,7 @@ export class GoogleMapsLocationBuilder extends LocationBuilder<GoogleMapsProvide
         }
     }
 
-    get stateCode(): string | undefined {
+    async getStateCode(): Promise<string | undefined> {
         const component: any | undefined = this.getAddressComponentsOfType('administrative_area_level_1').pop();
 
         if (component) {
@@ -42,7 +42,7 @@ export class GoogleMapsLocationBuilder extends LocationBuilder<GoogleMapsProvide
         }
     }
 
-    get city(): string | undefined {
+    async getCity(): Promise<string | undefined> {
         for (const type of ['locality', 'sublocality', 'administrative_area_level_3', 'administrative_area_level_2']) {
             const component: any | undefined = this.getAddressComponentsOfType(type).pop();
 
@@ -52,7 +52,7 @@ export class GoogleMapsLocationBuilder extends LocationBuilder<GoogleMapsProvide
         }
     }
 
-    get postalCode(): string | undefined {
+    async getPostalCode(): Promise<string | undefined> {
         const component: any | undefined = this.getAddressComponentsOfType('postal_code').pop();
 
         if (component) {
@@ -60,7 +60,7 @@ export class GoogleMapsLocationBuilder extends LocationBuilder<GoogleMapsProvide
         }
     }
 
-    get streetName(): string | undefined {
+    async getStreetName(): Promise<string | undefined> {
         const component: any | undefined = this.getAddressComponentsOfType('route').pop();
 
         if (component) {
@@ -68,7 +68,7 @@ export class GoogleMapsLocationBuilder extends LocationBuilder<GoogleMapsProvide
         }
     }
 
-    get houseNumber(): string | undefined {
+    async getHouseNumber(): Promise<string | undefined> {
         const component: any | undefined = this.getAddressComponentsOfType('street_number').pop();
 
         if (component) {
@@ -76,7 +76,7 @@ export class GoogleMapsLocationBuilder extends LocationBuilder<GoogleMapsProvide
         }
     }
 
-    get placeId(): string {
+    async getPlaceId(): Promise<string> {
         return this.raw.place_id;
     }
 

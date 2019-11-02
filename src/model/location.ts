@@ -2,7 +2,7 @@ import { classToPlain, ClassTransformOptions, Exclude, Expose } from 'class-tran
 import { LocationInterface } from '../interface';
 
 @Exclude()
-export class Location<R = any> implements LocationInterface<R> {
+export class Location<ProviderRawEntryType = any> implements LocationInterface<ProviderRawEntryType> {
     @Expose()
     provider: string;
 
@@ -20,10 +20,10 @@ export class Location<R = any> implements LocationInterface<R> {
     longitude: number;
 
     @Expose()
-    country: string;
+    country?: string;
 
     @Expose()
-    countryCode: string;
+    countryCode?: string;
 
     @Expose()
     state?: string;
@@ -50,7 +50,7 @@ export class Location<R = any> implements LocationInterface<R> {
     placeId?: string;
 
     @Expose({ groups: ['raw', 'all'] })
-    raw?: R;
+    raw?: ProviderRawEntryType;
 
     get street(): string {
         return `${this.houseNumber || ''} ${this.streetName || ''}`.trim();
@@ -70,7 +70,7 @@ export class Location<R = any> implements LocationInterface<R> {
                   .join(', ');
     }
 
-    toObject(options?: ClassTransformOptions): LocationInterface<R> {
-        return classToPlain<Location<R>>(this, options) as LocationInterface;
+    toObject(options?: ClassTransformOptions): LocationInterface<ProviderRawEntryType> {
+        return classToPlain<Location<ProviderRawEntryType>>(this, options) as LocationInterface<ProviderRawEntryType>;
     }
 }

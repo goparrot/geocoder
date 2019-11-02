@@ -1,6 +1,6 @@
-import { Transform } from 'class-transformer';
 import { IsBoolean, IsEnum, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { QueryInterface } from '../interface';
+import { ToBoolean } from '../util/transformer';
 import { AccuracyEnum } from './accuracy.enum';
 
 export class Query implements QueryInterface {
@@ -27,11 +27,11 @@ export class Query implements QueryInterface {
     @MaxLength(2)
     language: string = Query.DEFAULT_RESULT_LANGUAGE;
 
+    @ToBoolean()
     @IsBoolean()
-    @Transform((v: boolean) => !!v, { toClassOnly: true })
     fillMissingQueryProperties: boolean = true;
 
+    @ToBoolean()
     @IsBoolean()
-    @Transform((v: boolean) => !!v, { toClassOnly: true })
     withRaw: boolean = false;
 }

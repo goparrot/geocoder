@@ -247,7 +247,7 @@ export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
         // scope: 'GOOGLE',
         types: ['street_address'],
         url: 'https://maps.google.com/?q=1158+E+89th+St,+Chicago,+IL+60619,+USA&ftid=0x880e2620e2904a9f:0x8850f56fdf8a5429',
-        utc_offset: -300,
+        utc_offset: -360,
         vicinity: 'Chicago',
     },
     status: 'OK',

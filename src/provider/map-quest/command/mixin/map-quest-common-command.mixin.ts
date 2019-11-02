@@ -2,10 +2,12 @@ import { AxiosInstance, AxiosResponse } from 'axios';
 import { AbstractCommand } from '../../../../command';
 import { InvalidCredentialsException, UnsupportedAccuracyException } from '../../../../exception';
 import { QueryInterface } from '../../../../interface';
-import { AccuracyEnum, LocationBuilder } from '../../../../model';
+import { AccuracyEnum } from '../../../../model';
+import { AbstractLocationTransformer } from '../../../../transformer';
 import { Constructor } from '../../../../types';
 import { sliceFrom } from '../../../../util';
 import { MapQuestProvider } from '../../map-quest.provider';
+import { MapQuestLocationTransformer } from '../../transformer';
 
 export enum MapQuestLocationQualityEnum {
     COUNTRY = 'COUNTRY',
@@ -44,7 +46,7 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractCom
             return AccuracyEnum.STREET_NAME;
         }
 
-        protected async parseResponse(response: AxiosResponse, query: QueryInterface): Promise<LocationBuilder<MapQuestProvider>[]> {
+        protected async parseResponse(response: AxiosResponse, query: QueryInterface): Promise<AbstractLocationTransformer<MapQuestProvider>[]> {
             if (!Array.isArray(response.data.results) || !response.data.results.length) {
                 return [];
             }
@@ -54,28 +56,8 @@ export function MapQuestCommonCommandMixin<TBase extends Constructor<AbstractCom
                 return [];
             }
 
-            return Promise.all<LocationBuilder<MapQuestProvider>>(
-                locations.map(
-                    async (raw: any): Promise<LocationBuilder<MapQuestProvider>> => {
-                        const builder: LocationBuilder<MapQuestProvider> = new LocationBuilder(MapQuestProvider, raw);
-                        builder.latitude = raw.latLng.lat;
-                        builder.longitude = raw.latLng.lng;
-                        builder.countryCode = raw.adminArea1;
-                        if (2 === raw.adminArea3.length) {
-                            builder.stateCode = raw.adminArea3;
-                            builder.state = undefined;
-                        } else {
-                            builder.stateCode = undefined;
-                            builder.state = raw.adminArea3;
-                        }
-                        builder.city = raw.adminArea5;
-                        builder.streetName = raw.street;
-                        builder.houseNumber = undefined;
-                        builder.postalCode = raw.postalCode;
-
-                        return builder;
-                    },
-                ),
+            return Promise.all<AbstractLocationTransformer<MapQuestProvider>>(
+                locations.map(async (raw: any): Promise<AbstractLocationTransformer<MapQuestProvider>> => new MapQuestLocationTransformer(raw)),
             );
         }
 

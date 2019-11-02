@@ -1,6 +1,7 @@
 import { NotFoundException } from '../exception';
 import { PlaceDetailsQueryInterface } from '../interface';
-import { Location, LocationBuilder, PlaceDetailsQuery } from '../model';
+import { Location, PlaceDetailsQuery } from '../model';
+import { AbstractLocationTransformer } from '../transformer';
 import { AbstractLocationCommand } from './abstract-location.command';
 
 export class PlaceDetailsCommand<ProviderRequestType = any, ProviderResponseType = any> extends AbstractLocationCommand<
@@ -30,7 +31,9 @@ export class PlaceDetailsCommand<ProviderRequestType = any, ProviderResponseType
         return locations;
     }
 
-    protected async parseOneResult(_raw: any): Promise<LocationBuilder> {
+    protected async parseOneResult<ProviderRawEntryType = any, ProviderLocationTransformer extends AbstractLocationTransformer = any>(
+        _raw: ProviderRawEntryType,
+    ): Promise<ProviderLocationTransformer> {
         throw new Error('PlaceDetailsCommand.parseOneResult: not implemented');
     }
 }

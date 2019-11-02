@@ -1,16 +1,15 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
 import { SuggestQueryInterface } from '../../../interface';
-import { SuggestionBuilder } from '../../../model';
-import { HereProvider } from '../here.provider';
-import { HereSuggestQueryInterface } from '../interface';
+import { HereResponseType, HereSuggestQueryInterface } from '../interface';
+import { HereSuggestionTransformer } from '../transformer';
 import { filterByAccuracy } from '../util';
 import { HereLocationCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.here.com/documentation/geocoder/topics/resource-search.html}
  */
-export class HereSuggestCommand extends HereLocationCommandMixin(SuggestCommand)<HereSuggestQueryInterface> {
+export class HereSuggestCommand extends HereLocationCommandMixin(SuggestCommand)<HereSuggestQueryInterface, HereResponseType> {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {
         // @ts-ignore
         super(httpClient, appId, appCode);
@@ -20,7 +19,7 @@ export class HereSuggestCommand extends HereLocationCommandMixin(SuggestCommand)
         return 'https://geocoder.api.here.com/6.2/search.json';
     }
 
-    protected async parseResponse(response: AxiosResponse, query: SuggestQueryInterface): Promise<SuggestionBuilder<HereProvider>[]> {
+    protected async parseResponse(response: AxiosResponse<HereResponseType>, query: SuggestQueryInterface): Promise<HereSuggestionTransformer[]> {
         if (!response.data.Response || !Array.isArray(response.data.Response.View) || !response.data.Response.View[0]) {
             return [];
         }
@@ -32,18 +31,6 @@ export class HereSuggestCommand extends HereLocationCommandMixin(SuggestCommand)
             return [];
         }
 
-        return Promise.all<SuggestionBuilder<HereProvider>>(
-            results.map(
-                async (raw: any): Promise<SuggestionBuilder<HereProvider>> => {
-                    const hereAddress: any = raw.Location.Address || {};
-
-                    const builder: SuggestionBuilder<HereProvider> = new SuggestionBuilder(HereProvider, raw);
-                    builder.formattedAddress = hereAddress.Label;
-                    builder.placeId = raw.Location.LocationId;
-
-                    return builder;
-                },
-            ),
-        );
+        return Promise.all<HereSuggestionTransformer>(results.map(async (raw: any): Promise<HereSuggestionTransformer> => new HereSuggestionTransformer(raw)));
     }
 }

@@ -62,7 +62,7 @@ describe('HereProvider (2e2)', () => {
     });
     //
     // describe('#placeDetails', () => {
-    //     const url: string = HerePlaceDatailsCommand.getUrl();
+    //     const url: string = HerePlaceDetailsCommand.getUrl();
     //
     //     sharedBehaviours(url, 'placeDetails', providerPlaceDetailsQueryFixture, providerRawPlaceDetailsResponse, providerParsedPlaceDetailsResponse);
     // });

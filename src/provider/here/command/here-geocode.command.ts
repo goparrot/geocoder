@@ -1,12 +1,12 @@
 import { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import { HereGeocodeQueryInterface } from '../interface';
+import { HereGeocodeQueryInterface, HereResponseType } from '../interface';
 import { HereLocationCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}
  */
-export class HereGeocodeCommand extends HereLocationCommandMixin(GeocodeCommand)<HereGeocodeQueryInterface> {
+export class HereGeocodeCommand extends HereLocationCommandMixin(GeocodeCommand)<HereGeocodeQueryInterface, HereResponseType> {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {
         // @ts-ignore
         super(httpClient, appId, appCode);

@@ -7,7 +7,7 @@ import { ArcgisGeocodeCommandMixin } from './mixin';
 /**
  * @link {https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm}
  */
-export class ArcgisPlaceDatailsCommand extends ArcgisGeocodeCommandMixin(PlaceDetailsCommand)<ArcgisPlaceDetailsQueryInterface> {
+export class ArcgisPlaceDetailsCommand extends ArcgisGeocodeCommandMixin(PlaceDetailsCommand)<ArcgisPlaceDetailsQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly token?: string) {
         super(httpClient);
     }

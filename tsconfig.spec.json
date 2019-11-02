@@ -1,5 +1,0 @@
-{
-    "extends": "./tsconfig.json",
-    "declaration": false,
-    "include": ["test/**/*.spec.ts"]
-}

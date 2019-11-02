@@ -8,7 +8,6 @@
         "src/provider/map-quest/command/map-quest-suggest.command.ts",
         "src/model/abstract-provider.ts"
     ],
-    "require": ["ts-node/register", "source-map-support/register", "tsconfig-paths/register", "dotenv/config", "./node_modules/reflect-metadata/Reflect.js"],
     "reporter": ["text-summary", "html"],
     "cache": false,
     "all": true

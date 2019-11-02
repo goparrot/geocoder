@@ -1,8 +1,10 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import { SuggestionBuilder, SuggestQuery } from '../../../model';
+import { SuggestQuery } from '../../../model';
+import { AbstractSuggestionTransformer } from '../../../transformer';
 import { MapQuestSuggestQueryInterface } from '../interface';
 import { MapQuestProvider } from '../map-quest.provider';
+import { MapQuestSuggestionTransformer } from '../transformer';
 import { MapQuestCommonCommandMixin } from './mixin';
 
 /**
@@ -35,7 +37,7 @@ export class MapQuestSuggestCommand extends MapQuestCommonCommandMixin(SuggestCo
         return providerQuery;
     }
 
-    protected async parseResponse(response: AxiosResponse): Promise<SuggestionBuilder<MapQuestProvider>[]> {
+    protected async parseResponse(response: AxiosResponse): Promise<AbstractSuggestionTransformer<MapQuestProvider>[]> {
         if (!Array.isArray(response.data.results) || !response.data.results.length) {
             return [];
         }
@@ -45,16 +47,8 @@ export class MapQuestSuggestCommand extends MapQuestCommonCommandMixin(SuggestCo
             return [];
         }
 
-        return Promise.all<SuggestionBuilder<MapQuestProvider>>(
-            locations.map(
-                async (raw: any): Promise<SuggestionBuilder<MapQuestProvider>> => {
-                    const builder: SuggestionBuilder<MapQuestProvider> = new SuggestionBuilder(MapQuestProvider, raw);
-                    builder.formattedAddress = raw.displayString;
-                    builder.placeId = raw.id;
-
-                    return builder;
-                },
-            ),
+        return Promise.all<AbstractSuggestionTransformer<MapQuestProvider>>(
+            locations.map(async (raw: any): Promise<AbstractSuggestionTransformer<MapQuestProvider>> => new MapQuestSuggestionTransformer(raw)),
         );
     }
 }

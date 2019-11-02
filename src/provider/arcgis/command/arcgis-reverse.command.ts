@@ -1,10 +1,8 @@
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { ReverseCommand } from '../../../command';
-import { AccuracyEnum, LocationBuilder, ReverseQuery } from '../../../model';
-import { LocationUtil } from '../../../util/location';
-import { WorldCountry, WorldCountryUtil } from '../../../util/world-country';
-import { ArcgisProvider } from '../arcgis.provider';
+import { AccuracyEnum, ReverseQuery } from '../../../model';
 import { ArcgisReverseQueryInterface } from '../interface';
+import { ArcgisReverseTransformer } from '../transformer';
 import { ArcgisCommonCommandMixin } from './mixin';
 
 /**
@@ -50,38 +48,13 @@ export class ArcgisReverseCommand extends ArcgisCommonCommandMixin(ReverseComman
         };
     }
 
-    protected async parseResponse(response: AxiosResponse): Promise<LocationBuilder<ArcgisProvider>[]> {
+    protected async parseResponse(response: AxiosResponse): Promise<ArcgisReverseTransformer[]> {
         if (!response.data.address || !response.data.location) {
             return [];
         }
 
         const raw: any = response.data;
 
-        const builder: LocationBuilder<ArcgisProvider> = new LocationBuilder(ArcgisProvider, raw);
-        builder.formattedAddress = raw.address.LongLabel;
-        builder.latitude = raw.location.y;
-        builder.longitude = raw.location.x;
-
-        const cca3: string = raw.address.CountryCode;
-        if (cca3) {
-            const country: WorldCountry | undefined = await WorldCountryUtil.find({
-                cca3,
-            });
-
-            if (country) {
-                builder.country = country.name.common;
-                builder.countryCode = country.cca2;
-            }
-        }
-
-        builder.stateCode = undefined;
-        builder.state = raw.address.Region;
-        builder.city = raw.address.City;
-        // Address always includes a house number
-        builder.streetName = raw.address.AddNum ? LocationUtil.removeHouseNumberFromStreetName(raw.address.Address, raw.address.AddNum) : raw.address.Address;
-        builder.houseNumber = raw.address.AddNum;
-        builder.postalCode = raw.address.Postal;
-
-        return [builder];
+        return [new ArcgisReverseTransformer(raw)];
     }
 }

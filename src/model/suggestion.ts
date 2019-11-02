@@ -2,7 +2,7 @@ import { classToPlain, ClassTransformOptions, Exclude, Expose } from 'class-tran
 import { SuggestionInterface } from '../interface';
 
 @Exclude()
-export class Suggestion<R = any> implements SuggestionInterface<R> {
+export class Suggestion<ProviderRawEntryType = any> implements SuggestionInterface<ProviderRawEntryType> {
     @Expose()
     formattedAddress: string;
 
@@ -13,9 +13,9 @@ export class Suggestion<R = any> implements SuggestionInterface<R> {
     provider: string;
 
     @Expose({ groups: ['raw', 'all'] })
-    raw?: R;
+    raw?: ProviderRawEntryType;
 
-    toObject(options?: ClassTransformOptions): SuggestionInterface<R> {
-        return classToPlain<Suggestion<R>>(this, options) as SuggestionInterface<R>;
+    toObject(options?: ClassTransformOptions): SuggestionInterface<ProviderRawEntryType> {
+        return classToPlain<Suggestion<ProviderRawEntryType>>(this, options) as SuggestionInterface<ProviderRawEntryType>;
     }
 }

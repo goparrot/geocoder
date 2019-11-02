@@ -1,6 +1,6 @@
-import { Transform } from 'class-transformer';
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
 import { GeocodeQueryInterface } from '../interface';
+import { ToBoolean } from '../util/transformer';
 import { IsExactMatchApplicable } from '../validation';
 import { Query } from './query';
 
@@ -11,9 +11,8 @@ export class GeocodeQuery extends Query implements GeocodeQueryInterface {
     @MaxLength(150)
     address: string;
 
+    @ToBoolean()
     @IsExactMatchApplicable()
-    @IsBoolean()
-    @Transform((v: boolean) => !!v, { toClassOnly: true })
     exactMatch: boolean = false;
 
     @IsOptional()

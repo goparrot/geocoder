@@ -72,6 +72,7 @@ export abstract class AbstractLocationCommand<
             return locations;
         }
 
+        // @todo add check for all properties
         return locations.filter((location: Location) => {
             switch (accuracy) {
                 case AccuracyEnum.HOUSE_NUMBER:

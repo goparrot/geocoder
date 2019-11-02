@@ -44,8 +44,13 @@ export function GoogleMapsLocationCommandMixin<TBase extends Constructor<Abstrac
                     builder.stateCode = addressComponent.short_name;
                     break;
                 case 'locality':
+                case 'sublocality':
+                case 'administrative_area_level_3':
+                case 'administrative_area_level_2':
                 case 'postal_town':
-                    builder.city = addressComponent.long_name;
+                    if (!builder.city) {
+                        builder.city = addressComponent.long_name;
+                    }
                     break;
                 case 'postal_code':
                     builder.postalCode = addressComponent.long_name;

@@ -1,3 +1,11 @@
+<a name="2.2.4"></a>
+
+## [2.2.4](https://github.com/goparrot/geocoder/compare/v2.2.3...v2.2.4) (2019-11-02)
+
+### Bug Fixes
+
+*   **google location:** fix getting a city name ([10b9c22](https://github.com/goparrot/geocoder/commit/10b9c22))
+
 <a name="2.2.3"></a>
 
 ## [2.2.3](https://github.com/goparrot/geocoder/compare/v2.2.2...v2.2.3) (2019-10-22)

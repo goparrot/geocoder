@@ -1,3 +1,22 @@
+<a name="3.0.0"></a>
+
+# [3.0.0](https://github.com/goparrot/geocoder/compare/v2.2.4...v3.0.0) (2019-11-04)
+
+### Bug Fixes
+
+*   **google location-bilder:** fix raw data transformer ([adc07bd](https://github.com/goparrot/geocoder/commit/adc07bd))
+
+### Features
+
+*   **transformer:** add a separate provider data transformation layer ([f72dd77](https://github.com/goparrot/geocoder/commit/f72dd77))
+
+### BREAKING CHANGES
+
+*   **transformer:** - `LocationInterface`.`country` and `LocationInterface`.`countryCode` may be `undefined`.
+
+
+*   remove `LocationBuilder` and `SuggestionBuilder`. Use `AbstractLocationTransformer` and `AbstractSuggestionTransformer` instead.
+
 <a name="2.2.4"></a>
 
 ## [2.2.4](https://github.com/goparrot/geocoder/compare/v2.2.3...v2.2.4) (2019-11-02)

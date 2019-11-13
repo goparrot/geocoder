@@ -3,29 +3,29 @@ import { WorldCountryState, WorldCountryStateUtil } from '../../../../src/util/w
 describe('WorldCountryStateUtil (unit)', () => {
     const worldCountryStateFixture: WorldCountryState = {
         countryCode: 'US',
-        stateCode: 'NY',
-        name: 'New York',
+        stateCode: 'MD',
+        name: 'Maryland',
     };
 
     describe('#find', () => {
         it('should find state by name', async () => {
             return WorldCountryStateUtil.find({
                 countryCode: 'US',
-                name: 'New York',
+                name: 'Maryland',
             }).should.become(worldCountryStateFixture);
         });
 
         it('should find state by countryCode', async () => {
             return WorldCountryStateUtil.find({
                 countryCode: 'US',
-                stateCode: 'NY',
+                stateCode: 'MD',
             }).should.become(worldCountryStateFixture);
         });
 
         it('should find state by valid countryCode and stateCode and wrong state name', async () => {
             return WorldCountryStateUtil.find({
                 countryCode: 'US',
-                stateCode: 'NY',
+                stateCode: 'MD',
                 name: 'Wrong state name',
             }).should.become(worldCountryStateFixture);
         });

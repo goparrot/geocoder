@@ -12,8 +12,9 @@ export class WorldCountryStateUtil {
      */
     private static match(state: WorldCountryState, filters: WorldCountryStateQuery): boolean {
         if (
-            (filters.stateCode && state.stateCode.toLowerCase() === filters.stateCode.toLowerCase()) ||
-            (filters.name && state.name.toLowerCase() === filters.name.toLowerCase())
+            state.countryCode.toLowerCase() === filters.countryCode.toLowerCase() &&
+            ((filters.stateCode && state.stateCode.toLowerCase() === filters.stateCode.toLowerCase()) ||
+                (filters.name && state.name.toLowerCase() === filters.name.toLowerCase()))
         ) {
             return true;
         }

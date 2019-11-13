@@ -1,3 +1,11 @@
+<a name="3.0.1"></a>
+
+## [3.0.1](https://github.com/goparrot/geocoder/compare/v3.0.0...v3.0.1) (2019-11-13)
+
+### Bug Fixes
+
+*   **world-country-state-util:** fix match method ([a0df1fa](https://github.com/goparrot/geocoder/commit/a0df1fa))
+
 <a name="3.0.0"></a>
 
 # [3.0.0](https://github.com/goparrot/geocoder/compare/v2.2.4...v3.0.0) (2019-11-04)

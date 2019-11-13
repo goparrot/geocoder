@@ -1,13 +1,13 @@
-[![Build Status](https://travis-ci.com/goparrot/geocoder.svg?branch=master)](https://travis-ci.com/goparrot/geocoder)
+[![Build Status](https://github.com/goparrot/geocoder/workflows/CI/badge.svg?branch=master)](https://github.com/goparrot/geocoder/actions?query=branch%3Amaster+event%3Apush+workflow%3ACI)
 [![Coverage Status](https://coveralls.io/repos/github/goparrot/geocoder/badge.svg?branch=master)](https://coveralls.io/github/goparrot/geocoder?branch=master)
 [![npm version](https://badge.fury.io/js/%40goparrot%2Fgeocoder.svg)](https://badge.fury.io/js/%40goparrot%2Fgeocoder)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![Greenkeeper badge](https://badges.greenkeeper.io/goparrot/geocoder.svg)](https://greenkeeper.io/)
-
 # Geocoder
 
 <p align="center">
   <a href="https://github.com/goparrot/geocoder" target="blank"><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/OpenStreetMap-Logo-2006.svg" width="354" alt="Geocoder Logo" /></a>
 </p>
+
 
 ## Description
 

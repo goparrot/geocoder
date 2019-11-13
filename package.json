@@ -10,7 +10,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/goparrot/geocoder"
+        "url": "https://github.com/goparrot/geocoder.git"
     },
     "keywords": [
         "node",

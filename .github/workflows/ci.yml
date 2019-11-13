@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+      - /^greenkeeper.*$/
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x, 13.x]
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, lint and coverage
+        run: |
+          npm i
+          npm run lint
+          npm run coverage:all
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+          MAP_QUEST_API_KEY: ${{ secrets.MAP_QUEST_API_KEY }}
+          HERE_APP_ID: ${{ secrets.HERE_APP_ID }}
+          HERE_APP_CODE: ${{ secrets.HERE_APP_CODE }}
+
+#  coveralls:
+#    needs: [build]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Run coveralls
+#        run: npm i coveralls && npm run coveralls
+##      - name: Run coveralls
+##        uses: coverallsapp/github-action@master
+##        with:
+##          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+#  coveralls:
+#    needs: [build]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#        with:
+#          fetch-depth: 1
+#      - uses: actions/setup-node@v1
+#        with:
+#          node-version: '12.x'
+#      - name: Run coveralls
+#        uses: coverallsapp/github-action@master
+#        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+#    needs: [build, coveralls]
+    needs: [build]
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+    steps:
+      - name: Publish
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: mikeal/merge-release@master

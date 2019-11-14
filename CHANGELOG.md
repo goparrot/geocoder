@@ -1,3 +1,7 @@
+<a name="3.0.3"></a>
+
+## [3.0.3](https://github.com/goparrot/geocoder/compare/v3.0.1...v3.0.3) (2019-11-14)
+
 <a name="3.0.1"></a>
 
 ## [3.0.1](https://github.com/goparrot/geocoder/compare/v3.0.0...v3.0.1) (2019-11-13)

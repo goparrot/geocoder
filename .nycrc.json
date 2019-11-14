@@ -8,7 +8,7 @@
         "src/provider/map-quest/command/map-quest-suggest.command.ts",
         "src/model/abstract-provider.ts"
     ],
-    "reporter": ["text-summary", "html"],
+    "reporter": ["lcov", "text-summary", "html"],
     "cache": false,
     "all": true
 }

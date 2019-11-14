@@ -12,68 +12,65 @@ on:
 jobs:
   commitlint:
     runs-on: ubuntu-latest
+
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
-      - uses: actions/checkout@v1
+      - name: Clone repository
+        uses: actions/checkout@v1
         with:
           fetch-depth: 1
-      - uses: wagoid/commitlint-github-action@v1.2.2
+
+      - name: Lints Pull Request commits
+        uses: wagoid/commitlint-github-action@v1.2.2
 
   build:
     runs-on: ubuntu-latest
+
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [8.x, 10.x, 12.x, 13.x]
+        node-version: [8.x, 10.x, 12.x]
+
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
-      - uses: actions/checkout@v1
+      - name: Clone repository
+        uses: actions/checkout@v1
         with:
           fetch-depth: 1
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, lint and coverage
-        run: |
-          npm i
-          npm run lint
-          npm run coverage:all
+
+      - run: node --version
+      - run: npm --version
+
+      - name: Install npm dependencies
+        run: npm i
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run tests
+        run: npm run coverage:all
         env:
           GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
           MAP_QUEST_API_KEY: ${{ secrets.MAP_QUEST_API_KEY }}
           HERE_APP_ID: ${{ secrets.HERE_APP_ID }}
           HERE_APP_CODE: ${{ secrets.HERE_APP_CODE }}
 
-#  coveralls:
-#    needs: [build]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Run coveralls
-#        run: npm i coveralls && npm run coveralls
-##      - name: Run coveralls
-##        uses: coverallsapp/github-action@master
-##        with:
-##          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-#  coveralls:
-#    needs: [build]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v1
-#        with:
-#          fetch-depth: 1
-#      - uses: actions/setup-node@v1
-#        with:
-#          node-version: '12.x'
-#      - name: Run coveralls
-#        uses: coverallsapp/github-action@master
-#        with:
-#          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Coveralls
+        uses: coverallsapp/github-action@master
+        if: startsWith(matrix.node-version, '12.')
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
 #  publish:
-##    needs: [commitlint, build, coveralls]
 #    needs: [commitlint, build]
 #    runs-on: ubuntu-latest
 #    steps:

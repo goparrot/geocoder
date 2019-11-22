@@ -24,6 +24,11 @@ export class GoogleMapsPlaceDetailsCommand extends GoogleMapsLocationCommandMixi
             placeid: query.placeId,
             language: query.language,
             sensor: false,
+            /**
+             * @see interface
+             * used basic fields
+             */
+            fields: 'address_component,formatted_address,geometry,place_id,type',
         };
 
         if (query.countryCode) {

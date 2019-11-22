@@ -218,8 +218,8 @@ export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
                 types: ['postal_code_suffix'],
             },
         ],
-        adr_address:
-            '<span class="street-address">1158 E 89th St</span>, <span class="locality">Chicago</span>, <span class="region">IL</span> <span class="postal-code">60619-7017</span>, <span class="country-name">USA</span>',
+        // adr_address:
+        //     '<span class="street-address">1158 E 89th St</span>, <span class="locality">Chicago</span>, <span class="region">IL</span> <span class="postal-code">60619-7017</span>, <span class="country-name">USA</span>',
         formatted_address: '1158 E 89th St, Chicago, IL 60619, USA',
         geometry: {
             location: {
@@ -237,18 +237,18 @@ export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
                 },
             },
         },
-        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
+        // icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
         // sometimes this field is not returned
         // id: 'bbbfd42eed9385648e42f6f331d54eac2d61cbca',
-        name: '1158 E 89th St',
+        // name: '1158 E 89th St',
         place_id: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIxEi8KFAoSCZ9KkOIgJg6IEYkN8yihjBnAEIYJKhQKEgkJAlVQKiYOiBHg0_ra6hq5MA',
-        reference: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIxEi8KFAoSCZ9KkOIgJg6IEYkN8yihjBnAEIYJKhQKEgkJAlVQKiYOiBHg0_ra6hq5MA',
+        // reference: 'EiYxMTU4IEUgODl0aCBTdCwgQ2hpY2FnbywgSUwgNjA2MTksIFVTQSIxEi8KFAoSCZ9KkOIgJg6IEYkN8yihjBnAEIYJKhQKEgkJAlVQKiYOiBHg0_ra6hq5MA',
         // sometimes this field is not returned
         // scope: 'GOOGLE',
         types: ['street_address'],
-        url: 'https://maps.google.com/?q=1158+E+89th+St,+Chicago,+IL+60619,+USA&ftid=0x880e2620e2904a9f:0x8850f56fdf8a5429',
-        utc_offset: -360,
-        vicinity: 'Chicago',
+        // url: 'https://maps.google.com/?q=1158+E+89th+St,+Chicago,+IL+60619,+USA&ftid=0x880e2620e2904a9f:0x8850f56fdf8a5429',
+        // utc_offset: -360,
+        // vicinity: 'Chicago',
     },
     status: 'OK',
 });

@@ -1,13 +1,6 @@
 name: CI
 
-on:
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
-      - /^greenkeeper.*$/
+on: ["push", "pull_request"]
 
 jobs:
   commitlint:

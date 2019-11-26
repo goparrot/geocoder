@@ -4,10 +4,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [3.0.4](https://github.com/goparrot/geocoder/compare/v3.0.3...v3.0.4) (2019-11-22)
 
-
 ### Bug Fixes
 
-* **provider place-details:** restrict google place details query fields ([be5dde9](https://github.com/goparrot/geocoder/commit/be5dde904732ed8a7bd361a54a1f071b01141332))
+*   **provider place-details:** restrict google place details query fields ([be5dde9](https://github.com/goparrot/geocoder/commit/be5dde904732ed8a7bd361a54a1f071b01141332))
 
 <a name="3.0.3"></a>
 

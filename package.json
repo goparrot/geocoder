@@ -90,7 +90,7 @@
     },
     "dependencies": {
         "lodash.isempty": "^4.4.0",
-        "world-countries": "^2.1.0"
+        "world-countries": "^3.0.0"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.2.0",

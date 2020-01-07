@@ -104,7 +104,7 @@
         "@types/node": "^13.1.0",
         "@types/sinon": "^7.5.0",
         "@types/supertest": "^2.0.8",
-        "axios": "^0.18.1",
+        "axios": "^0.19.1",
         "axios-mock-adapter": "^1.17.0",
         "chai": "^4.2.0",
         "chai-as-promised": "^7.1.1",

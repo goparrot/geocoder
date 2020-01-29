@@ -100,7 +100,7 @@
         "@types/chai-as-promised": "^7.1.2",
         "@types/heremaps": "^3.0.15",
         "@types/lodash.isempty": "^4.4.6",
-        "@types/mocha": "^5.2.7",
+        "@types/mocha": "^7.0.0",
         "@types/node": "^13.1.0",
         "@types/sinon": "^7.5.0",
         "@types/supertest": "^2.0.8",

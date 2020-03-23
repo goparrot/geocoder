@@ -25,28 +25,19 @@ describe('ProviderAggregator (integration)', () => {
 
     describe('#geocode', () => {
         it('should return expected response', async () => {
-            return geocoder
-                .geocode(geocodeQuery)
-                .should.eventually.be.an('array')
-                .with.length(1);
+            return geocoder.geocode(geocodeQuery).should.eventually.be.an('array').with.length(1);
         });
     });
 
     describe('#reverse', () => {
         it('should return expected response', async () => {
-            return geocoder
-                .reverse(reverseQuery)
-                .should.eventually.be.an('array')
-                .with.length(1);
+            return geocoder.reverse(reverseQuery).should.eventually.be.an('array').with.length(1);
         });
     });
 
     describe('#suggest', () => {
         it('should return expected response', async () => {
-            return geocoder
-                .suggest(suggestQuery)
-                .should.eventually.be.an('array')
-                .with.length(3);
+            return geocoder.suggest(suggestQuery).should.eventually.be.an('array').with.length(3);
         });
     });
 });

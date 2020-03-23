@@ -26,10 +26,7 @@ describe('StatefulChainProvider (integration)', () => {
 
     describe('#geocode', () => {
         it('should return response', async () => {
-            return geocoder
-                .geocode(geocodeQuery)
-                .should.eventually.be.an('array')
-                .with.length(1);
+            return geocoder.geocode(geocodeQuery).should.eventually.be.an('array').with.length(1);
         });
 
         it('should return empty array', async () => {
@@ -45,10 +42,7 @@ describe('StatefulChainProvider (integration)', () => {
 
     describe('#reverse', () => {
         it('should return expected response', async () => {
-            return geocoder
-                .reverse(reverseQuery)
-                .should.eventually.be.an('array')
-                .with.length(1);
+            return geocoder.reverse(reverseQuery).should.eventually.be.an('array').with.length(1);
         });
 
         it('should return empty array', async () => {
@@ -65,10 +59,7 @@ describe('StatefulChainProvider (integration)', () => {
 
     describe('#suggest', () => {
         it('should return expected response', async () => {
-            return geocoder
-                .suggest(suggestQuery)
-                .should.eventually.be.an('array')
-                .with.length(3);
+            return geocoder.suggest(suggestQuery).should.eventually.be.an('array').with.length(3);
         });
 
         it('should return empty array', async () => {

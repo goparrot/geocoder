@@ -1,8 +1,0 @@
---ui bdd
--r ts-node/register
--r source-map-support/register
--r tsconfig-paths/register
--r dotenv/config
--r ./node_modules/reflect-metadata/Reflect.js
--r ./test/common.opts.ts
---project tsconfig.spec.json

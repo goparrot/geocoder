@@ -7,12 +7,7 @@ export class WorldCountryState implements WorldCountryStateInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Transform((v: string) =>
-        v
-            .toString()
-            .trim()
-            .toUpperCase(),
-    )
+    @Transform((v: string) => v.toString().trim().toUpperCase())
     @Expose()
     countryCode: string;
 
@@ -20,12 +15,7 @@ export class WorldCountryState implements WorldCountryStateInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Transform((v: string) =>
-        v
-            .toString()
-            .trim()
-            .toUpperCase(),
-    )
+    @Transform((v: string) => v.toString().trim().toUpperCase())
     @Expose()
     stateCode: string;
 

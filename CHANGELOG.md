@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/goparrot/geocoder/compare/v3.0.4...v4.0.0) (2020-03-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **lint:** Drop support for Node.js 8.
+Require 10.18.0 instead which is the oldest supported version.
+
+### Bug Fixes
+
+* **package:** update world-countries to version 3.0.0 ([ba12af3](https://github.com/goparrot/geocoder/commit/ba12af32b90612482d4c198325a2e6959afd4cc5))
+
+
+### Chore
+
+* **lint:** move from tslint to eslint ([a827fc1](https://github.com/goparrot/geocoder/commit/a827fc103051fcdbf9f42c55847baed81cfcb99f))
+
 ### [3.0.4](https://github.com/goparrot/geocoder/compare/v3.0.3...v3.0.4) (2019-11-22)
 
 ### Bug Fixes

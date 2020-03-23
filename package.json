@@ -30,7 +30,7 @@
         "mapquest"
     ],
     "engines": {
-        "node": ">=8.9.0"
+        "node": ">=10"
     },
     "main": "src/index.ts",
     "husky": {
@@ -40,8 +40,8 @@
         }
     },
     "lint-staged": {
-        "*.{ts,json}": [
-            "npm run format"
+        "*.{ts,tsx,json,js,jsx}": [
+            "npm run format:base"
         ]
     },
     "config": {
@@ -52,27 +52,24 @@
     "scripts": {
         "commit": "git-cz",
         "test": "mocha 'test/unit/**/*.spec.ts' 'test/e2e/**/*.spec.ts'",
-        "test:fast": "TS_NODE_TRANSPILE_ONLY=true npm run test",
+        "test:all": "mocha --timeout 15000 'test/**/*.spec.ts'",
         "test:unit": "mocha 'test/unit/**/*.spec.ts'",
         "test:e2e": "mocha 'test/e2e/**/*.spec.ts'",
         "test:integration": "mocha --timeout 15000 'test/integration/**/*.spec.ts'",
-        "test:integration:fast": "mocha --timeout 15000 'test/integration/**/*.spec.ts'",
-        "test:all": "mocha --timeout 15000 'test/**/*.spec.ts'",
-        "test:all:fast": "TS_NODE_TRANSPILE_ONLY=true mocha --timeout 15000 'test/**/*.spec.ts'",
         "coverage": "nyc npm test",
-        "coverage:fast": "TS_NODE_TRANSPILE_ONLY=true nyc npm run test:fast",
         "coverage:all": "nyc npm run test:all",
-        "coverage:all:fast": "TS_NODE_TRANSPILE_ONLY=true nyc npm run test:all:fast",
-        "format": "prettier \"**/*.{ts,js,json}\" --write",
-        "format:staged": "lint-staged",
-        "lint": "npm run lint:config:check && tslint -c tslint.json -p tsconfig.json --format stylish",
-        "lint:config:check": "tslint-config-prettier-check ./tslint.json",
+        "lint": "npm run lint:base -- '.'",
+        "lint:base": "npm run lint:config:check && eslint --ignore-path .gitignore --ext .ts,.tsx,.json,.js,.jsx",
+        "lint:config:check": "eslint --print-config src/index.ts | eslint-config-prettier-check",
+        "format": "npm run format:base -- '.'",
+        "format:base": "npm run lint:base -- --fix",
+        "format:staged": "git add . && lint-staged",
         "build": "rimraf dist && tsc -p tsconfig.build.json",
         "remark": "remark README.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md .github/ -o -f -q && git add .",
         "pre-commit": "git add . && npm run format:staged && npm run remark && npm run lint && npm run coverage:all && npm run build",
         "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && remark CHANGELOG.md -o -f -q && git add CHANGELOG.md",
         "prepublishOnly": "echo \"use 'npm run publish'\" && exit 1",
-        "publish": "npm run build && node bin/prepublish.js && npm publish dist",
+        "publish": "npm run build && ts-node -T bin/prepublish.ts && npm publish dist",
         "publish:dev": "npm run publish --tag dev",
         "publish:dev:dry": "npm run publish:dev --dry-run",
         "version": "echo \"use 'npm run release'\" && exit 1",
@@ -102,6 +99,8 @@
         "@types/node": "^13.9.3",
         "@types/sinon": "^7.5.2",
         "@types/supertest": "^2.0.8",
+        "@typescript-eslint/eslint-plugin": "^2.25.0",
+        "@typescript-eslint/parser": "^2.25.0",
         "axios": "^0.19.2",
         "axios-mock-adapter": "^1.18.1",
         "chai": "^4.2.0",
@@ -113,6 +112,11 @@
         "conventional-github-releaser": "^3.1.3",
         "cz-conventional-changelog": "^3.1.0",
         "dotenv": "^8.2.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.10.1",
+        "eslint-import-resolver-typescript": "^2.0.0",
+        "eslint-plugin-import": "^2.20.1",
+        "eslint-plugin-prettier": "^3.1.2",
         "husky": "^4.2.3",
         "lint-staged": "^10.0.8",
         "mocha": "^7.1.1",
@@ -132,8 +136,6 @@
         "supertest": "^4.0.2",
         "ts-node": "^8.8.1",
         "tsconfig-paths": "^3.9.0",
-        "tslint": "^5.20.1",
-        "tslint-config-prettier": "^1.18.0",
         "typescript": "^3.8.3"
     }
 }

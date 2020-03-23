@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Lints Pull Request commits
-        uses: wagoid/commitlint-github-action@v1.2.2
+        uses: wagoid/commitlint-github-action@v1
 
   build:
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [10.x, 12.x]
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

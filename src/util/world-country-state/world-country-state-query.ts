@@ -15,14 +15,7 @@ export class WorldCountryStateQuery implements WorldCountryStateQueryInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Transform((v: string) =>
-        v
-            ? v
-                  .toString()
-                  .trim()
-                  .toUpperCase()
-            : undefined,
-    )
+    @Transform((v: string) => (v ? v.toString().trim().toUpperCase() : undefined))
     @Expose()
     stateCode?: string;
 

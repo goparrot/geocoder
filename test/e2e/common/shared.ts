@@ -16,19 +16,6 @@ import { AbstractProvider, AccuracyEnum, ProvidableInterface } from '../../../sr
 import { ArcgisProvider, GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
 import { getAvailableAccuracies } from '../../../src/util';
 
-export function sharedCommandBehaviours(
-    mock: MockAdapter,
-    provider: GeocoderInterface,
-    url: string,
-    method: string,
-    query: QueryInterface,
-    rawResponse: any,
-    parsedResponse: any,
-): void {
-    sharedCommandResultBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
-    sharedCommandHttpStatusBehaviours(mock, provider, url, method, query);
-}
-
 export function sharedCommandResultBehaviours(
     mock: MockAdapter,
     provider: GeocoderInterface,
@@ -91,6 +78,19 @@ export function sharedCommandHttpStatusBehaviours(mock: MockAdapter, provider: G
             return provider[method](query).should.be.rejectedWith(InvalidServerResponseException);
         });
     });
+}
+
+export function sharedCommandBehaviours(
+    mock: MockAdapter,
+    provider: GeocoderInterface,
+    url: string,
+    method: string,
+    query: QueryInterface,
+    rawResponse: any,
+    parsedResponse: any,
+): void {
+    sharedCommandResultBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
+    sharedCommandHttpStatusBehaviours(mock, provider, url, method, query);
 }
 
 export function sharedGeocodeCommandBehaviours(mock: MockAdapter, provider: AbstractProvider, url: string, rawResponse: any): void {

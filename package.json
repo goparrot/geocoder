@@ -85,7 +85,7 @@
     },
     "dependencies": {
         "lodash.isempty": "^4.4.0",
-        "world-countries": "^3.0.0"
+        "world-countries": "^4.0.0"
     },
     "devDependencies": {
         "@commitlint/cli": "^8.3.5",

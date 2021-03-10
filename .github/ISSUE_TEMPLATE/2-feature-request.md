@@ -7,7 +7,7 @@ assignees: ruscon
 
 ---
 
-## Issue Number: [N/A]
+## Issue Number: \[N/A]
 
 ## Does this PR introduce a breaking change
 

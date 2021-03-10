@@ -8,18 +8,18 @@ export abstract class AbstractLocationTransformer<HttpProviderClass extends Abst
     HttpProviderClass,
     ProviderRawEntryType
 > {
-    abstract async getFormattedAddress(): Promise<LocationInterface['formattedAddress']>;
-    abstract async getLongitude(): Promise<LocationInterface['longitude']>;
-    abstract async getLatitude(): Promise<LocationInterface['latitude']>;
-    abstract async getCountry(): Promise<LocationInterface['country']>;
-    abstract async getCountryCode(): Promise<LocationInterface['countryCode']>;
-    abstract async getState(): Promise<LocationInterface['state']>;
-    abstract async getStateCode(): Promise<LocationInterface['stateCode']>;
-    abstract async getCity(): Promise<LocationInterface['city']>;
-    abstract async getStreetName(): Promise<LocationInterface['streetName']>;
-    abstract async getHouseNumber(): Promise<LocationInterface['houseNumber']>;
-    abstract async getPostalCode(): Promise<LocationInterface['postalCode']>;
-    abstract async getPlaceId(): Promise<LocationInterface['placeId']>;
+    abstract getFormattedAddress(): Promise<LocationInterface['formattedAddress']>;
+    abstract getLongitude(): Promise<LocationInterface['longitude']>;
+    abstract getLatitude(): Promise<LocationInterface['latitude']>;
+    abstract getCountry(): Promise<LocationInterface['country']>;
+    abstract getCountryCode(): Promise<LocationInterface['countryCode']>;
+    abstract getState(): Promise<LocationInterface['state']>;
+    abstract getStateCode(): Promise<LocationInterface['stateCode']>;
+    abstract getCity(): Promise<LocationInterface['city']>;
+    abstract getStreetName(): Promise<LocationInterface['streetName']>;
+    abstract getHouseNumber(): Promise<LocationInterface['houseNumber']>;
+    abstract getPostalCode(): Promise<LocationInterface['postalCode']>;
+    abstract getPlaceId(): Promise<LocationInterface['placeId']>;
 
     async transform(options?: ClassTransformOptions): Promise<Location<ProviderRawEntryType>> {
         const location: Location = new Location<ProviderRawEntryType>();

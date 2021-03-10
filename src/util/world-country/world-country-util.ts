@@ -1,10 +1,10 @@
 import { plainToClass } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
+import { Countries, Country } from 'world-countries';
 import countries from 'world-countries/dist/countries-unescaped.json';
 import { WorldCountry } from './world-country';
 import { WorldCountryQuery } from './world-country-query';
 import { WorldCountryQueryInterface } from './world-country-query.interface';
-import { WorldCountryInterface } from './world-country.interface';
 
 export class WorldCountryUtil {
     /**
@@ -47,8 +47,8 @@ export class WorldCountryUtil {
             return;
         }
 
-        const countryData: WorldCountryInterface | undefined = (countries as WorldCountryInterface[]).find((plainCountry: WorldCountryInterface) => {
-            const country: WorldCountry = plainToClass<WorldCountry, WorldCountryInterface>(WorldCountry, plainCountry);
+        const countryData: Country | undefined = ((countries as unknown) as Countries).find((plainCountry: Country) => {
+            const country: WorldCountry = plainToClass<WorldCountry, Country>(WorldCountry, plainCountry);
 
             return WorldCountryUtil.match(country, query);
         });
@@ -57,6 +57,6 @@ export class WorldCountryUtil {
             return;
         }
 
-        return plainToClass<WorldCountry, WorldCountryInterface>(WorldCountry, countryData);
+        return plainToClass<WorldCountry, Country>(WorldCountry, countryData);
     }
 }

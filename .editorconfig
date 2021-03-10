@@ -1,3 +1,4 @@
+# if you want to update the rules in this file, you MUST also update them in prettier.config.js
 root = true
 
 [*]

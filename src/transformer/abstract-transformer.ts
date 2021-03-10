@@ -11,5 +11,5 @@ export abstract class AbstractTransformer<HttpProviderClass extends AbstractHttp
         this.raw = raw;
     }
 
-    abstract async transform(options?: ClassTransformOptions): Promise<any>;
+    abstract transform(options?: ClassTransformOptions): Promise<any>;
 }

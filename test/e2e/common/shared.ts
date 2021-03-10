@@ -22,8 +22,8 @@ export function sharedCommandResultBehaviours(
     url: string,
     method: string,
     query: QueryInterface,
-    rawResponse: any,
-    parsedResponse: any,
+    rawResponse: unknown,
+    parsedResponse: unknown,
 ): void {
     describe('#sharedCommandBehaviours', () => {
         it('should return success response', async () => {
@@ -86,14 +86,14 @@ export function sharedCommandBehaviours(
     url: string,
     method: string,
     query: QueryInterface,
-    rawResponse: any,
-    parsedResponse: any,
+    rawResponse: unknown,
+    parsedResponse: unknown,
 ): void {
     sharedCommandResultBehaviours(mock, provider, url, method, query, rawResponse, parsedResponse);
     sharedCommandHttpStatusBehaviours(mock, provider, url, method, query);
 }
 
-export function sharedGeocodeCommandBehaviours(mock: MockAdapter, provider: AbstractProvider, url: string, rawResponse: any): void {
+export function sharedGeocodeCommandBehaviours(mock: MockAdapter, provider: AbstractProvider, url: string, rawResponse: unknown): void {
     describe('#sharedGeocodeCommandBehaviours', () => {
         describe('#exactMatch', () => {
             it('should throw ExactMatchNotFoundException with "More than one result" message', async () => {
@@ -140,7 +140,7 @@ export function sharedAccuracyBehaviours(
     url: string,
     method: string,
     query: QueryInterface,
-    rawResponse: any,
+    rawResponse: unknown,
     maxAccuracy: AccuracyEnum,
 ): void {
     describe('#sharedAccuracyBehaviours', () => {

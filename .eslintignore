@@ -1,0 +1,13 @@
+# eslint by default ignores all hidden directories
+# example (also you must add ".storybook/**/*" to the tsconfig.eslint.json in the "include" property)
+#!.storybook
+
+# don't forget to add here all ignored folders or files from .gitignore that you don't need to check with a linter (there is no magic)
+node_modules
+dist
+coverage
+test-reports
+.nyc_output
+test.ts
+
+# add here all custom rules

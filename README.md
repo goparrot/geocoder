@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/goparrot/geocoder/badge.svg?branch=master)](https://coveralls.io/github/goparrot/geocoder?branch=master)
 [![NPM version](https://img.shields.io/npm/v/@goparrot/geocoder)](https://www.npmjs.com/package/@goparrot/geocoder)
 [![Greenkeeper badge](https://badges.greenkeeper.io/goparrot/geocoder.svg)](https://greenkeeper.io/)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 # Geocoder
@@ -19,7 +19,7 @@ providing a powerful abstraction layer for geocoding manipulations.
 *   [Installation](#installation)
 *   [Usage](#usage)
 *   [Providers](#providers)
-*   [Special Geocoders and Providers](#special-geocoders-and-providers) 
+*   [Special Geocoders and Providers](#special-geocoders-and-providers)
 *   [Versioning](#versioning)
 *   [Contributing](#contributing)
 *   [Unit Tests](#unit-tests)
@@ -37,7 +37,7 @@ So if you had a project with multiple reflect-metadata packages, it could happen
 
 ### Minimal
 
-In the code snippet below we use Google provider. 
+In the code snippet below we use Google provider.
 
 ```typescript
 import 'reflect-metadata';
@@ -86,7 +86,7 @@ const geocoder: Geocoder = new Geocoder(provider);
 
 ### Advanced
 
-In the code snippet below we use Here provider. 
+In the code snippet below we use Here provider.
 
 ```typescript
 import 'reflect-metadata';

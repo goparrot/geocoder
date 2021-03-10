@@ -2,7 +2,7 @@
  * All library exceptions must inherit this class.
  */
 export class GeocoderException extends Error {
-    constructor(message: string, private readonly payload?: any) {
+    constructor(message: string, private readonly payload?: unknown) {
         super(message);
 
         this.name = this.constructor.name;

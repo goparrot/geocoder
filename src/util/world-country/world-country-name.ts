@@ -8,6 +8,7 @@ export class WorldCountryName {
     @MinLength(1)
     @Expose()
     common: string;
+
     @IsString()
     @IsOptional()
     @MinLength(1)

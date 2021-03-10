@@ -7,8 +7,8 @@ export abstract class AbstractSuggestionTransformer<
     HttpProviderClass extends AbstractHttpProvider = any,
     ProviderRawEntryType = any
 > extends AbstractTransformer<HttpProviderClass, ProviderRawEntryType> {
-    abstract async getFormattedAddress(): Promise<SuggestionInterface['formattedAddress']>;
-    abstract async getPlaceId(): Promise<SuggestionInterface['placeId']>;
+    abstract getFormattedAddress(): Promise<SuggestionInterface['formattedAddress']>;
+    abstract getPlaceId(): Promise<SuggestionInterface['placeId']>;
 
     async transform(options?: ClassTransformOptions): Promise<Suggestion<ProviderRawEntryType>> {
         const suggestion: Suggestion = new Suggestion<ProviderRawEntryType>();

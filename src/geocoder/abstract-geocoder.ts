@@ -5,11 +5,11 @@ import { AbstractChainProvider, AbstractHttpProvider, AbstractProvider, Location
 import { Type } from '../types';
 
 export abstract class AbstractGeocoder extends ProvidableMixin(LoggableMixin(Object)) implements GeocoderInterface {
-    abstract async geocode(query: GeocodeQueryInterface): Promise<Location[]>;
+    abstract geocode(query: GeocodeQueryInterface): Promise<Location[]>;
 
-    abstract async reverse(query: ReverseQueryInterface): Promise<Location[]>;
+    abstract reverse(query: ReverseQueryInterface): Promise<Location[]>;
 
-    abstract async suggest(query: SuggestQueryInterface): Promise<Suggestion[]>;
+    abstract suggest(query: SuggestQueryInterface): Promise<Suggestion[]>;
 
     protected async geocodeByProvider(provider: AbstractProvider, query: GeocodeQueryInterface): Promise<Location[]> {
         return provider.geocode(query);

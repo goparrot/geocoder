@@ -3,13 +3,21 @@ import { Geocoder } from '../../../src/geocoder';
 import { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { Location } from '../../../src/model';
 import { GoogleMapsProvider } from '../../../src/provider';
-import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
+import {
+    geocodeQueryFixture,
+    geocodeQueryFixtureForAustralia,
+    geocodeQueryFixtureForCountryWithoutStateCode,
+    reverseQueryFixture,
+    suggestQueryFixture,
+} from '../../fixture/model/query.fixture';
 import { providerParsedPlaceDetailsResponse, providerPlaceDetailsQueryFixture } from '../../fixture/provider/google.fixture';
 
 describe('GoogleMapsProvider (integration)', () => {
     let client: AxiosInstance;
     let geocoder: Geocoder;
     let geocodeQuery: GeocodeQueryInterface;
+    let geocodeQueryForAustralia: GeocodeQueryInterface;
+    let geocodeQueryForCountryWithoutStateCode: GeocodeQueryInterface;
     let reverseQuery: ReverseQueryInterface;
     let suggestQuery: SuggestQueryInterface;
     let placeDetailsQuery: PlaceDetailsQueryInterface;
@@ -18,6 +26,10 @@ describe('GoogleMapsProvider (integration)', () => {
         geocodeQuery = { ...geocodeQueryFixture };
         reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
+        suggestQuery = { ...suggestQueryFixture };
+        geocodeQueryForAustralia = { ...geocodeQueryFixtureForAustralia };
+        geocodeQueryForCountryWithoutStateCode = { ...geocodeQueryFixtureForCountryWithoutStateCode };
+
         placeDetailsQuery = { ...providerPlaceDetailsQueryFixture };
 
         client = Axios.create();
@@ -30,6 +42,14 @@ describe('GoogleMapsProvider (integration)', () => {
     describe('#geocode', () => {
         it('should return expected response', async () => {
             return geocoder.geocode(geocodeQuery).should.eventually.be.an('array').with.length(1);
+        });
+
+        it('should return expected response for Australia address', async () => {
+            return geocoder.geocode(geocodeQueryForAustralia).should.eventually.be.an('array').with.length(1);
+        });
+
+        it('should return expected response for country without stateCode', async () => {
+            return geocoder.geocode(geocodeQueryForCountryWithoutStateCode).should.eventually.be.an('array').with.length(1);
         });
     });
 

@@ -30,7 +30,7 @@ export class GeocodeQuery extends Query implements GeocodeQueryInterface {
     @IsOptional()
     @IsString()
     @MinLength(2)
-    @MaxLength(2)
+    @MaxLength(100)
     stateCode?: string;
 
     @IsOptional()

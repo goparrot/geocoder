@@ -17,6 +17,38 @@ export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freez
     withRaw: true,
 });
 
+export const geocodeQueryFixtureForAustralia: Readonly<GeocodeQueryInterface> = Object.freeze<GeocodeQueryInterface>({
+    address: '2 Balaka Pl',
+    countryCode: 'AU',
+    postalCode: '3083',
+    state: 'Victoria',
+    stateCode: 'VIC',
+    city: 'Bundoora',
+    lat: -37.70083069999999,
+    lon: 145.0655546,
+    radius: 25000,
+    language: 'en',
+    limit: 3,
+    fillMissingQueryProperties: true,
+    withRaw: true,
+});
+
+export const geocodeQueryFixtureForCountryWithoutStateCode: Readonly<GeocodeQueryInterface> = Object.freeze<GeocodeQueryInterface>({
+    address: 'Strada Lacului 44',
+    countryCode: 'MD',
+    postalCode: '2009',
+    state: 'Chișinău',
+    stateCode: 'Chișinău',
+    city: 'Chișinău',
+    lat: 47.0099488,
+    lon: 28.8251969,
+    radius: 25000,
+    language: 'en',
+    limit: 3,
+    fillMissingQueryProperties: true,
+    withRaw: true,
+});
+
 export const reverseQueryFixture: Readonly<ReverseQueryInterface> = Object.freeze<ReverseQueryInterface>({
     lat: 41.7340186,
     lon: -87.5960762,

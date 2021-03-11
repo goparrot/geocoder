@@ -1,7 +1,8 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { Geocoder } from '../../../src/geocoder';
-import { QueryInterface } from '../../../src/interface';
+import type { QueryInterface } from '../../../src/interface';
 import { NullLogger } from '../../../src/logger';
 import { AccuracyEnum } from '../../../src/model';
 import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider';

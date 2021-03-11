@@ -1,4 +1,4 @@
-import { LocationInterface, PlaceDetailsQueryInterface, SuggestionInterface } from '../../../src/interface';
+import type { LocationInterface, PlaceDetailsQueryInterface, SuggestionInterface } from '../../../src/interface';
 import { placeDetailsQueryFixture } from '../model/query.fixture';
 
 export const providerRawGeocodeResponse: Readonly<any> = Object.freeze({

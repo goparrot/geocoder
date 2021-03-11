@@ -1,8 +1,8 @@
 import { ProviderNotRegisteredException } from '../exception';
-import { LoggableInterface, LoggerInterface } from '../logger';
-import { Constructor } from '../types';
-import { AbstractProvider } from './abstract-provider';
-import { ProvidableInterface } from './providable.interface';
+import type { LoggableInterface, LoggerInterface } from '../logger';
+import type { Constructor } from '../types';
+import type { AbstractProvider } from './abstract-provider';
+import type { ProvidableInterface } from './providable.interface';
 
 export function ProvidableMixin<TBase extends Constructor<LoggableInterface>>(Base: TBase): TBase & Constructor<ProvidableInterface> {
     return class extends Base {

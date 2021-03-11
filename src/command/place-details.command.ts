@@ -1,7 +1,8 @@
 import { NotFoundException } from '../exception';
-import { PlaceDetailsQueryInterface } from '../interface';
-import { Location, PlaceDetailsQuery } from '../model';
-import { AbstractLocationTransformer } from '../transformer';
+import type { PlaceDetailsQueryInterface } from '../interface';
+import type { Location } from '../model';
+import { PlaceDetailsQuery } from '../model';
+import type { AbstractLocationTransformer } from '../transformer';
 import { AbstractLocationCommand } from './abstract-location.command';
 
 export class PlaceDetailsCommand<ProviderRequestType = any, ProviderResponseType = any> extends AbstractLocationCommand<

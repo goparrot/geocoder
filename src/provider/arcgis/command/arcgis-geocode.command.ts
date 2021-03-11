@@ -1,7 +1,8 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import { AccuracyEnum, GeocodeQuery } from '../../../model';
-import { ArcgisGeocodeQueryInterface } from '../interface';
+import type { GeocodeQuery } from '../../../model';
+import { AccuracyEnum } from '../../../model';
+import type { ArcgisGeocodeQueryInterface } from '../interface';
 import { ArcgisGeocodeCommandMixin } from './mixin';
 
 /**

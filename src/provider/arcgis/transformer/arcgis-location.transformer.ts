@@ -1,6 +1,6 @@
 import { AbstractLocationTransformer } from '../../../transformer';
 import { LocationUtil } from '../../../util/location';
-import { WorldCountry } from '../../../util/world-country';
+import type { WorldCountry } from '../../../util/world-country';
 import { ArcgisProvider } from '../arcgis.provider';
 
 export class ArcgisLocationTransformer extends AbstractLocationTransformer<ArcgisProvider> {

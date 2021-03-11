@@ -1,6 +1,7 @@
-import Axios, { AxiosInstance } from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import { GeocoderInterface, Type } from '../../../src';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
+import type MockAdapter from 'axios-mock-adapter';
+import type { GeocoderInterface, Type } from '../../../src';
 import {
     ExactMatchNotFoundException,
     InvalidCredentialsException,
@@ -10,9 +11,11 @@ import {
     UnsupportedAccuracyException,
     ValidationException,
 } from '../../../src/exception';
-import { ProviderInterface, QueryInterface } from '../../../src/interface';
-import { LoggableInterface, NullLogger } from '../../../src/logger';
-import { AbstractProvider, AccuracyEnum, ProvidableInterface } from '../../../src/model';
+import type { ProviderInterface, QueryInterface } from '../../../src/interface';
+import type { LoggableInterface } from '../../../src/logger';
+import { NullLogger } from '../../../src/logger';
+import type { AbstractProvider, ProvidableInterface } from '../../../src/model';
+import { AccuracyEnum } from '../../../src/model';
 import { ArcgisProvider, GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
 import { getAvailableAccuracies } from '../../../src/util';
 

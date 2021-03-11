@@ -1,4 +1,4 @@
-import { ValidationError } from 'class-validator';
+import type { ValidationError } from 'class-validator';
 import { GeocoderException } from './geocoder.exception';
 
 export class ValidationException extends GeocoderException {

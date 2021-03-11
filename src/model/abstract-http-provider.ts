@@ -1,9 +1,15 @@
 import { UnsupportedOperationException } from '../exception';
-import { GeocodeQueryInterface, HttpProviderCommandsInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
-import { LoggerInterface } from '../logger';
+import type {
+    GeocodeQueryInterface,
+    HttpProviderCommandsInterface,
+    PlaceDetailsQueryInterface,
+    ReverseQueryInterface,
+    SuggestQueryInterface,
+} from '../interface';
+import type { LoggerInterface } from '../logger';
 import { AbstractProvider } from './abstract-provider';
-import { Location } from './location';
-import { Suggestion } from './suggestion';
+import type { Location } from './location';
+import type { Suggestion } from './suggestion';
 
 export abstract class AbstractHttpProvider extends AbstractProvider {
     protected constructor(private readonly commands: HttpProviderCommandsInterface) {

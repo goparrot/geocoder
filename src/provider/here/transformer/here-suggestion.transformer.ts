@@ -1,6 +1,6 @@
 import { AbstractSuggestionTransformer } from '../../../transformer';
 import { HereProvider } from '../here.provider';
-import { HereOneResultAddressType, HereOneResultType } from '../interface';
+import type { HereOneResultAddressType, HereOneResultType } from '../interface';
 
 export class HereSuggestionTransformer extends AbstractSuggestionTransformer<HereProvider> {
     constructor(raw: HereOneResultType) {

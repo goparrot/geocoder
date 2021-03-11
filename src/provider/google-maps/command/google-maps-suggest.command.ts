@@ -1,10 +1,11 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import { SuggestQueryInterface } from '../../../interface';
-import { AccuracyEnum, SuggestQuery } from '../../../model';
-import { AbstractSuggestionTransformer } from '../../../transformer';
-import { GoogleMapsProvider } from '../google-maps.provider';
-import { GoogleMapsSuggestQueryInterface } from '../interface';
+import type { SuggestQueryInterface } from '../../../interface';
+import type { SuggestQuery } from '../../../model';
+import { AccuracyEnum } from '../../../model';
+import type { AbstractSuggestionTransformer } from '../../../transformer';
+import type { GoogleMapsProvider } from '../google-maps.provider';
+import type { GoogleMapsSuggestQueryInterface } from '../interface';
 import { GoogleMapsSuggestionTransformer } from '../transformer';
 import { GoogleMapsCommonCommandMixin } from './mixin';
 

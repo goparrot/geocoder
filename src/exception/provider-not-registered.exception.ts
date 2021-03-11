@@ -1,4 +1,4 @@
-import { AbstractProvider } from '../model';
+import type { AbstractProvider } from '../model';
 import { GeocoderException } from './geocoder.exception';
 
 export class ProviderNotRegisteredException extends GeocoderException {

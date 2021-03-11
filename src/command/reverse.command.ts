@@ -1,4 +1,4 @@
-import { ReverseQueryInterface } from '../interface';
+import type { ReverseQueryInterface } from '../interface';
 import { ReverseQuery } from '../model';
 import { AbstractLocationCommand } from './abstract-location.command';
 

@@ -72,15 +72,15 @@ const geocoder: Geocoder = new Geocoder(provider);
         console.error(err);
     }
 
-     try {
-            const suggestions: Suggestion[] = await geocoder.suggest({
-                address: '1158 E 89th St',
-            });
-    
-            console.info('suggestions', suggestions);
-        } catch (err) {
-            console.error(err);
-        }
+    try {
+        const suggestions: Suggestion[] = await geocoder.suggest({
+            address: '1158 E 89th St',
+        });
+
+        console.info('suggestions', suggestions);
+    } catch (err) {
+        console.error(err);
+    }
 })();
 ```
 
@@ -155,8 +155,8 @@ geocoder.setLogger(logger);
             lon: -87.5960762,
             countryCode: 'US',
             // language: 'en', // default
-            // limit: 5, // default     
-            // withRaw: false, // default       
+            // limit: 5, // default
+            // withRaw: false, // default
         });
 
         console.info('locations', locations);
@@ -183,14 +183,14 @@ Legend:
 | Provider                                                                                  | Geocode | Reverse | Suggest | Place Details |
 | :---------------------------------------------------------------------------------------- | :------ | :------ | :------ | :------------ |
 | [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘      | 🆘            |
-| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅       | ✅       | ✅️      | ✅             |
+| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅      | ✅      | ✅️     | ✅            |
 | [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️     | 🆘            |
 | [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️     | 🆘            |
-| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅       | ✅       | ✅       | ✅             |
-| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅       | ✅       | ✅       | ✅             |
+| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅      | ✅      | ✅      | ✅            |
+| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅      | ✅      | ✅      | ✅            |
 | [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️     | 🔍            |
 | [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅       | ✅       | 🚫️     | 🚫            |
+| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅      | ✅      | 🚫️     | 🚫            |
 | [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️     | 🔍️     | 🔍            |
 | [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️     | 🔍️     | 🔍            |
 | [OpenCage](https://opencagedata.com/api)                                                  | 🆘      | 🆘️     | 🔍️     | 🔍            |
@@ -216,10 +216,7 @@ const axios: AxiosInstance = Axios.create({
     timeout: 5000,
 });
 
-const chainProvider: ChainProvider = new ChainProvider([
-    new MapQuestProvider(axios, 'YOUR_API_KEY'),
-    new HereProvider(axios, 'YOUR_APP_ID', 'YOUR_APP_CODE'),
-]);
+const chainProvider: ChainProvider = new ChainProvider([new MapQuestProvider(axios, 'YOUR_API_KEY'), new HereProvider(axios, 'YOUR_APP_ID', 'YOUR_APP_CODE')]);
 
 const geocoder: ProviderAggregator = new ProviderAggregator([chainProvider]);
 
@@ -280,7 +277,7 @@ const locations: Location[] = geocoder
 ```
 
 The `using()` method allows you to choose the `provider` to use by its class name.
-When you deal with multiple providers, you may want to choose one of them.  The
+When you deal with multiple providers, you may want to choose one of them. The
 default behavior is to use the first one but it can be annoying.
 
 ## Versioning

@@ -1,6 +1,6 @@
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
-import { WorldCountryStateQueryInterface } from './world-country-state-query.interface';
+import type { WorldCountryStateQueryInterface } from './world-country-state-query.interface';
 
 @Exclude()
 export class WorldCountryStateQuery implements WorldCountryStateQueryInterface {

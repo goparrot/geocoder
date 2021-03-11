@@ -1,8 +1,8 @@
-import { AxiosResponse } from 'axios';
-import { AbstractCommand } from '../../../../command';
+import type { AxiosResponse } from 'axios';
+import type { AbstractCommand } from '../../../../command';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../../exception';
 import { AccuracyEnum } from '../../../../model';
-import { Constructor } from '../../../../types';
+import type { Constructor } from '../../../../types';
 
 export function ArcgisCommonCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {
     return class extends Base {

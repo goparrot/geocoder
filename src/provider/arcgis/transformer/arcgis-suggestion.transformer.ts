@@ -1,6 +1,6 @@
 import { AbstractSuggestionTransformer } from '../../../transformer';
 import { ArcgisProvider } from '../arcgis.provider';
-import { ArcgisSuggestionInterface } from '../interface';
+import type { ArcgisSuggestionInterface } from '../interface';
 
 export class ArcgisSuggestionTransformer extends AbstractSuggestionTransformer<ArcgisProvider> {
     constructor(readonly raw: ArcgisSuggestionInterface) {

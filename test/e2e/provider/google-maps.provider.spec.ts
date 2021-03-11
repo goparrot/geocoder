@@ -1,4 +1,5 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import {
     InvalidArgumentException,
@@ -7,7 +8,7 @@ import {
     NotFoundException,
     QuotaExceededException,
 } from '../../../src/exception';
-import { QueryInterface } from '../../../src/interface';
+import type { QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import {
     GoogleMapsGeocodeCommand,

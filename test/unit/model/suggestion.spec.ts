@@ -1,5 +1,5 @@
 import { plainToClass } from 'class-transformer';
-import { SuggestionInterface } from '../../../src/interface';
+import type { SuggestionInterface } from '../../../src/interface';
 import { Suggestion } from '../../../src/model';
 import { suggestionFixture } from '../../fixture/model/suggestion.fixture';
 

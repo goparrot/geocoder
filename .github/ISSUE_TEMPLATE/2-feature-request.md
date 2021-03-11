@@ -4,7 +4,6 @@ about: Suggest an idea or feature
 title: 'feat: '
 labels: feature
 assignees: ruscon
-
 ---
 
 ## Issue Number: \[N/A]

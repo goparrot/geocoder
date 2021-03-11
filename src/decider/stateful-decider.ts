@@ -1,5 +1,5 @@
 import { ProviderNotRegisteredException } from '../exception';
-import { AbstractProvider } from '../model';
+import type { AbstractProvider } from '../model';
 import { AbstractDecider } from './abstract-decider';
 
 export class StatefulDecider extends AbstractDecider {

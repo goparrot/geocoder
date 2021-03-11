@@ -1,10 +1,13 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { UnsupportedAccuracyException } from '../exception';
-import { QueryInterface } from '../interface';
-import { AccuracyEnum, Location } from '../model';
-import { AbstractLocationTransformer } from '../transformer';
-import { WorldCountry, WorldCountryUtil } from '../util/world-country';
-import { WorldCountryState, WorldCountryStateUtil } from '../util/world-country-state';
+import type { QueryInterface } from '../interface';
+import type { Location } from '../model';
+import { AccuracyEnum } from '../model';
+import type { AbstractLocationTransformer } from '../transformer';
+import type { WorldCountry } from '../util/world-country';
+import { WorldCountryUtil } from '../util/world-country';
+import type { WorldCountryState } from '../util/world-country-state';
+import { WorldCountryStateUtil } from '../util/world-country-state';
 import { AbstractCommand } from './abstract.command';
 
 export abstract class AbstractLocationCommand<

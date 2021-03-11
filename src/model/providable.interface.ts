@@ -1,5 +1,5 @@
-import { LoggerInterface } from '../logger';
-import { AbstractProvider } from './abstract-provider';
+import type { LoggerInterface } from '../logger';
+import type { AbstractProvider } from './abstract-provider';
 
 export interface ProvidableInterface {
     getProviders(): AbstractProvider[];

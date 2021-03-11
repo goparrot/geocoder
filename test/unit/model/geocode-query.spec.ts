@@ -1,5 +1,6 @@
 import { plainToClass } from 'class-transformer';
-import { ValidationError, Validator } from 'class-validator';
+import type { ValidationError } from 'class-validator';
+import { Validator } from 'class-validator';
 import { AccuracyEnum, GeocodeQuery } from '../../../src/model';
 
 describe('GeocodeQuery (unit)', () => {
@@ -17,7 +18,7 @@ describe('GeocodeQuery (unit)', () => {
             const errors: ValidationError[] = await validator.validate(query);
 
             errors.length.should.be.equal(1);
-            errors[0].constraints.should.be.eql({
+            errors[0].constraints?.should.be.eql({
                 isExactMatchApplicable:
                     'Can be used only if accuracy is not specified or it is set to AccuracyEnum.HOUSE_NUMBER and if limit is not specified or it is more than 1',
             });
@@ -34,7 +35,7 @@ describe('GeocodeQuery (unit)', () => {
             const errors: ValidationError[] = await validator.validate(query);
 
             errors.length.should.be.equal(1);
-            errors[0].constraints.should.be.eql({
+            errors[0].constraints?.should.be.eql({
                 isExactMatchApplicable:
                     'Can be used only if accuracy is not specified or it is set to AccuracyEnum.HOUSE_NUMBER and if limit is not specified or it is more than 1',
             });

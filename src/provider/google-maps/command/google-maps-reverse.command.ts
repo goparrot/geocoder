@@ -1,7 +1,7 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { ReverseCommand } from '../../../command';
-import { ReverseQuery } from '../../../model';
-import { GoogleMapsReverseQueryInterface } from '../interface';
+import type { ReverseQuery } from '../../../model';
+import type { GoogleMapsReverseQueryInterface } from '../interface';
 import { GoogleMapsLocationCommandMixin } from './mixin';
 
 /**

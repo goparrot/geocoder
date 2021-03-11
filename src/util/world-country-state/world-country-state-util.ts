@@ -3,8 +3,8 @@ import { validateOrReject } from 'class-validator';
 import countryStates from '../../data/country-states/country-states.json';
 import { WorldCountryState } from './world-country-state';
 import { WorldCountryStateQuery } from './world-country-state-query';
-import { WorldCountryStateQueryInterface } from './world-country-state-query.interface';
-import { WorldCountryStateInterface } from './world-country-state.interface';
+import type { WorldCountryStateQueryInterface } from './world-country-state-query.interface';
+import type { WorldCountryStateInterface } from './world-country-state.interface';
 
 export class WorldCountryStateUtil {
     /**
@@ -24,9 +24,10 @@ export class WorldCountryStateUtil {
 
     static async find(_query: WorldCountryStateQueryInterface): Promise<WorldCountryState | undefined> {
         const query: WorldCountryStateQuery = plainToClass<WorldCountryStateQuery, WorldCountryStateQueryInterface>(WorldCountryStateQuery, _query);
+        const keys: Array<keyof WorldCountryStateQuery> = (Object.keys(query) as unknown) as Array<keyof WorldCountryStateQuery>;
 
         // clear undefined/empty values
-        for (const key of Object.keys(query)) {
+        for (const key of keys) {
             if (!query[key]) {
                 delete query[key];
             }

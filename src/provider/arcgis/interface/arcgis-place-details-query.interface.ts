@@ -1,7 +1,7 @@
 /**
  * https://developers.arcgis.com/rest/geocode/api-reference/geocoding-category-filtering.htm
  */
-import { ArcgisQueryInterface } from './arcgis-query.interface';
+import type { ArcgisQueryInterface } from './arcgis-query.interface';
 
 export interface ArcgisPlaceDetailsQueryInterface extends ArcgisQueryInterface {
     magicKey: string;

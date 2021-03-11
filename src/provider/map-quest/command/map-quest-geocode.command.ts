@@ -1,7 +1,7 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import { GeocodeQuery } from '../../../model';
-import { MapQuestGeocodeQueryInterface } from '../interface';
+import type { GeocodeQuery } from '../../../model';
+import type { MapQuestGeocodeQueryInterface } from '../interface';
 import { MapQuestCommonCommandMixin } from './mixin';
 
 /**

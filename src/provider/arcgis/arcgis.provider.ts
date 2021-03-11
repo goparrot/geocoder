@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { AbstractHttpProvider } from '../../model';
 import { ArcgisGeocodeCommand, ArcgisPlaceDetailsCommand, ArcgisReverseCommand, ArcgisSuggestCommand } from './command';
 

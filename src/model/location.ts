@@ -1,5 +1,6 @@
-import { classToPlain, ClassTransformOptions, Exclude, Expose } from 'class-transformer';
-import { LocationInterface } from '../interface';
+import type { ClassTransformOptions } from 'class-transformer';
+import { classToPlain, Exclude, Expose } from 'class-transformer';
+import type { LocationInterface } from '../interface';
 
 @Exclude()
 export class Location<ProviderRawEntryType = any> implements LocationInterface<ProviderRawEntryType> {

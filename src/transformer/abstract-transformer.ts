@@ -1,6 +1,6 @@
-import { ClassTransformOptions } from 'class-transformer';
-import { AbstractHttpProvider } from '../model';
-import { Type } from '../types';
+import type { ClassTransformOptions } from 'class-transformer';
+import type { AbstractHttpProvider } from '../model';
+import type { Type } from '../types';
 
 export abstract class AbstractTransformer<HttpProviderClass extends AbstractHttpProvider = any, ProviderRawEntryType = any> {
     readonly provider: string;

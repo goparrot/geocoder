@@ -1,9 +1,9 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import { SuggestQuery } from '../../../model';
-import { AbstractSuggestionTransformer } from '../../../transformer';
-import { MapQuestSuggestQueryInterface } from '../interface';
-import { MapQuestProvider } from '../map-quest.provider';
+import type { SuggestQuery } from '../../../model';
+import type { AbstractSuggestionTransformer } from '../../../transformer';
+import type { MapQuestSuggestQueryInterface } from '../interface';
+import type { MapQuestProvider } from '../map-quest.provider';
 import { MapQuestSuggestionTransformer } from '../transformer';
 import { MapQuestCommonCommandMixin } from './mixin';
 

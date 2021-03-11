@@ -4,7 +4,6 @@ about: Report a reproducible bug
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 <!-- Click "Preview" for a more readable version --

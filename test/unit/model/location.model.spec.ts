@@ -1,5 +1,5 @@
 import { classToPlain, plainToClass } from 'class-transformer';
-import { LocationInterface } from '../../../src/interface';
+import type { LocationInterface } from '../../../src/interface';
 import { Location } from '../../../src/model';
 import { locationFixture } from '../../fixture/model/address.fixture';
 

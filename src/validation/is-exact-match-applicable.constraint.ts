@@ -1,4 +1,5 @@
-import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import type { ValidationArguments, ValidatorConstraintInterface } from 'class-validator';
+import { ValidatorConstraint } from 'class-validator';
 import { AccuracyEnum } from '../model';
 
 @ValidatorConstraint({ name: 'isExactMatchApplicable' })

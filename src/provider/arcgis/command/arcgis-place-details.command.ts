@@ -1,7 +1,7 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { PlaceDetailsCommand } from '../../../command';
-import { PlaceDetailsQuery } from '../../../model';
-import { ArcgisPlaceDetailsQueryInterface } from '../interface';
+import type { PlaceDetailsQuery } from '../../../model';
+import type { ArcgisPlaceDetailsQueryInterface } from '../interface';
 import { ArcgisGeocodeCommandMixin } from './mixin';
 
 /**

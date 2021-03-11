@@ -1,7 +1,7 @@
-import { GeocodeQueryInterface, PlaceDetailsQueryInterface, ProviderInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ProviderInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggableMixin } from '../logger';
-import { Location } from './location';
-import { Suggestion } from './suggestion';
+import type { Location } from './location';
+import type { Suggestion } from './suggestion';
 
 export class AbstractProvider extends LoggableMixin(Object) implements ProviderInterface {
     async geocode(_query: GeocodeQueryInterface): Promise<Location[]> {

@@ -1,4 +1,4 @@
-import { LocationInterface, SuggestionInterface } from '../../../src/interface';
+import type { LocationInterface, SuggestionInterface } from '../../../src/interface';
 import { Query } from '../../../src/model';
 
 const providerRawLocationResponse: Readonly<any> = Object.freeze({

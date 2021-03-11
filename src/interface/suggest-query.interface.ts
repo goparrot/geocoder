@@ -1,3 +1,3 @@
-import { GeocodeQueryInterface } from './geocode-query.interface';
+import type { GeocodeQueryInterface } from './geocode-query.interface';
 
 export interface SuggestQueryInterface extends GeocodeQueryInterface {}

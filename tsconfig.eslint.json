@@ -2,7 +2,8 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "allowJs": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "removeComments": true
     },
     "include": ["./**/**.ts", "./**/**.tsx", "./**/**.js", "./**/**.json"]
 }

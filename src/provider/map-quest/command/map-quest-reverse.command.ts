@@ -1,7 +1,7 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { ReverseCommand } from '../../../command';
-import { ReverseQuery } from '../../../model';
-import { MapQuestReverseQueryInterface } from '../interface';
+import type { ReverseQuery } from '../../../model';
+import type { MapQuestReverseQueryInterface } from '../interface';
 import { MapQuestCommonCommandMixin } from './mixin';
 
 /**

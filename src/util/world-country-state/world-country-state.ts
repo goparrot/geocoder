@@ -14,7 +14,7 @@ export class WorldCountryState implements WorldCountryStateInterface {
     @IsOptional()
     @IsString()
     @MinLength(2)
-    @MaxLength(2)
+    @MaxLength(100)
     @Transform((v: string) => v.toString().trim().toUpperCase())
     @Expose()
     stateCode: string;

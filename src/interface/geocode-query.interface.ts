@@ -33,7 +33,7 @@ export interface GeocodeQueryInterface extends QueryInterface {
     state?: string;
 
     /**
-     * ISO 3166-1 alpha-2
+     * can be as ISO 3166-1 alpha-2 or an arbitrary string for countries that have no states
      *
      * @default not applicable
      */

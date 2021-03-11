@@ -1,7 +1,7 @@
-import { AxiosResponse } from 'axios';
-import { AbstractCommand } from '../../../../command';
+import type { AxiosResponse } from 'axios';
+import type { AbstractCommand } from '../../../../command';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../../exception';
-import { Constructor } from '../../../../types';
+import type { Constructor } from '../../../../types';
 import { ArcgisLocationTransformer } from '../../transformer';
 import { ArcgisCommonCommandMixin } from './arcgis-common-command.mixin';
 

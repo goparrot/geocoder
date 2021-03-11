@@ -1,4 +1,4 @@
-import { AccuracyEnum } from '../model';
+import type { AccuracyEnum } from '../model';
 
 export interface QueryInterface {
     /**

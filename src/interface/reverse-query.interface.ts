@@ -1,4 +1,4 @@
-import { QueryInterface } from './query.interface';
+import type { QueryInterface } from './query.interface';
 
 export interface ReverseQueryInterface extends QueryInterface {
     lat: number;

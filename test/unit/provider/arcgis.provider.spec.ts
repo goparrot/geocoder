@@ -1,4 +1,5 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import { ArcgisProvider } from '../../../src/provider';
 
 describe('ArcgisProvider (unit)', () => {

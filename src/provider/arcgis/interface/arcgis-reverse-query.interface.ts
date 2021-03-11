@@ -1,4 +1,4 @@
-import { ArcgisQueryInterface } from './arcgis-query.interface';
+import type { ArcgisQueryInterface } from './arcgis-query.interface';
 
 export interface ArcgisReverseQueryInterface extends ArcgisQueryInterface {
     location: string;

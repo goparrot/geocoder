@@ -1,6 +1,8 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import { Geocoder } from '../../../src/geocoder';
-import { LoggerInterface, NullLogger } from '../../../src/logger';
+import type { LoggerInterface } from '../../../src/logger';
+import { NullLogger } from '../../../src/logger';
 import { HereProvider } from '../../../src/provider';
 
 describe('Geocoder (unit)', () => {

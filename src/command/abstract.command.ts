@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import {
@@ -8,11 +8,12 @@ import {
     UnsupportedAccuracyException,
     ValidationException,
 } from '../exception';
-import { QueryInterface } from '../interface';
-import { LoggableInterface, LoggableMixin } from '../logger';
-import { AccuracyEnum } from '../model';
-import { AbstractTransformer } from '../transformer';
-import { Type } from '../types';
+import type { QueryInterface } from '../interface';
+import type { LoggableInterface } from '../logger';
+import { LoggableMixin } from '../logger';
+import type { AccuracyEnum } from '../model';
+import type { AbstractTransformer } from '../transformer';
+import type { Type } from '../types';
 import { getAvailableAccuracies } from '../util';
 
 export abstract class AbstractCommand<

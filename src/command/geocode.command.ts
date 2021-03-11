@@ -1,6 +1,7 @@
 import { ExactMatchNotFoundException } from '../exception';
-import { GeocodeQueryInterface } from '../interface';
-import { GeocodeQuery, Location } from '../model';
+import type { GeocodeQueryInterface } from '../interface';
+import type { Location } from '../model';
+import { GeocodeQuery } from '../model';
 import { AbstractLocationCommand } from './abstract-location.command';
 
 export class GeocodeCommand<ProviderRequestType = any, ProviderResponseType = any> extends AbstractLocationCommand<

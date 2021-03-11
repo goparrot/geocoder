@@ -1,5 +1,6 @@
-import { classToPlain, ClassTransformOptions, Exclude, Expose } from 'class-transformer';
-import { SuggestionInterface } from '../interface';
+import type { ClassTransformOptions } from 'class-transformer';
+import { classToPlain, Exclude, Expose } from 'class-transformer';
+import type { SuggestionInterface } from '../interface';
 
 @Exclude()
 export class Suggestion<ProviderRawEntryType = any> implements SuggestionInterface<ProviderRawEntryType> {

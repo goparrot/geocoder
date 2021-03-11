@@ -1,7 +1,8 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../src/exception';
-import { GeocodeQueryInterface, QueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import type { GeocodeQueryInterface, QueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';

@@ -1,4 +1,5 @@
-import { WorldCountry, WorldCountryUtil } from '../../../../src/util/world-country';
+import type { WorldCountry } from '../../../../src/util/world-country';
+import { WorldCountryUtil } from '../../../../src/util/world-country';
 
 describe('WorldCountryUtil (unit)', () => {
     const successResponseFixture: WorldCountry = {

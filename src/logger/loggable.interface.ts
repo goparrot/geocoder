@@ -1,4 +1,4 @@
-import { LoggerInterface } from './logger.interface';
+import type { LoggerInterface } from './logger.interface';
 
 export interface LoggableInterface {
     setLogger(logger: LoggerInterface): this;

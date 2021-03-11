@@ -1,6 +1,7 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { GeocodeQueryInterface, QueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import type { GeocodeQueryInterface, QueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import { GoogleMapsGeocodeCommand, GoogleMapsProvider, GoogleMapsReverseCommand, GoogleMapsSuggestCommand, StatefulChainProvider } from '../../../src/provider';
 import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider/arcgis';

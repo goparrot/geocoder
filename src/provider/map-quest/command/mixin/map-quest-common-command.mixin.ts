@@ -1,12 +1,12 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
-import { AbstractCommand } from '../../../../command';
+import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { AbstractCommand } from '../../../../command';
 import { InvalidCredentialsException, UnsupportedAccuracyException } from '../../../../exception';
-import { QueryInterface } from '../../../../interface';
+import type { QueryInterface } from '../../../../interface';
 import { AccuracyEnum } from '../../../../model';
-import { AbstractLocationTransformer } from '../../../../transformer';
-import { Constructor } from '../../../../types';
+import type { AbstractLocationTransformer } from '../../../../transformer';
+import type { Constructor } from '../../../../types';
 import { sliceFrom } from '../../../../util';
-import { MapQuestProvider } from '../../map-quest.provider';
+import type { MapQuestProvider } from '../../map-quest.provider';
 import { MapQuestLocationTransformer } from '../../transformer';
 
 export enum MapQuestLocationQualityEnum {

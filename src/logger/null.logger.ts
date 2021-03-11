@@ -1,4 +1,4 @@
-import { LoggerInterface } from './logger.interface';
+import type { LoggerInterface } from './logger.interface';
 
 export class NullLogger implements LoggerInterface {
     debug(): any {

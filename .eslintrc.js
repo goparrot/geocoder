@@ -57,6 +57,7 @@ module.exports = {
         '@typescript-eslint/no-empty-interface': 'off',
         '@typescript-eslint/no-require-imports': ['error'],
         '@typescript-eslint/no-use-before-define': ['error'],
+        '@typescript-eslint/consistent-type-imports': ['error'],
         '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/camelcase': 'off',
         '@typescript-eslint/ban-ts-ignore': 'off',

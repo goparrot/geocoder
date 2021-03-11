@@ -1,7 +1,7 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import { SuggestQueryInterface } from '../../../interface';
-import { HereResponseType, HereSuggestQueryInterface } from '../interface';
+import type { SuggestQueryInterface } from '../../../interface';
+import type { HereResponseType, HereSuggestQueryInterface } from '../interface';
 import { HereSuggestionTransformer } from '../transformer';
 import { filterByAccuracy } from '../util';
 import { HereLocationCommandMixin } from './mixin';

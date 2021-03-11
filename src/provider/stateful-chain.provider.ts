@@ -1,6 +1,7 @@
 import { ValidationException } from '../exception';
-import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
-import { AbstractChainProvider, AbstractHttpProvider, AbstractProvider, Location, Suggestion } from '../model';
+import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import type { AbstractHttpProvider, AbstractProvider, Location, Suggestion } from '../model';
+import { AbstractChainProvider } from '../model';
 
 export class StatefulChainProvider extends AbstractChainProvider {
     private nextProvider: AbstractProvider;

@@ -1,8 +1,9 @@
 import { ProviderNotRegisteredException } from '../exception';
-import { GeocodeQueryInterface, GeocoderInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import type { GeocodeQueryInterface, GeocoderInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggableMixin } from '../logger';
-import { AbstractChainProvider, AbstractHttpProvider, AbstractProvider, Location, ProvidableMixin, Suggestion } from '../model';
-import { Type } from '../types';
+import type { AbstractProvider, Location, Suggestion } from '../model';
+import { AbstractChainProvider, AbstractHttpProvider, ProvidableMixin } from '../model';
+import type { Type } from '../types';
 
 export abstract class AbstractGeocoder extends ProvidableMixin(LoggableMixin(Object)) implements GeocoderInterface {
     abstract geocode(query: GeocodeQueryInterface): Promise<Location[]>;

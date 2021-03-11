@@ -1,21 +1,23 @@
-import { writeFileSync, copyFileSync } from 'fs';
-import originPackage from '../package.json';
+import fs from 'fs';
+import path from 'path';
 
-const distPackage: Record<string, any> = originPackage;
-distPackage.module = './index.js';
-distPackage.main = './index.js';
-distPackage.types = './index.d.ts';
-delete distPackage.scripts;
-delete distPackage.devDependencies;
-delete distPackage.config;
-delete distPackage.husky;
-delete distPackage.files;
-delete distPackage.directories;
-delete distPackage['lint-staged'];
+async function run(): Promise<void> {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { scripts, devDependencies, husky, files, 'lint-staged': lintStaged, directories, config, ...packageJson } = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), 'package.json')).toString(),
+    );
 
-writeFileSync('./dist/package.json', JSON.stringify(distPackage, null, '  '));
+    packageJson.main = './cjs/index.js';
+    packageJson.module = './esm/index.js';
+    packageJson.typings = './types/index.d.ts';
+    packageJson.sideEffects = false;
 
-const copyFiles = ['README.md'];
-for (const file of copyFiles) {
-    copyFileSync(`./${file}`, `./dist/${file}`);
+    fs.writeFileSync('./dist/package.json', JSON.stringify(packageJson, null, 4));
+
+    const copyFiles = ['README.md'];
+    for (const file of copyFiles) {
+        fs.copyFileSync(`./${file}`, `./dist/${file}`);
+    }
 }
+
+void run();

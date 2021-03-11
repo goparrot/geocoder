@@ -1,4 +1,4 @@
-import { LocationInterface } from '../../../src/interface';
+import type { LocationInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
 
 export const locationFixture: Readonly<LocationInterface> = Object.freeze<LocationInterface>({

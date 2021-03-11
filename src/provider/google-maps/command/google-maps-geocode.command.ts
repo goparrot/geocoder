@@ -1,7 +1,7 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import { GeocodeQuery } from '../../../model';
-import { GoogleMapsGeocodeQueryInterface } from '../interface';
+import type { GeocodeQuery } from '../../../model';
+import type { GoogleMapsGeocodeQueryInterface } from '../interface';
 import { GoogleMapsLocationCommandMixin } from './mixin';
 
 /**

@@ -4,7 +4,6 @@ about: Get help using Geocoder
 title: 'question: '
 labels: question
 assignees: ''
-
 ---
 
 <!-- Click "Preview" for a more readable version --

@@ -1,9 +1,10 @@
-import { AxiosResponse } from 'axios';
-import { AbstractCommand } from '../../../../command';
+import type { AxiosResponse } from 'axios';
+import type { AbstractCommand } from '../../../../command';
 import { InvalidCredentialsException } from '../../../../exception';
-import { AccuracyEnum, Query } from '../../../../model';
-import { Constructor } from '../../../../types';
-import { HereOneResultType, HereResponseType } from '../../interface';
+import type { Query } from '../../../../model';
+import { AccuracyEnum } from '../../../../model';
+import type { Constructor } from '../../../../types';
+import type { HereOneResultType, HereResponseType } from '../../interface';
 import { HereLocationTransformer } from '../../transformer';
 import { filterByAccuracy } from '../../util';
 

@@ -1,6 +1,7 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { QueryInterface } from '../../../src/interface';
+import type { QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import { HereGeocodeCommand, HereProvider, HereReverseCommand, HereSuggestCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';

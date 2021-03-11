@@ -1,7 +1,7 @@
-import { AxiosResponse } from 'axios';
-import { QueryInterface } from '../interface';
-import { Suggestion } from '../model';
-import { AbstractSuggestionTransformer } from '../transformer';
+import type { AxiosResponse } from 'axios';
+import type { QueryInterface } from '../interface';
+import type { Suggestion } from '../model';
+import type { AbstractSuggestionTransformer } from '../transformer';
 import { AbstractCommand } from './abstract.command';
 
 export abstract class AbstractSuggestCommand<

@@ -1,5 +1,5 @@
-import { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
-import { AbstractProvider, Location, Suggestion } from '../model';
+import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import type { AbstractProvider, Location, Suggestion } from '../model';
 import { AbstractGeocoder } from './abstract-geocoder';
 
 export class Geocoder extends AbstractGeocoder {

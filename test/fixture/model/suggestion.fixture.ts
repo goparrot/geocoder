@@ -1,4 +1,4 @@
-import { SuggestionInterface } from '../../../src/interface';
+import type { SuggestionInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
 
 export const suggestionFixture: Readonly<SuggestionInterface> = Object.freeze<SuggestionInterface>({

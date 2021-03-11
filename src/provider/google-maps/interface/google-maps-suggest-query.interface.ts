@@ -1,4 +1,4 @@
-import { GoogleMapsQueryInterface } from './google-maps-query.interface';
+import type { GoogleMapsQueryInterface } from './google-maps-query.interface';
 
 export interface GoogleMapsSuggestQueryInterface extends GoogleMapsQueryInterface {
     input: string;

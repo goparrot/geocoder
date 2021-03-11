@@ -1,6 +1,6 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import { HereGeocodeQueryInterface, HereResponseType } from '../interface';
+import type { HereGeocodeQueryInterface, HereResponseType } from '../interface';
 import { HereLocationCommandMixin } from './mixin';
 
 /**

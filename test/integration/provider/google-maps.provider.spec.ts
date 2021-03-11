@@ -1,7 +1,8 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import { Geocoder } from '../../../src/geocoder';
-import { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
-import { Location } from '../../../src/model';
+import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import type { Location } from '../../../src/model';
 import { GoogleMapsProvider } from '../../../src/provider';
 import {
     geocodeQueryFixture,

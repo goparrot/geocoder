@@ -1,7 +1,8 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import { ReverseCommand } from '../../../command';
-import { AccuracyEnum, ReverseQuery } from '../../../model';
-import { ArcgisReverseQueryInterface } from '../interface';
+import type { ReverseQuery } from '../../../model';
+import { AccuracyEnum } from '../../../model';
+import type { ArcgisReverseQueryInterface } from '../interface';
 import { ArcgisReverseTransformer } from '../transformer';
 import { ArcgisCommonCommandMixin } from './mixin';
 

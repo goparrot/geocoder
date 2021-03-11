@@ -1,7 +1,7 @@
-import { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
 import { PlaceDetailsCommand } from '../../../command';
-import { PlaceDetailsQuery } from '../../../model';
-import { HerePlaceDetailsQueryInterface, HereResponseType } from '../interface';
+import type { PlaceDetailsQuery } from '../../../model';
+import type { HerePlaceDetailsQueryInterface, HereResponseType } from '../interface';
 import { HereLocationCommandMixin } from './mixin';
 
 /**

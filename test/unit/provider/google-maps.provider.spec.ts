@@ -1,4 +1,5 @@
-import Axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import Axios from 'axios';
 import { InvalidCredentialsException } from '../../../src/exception';
 import { GoogleMapsProvider } from '../../../src/provider';
 

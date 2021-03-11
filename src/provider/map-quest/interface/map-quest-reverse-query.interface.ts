@@ -1,4 +1,4 @@
-import { MapQuestQueryInterface } from './map-quest-query.interface';
+import type { MapQuestQueryInterface } from './map-quest-query.interface';
 
 export interface MapQuestReverseQueryInterface extends MapQuestQueryInterface {
     location: string;

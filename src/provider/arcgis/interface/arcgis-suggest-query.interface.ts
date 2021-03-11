@@ -1,7 +1,7 @@
 /**
  * @link {https://developers.arcgis.com/rest/geocode/api-reference/geocoding-suggest.htm#ESRI_SECTION1_606D93C721874B16844B9AB9CA8083FF}
  */
-import { ArcgisQueryInterface } from './arcgis-query.interface';
+import type { ArcgisQueryInterface } from './arcgis-query.interface';
 
 export interface ArcgisSuggestQueryInterface extends ArcgisQueryInterface {
     text: string;

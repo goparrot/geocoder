@@ -1,10 +1,12 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import { AccuracyEnum, SuggestQuery } from '../../../model';
-import { AbstractSuggestionTransformer } from '../../../transformer';
-import { WorldCountry, WorldCountryUtil } from '../../../util/world-country';
-import { ArcgisProvider } from '../arcgis.provider';
-import { ArcgisSuggestionInterface, ArcgisSuggestQueryInterface, ArcgisSuggestResponseInterface } from '../interface';
+import type { SuggestQuery } from '../../../model';
+import { AccuracyEnum } from '../../../model';
+import type { AbstractSuggestionTransformer } from '../../../transformer';
+import type { WorldCountry } from '../../../util/world-country';
+import { WorldCountryUtil } from '../../../util/world-country';
+import type { ArcgisProvider } from '../arcgis.provider';
+import type { ArcgisSuggestionInterface, ArcgisSuggestQueryInterface, ArcgisSuggestResponseInterface } from '../interface';
 import { ArcgisSuggestionTransformer } from '../transformer';
 import { ArcgisCommonCommandMixin } from './mixin';
 

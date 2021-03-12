@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/goparrot/geocoder/compare/v4.0.0...v4.0.1) (2021-03-12)
+
+
+### Bug Fixes
+
+* geocode query stateCode can be more than 2 characters long ([550c338](https://github.com/goparrot/geocoder/commit/550c338472108ad655e0e3e742ac2464753f9623))
+
 ## [4.0.0](https://github.com/goparrot/geocoder/compare/v3.0.4...v4.0.0) (2020-03-23)
 
 ### ⚠ BREAKING CHANGES

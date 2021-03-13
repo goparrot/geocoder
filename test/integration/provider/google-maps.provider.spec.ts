@@ -1,5 +1,6 @@
 import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
+import { delay } from '../../../src';
 import { Geocoder } from '../../../src/geocoder';
 import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import type { Location } from '../../../src/model';
@@ -23,7 +24,7 @@ describe('GoogleMapsProvider (integration)', () => {
     let suggestQuery: SuggestQueryInterface;
     let placeDetailsQuery: PlaceDetailsQueryInterface;
 
-    beforeEach(() => {
+    beforeEach(async () => {
         geocodeQuery = { ...geocodeQueryFixture };
         reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
@@ -38,6 +39,9 @@ describe('GoogleMapsProvider (integration)', () => {
         const provider: GoogleMapsProvider = new GoogleMapsProvider(client, `${process.env.GOOGLE_MAPS_API_KEY}`);
 
         geocoder = new Geocoder(provider);
+
+        // google maps api quote is 10 rps
+        await delay(500);
     });
 
     describe('#geocode', () => {

@@ -13,3 +13,7 @@ export function getAvailableAccuracies(maxAccuracy: AccuracyEnum): string[] {
 
     return accuracies.slice(accuracies.indexOf(maxAccuracy));
 }
+
+export async function delay(time: number): Promise<void> {
+    return new Promise<void>((resolve) => setTimeout(resolve, time));
+}

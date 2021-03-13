@@ -52,6 +52,11 @@
             "path": "cz-conventional-changelog"
         }
     },
+    "standard-version": {
+        "scripts": {
+            "postchangelog": "npm run remark"
+        }
+    },
     "scripts": {
         "commit": "git-cz",
         "test": "mocha 'test/unit/**/*.spec.ts' 'test/e2e/**/*.spec.ts'",
@@ -76,15 +81,13 @@
         "remark": "remark README.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md .github/ -o -f -q && git add .",
         "check:tsc": "rimraf dist/* && tsc -b tsconfig.json && rimraf dist/*",
         "pre-commit": "git add . && run-p format:staged check:tsc && run-p build:dist lint remark coverage:all",
-        "prepublishOnly": "echo \"use 'npm run publish'\" && exit 1",
+        "prepublishOnly": "echo \"use 'npm run release:dev' or 'npm run version:stable' and make PR to master branch, CD/CI will do the rest of the work\" && exit 1",
         "publish": "npm run build:dist && ts-node -T bin/prepublish.ts && npm publish dist",
-        "publish:dev": "npm run version:dev && npm run publish --tag dev",
-        "publish:dev:dry": "npm run publish --tag dev --dry-run",
-        "version": "echo \"use 'npm run version:release'\" && exit 1",
-        "version:release": "standard-version && npm run remark && git push --follow-tags",
-        "version:dev": "ts-node -T bin/npm-dev-version.ts",
-        "release": "npm run publish && npm run github-release",
-        "release:dry": "npm run publish:dev:dry && standard-version --dry-run",
+        "version": "echo \"use 'npm run version:dev' or 'npm run version:stable'\" && exit 1",
+        "version:dev": "standard-version --no-verify --prerelease dev --skip.changelog --skip.tag --skip.commit",
+        "version:stable": "standard-version --no-verify --skip.tag && git push origin",
+        "release:dev": "npm run version:dev && npm run publish -- --tag dev",
+        "release:dev:dry": "npm run release:dev -- --dry-run",
         "github-release": "conventional-github-releaser -p angular"
     },
     "peerDependencies": {
@@ -127,7 +130,6 @@
         "eslint-plugin-prettier": "^3.3.1",
         "husky": "^5.1.3",
         "lint-staged": "^10.5.4",
-        "minimist": "^1.2.5",
         "mocha": "^8.3.1",
         "mocha-junit-reporter": "^2.0.0",
         "npm-run-all": "^4.1.5",
@@ -140,7 +142,6 @@
         "remark-lint-emphasis-marker": "^2.0.1",
         "remark-lint-strong-marker": "^2.0.1",
         "rimraf": "^3.0.2",
-        "semver": "^7.3.4",
         "sinon": "^9.2.4",
         "source-map-support": "^0.5.19",
         "standard-version": "^9.1.1",

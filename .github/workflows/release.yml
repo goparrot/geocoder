@@ -1,0 +1,46 @@
+name: release
+
+on:
+  workflow_run:
+    workflows:
+      - ci
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  release:
+    # double check :)
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Read node version from `.nvmrc` file
+        id: nvmrc
+        uses: browniebroke/read-nvmrc-action@v1
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ steps.nvmrc.outputs.node_version }}
+
+      - name: Check if package.json version has been updated
+        id: package-version
+        uses: EndBug/version-check@v1
+        with:
+          file-url: https://unpkg.com/@goparrot/geocoder@latest/package.json
+          static-checking: localIsNew
+
+      - name: Publish to NPM and create github release
+        if: steps.package-version.outputs.changed == 'true'
+        run: |
+          npm install --progress=false --loglevel=warn --ignore-scripts
+          run: npm run publish
+          npm run github-release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GH_RELEASE_TOKEN }}

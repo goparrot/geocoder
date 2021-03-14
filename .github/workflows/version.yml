@@ -22,8 +22,8 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GH_RELEASE_TOKEN }}
 
-      # Read node version from `.nvmrc` file
-      - id: nvmrc
+      - name: Read node version from `.nvmrc` file
+        id: nvmrc
         uses: browniebroke/read-nvmrc-action@v1
 
       - name: Use Node.js

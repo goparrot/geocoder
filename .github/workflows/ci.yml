@@ -2,6 +2,9 @@ name: ci
 
 on:
   push:
+  schedule:
+    # https://crontab.guru/every-day
+    - cron:  '0 9 * * *'
 
 jobs:
   commitlint:
@@ -23,8 +26,8 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v2
 
-      # Read node version from `.nvmrc` file
-      - id: nvmrc
+      - name: Read node version from `.nvmrc` file
+        id: nvmrc
         uses: browniebroke/read-nvmrc-action@v1
 
       - name: Use Node.js
@@ -48,8 +51,8 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v2
 
-      # Read node version from `.nvmrc` file
-      - id: nvmrc
+      - name: Read node version from `.nvmrc` file
+        id: nvmrc
         uses: browniebroke/read-nvmrc-action@v1
 
       - name: Use Node.js

@@ -1,7 +1,7 @@
 name: ci
 
 on:
-  push:
+#  push:
   schedule:
     # https://crontab.guru/every-day
     - cron:  '0 9 * * *'

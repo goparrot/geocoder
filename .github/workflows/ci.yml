@@ -2,6 +2,9 @@ name: ci
 
 on:
   push:
+  schedule:
+    # https://crontab.guru/every-day
+    - cron:  '0 9 * * *'
 
 jobs:
   commitlint:

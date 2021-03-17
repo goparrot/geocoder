@@ -81,11 +81,10 @@
         "remark": "remark README.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md .github/ -o -f -q && git add .",
         "check:tsc": "rimraf dist/* && tsc -b tsconfig.json && rimraf dist/*",
         "pre-commit": "git add . && run-p format:staged check:tsc && run-p build:dist lint remark coverage:all",
-        "prepublishOnly": "echo \"use 'npm run release:dev' or 'npm run version:stable' and make PR to master branch, CD/CI will do the rest of the work\" && exit 1",
+        "prepublishOnly": "echo \"use 'npm run release:dev' or 'npm run version' and make PR to master branch, CD/CI will do the rest of the work\" && exit 1",
         "publish": "npm run build:dist && ts-node -T bin/prepublish.ts && npm publish dist",
-        "version": "echo \"use 'npm run version:dev' or 'npm run version:stable'\" && exit 1",
+        "version": "standard-version --no-verify --skip.tag && git push origin && git push",
         "version:dev": "standard-version --no-verify --prerelease dev --skip.changelog --skip.tag --skip.commit",
-        "version:stable": "standard-version --no-verify --skip.tag && git push origin",
         "release:dev": "npm run version:dev && npm run publish -- --tag dev",
         "release:dev:dry": "npm run release:dev -- --dry-run",
         "github-release": "conventional-github-releaser -p angular"

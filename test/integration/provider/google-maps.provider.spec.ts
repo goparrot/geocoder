@@ -1,11 +1,13 @@
 import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
+import type { Distance, DistanceQueryInterface } from '../../../src';
 import { delay } from '../../../src';
 import { Geocoder } from '../../../src/geocoder';
 import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import type { Location } from '../../../src/model';
 import { GoogleMapsProvider } from '../../../src/provider';
 import {
+    distanceQueryFixture,
     geocodeQueryFixture,
     geocodeQueryFixtureForAustralia,
     geocodeQueryFixtureForCountryWithoutStateCode,
@@ -23,12 +25,14 @@ describe('GoogleMapsProvider (integration)', () => {
     let reverseQuery: ReverseQueryInterface;
     let suggestQuery: SuggestQueryInterface;
     let placeDetailsQuery: PlaceDetailsQueryInterface;
+    let distanceQuery: DistanceQueryInterface;
 
     beforeEach(async () => {
         geocodeQuery = { ...geocodeQueryFixture };
         reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
+        distanceQuery = { ...distanceQueryFixture };
         geocodeQueryForAustralia = { ...geocodeQueryFixtureForAustralia };
         geocodeQueryForCountryWithoutStateCode = { ...geocodeQueryFixtureForCountryWithoutStateCode };
 
@@ -79,6 +83,25 @@ describe('GoogleMapsProvider (integration)', () => {
             delete location.raw.scope;
 
             return location.should.be.deep.eq(providerParsedPlaceDetailsResponse);
+        });
+    });
+
+    describe('#distance', () => {
+        it('should return expected response', async () => {
+            const distance: Distance = await geocoder.using(GoogleMapsProvider).distance(distanceQuery);
+
+            // return distance.should.be.deep.eq(providerParsedDistanceResponse);
+            distance.should.have.property('distance');
+            distance.distance.should.be.a('number');
+
+            distance.should.have.property('duration');
+            distance.duration.should.be.a('number');
+
+            distance.should.have.property('provider');
+            distance.provider.should.be.deep.eq(GoogleMapsProvider.name);
+
+            distance.should.have.property('raw');
+            distance.raw.should.be.an('object');
         });
     });
 });

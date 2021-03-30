@@ -1,5 +1,11 @@
-import type { LocationInterface, PlaceDetailsQueryInterface, SuggestionInterface } from '../../../src/interface';
-import { placeDetailsQueryFixture } from '../model/query.fixture';
+import type {
+    DistanceDetailsInterface,
+    DistanceQueryInterface,
+    LocationInterface,
+    PlaceDetailsQueryInterface,
+    SuggestionInterface,
+} from '../../../src/interface';
+import { distanceQueryFixture, placeDetailsQueryFixture } from '../model/query.fixture';
 
 const providerRawLocationResponse: Readonly<any> = Object.freeze({
     results: [
@@ -168,6 +174,10 @@ export const providerPlaceDetailsQueryFixture: Readonly<PlaceDetailsQueryInterfa
     },
 });
 
+export const providerDistanceQueryFixture: Readonly<DistanceQueryInterface> = Object.freeze<DistanceQueryInterface>({
+    ...distanceQueryFixture,
+});
+
 export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
     html_attributions: [],
     result: {
@@ -253,6 +263,29 @@ export const providerRawPlaceDetailsResponse: Readonly<any> = Object.freeze({
     status: 'OK',
 });
 
+export const providerRawDistanceResponse: Readonly<any> = Object.freeze({
+    destination_addresses: ['1084 US-46, Parsippany-Troy Hills, NJ 07054, USA'],
+    origin_addresses: ['3195 US-46, Parsippany-Troy Hills, NJ 07054, USA'],
+    rows: [
+        {
+            elements: [
+                {
+                    distance: {
+                        text: '6.1 km',
+                        value: 6131,
+                    },
+                    duration: {
+                        text: '7 mins',
+                        value: 401,
+                    },
+                    status: 'OK',
+                },
+            ],
+        },
+    ],
+    status: 'OK',
+});
+
 export const providerParsedPlaceDetailsResponse: Readonly<LocationInterface> = Object.freeze<LocationInterface>({
     formattedAddress: '1158 E 89th St, Chicago, IL 60619, USA',
     latitude: 41.7340226,
@@ -268,4 +301,11 @@ export const providerParsedPlaceDetailsResponse: Readonly<LocationInterface> = O
     placeId: providerRawPlaceDetailsResponse.result.place_id,
     provider: 'GoogleMapsProvider',
     raw: providerRawPlaceDetailsResponse.result,
+});
+
+export const providerParsedDistanceResponse: Readonly<DistanceDetailsInterface> = Object.freeze<DistanceDetailsInterface>({
+    distance: 6131,
+    duration: 401,
+    provider: 'GoogleMapsProvider',
+    raw: providerRawDistanceResponse.rows[0].elements[0],
 });

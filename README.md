@@ -41,7 +41,7 @@ In the code snippet below we use Google provider.
 
 ```typescript
 import 'reflect-metadata';
-import { Location, Geocoder, GoogleMapsProvider, Suggestion } from '@goparrot/geocoder';
+import { Distance, Location, Geocoder, GoogleMapsProvider, Suggestion } from '@goparrot/geocoder';
 import Axios, { AxiosInstance } from 'axios';
 
 const axios: AxiosInstance = Axios.create();
@@ -56,7 +56,7 @@ const geocoder: Geocoder = new Geocoder(provider);
             address: '1158 E 89th St, Chicago, IL 60619, USA',
         });
 
-        console.info('locations', locations);
+        console.info({ locations });
     } catch (err) {
         console.error(err);
     }
@@ -67,7 +67,7 @@ const geocoder: Geocoder = new Geocoder(provider);
             lon: -87.5960762,
         });
 
-        console.info('locations', locations);
+        console.info({ locations });
     } catch (err) {
         console.error(err);
     }
@@ -77,7 +77,35 @@ const geocoder: Geocoder = new Geocoder(provider);
             address: '1158 E 89th St',
         });
 
-        console.info('suggestions', suggestions);
+        console.info({ suggestions });
+    } catch (err) {
+        console.error(err);
+    }
+
+    try {
+        const location: Location = await geocoder.placeDetails({
+            placeId: 'SOME_GOOGLE_PLACE_ID',
+        });
+
+        console.info({ location });
+    } catch (err) {
+        console.error(err);
+    }
+
+    try {
+        const distance: Distance = await geocoder.distance({
+            from: {
+                lat: 40.871994,
+                lon: -74.425937,
+            },
+            to: {
+                lat: 40.863008,
+                lon: -74.385286,
+            },
+            mode: TravelModeEnum.DRIVING,
+        });
+
+        console.info({ distance });
     } catch (err) {
         console.error(err);
     }
@@ -180,24 +208,24 @@ Legend:
 
 #### World
 
-| Provider                                                                                  | Geocode | Reverse | Suggest | Place Details |
-| :---------------------------------------------------------------------------------------- | :------ | :------ | :------ | :------------ |
-| [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘      | 🆘            |
-| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅      | ✅      | ✅️     | ✅            |
-| [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️     | 🆘            |
-| [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️     | 🆘            |
-| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅      | ✅      | ✅      | ✅            |
-| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅      | ✅      | ✅      | ✅            |
-| [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅      | ✅      | 🚫️     | 🚫            |
-| [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [OpenCage](https://opencagedata.com/api)                                                  | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [Photon](http://doc-api.photonengine.com/en/PUN/current/)                                 | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [PickPoint](https://pickpoint.io/)                                                        | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [TomTom](https://developer.tomtom.com/maps-sdk-web/documentation)                         | 🆘      | 🆘️     | 🔍️     | 🔍            |
-| [Yandex](https://tech.yandex.com/maps/)                                                   | 🆘      | 🆘️     | 🔍️     | 🔍            |
+| Provider                                                                                  | Geocode | Reverse | Suggest | Place Details | Distance |
+| :---------------------------------------------------------------------------------------- | :------ | :------ | :------ | :------------ | :------- |
+| [Algolia Places](https://community.algolia.com/places/documentation.html)                 | 🆘      | 🆘️     | 🆘      | 🆘            | 🔍       |
+| [ArcGIS Online](https://developers.arcgis.com/documentation/)                             | ✅      | ✅      | ✅️     | ✅            | 🔍       |
+| [Bing Maps](https://docs.microsoft.com/en-us/bingmaps/)                                   | 🆘      | 🆘️     | 🔍️     | 🆘            | 🔍       |
+| [Geonames](http://www.geonames.org/export/web-services.html)                              | 🆘      | 🆘️     | 🔍️     | 🆘            | 🔍       |
+| [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅      | ✅      | ✅      | ✅            | ✅       |
+| [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅      | ✅      | ✅      | ✅            | 🔍       |
+| [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅      | ✅      | 🚫️     | 🚫            | 🔍       |
+| [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [OpenCage](https://opencagedata.com/api)                                                  | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [Photon](http://doc-api.photonengine.com/en/PUN/current/)                                 | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [PickPoint](https://pickpoint.io/)                                                        | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [TomTom](https://developer.tomtom.com/maps-sdk-web/documentation)                         | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [Yandex](https://tech.yandex.com/maps/)                                                   | 🆘      | 🆘️     | 🔍️     | 🔍            | 🆘️      |
 
 ## Special Geocoders and Providers
 
@@ -273,12 +301,14 @@ The `ProviderAggregator`'s API is fluent, meaning you can write:
 const locations: Location[] = geocoder
     .registerProvider(new MyCustomProvider(axios))
     .using(MyCustomProvider)
-    .geocode( ... );
+    .geocode({ 
+        // ...
+    });
 ```
 
 The `using()` method allows you to choose the `provider` to use by its class name.
 When you deal with multiple providers, you may want to choose one of them. The
-default behavior is to use the first one but it can be annoying.
+default behavior is to use the first one, but it can be annoying.
 
 ## Versioning
 

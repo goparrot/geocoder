@@ -1,5 +1,5 @@
-import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
-import type { AbstractProvider, Location, Suggestion } from '../model';
+import type { DistanceQueryInterface, GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import type { AbstractProvider, Distance, Location, Suggestion } from '../model';
 import { AbstractGeocoder } from './abstract-geocoder';
 
 export class Geocoder extends AbstractGeocoder {
@@ -17,5 +17,9 @@ export class Geocoder extends AbstractGeocoder {
 
     async suggest(query: SuggestQueryInterface): Promise<Suggestion[]> {
         return this.suggestByProvider(this.getFirstProvider(), query);
+    }
+
+    async distance(query: DistanceQueryInterface): Promise<Distance> {
+        return this.distanceByProvider(this.getFirstProvider(), query);
     }
 }

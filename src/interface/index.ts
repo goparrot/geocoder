@@ -8,3 +8,5 @@ export * from './query.interface';
 export * from './reverse-query.interface';
 export * from './suggest-query.interface';
 export * from './suggestion.interface';
+export * from './distance-query.interface';
+export * from './distance-details.interface';

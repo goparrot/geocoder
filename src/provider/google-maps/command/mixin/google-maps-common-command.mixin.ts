@@ -13,7 +13,7 @@ import type { Constructor } from '../../../../types';
 
 export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {
     abstract class GoogleMapsCommonCommand extends Base {
-        protected readonly apiKey: any;
+        protected readonly apiKey: string;
 
         protected constructor(...args: any[]) {
             const [httpClient, apiKey]: [AxiosInstance, string] = args as any;
@@ -32,6 +32,7 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
         }
 
         /**
+         * the top-level status code validation
          * @link {https://developers.google.com/maps/documentation/geocoding/intro#StatusCodes}
          */
         protected async validateResponse(response: AxiosResponse): Promise<void> {
@@ -64,7 +65,7 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
                 return;
             }
 
-            throw new InvalidServerResponseException(`Unknown status "${response.data.status}" error`, response);
+            throw new InvalidServerResponseException(`Unknown response status "${response.data.status}"`, response);
         }
     }
 

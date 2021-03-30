@@ -1,7 +1,7 @@
 import { ProviderNotRegisteredException } from '../exception';
-import type { GeocodeQueryInterface, GeocoderInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import type { DistanceQueryInterface, GeocodeQueryInterface, GeocoderInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import { LoggableMixin } from '../logger';
-import type { AbstractProvider, Location, Suggestion } from '../model';
+import type { AbstractProvider, Distance, Location, Suggestion } from '../model';
 import { AbstractChainProvider, AbstractHttpProvider, ProvidableMixin } from '../model';
 import type { Type } from '../types';
 
@@ -22,6 +22,10 @@ export abstract class AbstractGeocoder extends ProvidableMixin(LoggableMixin(Obj
 
     protected async suggestByProvider(provider: AbstractProvider, query: SuggestQueryInterface): Promise<Suggestion[]> {
         return provider.suggest(query);
+    }
+
+    protected async distanceByProvider(provider: AbstractProvider, query: DistanceQueryInterface): Promise<Distance> {
+        return provider.distance(query);
     }
 
     using<HttpProviderClass extends AbstractHttpProvider>(providerClass: Type<HttpProviderClass> | string): AbstractHttpProvider {

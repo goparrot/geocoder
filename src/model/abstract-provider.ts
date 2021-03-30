@@ -1,5 +1,13 @@
-import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ProviderInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
+import type {
+    DistanceQueryInterface,
+    GeocodeQueryInterface,
+    PlaceDetailsQueryInterface,
+    ProviderInterface,
+    ReverseQueryInterface,
+    SuggestQueryInterface,
+} from '../interface';
 import { LoggableMixin } from '../logger';
+import type { Distance } from './distance';
 import type { Location } from './location';
 import type { Suggestion } from './suggestion';
 
@@ -17,6 +25,10 @@ export class AbstractProvider extends LoggableMixin(Object) implements ProviderI
     }
 
     async placeDetails(_query: PlaceDetailsQueryInterface): Promise<Location> {
-        throw new Error('AbstractProvider.placeId: not implemented');
+        throw new Error('AbstractProvider.placeDetails: not implemented');
+    }
+
+    async distance(_query: DistanceQueryInterface): Promise<Distance> {
+        throw new Error('AbstractProvider.distance: not implemented');
     }
 }

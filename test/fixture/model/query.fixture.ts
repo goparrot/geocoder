@@ -1,5 +1,11 @@
-import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
-import { Query } from '../../../src/model';
+import type {
+    DistanceQueryInterface,
+    GeocodeQueryInterface,
+    PlaceDetailsQueryInterface,
+    ReverseQueryInterface,
+    SuggestQueryInterface,
+} from '../../../src/interface';
+import { Query, TravelModeEnum } from '../../../src/model';
 
 export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freeze<GeocodeQueryInterface>({
     address: '1158 E 89th St',
@@ -66,5 +72,20 @@ export const placeDetailsQueryFixture: Readonly<PlaceDetailsQueryInterface> = Ob
     placeId: '', // you must set placeId in the specific test
     countryCode: 'US',
     language: Query.DEFAULT_RESULT_LANGUAGE,
+    withRaw: true,
+});
+
+export const distanceQueryFixture: Readonly<DistanceQueryInterface> = Object.freeze<DistanceQueryInterface>({
+    from: {
+        lat: 40.871994,
+        lon: -74.425937,
+    },
+    to: {
+        lat: 40.863008,
+        lon: -74.385286,
+    },
+    mode: TravelModeEnum.DRIVING,
+    language: Query.DEFAULT_RESULT_LANGUAGE,
+    countryCode: 'US',
     withRaw: true,
 });

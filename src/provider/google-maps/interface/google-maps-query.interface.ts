@@ -1,5 +1,5 @@
 export interface GoogleMapsQueryInterface {
-    sensor: boolean;
+    sensor?: boolean;
     key: string;
     /**
      * Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier. Optional.

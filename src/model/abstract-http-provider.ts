@@ -1,5 +1,6 @@
 import { UnsupportedOperationException } from '../exception';
 import type {
+    DistanceQueryInterface,
     GeocodeQueryInterface,
     HttpProviderCommandsInterface,
     PlaceDetailsQueryInterface,
@@ -8,6 +9,7 @@ import type {
 } from '../interface';
 import type { LoggerInterface } from '../logger';
 import { AbstractProvider } from './abstract-provider';
+import type { Distance } from './distance';
 import type { Location } from './location';
 import type { Suggestion } from './suggestion';
 
@@ -34,10 +36,18 @@ export abstract class AbstractHttpProvider extends AbstractProvider {
 
     async placeDetails(query: PlaceDetailsQueryInterface): Promise<Location> {
         if (!this.commands.placeDetails) {
-            throw new UnsupportedOperationException(`Provider ${this.constructor.name} doesn't support "placeId" method`);
+            throw new UnsupportedOperationException(`Provider ${this.constructor.name} doesn't support "placeDetails" method`);
         }
 
         return (await this.commands.placeDetails.execute(query))[0];
+    }
+
+    async distance(query: DistanceQueryInterface): Promise<Distance> {
+        if (!this.commands.distance) {
+            throw new UnsupportedOperationException(`Provider ${this.constructor.name} doesn't support "distance" method`);
+        }
+
+        return (await this.commands.distance.execute(query))[0];
     }
 
     setLogger(logger: LoggerInterface): this {

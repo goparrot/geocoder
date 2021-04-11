@@ -1,5 +1,4 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import isEmpty from 'lodash.isempty';
 import type { AbstractCommand } from '../../../../command';
 import {
     InvalidArgumentException,
@@ -36,10 +35,6 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
          * @link {https://developers.google.com/maps/documentation/geocoding/intro#StatusCodes}
          */
         protected async validateResponse(response: AxiosResponse): Promise<void> {
-            if (isEmpty(response.data)) {
-                return;
-            }
-
             if ('OK' === response.data.status) {
                 return;
             }

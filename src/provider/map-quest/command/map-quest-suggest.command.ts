@@ -12,7 +12,6 @@ import { MapQuestCommonCommandMixin } from './mixin';
  */
 export class MapQuestSuggestCommand extends MapQuestCommonCommandMixin(SuggestCommand)<MapQuestSuggestQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
-        // @ts-ignore
         super(httpClient, apiKey);
     }
 

@@ -9,7 +9,6 @@ import { HereCommonCommandMixin } from './mixin';
  */
 export class HereReverseCommand extends HereCommonCommandMixin(ReverseCommand)<HereReverseQueryInterface, HereResponseType> {
     constructor(httpClient: AxiosInstance, private readonly appId: string, private readonly appCode: string) {
-        // @ts-ignore
         super(httpClient, appId, appCode);
     }
 

@@ -35,16 +35,16 @@ export function sharedCommandResultBehaviours(
             return provider[method](query).should.become(parsedResponse);
         });
 
-        it('should return empty result on empty response', async () => {
+        it('should throw InvalidServerResponseException result on empty response', async () => {
             mock.onGet(provider[url]).reply(200, '');
 
-            return provider[method](query).should.become([]);
+            return provider[method](query).should.be.rejectedWith(InvalidServerResponseException, 'Empty response data');
         });
 
         it('should return empty result on response with empty json', async () => {
             mock.onGet(provider[url]).reply(200, {});
 
-            return provider[method](query).should.become([]);
+            return provider[method](query).should.rejectedWith(InvalidServerResponseException, 'Empty response data');
         });
     });
 }

@@ -9,7 +9,6 @@ import { MapQuestCommonCommandMixin } from './mixin';
  */
 export class MapQuestReverseCommand extends MapQuestCommonCommandMixin(ReverseCommand)<MapQuestReverseQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
-        // @ts-ignore
         super(httpClient, apiKey);
     }
 

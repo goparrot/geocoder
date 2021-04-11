@@ -11,7 +11,6 @@ import { HereLocationCommandMixin } from './mixin';
  */
 export class HereSuggestCommand extends HereLocationCommandMixin(SuggestCommand)<HereSuggestQueryInterface, HereResponseType> {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {
-        // @ts-ignore
         super(httpClient, appId, appCode);
     }
 

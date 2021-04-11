@@ -14,7 +14,6 @@ import { GoogleMapsCommonCommandMixin } from './mixin';
  */
 export class GoogleMapsSuggestCommand extends GoogleMapsCommonCommandMixin(SuggestCommand)<GoogleMapsSuggestQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
-        // @ts-ignore
         super(httpClient, apiKey);
     }
 

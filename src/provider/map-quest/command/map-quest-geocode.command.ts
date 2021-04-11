@@ -9,7 +9,6 @@ import { MapQuestCommonCommandMixin } from './mixin';
  */
 export class MapQuestGeocodeCommand extends MapQuestCommonCommandMixin(GeocodeCommand)<MapQuestGeocodeQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
-        // @ts-ignore
         super(httpClient, apiKey);
     }
 

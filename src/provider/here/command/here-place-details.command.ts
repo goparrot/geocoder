@@ -9,7 +9,6 @@ import { HereLocationCommandMixin } from './mixin';
  */
 export class HerePlaceDetailsCommand extends HereLocationCommandMixin(PlaceDetailsCommand)<HerePlaceDetailsQueryInterface, HereResponseType> {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {
-        // @ts-ignore
         super(httpClient, appId, appCode);
     }
 

@@ -1,6 +1,7 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
+import isEmpty from 'lodash.isempty';
 import {
     InvalidCredentialsException,
     InvalidServerResponseException,
@@ -25,7 +26,7 @@ export abstract class AbstractCommand<
 > extends LoggableMixin(Function) {
     ['constructor']: Pick<typeof AbstractCommand, keyof typeof AbstractCommand> & { name: string } & LoggableInterface;
 
-    constructor(protected readonly httpClient: AxiosInstance) {
+    constructor(protected readonly httpClient: AxiosInstance, ..._args: unknown[]) {
         super();
     }
 
@@ -105,6 +106,10 @@ export abstract class AbstractCommand<
             } else {
                 throw new InvalidServerResponseException(err.message);
             }
+        }
+
+        if (isEmpty(response.data)) {
+            throw new InvalidServerResponseException('Empty response data', response);
         }
 
         await this.validateResponse(response);

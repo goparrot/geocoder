@@ -1,5 +1,4 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import isEmpty from 'lodash.isempty';
 import { DistanceCommand } from '../../../command';
 import { InvalidArgumentException, InvalidServerResponseException, NotFoundException, QuotaExceededException } from '../../../exception';
 import type { DistanceQueryInterface } from '../../../interface';
@@ -16,7 +15,6 @@ import { GoogleMapsCommonCommandMixin } from './mixin';
  */
 export class GoogleMapsDistanceCommand extends GoogleMapsCommonCommandMixin(DistanceCommand)<GoogleMapsDistanceQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
-        // @ts-ignore
         super(httpClient, apiKey);
     }
 
@@ -63,10 +61,6 @@ export class GoogleMapsDistanceCommand extends GoogleMapsCommonCommandMixin(Dist
      * @link {https://developers.google.com/maps/documentation/distance-matrix/overview#element-level-status-codes}
      */
     protected async validateResponse(response: AxiosResponse): Promise<void> {
-        if (isEmpty(response.data)) {
-            throw new InvalidServerResponseException(`Empty response data`, response);
-        }
-
         switch (response.data.status) {
             case 'MAX_DIMENSIONS_EXCEEDED':
                 throw new QuotaExceededException('The number of origins or destinations exceeds the per-query limit', response);

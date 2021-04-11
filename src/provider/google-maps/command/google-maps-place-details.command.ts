@@ -10,7 +10,6 @@ import { GoogleMapsLocationCommandMixin } from './mixin';
  */
 export class GoogleMapsPlaceDetailsCommand extends GoogleMapsLocationCommandMixin(PlaceDetailsCommand)<GoogleMapsPlaceDetailsQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
-        // @ts-ignore
         super(httpClient, apiKey);
     }
 

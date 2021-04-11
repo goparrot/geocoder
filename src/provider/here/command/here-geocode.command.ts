@@ -8,7 +8,6 @@ import { HereLocationCommandMixin } from './mixin';
  */
 export class HereGeocodeCommand extends HereLocationCommandMixin(GeocodeCommand)<HereGeocodeQueryInterface, HereResponseType> {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {
-        // @ts-ignore
         super(httpClient, appId, appCode);
     }
 

@@ -9,7 +9,6 @@ import { GoogleMapsLocationCommandMixin } from './mixin';
  */
 export class GoogleMapsGeocodeCommand extends GoogleMapsLocationCommandMixin(GeocodeCommand)<GoogleMapsGeocodeQueryInterface> {
     constructor(httpClient: AxiosInstance, private readonly apiKey: string) {
-        // @ts-ignore
         super(httpClient, apiKey);
     }
 

@@ -2,7 +2,7 @@ import { AbstractLocationTransformer } from '../../../transformer';
 import { GoogleMapsProvider } from '../google-maps.provider';
 
 export class GoogleMapsLocationTransformer extends AbstractLocationTransformer<GoogleMapsProvider> {
-    constructor(raw: any) {
+    constructor(raw: Record<string, any>) {
         super(GoogleMapsProvider, raw);
     }
 
@@ -18,12 +18,20 @@ export class GoogleMapsLocationTransformer extends AbstractLocationTransformer<G
         return this.raw.geometry.location.lng;
     }
 
-    async getCountry(): Promise<string> {
-        return this.getAddressComponentsOfType('country').pop()!.long_name;
+    async getCountry(): Promise<string | undefined> {
+        const component: any | undefined = this.getAddressComponentsOfType('country').pop();
+
+        if (component) {
+            return component.long_name;
+        }
     }
 
-    async getCountryCode(): Promise<string> {
-        return this.getAddressComponentsOfType('country').pop()!.short_name;
+    async getCountryCode(): Promise<string | undefined> {
+        const component: any | undefined = this.getAddressComponentsOfType('country').pop();
+
+        if (component) {
+            return component.short_name;
+        }
     }
 
     async getState(): Promise<string | undefined> {
@@ -76,11 +84,15 @@ export class GoogleMapsLocationTransformer extends AbstractLocationTransformer<G
         }
     }
 
-    async getPlaceId(): Promise<string> {
+    async getPlaceId(): Promise<string | undefined> {
         return this.raw.place_id;
     }
 
     private getAddressComponentsOfType(type: string): any[] {
+        if (!Array.isArray(this.raw.address_components)) {
+            return [];
+        }
+
         return this.raw.address_components.filter((addressComponent: any) => addressComponent.types.includes(type));
     }
 }

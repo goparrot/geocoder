@@ -3,9 +3,16 @@ import path from 'path';
 
 async function run(): Promise<void> {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { scripts, devDependencies, husky, files, 'lint-staged': lintStaged, directories, config, ...packageJson } = JSON.parse(
-        fs.readFileSync(path.join(process.cwd(), 'package.json')).toString(),
-    );
+    const {
+        scripts,
+        devDependencies,
+        husky,
+        files,
+        'lint-staged': lintStaged,
+        directories,
+        config,
+        ...packageJson
+    } = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json')).toString());
 
     packageJson.main = './cjs/index.js';
     packageJson.module = './esm/index.js';

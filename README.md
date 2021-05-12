@@ -28,7 +28,7 @@ providing a powerful abstraction layer for geocoding manipulations.
 
 ## Installation
 
-    $ npm i @goparrot/geocoder reflect-metadata axios class-transformer class-validator
+    $ npm i @goparrot/geocoder reflect-metadata axios
 
 <sub>⚠️️ Each reflect-metadata installation has its own metadata storage, from which it reads and writes from.
 So if you had a project with multiple reflect-metadata packages, it could happen that in one file you write metadata in one reflect-metadata package and in another file you’re trying to retrieve this metadata accidently from the other reflect-metadata package, which of course doesn’t exist there.</sub>
@@ -137,13 +137,11 @@ axios.interceptors.request.use((request: AxiosRequestConfig) => {
 });
 
 // You can log all responses
-axios.interceptors.response.use(
-    (response: AxiosResponse): AxiosResponse => {
-        logger.debug(`api response ${response.status}`, response.data);
+axios.interceptors.response.use((response: AxiosResponse): AxiosResponse => {
+    logger.debug(`api response ${response.status}`, response.data);
 
-        return response;
-    },
-);
+    return response;
+});
 
 /**
  * Caching adapter for axios. Store request results in a configurable store to prevent unneeded network requests.
@@ -298,12 +296,9 @@ geocoder.registerProvider(new GoogleMapsProvider(axios, 'YOUR_API_KEY'));
 The `ProviderAggregator`'s API is fluent, meaning you can write:
 
 ```typescript
-const locations: Location[] = geocoder
-    .registerProvider(new MyCustomProvider(axios))
-    .using(MyCustomProvider)
-    .geocode({ 
-        // ...
-    });
+const locations: Location[] = geocoder.registerProvider(new MyCustomProvider(axios)).using(MyCustomProvider).geocode({
+    // ...
+});
 ```
 
 The `using()` method allows you to choose the `provider` to use by its class name.

@@ -22,7 +22,7 @@ export abstract class AbstractCommand<
     GeocoderResponseType = any,
     GeocoderTransformerType extends AbstractTransformer = any,
     ProviderRequestType = any,
-    ProviderResponseType = any
+    ProviderResponseType = any,
 > extends LoggableMixin(Function) {
     ['constructor']: Pick<typeof AbstractCommand, keyof typeof AbstractCommand> & { name: string } & LoggableInterface;
 
@@ -117,13 +117,11 @@ export abstract class AbstractCommand<
         const transformers: GeocoderTransformerType[] = await this.parseResponse(response, query);
 
         return Promise.all<GeocoderResponseType>(
-            transformers.map(
-                async (transformer: GeocoderTransformerType): Promise<GeocoderResponseType> => {
-                    return transformer.transform({
-                        groups: query.withRaw ? ['raw'] : undefined,
-                    });
-                },
-            ),
+            transformers.map(async (transformer: GeocoderTransformerType): Promise<GeocoderResponseType> => {
+                return transformer.transform({
+                    groups: query.withRaw ? ['raw'] : undefined,
+                });
+            }),
         );
     }
 

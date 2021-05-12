@@ -24,7 +24,7 @@ export class WorldCountryStateUtil {
 
     static async find(_query: WorldCountryStateQueryInterface): Promise<WorldCountryState | undefined> {
         const query: WorldCountryStateQuery = plainToClass<WorldCountryStateQuery, WorldCountryStateQueryInterface>(WorldCountryStateQuery, _query);
-        const keys: Array<keyof WorldCountryStateQuery> = (Object.keys(query) as unknown) as Array<keyof WorldCountryStateQuery>;
+        const keys: Array<keyof WorldCountryStateQuery> = Object.keys(query) as unknown as Array<keyof WorldCountryStateQuery>;
 
         // clear undefined/empty values
         for (const key of keys) {

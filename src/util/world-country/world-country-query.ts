@@ -7,7 +7,7 @@ export class WorldCountryQuery implements WorldCountryQueryInterface {
     @IsString()
     @IsOptional()
     @MinLength(1)
-    @Transform((v: string) => (v ? v.trim() : undefined))
+    @Transform(({ value }) => value?.trim())
     @Expose()
     name?: string;
 
@@ -15,7 +15,7 @@ export class WorldCountryQuery implements WorldCountryQueryInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Transform((v: string) => (v ? v.toString().trim().toUpperCase() : undefined))
+    @Transform(({ value }) => value?.toString().trim().toUpperCase())
     @Expose()
     cca2?: string;
 
@@ -23,7 +23,7 @@ export class WorldCountryQuery implements WorldCountryQueryInterface {
     @IsString()
     @MinLength(3)
     @MaxLength(3)
-    @Transform((v: string) => (v ? v.toString().trim().toUpperCase() : undefined))
+    @Transform(({ value }) => value?.toString().trim().toUpperCase())
     @Expose()
     cca3?: string;
 
@@ -32,7 +32,7 @@ export class WorldCountryQuery implements WorldCountryQueryInterface {
     @IsNumberString()
     @MinLength(3)
     @MaxLength(3)
-    @Transform((v: number | string) => (v ? (+v).toString().trim().padStart(3, '0') : undefined))
+    @Transform(({ value }) => (value ? (+value).toString().trim().padStart(3, '0') : undefined))
     @Expose()
     ccn3?: string | number;
 }

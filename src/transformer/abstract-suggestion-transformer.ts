@@ -7,7 +7,7 @@ import { AbstractTransformer } from './abstract-transformer';
 
 export abstract class AbstractSuggestionTransformer<
     HttpProviderClass extends AbstractHttpProvider = any,
-    ProviderRawEntryType = any
+    ProviderRawEntryType = any,
 > extends AbstractTransformer<HttpProviderClass, ProviderRawEntryType> {
     abstract getFormattedAddress(): Promise<SuggestionInterface['formattedAddress']>;
     abstract getPlaceId(): Promise<SuggestionInterface['placeId']>;

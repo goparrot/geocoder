@@ -18,3 +18,4 @@ test.ts
 !/bin
 .env
 package-lock.json
+/yalc.lock

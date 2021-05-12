@@ -7,7 +7,7 @@ import { AbstractCommand } from './abstract.command';
 export abstract class AbstractSuggestCommand<
     GeocoderQueryType extends QueryInterface = any,
     ProviderRequestType = any,
-    ProviderResponseType = any
+    ProviderResponseType = any,
 > extends AbstractCommand<GeocoderQueryType, Suggestion, AbstractSuggestionTransformer, ProviderRequestType, ProviderResponseType> {
     protected async parseResponse(_response: AxiosResponse<ProviderResponseType>, _query: GeocoderQueryType): Promise<AbstractSuggestionTransformer[]> {
         throw new Error('AbstractSuggestCommand.parseResponse: not implemented');

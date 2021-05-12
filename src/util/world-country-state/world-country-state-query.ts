@@ -7,7 +7,7 @@ export class WorldCountryStateQuery implements WorldCountryStateQueryInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(2)
-    @Transform((v: string) => v.trim())
+    @Transform(({ value }) => value?.trim())
     @Expose()
     countryCode: string;
 
@@ -15,14 +15,14 @@ export class WorldCountryStateQuery implements WorldCountryStateQueryInterface {
     @IsString()
     @MinLength(2)
     @MaxLength(100)
-    @Transform((v: string) => (v ? v.toString().trim().toUpperCase() : undefined))
+    @Transform(({ value }) => value?.toString().trim().toUpperCase())
     @Expose()
     stateCode?: string;
 
     @IsString()
     @IsOptional()
     @MinLength(1)
-    @Transform((v: string) => (v ? v.trim() : undefined))
+    @Transform(({ value }) => value?.trim())
     @Expose()
     name?: string;
 }

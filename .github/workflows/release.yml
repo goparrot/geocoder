@@ -39,7 +39,7 @@ jobs:
         if: steps.package-version.outputs.changed == 'true'
         run: |
           npm install --progress=false --loglevel=warn --ignore-scripts
-          run: npm run publish
+          npm run publish
           npm run github-release
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

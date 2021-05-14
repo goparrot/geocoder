@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import { ReverseCommand } from '../../../command';
+import { HereCommonCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
 import type { ReverseQuery } from '../../../model';
 import type { HereResponseType, HereReverseQueryInterface } from '../interface';
-import { HereCommonCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.here.com/documentation/geocoder/topics/resource-reverse-geocode.html}

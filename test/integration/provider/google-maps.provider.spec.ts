@@ -1,10 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
-import type { Distance, DistanceQueryInterface } from '../../../src';
 import { delay } from '../../../src';
 import { Geocoder } from '../../../src/geocoder';
-import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
-import type { Location } from '../../../src/model';
 import { GoogleMapsProvider } from '../../../src/provider';
 import {
     distanceQueryFixture,
@@ -15,6 +11,10 @@ import {
     suggestQueryFixture,
 } from '../../fixture/model/query.fixture';
 import { providerParsedPlaceDetailsResponse, providerPlaceDetailsQueryFixture } from '../../fixture/provider/google.fixture';
+import type { Location } from '../../../src/model';
+import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import type { Distance, DistanceQueryInterface } from '../../../src';
+import type { AxiosInstance } from 'axios';
 
 describe('GoogleMapsProvider (integration)', () => {
     let client: AxiosInstance;

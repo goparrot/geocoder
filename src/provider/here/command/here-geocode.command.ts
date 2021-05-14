@@ -1,7 +1,7 @@
-import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import type { HereGeocodeQueryInterface, HereResponseType } from '../interface';
 import { HereLocationCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
+import type { HereGeocodeQueryInterface, HereResponseType } from '../interface';
 
 /**
  * @link {https://developer.here.com/documentation/geocoder/topics/resource-geocode.html}

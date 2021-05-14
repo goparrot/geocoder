@@ -1,6 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import { AbstractHttpProvider } from '../../model';
 import { ArcgisGeocodeCommand, ArcgisPlaceDetailsCommand, ArcgisReverseCommand, ArcgisSuggestCommand } from './command';
+import type { AxiosInstance } from 'axios';
 
 export class ArcgisProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, token?: string) {

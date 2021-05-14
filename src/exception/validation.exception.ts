@@ -1,5 +1,5 @@
-import type { ValidationError } from 'class-validator';
 import { GeocoderException } from './geocoder.exception';
+import type { ValidationError } from 'class-validator';
 
 export class ValidationException extends GeocoderException {
     constructor(private readonly errors: ValidationError[]) {

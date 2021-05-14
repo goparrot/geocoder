@@ -1,3 +1,4 @@
+import { Query, TravelModeEnum } from '../../../src/model';
 import type {
     DistanceQueryInterface,
     GeocodeQueryInterface,
@@ -5,7 +6,6 @@ import type {
     ReverseQueryInterface,
     SuggestQueryInterface,
 } from '../../../src/interface';
-import { Query, TravelModeEnum } from '../../../src/model';
 
 export const geocodeQueryFixture: Readonly<GeocodeQueryInterface> = Object.freeze<GeocodeQueryInterface>({
     address: '1158 E 89th St',

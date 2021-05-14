@@ -1,6 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import { AbstractHttpProvider } from '../../model';
 import { HereGeocodeCommand, HerePlaceDetailsCommand, HereReverseCommand, HereSuggestCommand } from './command';
+import type { AxiosInstance } from 'axios';
 
 export class HereProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, appId: string, appCode: string) {

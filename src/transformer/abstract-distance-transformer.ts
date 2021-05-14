@@ -1,9 +1,9 @@
-import type { ClassTransformOptions } from 'class-transformer';
 import { plainToClass } from 'class-transformer';
-import type { DistanceDetailsInterface } from '../interface';
-import type { AbstractHttpProvider } from '../model';
 import { Distance } from '../model/distance';
 import { AbstractTransformer } from './abstract-transformer';
+import type { ClassTransformOptions } from 'class-transformer';
+import type { DistanceDetailsInterface } from '../interface';
+import type { AbstractHttpProvider } from '../model';
 
 export abstract class AbstractDistanceTransformer<HttpProviderClass extends AbstractHttpProvider = any, ProviderRawEntryType = any> extends AbstractTransformer<
     HttpProviderClass,

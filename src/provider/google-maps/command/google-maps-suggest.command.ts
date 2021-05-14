@@ -1,13 +1,13 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
+import { AccuracyEnum } from '../../../model';
+import { GoogleMapsSuggestionTransformer } from '../transformer';
+import { GoogleMapsCommonCommandMixin } from './mixin';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import type { SuggestQueryInterface } from '../../../interface';
 import type { SuggestQuery } from '../../../model';
-import { AccuracyEnum } from '../../../model';
 import type { AbstractSuggestionTransformer } from '../../../transformer';
 import type { GoogleMapsProvider } from '../google-maps.provider';
 import type { GoogleMapsSuggestQueryInterface } from '../interface';
-import { GoogleMapsSuggestionTransformer } from '../transformer';
-import { GoogleMapsCommonCommandMixin } from './mixin';
 
 /**
  * @link {https://developers.google.com/places/web-service/autocomplete#place_autocomplete_requests}

@@ -1,11 +1,11 @@
-import type { ClassTransformOptions } from 'class-transformer';
 import { plainToClass } from 'class-transformer';
-import type { LocationInterface } from '../interface';
-import type { AbstractHttpProvider } from '../model';
 import { Location } from '../model';
-import type { WorldCountry, WorldCountryQueryInterface } from '../util/world-country';
 import { WorldCountryUtil } from '../util/world-country';
 import { AbstractTransformer } from './abstract-transformer';
+import type { ClassTransformOptions } from 'class-transformer';
+import type { LocationInterface } from '../interface';
+import type { AbstractHttpProvider } from '../model';
+import type { WorldCountry, WorldCountryQueryInterface } from '../util/world-country';
 
 export abstract class AbstractLocationTransformer<HttpProviderClass extends AbstractHttpProvider = any, ProviderRawEntryType = any> extends AbstractTransformer<
     HttpProviderClass,

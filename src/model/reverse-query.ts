@@ -1,6 +1,6 @@
 import { IsNumber, Max, Min } from 'class-validator';
-import type { ReverseQueryInterface } from '../interface';
 import { Query } from './query';
+import type { ReverseQueryInterface } from '../interface';
 
 export class ReverseQuery extends Query implements ReverseQueryInterface {
     @IsNumber()

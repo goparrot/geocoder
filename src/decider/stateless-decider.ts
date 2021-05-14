@@ -1,6 +1,6 @@
 import { ProviderNotRegisteredException } from '../exception';
-import type { AbstractProvider } from '../model';
 import { AbstractDecider } from './abstract-decider';
+import type { AbstractProvider } from '../model';
 
 export class StatelessDecider extends AbstractDecider {
     async getProvider(providers: AbstractProvider[], forceProvider?: AbstractProvider): Promise<AbstractProvider> {

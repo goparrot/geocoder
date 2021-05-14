@@ -1,11 +1,11 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
+import { MapQuestSuggestionTransformer } from '../transformer';
+import { MapQuestCommonCommandMixin } from './mixin';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import type { SuggestQuery } from '../../../model';
 import type { AbstractSuggestionTransformer } from '../../../transformer';
 import type { MapQuestSuggestQueryInterface } from '../interface';
 import type { MapQuestProvider } from '../map-quest.provider';
-import { MapQuestSuggestionTransformer } from '../transformer';
-import { MapQuestCommonCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.mapquest.com/documentation/searchahead-api/}

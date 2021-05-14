@@ -1,5 +1,5 @@
-import type { AbstractProvider } from '../model';
 import { GeocoderException } from './geocoder.exception';
+import type { AbstractProvider } from '../model';
 
 export class ProviderNotRegisteredException extends GeocoderException {
     static create(providerClassName: string, registeredProviders: AbstractProvider[] = []): ProviderNotRegisteredException {

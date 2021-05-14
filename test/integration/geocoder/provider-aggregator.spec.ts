@@ -1,9 +1,9 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import { ProviderAggregator } from '../../../src/geocoder';
-import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { ArcgisProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
+import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import type { AxiosInstance } from 'axios';
 
 describe('ProviderAggregator (integration)', () => {
     let geocoder: ProviderAggregator;

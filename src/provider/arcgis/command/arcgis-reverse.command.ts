@@ -1,10 +1,10 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
 import { ReverseCommand } from '../../../command';
-import type { ReverseQuery } from '../../../model';
 import { AccuracyEnum } from '../../../model';
-import type { ArcgisReverseQueryInterface } from '../interface';
 import { ArcgisReverseTransformer } from '../transformer';
 import { ArcgisCommonCommandMixin } from './mixin';
+import type { ArcgisReverseQueryInterface } from '../interface';
+import type { ReverseQuery } from '../../../model';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 
 /**
  * @link {https://developers.arcgis.com/rest/geocode/api-reference/geocoding-reverse-geocode.htm}

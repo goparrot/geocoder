@@ -1,9 +1,9 @@
-import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
-import type { GeocodeQuery } from '../../../model';
 import { AccuracyEnum } from '../../../model';
-import type { ArcgisGeocodeQueryInterface } from '../interface';
 import { ArcgisGeocodeCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
+import type { GeocodeQuery } from '../../../model';
+import type { ArcgisGeocodeQueryInterface } from '../interface';
 
 /**
  * @link {https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm}

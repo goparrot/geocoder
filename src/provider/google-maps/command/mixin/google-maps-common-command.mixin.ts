@@ -1,5 +1,3 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
-import type { AbstractCommand } from '../../../../command';
 import {
     InvalidArgumentException,
     InvalidCredentialsException,
@@ -8,6 +6,8 @@ import {
     QuotaExceededException,
 } from '../../../../exception';
 import { AccuracyEnum } from '../../../../model';
+import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { AbstractCommand } from '../../../../command';
 import type { Constructor } from '../../../../types';
 
 export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {

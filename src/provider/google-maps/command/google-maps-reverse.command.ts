@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import { ReverseCommand } from '../../../command';
+import { GoogleMapsLocationCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
 import type { ReverseQuery } from '../../../model';
 import type { GoogleMapsReverseQueryInterface } from '../interface';
-import { GoogleMapsLocationCommandMixin } from './mixin';
 
 /**
  * TODO implement result_type and location_type

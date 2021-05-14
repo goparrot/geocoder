@@ -1,14 +1,14 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
 import { SuggestCommand } from '../../../command';
-import type { SuggestQuery } from '../../../model';
 import { AccuracyEnum } from '../../../model';
-import type { AbstractSuggestionTransformer } from '../../../transformer';
-import type { WorldCountry } from '../../../util/world-country';
 import { WorldCountryUtil } from '../../../util/world-country';
-import type { ArcgisProvider } from '../arcgis.provider';
-import type { ArcgisSuggestionInterface, ArcgisSuggestQueryInterface, ArcgisSuggestResponseInterface } from '../interface';
 import { ArcgisSuggestionTransformer } from '../transformer';
 import { ArcgisCommonCommandMixin } from './mixin';
+import type { AxiosInstance, AxiosResponse } from 'axios';
+import type { SuggestQuery } from '../../../model';
+import type { AbstractSuggestionTransformer } from '../../../transformer';
+import type { WorldCountry } from '../../../util/world-country';
+import type { ArcgisProvider } from '../arcgis.provider';
+import type { ArcgisSuggestionInterface, ArcgisSuggestQueryInterface, ArcgisSuggestResponseInterface } from '../interface';
 
 /**
  * @link {https://developers.arcgis.com/rest/geocode/api-reference/geocoding-suggest.htm}

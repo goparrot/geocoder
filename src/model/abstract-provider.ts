@@ -1,3 +1,4 @@
+import { LoggableMixin } from '../logger';
 import type {
     DistanceQueryInterface,
     GeocodeQueryInterface,
@@ -6,7 +7,6 @@ import type {
     ReverseQueryInterface,
     SuggestQueryInterface,
 } from '../interface';
-import { LoggableMixin } from '../logger';
 import type { Distance } from './distance';
 import type { Location } from './location';
 import type { Suggestion } from './suggestion';

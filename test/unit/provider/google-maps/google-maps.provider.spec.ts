@@ -1,7 +1,7 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import { InvalidCredentialsException } from '../../../../src/exception';
 import { GoogleMapsProvider } from '../../../../src/provider';
+import type { AxiosInstance } from 'axios';
 
 describe('GoogleMapsProvider (unit)', () => {
     let client: AxiosInstance;

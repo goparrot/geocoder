@@ -1,6 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import { ArcgisProvider } from '../../../src/provider';
+import type { AxiosInstance } from 'axios';
 
 describe('ArcgisProvider (unit)', () => {
     let client: AxiosInstance;

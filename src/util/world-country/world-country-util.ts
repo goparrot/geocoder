@@ -1,9 +1,9 @@
 import { plainToClass } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
-import type { Countries, Country } from 'world-countries';
 import countries from 'world-countries/dist/countries-unescaped.json';
 import { WorldCountry } from './world-country';
 import { WorldCountryQuery } from './world-country-query';
+import type { Countries, Country } from 'world-countries';
 import type { WorldCountryQueryInterface } from './world-country-query.interface';
 
 export class WorldCountryUtil {

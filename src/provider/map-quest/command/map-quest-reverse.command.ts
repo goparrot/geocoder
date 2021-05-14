@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import { ReverseCommand } from '../../../command';
+import { MapQuestCommonCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
 import type { ReverseQuery } from '../../../model';
 import type { MapQuestReverseQueryInterface } from '../interface';
-import { MapQuestCommonCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.mapquest.com/documentation/geocoding-api/reverse/get/}

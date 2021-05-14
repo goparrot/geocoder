@@ -1,7 +1,7 @@
 import { ValidationException } from '../exception';
+import { AbstractChainProvider } from '../model';
 import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import type { AbstractHttpProvider, Location, Suggestion } from '../model';
-import { AbstractChainProvider } from '../model';
 
 export class ChainProvider extends AbstractChainProvider {
     constructor(providers: AbstractHttpProvider[]) {

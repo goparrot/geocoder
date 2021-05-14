@@ -1,4 +1,5 @@
 import { UnsupportedOperationException } from '../exception';
+import { AbstractProvider } from './abstract-provider';
 import type {
     DistanceQueryInterface,
     GeocodeQueryInterface,
@@ -8,7 +9,6 @@ import type {
     SuggestQueryInterface,
 } from '../interface';
 import type { LoggerInterface } from '../logger';
-import { AbstractProvider } from './abstract-provider';
 import type { Distance } from './distance';
 import type { Location } from './location';
 import type { Suggestion } from './suggestion';

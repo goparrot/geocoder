@@ -1,7 +1,7 @@
 import { classToPlain, plainToClass } from 'class-transformer';
-import type { LocationInterface } from '../../../src/interface';
 import { Location } from '../../../src/model';
 import { locationFixture } from '../../fixture/model/address.fixture';
+import type { LocationInterface } from '../../../src/interface';
 
 describe('Location (unit)', () => {
     let location: Location;

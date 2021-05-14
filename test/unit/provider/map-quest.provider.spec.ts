@@ -1,7 +1,7 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import { InvalidCredentialsException } from '../../../src/exception';
 import { MapQuestProvider } from '../../../src/provider';
+import type { AxiosInstance } from 'axios';
 
 describe('MapQuestProvider (unit)', () => {
     let client: AxiosInstance;

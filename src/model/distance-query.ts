@@ -1,9 +1,9 @@
 import { Type } from 'class-transformer';
 import { IsEnum, IsOptional, ValidateNested } from 'class-validator';
-import type { DistanceQueryInterface } from '../interface';
 import { TravelModeEnum } from './travel-mode.enum';
 import { Point } from './point';
 import { Query } from './query';
+import type { DistanceQueryInterface } from '../interface';
 
 export class DistanceQuery extends Query implements DistanceQueryInterface {
     @Type(() => Point)

@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import { StatefulDecider } from '../../../src/decider';
 import { ProviderNotRegisteredException } from '../../../src/exception';
 import { GoogleMapsProvider, HereProvider } from '../../../src/provider';
+import type { AxiosInstance } from 'axios';
 
 describe('StatefulDecider (unit)', () => {
     let decider: StatefulDecider;

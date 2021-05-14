@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
+import { MapQuestCommonCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
 import type { GeocodeQuery } from '../../../model';
 import type { MapQuestGeocodeQueryInterface } from '../interface';
-import { MapQuestCommonCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.mapquest.com/documentation/geocoding-api/address/get/}

@@ -1,13 +1,13 @@
+import { InvalidCredentialsException, UnsupportedAccuracyException } from '../../../../exception';
+import { AccuracyEnum } from '../../../../model';
+import { sliceFrom } from '../../../../util';
+import { MapQuestLocationTransformer } from '../../transformer';
 import type { AxiosInstance, AxiosResponse } from 'axios';
 import type { AbstractCommand } from '../../../../command';
-import { InvalidCredentialsException, UnsupportedAccuracyException } from '../../../../exception';
 import type { QueryInterface } from '../../../../interface';
-import { AccuracyEnum } from '../../../../model';
 import type { AbstractLocationTransformer } from '../../../../transformer';
 import type { Constructor } from '../../../../types';
-import { sliceFrom } from '../../../../util';
 import type { MapQuestProvider } from '../../map-quest.provider';
-import { MapQuestLocationTransformer } from '../../transformer';
 
 export enum MapQuestLocationQualityEnum {
     COUNTRY = 'COUNTRY',

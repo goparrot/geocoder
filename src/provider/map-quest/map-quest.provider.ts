@@ -1,6 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import { AbstractHttpProvider } from '../../model';
 import { MapQuestGeocodeCommand, MapQuestReverseCommand } from './command';
+import type { AxiosInstance } from 'axios';
 
 export class MapQuestProvider extends AbstractHttpProvider {
     constructor(httpClient: AxiosInstance, apiKey: string) {

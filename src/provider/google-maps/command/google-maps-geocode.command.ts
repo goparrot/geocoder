@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import { GeocodeCommand } from '../../../command';
+import { GoogleMapsLocationCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
 import type { GeocodeQuery } from '../../../model';
 import type { GoogleMapsGeocodeQueryInterface } from '../interface';
-import { GoogleMapsLocationCommandMixin } from './mixin';
 
 /**
  * @link {https://developers.google.com/maps/documentation/geocoding/intro#GeocodingRequests}

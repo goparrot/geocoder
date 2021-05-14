@@ -1,9 +1,9 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
 import { PlaceDetailsCommand } from '../../../command';
+import { GoogleMapsLocationCommandMixin } from './mixin';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import type { PlaceDetailsQuery } from '../../../model';
 import type { GoogleMapsPlaceDetailsQueryInterface } from '../interface';
 import type { GoogleMapsLocationTransformer } from '../transformer';
-import { GoogleMapsLocationCommandMixin } from './mixin';
 
 /**
  * @link {https://developers.google.com/places/web-service/details}

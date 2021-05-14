@@ -1,7 +1,7 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import { InvalidCredentialsException } from '../../../src/exception';
 import { HereProvider } from '../../../src/provider';
+import type { AxiosInstance } from 'axios';
 
 describe('HereProvider (unit)', () => {
     let client: AxiosInstance;

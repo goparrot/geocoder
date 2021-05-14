@@ -1,8 +1,8 @@
+import { AbstractCommand } from './abstract.command';
 import type { AxiosResponse } from 'axios';
 import type { QueryInterface } from '../interface';
 import type { Suggestion } from '../model';
 import type { AbstractSuggestionTransformer } from '../transformer';
-import { AbstractCommand } from './abstract.command';
 
 export abstract class AbstractSuggestCommand<
     GeocoderQueryType extends QueryInterface = any,

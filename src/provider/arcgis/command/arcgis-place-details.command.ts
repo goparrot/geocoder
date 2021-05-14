@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import { PlaceDetailsCommand } from '../../../command';
+import { ArcgisGeocodeCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
 import type { PlaceDetailsQuery } from '../../../model';
 import type { ArcgisPlaceDetailsQueryInterface } from '../interface';
-import { ArcgisGeocodeCommandMixin } from './mixin';
 
 /**
  * @link {https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm}

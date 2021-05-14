@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
-import type { GeocodeQueryInterface } from '../interface';
 import { ToBoolean } from '../util/transformer';
 import { IsExactMatchApplicable } from '../validation';
 import { Query } from './query';
+import type { GeocodeQueryInterface } from '../interface';
 
 export class GeocodeQuery extends Query implements GeocodeQueryInterface {
     @IsString()

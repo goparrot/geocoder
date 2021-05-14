@@ -1,8 +1,8 @@
-import type { AxiosInstance } from 'axios';
 import { PlaceDetailsCommand } from '../../../command';
+import { HereLocationCommandMixin } from './mixin';
+import type { AxiosInstance } from 'axios';
 import type { PlaceDetailsQuery } from '../../../model';
 import type { HerePlaceDetailsQueryInterface, HereResponseType } from '../interface';
-import { HereLocationCommandMixin } from './mixin';
 
 /**
  * @link {https://developer.here.com/documentation/geocoder/topics/resource-search.html}

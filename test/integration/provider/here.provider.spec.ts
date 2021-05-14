@@ -1,10 +1,10 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import { Geocoder } from '../../../src/geocoder';
-import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { HereProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 import { providerParsedPlaceDetailsResponse, providerPlaceDetailsQueryFixture } from '../../fixture/provider/here.fixture';
+import type { GeocodeQueryInterface, PlaceDetailsQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import type { AxiosInstance } from 'axios';
 
 describe('HereProvider (integration)', () => {
     let client: AxiosInstance;

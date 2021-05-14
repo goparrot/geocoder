@@ -1,7 +1,7 @@
 import { IsBoolean, IsEnum, IsNumber, IsOptional, IsString, Max, MaxLength, Min, MinLength } from 'class-validator';
-import type { QueryInterface } from '../interface';
 import { ToBoolean } from '../util/transformer';
 import { AccuracyEnum } from './accuracy.enum';
+import type { QueryInterface } from '../interface';
 
 export class Query implements QueryInterface {
     static readonly DEFAULT_RESULT_LIMIT: number = 5;

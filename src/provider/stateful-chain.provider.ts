@@ -1,7 +1,7 @@
 import { ValidationException } from '../exception';
+import { AbstractChainProvider } from '../model';
 import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import type { AbstractHttpProvider, AbstractProvider, Location, Suggestion } from '../model';
-import { AbstractChainProvider } from '../model';
 
 export class StatefulChainProvider extends AbstractChainProvider {
     private nextProvider: AbstractProvider;
@@ -22,7 +22,7 @@ export class StatefulChainProvider extends AbstractChainProvider {
                 if (locations.length) {
                     return locations;
                 }
-            } catch (err) {
+            } catch (err: any) {
                 if (err instanceof ValidationException) {
                     throw err;
                 }
@@ -44,7 +44,7 @@ export class StatefulChainProvider extends AbstractChainProvider {
                 if (locations.length) {
                     return locations;
                 }
-            } catch (err) {
+            } catch (err: any) {
                 if (err instanceof ValidationException) {
                     throw err;
                 }
@@ -62,7 +62,7 @@ export class StatefulChainProvider extends AbstractChainProvider {
                 this.setNextProvider();
 
                 return await provider.suggest(query);
-            } catch (err) {
+            } catch (err: any) {
                 if (err instanceof ValidationException) {
                     throw err;
                 }

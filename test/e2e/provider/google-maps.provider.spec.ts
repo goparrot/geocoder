@@ -1,7 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import type { GeocoderException } from '../../../src/exception';
+import type { AxiosInstance } from 'axios';
 import {
     InvalidArgumentException,
     InvalidCredentialsException,
@@ -9,7 +8,6 @@ import {
     NotFoundException,
     QuotaExceededException,
 } from '../../../src/exception';
-import type { QueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import {
     GoogleMapsDistanceCommand,
@@ -31,6 +29,8 @@ import {
     providerRawSuggestResponse,
 } from '../../fixture/provider/google.fixture';
 import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
+import type { QueryInterface } from '../../../src/interface';
+import type { GeocoderException } from '../../../src/exception';
 
 describe('GoogleMapsProvider (2e2)', () => {
     const client: AxiosInstance = Axios.create();

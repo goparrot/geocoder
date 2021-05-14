@@ -1,7 +1,7 @@
 import { plainToClass } from 'class-transformer';
-import type { SuggestionInterface } from '../../../src/interface';
 import { Suggestion } from '../../../src/model';
 import { suggestionFixture } from '../../fixture/model/suggestion.fixture';
+import type { SuggestionInterface } from '../../../src/interface';
 
 describe('Suggestion (unit)', () => {
     let suggestion: Suggestion;

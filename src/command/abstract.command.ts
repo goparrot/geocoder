@@ -1,7 +1,7 @@
-import type { AxiosInstance, AxiosResponse } from 'axios';
 import { plainToClass } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import isEmpty from 'lodash.isempty';
+import type { AxiosInstance, AxiosResponse } from 'axios';
 import {
     InvalidCredentialsException,
     InvalidServerResponseException,
@@ -9,13 +9,13 @@ import {
     UnsupportedAccuracyException,
     ValidationException,
 } from '../exception';
+import { LoggableMixin } from '../logger';
+import { getAvailableAccuracies } from '../util';
 import type { QueryInterface } from '../interface';
 import type { LoggableInterface } from '../logger';
-import { LoggableMixin } from '../logger';
 import type { AccuracyEnum } from '../model';
 import type { AbstractTransformer } from '../transformer';
 import type { Type } from '../types';
-import { getAvailableAccuracies } from '../util';
 
 export abstract class AbstractCommand<
     GeocoderQueryType extends QueryInterface = any,
@@ -75,7 +75,7 @@ export abstract class AbstractCommand<
                 forbidNonWhitelisted: true,
                 validationError: { target: false, value: false },
             });
-        } catch (err) {
+        } catch (err: any) {
             this.getLogger().error(err, query);
 
             throw new ValidationException(err);
@@ -92,13 +92,13 @@ export abstract class AbstractCommand<
 
         try {
             response = await this.getResponse(params);
-        } catch (err) {
+        } catch (err: any) {
             if (err.response && err.response.status) {
                 const statusCode: number = err.response.status;
 
-                if (401 === statusCode || 403 === statusCode) {
+                if (statusCode === 401 || statusCode === 403) {
                     throw new InvalidCredentialsException(`API key is invalid`, err.response);
-                } else if (429 === statusCode) {
+                } else if (statusCode === 429) {
                     throw new QuotaExceededException('Quota exceeded', err.response);
                 }
 

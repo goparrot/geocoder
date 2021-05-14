@@ -1,7 +1,7 @@
 import { plainToClass } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
-import type { Countries, Country } from 'world-countries';
 import countries from 'world-countries/dist/countries-unescaped.json';
+import type { Countries, Country } from 'world-countries';
 import { WorldCountry } from './world-country';
 import { WorldCountryQuery } from './world-country-query';
 import type { WorldCountryQueryInterface } from './world-country-query.interface';
@@ -16,7 +16,7 @@ export class WorldCountryUtil {
         for (const key of keys) {
             const searchValue: unknown = filters[key]?.toString().toLowerCase();
 
-            if ('name' === key) {
+            if (key === 'name') {
                 // TODO add search by `country.name.native` property
                 if (country.name.common.toLowerCase() === searchValue || country.name.official.toLowerCase() === searchValue) {
                     return true;
@@ -46,7 +46,7 @@ export class WorldCountryUtil {
                 forbidNonWhitelisted: true,
                 validationError: { target: false, value: false },
             });
-        } catch (err) {
+        } catch (err: any) {
             return;
         }
 

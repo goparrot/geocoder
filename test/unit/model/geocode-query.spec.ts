@@ -1,6 +1,6 @@
 import { plainToClass } from 'class-transformer';
-import type { ValidationError } from 'class-validator';
 import { Validator } from 'class-validator';
+import type { ValidationError } from 'class-validator';
 import { AccuracyEnum, GeocodeQuery } from '../../../src/model';
 
 describe('GeocodeQuery (unit)', () => {

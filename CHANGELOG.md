@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 *   **command:** an empty response should throw an InvalidServerResponseException ([48fb804](https://github.com/goparrot/geocoder/commit/48fb8040f41da66467ca9ff44213f866c3888062))
-*   **provider:** google transformer cannot read property 'long_name' of undefined ([ae5f8d5](https://github.com/goparrot/geocoder/commit/ae5f8d5210fdda71c6985428d2c86585a3786585))
+*   **provider:** google transformer cannot read property 'long\_name' of undefined ([ae5f8d5](https://github.com/goparrot/geocoder/commit/ae5f8d5210fdda71c6985428d2c86585a3786585))
 
 ### [4.0.1](https://github.com/goparrot/geocoder/compare/v4.0.0...v4.0.1) (2021-03-12)
 
@@ -110,7 +110,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-*   **google suggest:** allow `premise` type as HOUSE_NUMBER accuracy ([9eaab20](https://github.com/goparrot/geocoder/commit/9eaab20))
+*   **google suggest:** allow `premise` type as HOUSE\_NUMBER accuracy ([9eaab20](https://github.com/goparrot/geocoder/commit/9eaab20))
 
 ### Features
 

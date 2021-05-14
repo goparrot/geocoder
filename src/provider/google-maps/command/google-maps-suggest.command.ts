@@ -1,12 +1,12 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
+import { GoogleMapsSuggestionTransformer } from '../transformer';
+import { AccuracyEnum } from '../../../model';
 import { SuggestCommand } from '../../../command';
 import type { SuggestQueryInterface } from '../../../interface';
 import type { SuggestQuery } from '../../../model';
-import { AccuracyEnum } from '../../../model';
 import type { AbstractSuggestionTransformer } from '../../../transformer';
 import type { GoogleMapsProvider } from '../google-maps.provider';
 import type { GoogleMapsSuggestQueryInterface } from '../interface';
-import { GoogleMapsSuggestionTransformer } from '../transformer';
 import { GoogleMapsCommonCommandMixin } from './mixin';
 
 /**

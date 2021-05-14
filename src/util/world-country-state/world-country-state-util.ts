@@ -39,7 +39,7 @@ export class WorldCountryStateUtil {
                 forbidNonWhitelisted: true,
                 validationError: { target: false, value: false },
             });
-        } catch (err) {
+        } catch (err: any) {
             return;
         }
 

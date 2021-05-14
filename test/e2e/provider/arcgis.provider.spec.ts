@@ -1,8 +1,7 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import type { AxiosInstance } from 'axios';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../src/exception';
-import type { GeocodeQueryInterface, QueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
@@ -16,6 +15,7 @@ import {
     providerRawSuggestResponse,
 } from '../../fixture/provider/arcgis.fixture';
 import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/shared';
+import type { GeocodeQueryInterface, QueryInterface, SuggestQueryInterface } from '../../../src/interface';
 
 describe('ArcgisProvider (2e2)', () => {
     const client: AxiosInstance = Axios.create();

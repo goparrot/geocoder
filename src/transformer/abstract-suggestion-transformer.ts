@@ -1,8 +1,8 @@
-import type { ClassTransformOptions } from 'class-transformer';
 import { plainToClass } from 'class-transformer';
+import type { ClassTransformOptions } from 'class-transformer';
+import { Suggestion } from '../model';
 import type { SuggestionInterface } from '../interface';
 import type { AbstractHttpProvider } from '../model';
-import { Suggestion } from '../model';
 import { AbstractTransformer } from './abstract-transformer';
 
 export abstract class AbstractSuggestionTransformer<

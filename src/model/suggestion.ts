@@ -1,5 +1,5 @@
-import type { ClassTransformOptions } from 'class-transformer';
 import { classToPlain, Exclude, Expose } from 'class-transformer';
+import type { ClassTransformOptions } from 'class-transformer';
 import type { SuggestionInterface } from '../interface';
 
 @Exclude()

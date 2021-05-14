@@ -1,8 +1,8 @@
+import { WorldCountryUtil } from '../../../../util/world-country';
 import type { AbstractCommand } from '../../../../command';
 import type { GeocodeQuery } from '../../../../model';
 import type { Constructor } from '../../../../types';
 import type { WorldCountry } from '../../../../util/world-country';
-import { WorldCountryUtil } from '../../../../util/world-country';
 import type { HereGeocodeQueryInterface } from '../../interface';
 import { HereCommonCommandMixin } from './here-common-command.mixin';
 

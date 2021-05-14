@@ -1,5 +1,5 @@
-import type { AbstractDecider } from '../decider';
 import { StatelessDecider } from '../decider';
+import type { AbstractDecider } from '../decider';
 import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../interface';
 import type { AbstractProvider, Location, Suggestion } from '../model';
 import { AbstractGeocoder } from './abstract-geocoder';

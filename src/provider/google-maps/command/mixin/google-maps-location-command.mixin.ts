@@ -1,9 +1,9 @@
 import type { AxiosResponse } from 'axios';
+import { GoogleMapsLocationTransformer } from '../../transformer';
 import type { AbstractCommand } from '../../../../command';
 import type { AbstractLocationTransformer } from '../../../../transformer';
 import type { Constructor } from '../../../../types';
 import type { GoogleMapsProvider } from '../../google-maps.provider';
-import { GoogleMapsLocationTransformer } from '../../transformer';
 import { GoogleMapsCommonCommandMixin } from './google-maps-common-command.mixin';
 
 export function GoogleMapsLocationCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {

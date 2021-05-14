@@ -1,5 +1,5 @@
-import type { LocationInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
+import type { LocationInterface } from '../../../src/interface';
 
 export const locationFixture: Readonly<LocationInterface> = Object.freeze<LocationInterface>({
     formattedAddress: '1158 E 89th St, Chicago, IL 60619, United States',

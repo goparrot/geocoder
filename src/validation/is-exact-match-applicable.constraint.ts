@@ -1,5 +1,5 @@
-import type { ValidationArguments, ValidatorConstraintInterface } from 'class-validator';
 import { ValidatorConstraint } from 'class-validator';
+import type { ValidationArguments, ValidatorConstraintInterface } from 'class-validator';
 import { AccuracyEnum } from '../model';
 
 @ValidatorConstraint({ name: 'isExactMatchApplicable' })
@@ -13,7 +13,7 @@ export class IsExactMatchApplicableConstraint implements ValidatorConstraintInte
             return true;
         }
 
-        if (!accuracy && 'undefined' === typeof limit) {
+        if (!accuracy && typeof limit === 'undefined') {
             return true;
         }
 
@@ -21,7 +21,7 @@ export class IsExactMatchApplicableConstraint implements ValidatorConstraintInte
             return false;
         }
 
-        if (limit && 1 === limit) {
+        if (limit && limit === 1) {
             return false;
         }
 

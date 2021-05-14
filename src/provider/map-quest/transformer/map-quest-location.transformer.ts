@@ -27,13 +27,13 @@ export class MapQuestLocationTransformer extends AbstractLocationTransformer<Map
     }
 
     async getState(): Promise<string | undefined> {
-        if (2 !== this.raw.adminArea3.length) {
+        if (this.raw.adminArea3.length !== 2) {
             return this.raw.adminArea3;
         }
     }
 
     async getStateCode(): Promise<string | undefined> {
-        if (2 === this.raw.adminArea3.length) {
+        if (this.raw.adminArea3.length === 2) {
             return this.raw.adminArea3;
         }
     }

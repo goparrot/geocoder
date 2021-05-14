@@ -1,10 +1,10 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
+import { MapQuestSuggestionTransformer } from '../transformer';
 import { SuggestCommand } from '../../../command';
 import type { SuggestQuery } from '../../../model';
 import type { AbstractSuggestionTransformer } from '../../../transformer';
 import type { MapQuestSuggestQueryInterface } from '../interface';
 import type { MapQuestProvider } from '../map-quest.provider';
-import { MapQuestSuggestionTransformer } from '../transformer';
 import { MapQuestCommonCommandMixin } from './mixin';
 
 /**

@@ -1,5 +1,5 @@
-import type { ReverseQueryInterface } from '../interface';
 import { ReverseQuery } from '../model';
+import type { ReverseQueryInterface } from '../interface';
 import { AbstractLocationCommand } from './abstract-location.command';
 
 export class ReverseCommand<ProviderRequestType = any, ProviderResponseType = any> extends AbstractLocationCommand<

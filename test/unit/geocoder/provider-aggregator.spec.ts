@@ -1,10 +1,10 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
+import type { AxiosInstance } from 'axios';
 import { ProviderNotRegisteredException } from '../../../src/exception';
 import { ProviderAggregator } from '../../../src/geocoder';
-import type { LoggerInterface } from '../../../src/logger';
 import { NullLogger } from '../../../src/logger';
 import { ChainProvider, GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
+import type { LoggerInterface } from '../../../src/logger';
 
 describe('ProviderAggregator (unit)', () => {
     const client: AxiosInstance = Axios.create();

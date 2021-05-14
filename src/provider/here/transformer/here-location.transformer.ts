@@ -1,6 +1,6 @@
 import { AbstractLocationTransformer } from '../../../transformer';
-import type { WorldCountry } from '../../../util/world-country';
 import { HereProvider } from '../here.provider';
+import type { WorldCountry } from '../../../util/world-country';
 import type { HereOneResultAddressAdditionalDataType, HereOneResultAddressType, HereOneResultType } from '../interface';
 
 export class HereLocationTransformer extends AbstractLocationTransformer<HereProvider, HereOneResultType> {

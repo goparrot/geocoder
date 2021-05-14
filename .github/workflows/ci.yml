@@ -39,7 +39,7 @@ jobs:
         run: npm install --progress=false --loglevel=warn --ignore-scripts
 
       - name: Check typescript compilation
-        run: npm run check:tsc
+        run: npm run typecheck
 
       - name: Lint code
         run: npm run lint

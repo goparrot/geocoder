@@ -1,3 +1,4 @@
+import { distanceQueryFixture, placeDetailsQueryFixture } from '../model/query.fixture';
 import type {
     DistanceDetailsInterface,
     DistanceQueryInterface,
@@ -5,7 +6,6 @@ import type {
     PlaceDetailsQueryInterface,
     SuggestionInterface,
 } from '../../../src/interface';
-import { distanceQueryFixture, placeDetailsQueryFixture } from '../model/query.fixture';
 
 const providerRawLocationResponse: Readonly<any> = Object.freeze({
     results: [

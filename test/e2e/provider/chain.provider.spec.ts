@@ -1,7 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import type { GeocodeQueryInterface, QueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
+import type { AxiosInstance } from 'axios';
 import { AccuracyEnum } from '../../../src/model';
 import { ChainProvider, GoogleMapsGeocodeCommand, GoogleMapsProvider, GoogleMapsReverseCommand, GoogleMapsSuggestCommand } from '../../../src/provider';
 import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider/arcgis';
@@ -15,6 +14,7 @@ import {
     providerRawSuggestResponse,
 } from '../../fixture/provider/google.fixture';
 import { sharedAccuracyBehaviours } from '../common/shared';
+import type { GeocodeQueryInterface, QueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 
 describe('ChainProvider (2e2)', () => {
     const client: AxiosInstance = Axios.create();

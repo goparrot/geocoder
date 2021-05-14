@@ -1,13 +1,13 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import { DistanceCommand } from '../../../command';
-import { InvalidArgumentException, InvalidServerResponseException, NotFoundException, QuotaExceededException } from '../../../exception';
-import type { DistanceQueryInterface } from '../../../interface';
+import { GoogleMapsDistanceTransformer } from '../transformer';
 import { TravelModeEnum } from '../../../model';
+import { InvalidArgumentException, InvalidServerResponseException, NotFoundException, QuotaExceededException } from '../../../exception';
+import { DistanceCommand } from '../../../command';
+import type { DistanceQueryInterface } from '../../../interface';
 import type { DistanceQuery } from '../../../model/distance-query';
 import type { AbstractDistanceTransformer } from '../../../transformer';
 import type { GoogleMapsProvider } from '../google-maps.provider';
 import type { GoogleMapsDistanceQueryInterface } from '../interface';
-import { GoogleMapsDistanceTransformer } from '../transformer';
 import { GoogleMapsCommonCommandMixin } from './mixin';
 
 /**

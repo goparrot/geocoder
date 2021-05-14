@@ -1,10 +1,10 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
+import type { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
-import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 import { AccuracyEnum } from '../../../src/model';
 import { ArcgisProvider, StatefulChainProvider } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
+import type { GeocodeQueryInterface, ReverseQueryInterface, SuggestQueryInterface } from '../../../src/interface';
 
 describe('StatefulChainProvider (integration)', () => {
     let client: AxiosInstance;

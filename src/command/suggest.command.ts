@@ -1,5 +1,5 @@
-import type { SuggestQueryInterface } from '../interface';
 import { SuggestQuery } from '../model';
+import type { SuggestQueryInterface } from '../interface';
 import { AbstractSuggestCommand } from './abstract-suggest.command';
 
 export class SuggestCommand<ProviderRequestType = any, ProviderResponseType = any> extends AbstractSuggestCommand<

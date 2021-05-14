@@ -14,7 +14,7 @@ export class StatefulDecider extends AbstractDecider {
             throw ProviderNotRegisteredException.noProviderRegistered();
         }
 
-        if (!this.currentProvider || 1 === providers.length) {
+        if (!this.currentProvider || providers.length === 1) {
             return (this.currentProvider = providers[0]);
         }
 

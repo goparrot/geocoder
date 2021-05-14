@@ -1,12 +1,12 @@
 import type { AxiosResponse } from 'axios';
-import type { AbstractCommand } from '../../../../command';
 import { InvalidCredentialsException } from '../../../../exception';
-import type { Query } from '../../../../model';
 import { AccuracyEnum } from '../../../../model';
-import type { Constructor } from '../../../../types';
-import type { HereOneResultType, HereResponseType } from '../../interface';
 import { HereLocationTransformer } from '../../transformer';
 import { filterByAccuracy } from '../../util';
+import type { AbstractCommand } from '../../../../command';
+import type { Query } from '../../../../model';
+import type { Constructor } from '../../../../types';
+import type { HereOneResultType, HereResponseType } from '../../interface';
 
 export function HereCommonCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {
     abstract class HereCommonCommand extends Base {

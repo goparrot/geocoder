@@ -1,7 +1,7 @@
 import type { AxiosResponse } from 'axios';
+import { DistanceQuery } from '../model/distance-query';
 import type { DistanceQueryInterface } from '../interface';
 import type { Distance } from '../model';
-import { DistanceQuery } from '../model/distance-query';
 import type { AbstractDistanceTransformer } from '../transformer';
 import { AbstractCommand } from './abstract.command';
 

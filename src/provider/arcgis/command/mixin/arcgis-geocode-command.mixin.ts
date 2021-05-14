@@ -1,8 +1,8 @@
 import type { AxiosResponse } from 'axios';
-import type { AbstractCommand } from '../../../../command';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../../exception';
-import type { Constructor } from '../../../../types';
 import { ArcgisLocationTransformer } from '../../transformer';
+import type { AbstractCommand } from '../../../../command';
+import type { Constructor } from '../../../../types';
 import { ArcgisCommonCommandMixin } from './arcgis-common-command.mixin';
 
 export function ArcgisGeocodeCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {

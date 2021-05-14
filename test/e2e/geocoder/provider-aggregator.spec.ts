@@ -1,8 +1,7 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import type { AxiosInstance } from 'axios';
 import { ProviderAggregator } from '../../../src/geocoder';
-import type { QueryInterface } from '../../../src/interface';
 import { NullLogger } from '../../../src/logger';
 import { AccuracyEnum } from '../../../src/model';
 import { ArcgisGeocodeCommand, ArcgisProvider, ArcgisReverseCommand, ArcgisSuggestCommand } from '../../../src/provider';
@@ -16,6 +15,7 @@ import {
     providerRawSuggestResponse,
 } from '../../fixture/provider/arcgis.fixture';
 import { sharedAccuracyBehaviours, sharedCommandBehaviours, sharedProvidableBehaviours } from '../common/shared';
+import type { QueryInterface } from '../../../src/interface';
 
 describe('ProviderAggregator (2e2)', () => {
     const client: AxiosInstance = Axios.create();

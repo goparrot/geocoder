@@ -1,5 +1,4 @@
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import type { AbstractCommand } from '../../../../command';
 import {
     InvalidArgumentException,
     InvalidCredentialsException,
@@ -8,6 +7,7 @@ import {
     QuotaExceededException,
 } from '../../../../exception';
 import { AccuracyEnum } from '../../../../model';
+import type { AbstractCommand } from '../../../../command';
 import type { Constructor } from '../../../../types';
 
 export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractCommand>>(Base: TBase): TBase {
@@ -35,28 +35,28 @@ export function GoogleMapsCommonCommandMixin<TBase extends Constructor<AbstractC
          * @link {https://developers.google.com/maps/documentation/geocoding/intro#StatusCodes}
          */
         protected async validateResponse(response: AxiosResponse): Promise<void> {
-            if ('OK' === response.data.status) {
+            if (response.data.status === 'OK') {
                 return;
             }
 
-            if ('NOT_FOUND' === response.data.status) {
+            if (response.data.status === 'NOT_FOUND') {
                 throw new NotFoundException('Not found', response);
-            } else if ('REQUEST_DENIED' === response.data.status && 'The provided API key is invalid.' === response.data.error_message) {
+            } else if (response.data.status === 'REQUEST_DENIED' && response.data.error_message === 'The provided API key is invalid.') {
                 throw new InvalidCredentialsException('API key is invalid', response);
-            } else if ('REQUEST_DENIED' === response.data.status) {
+            } else if (response.data.status === 'REQUEST_DENIED') {
                 throw new InvalidServerResponseException('API key is invalid', response);
-            } else if ('OVER_QUERY_LIMIT' === response.data.status) {
+            } else if (response.data.status === 'OVER_QUERY_LIMIT') {
                 throw new QuotaExceededException('Quota exceeded', response);
-            } else if ('OVER_DAILY_LIMIT' === response.data.status) {
+            } else if (response.data.status === 'OVER_DAILY_LIMIT') {
                 /**
                  * @link {https://developers.google.com/maps/faq#over-limit-key-error}
                  */
                 throw new QuotaExceededException('Daily quota exceeded', response);
-            } else if ('INVALID_REQUEST' === response.data.status) {
+            } else if (response.data.status === 'INVALID_REQUEST') {
                 throw new InvalidArgumentException('Invalid request', response);
-            } else if ('UNKNOWN_ERROR' === response.data.status) {
+            } else if (response.data.status === 'UNKNOWN_ERROR') {
                 throw new InvalidServerResponseException('Unknown error', response);
-            } else if ('ZERO_RESULTS' === response.data.status) {
+            } else if (response.data.status === 'ZERO_RESULTS') {
                 return;
             }
 

@@ -1,5 +1,5 @@
-import type { SuggestionInterface } from '../../../src/interface';
 import { GoogleMapsProvider } from '../../../src/provider';
+import type { SuggestionInterface } from '../../../src/interface';
 
 export const suggestionFixture: Readonly<SuggestionInterface> = Object.freeze<SuggestionInterface>({
     formattedAddress: '1158 E 89th St, Chicago, IL 60619, USA',

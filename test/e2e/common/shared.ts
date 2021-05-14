@@ -1,7 +1,6 @@
-import type { AxiosInstance } from 'axios';
 import Axios from 'axios';
+import type { AxiosInstance } from 'axios';
 import type MockAdapter from 'axios-mock-adapter';
-import type { GeocoderInterface, Type } from '../../../src';
 import {
     ExactMatchNotFoundException,
     InvalidCredentialsException,
@@ -11,13 +10,14 @@ import {
     UnsupportedAccuracyException,
     ValidationException,
 } from '../../../src/exception';
-import type { ProviderInterface, QueryInterface } from '../../../src/interface';
-import type { LoggableInterface } from '../../../src/logger';
 import { NullLogger } from '../../../src/logger';
-import type { AbstractProvider, ProvidableInterface } from '../../../src/model';
 import { AccuracyEnum } from '../../../src/model';
 import { ArcgisProvider, GoogleMapsProvider, MapQuestProvider } from '../../../src/provider';
 import { getAvailableAccuracies } from '../../../src/util';
+import type { GeocoderInterface, Type } from '../../../src';
+import type { ProviderInterface, QueryInterface } from '../../../src/interface';
+import type { LoggableInterface } from '../../../src/logger';
+import type { AbstractProvider, ProvidableInterface } from '../../../src/model';
 
 export function sharedCommandResultBehaviours(
     mock: MockAdapter,

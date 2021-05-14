@@ -1,13 +1,13 @@
 import type { AxiosResponse } from 'axios';
+import { WorldCountryStateUtil } from '../util/world-country-state';
+import { WorldCountryUtil } from '../util/world-country';
+import { AccuracyEnum } from '../model';
 import { UnsupportedAccuracyException } from '../exception';
 import type { QueryInterface } from '../interface';
 import type { Location } from '../model';
-import { AccuracyEnum } from '../model';
 import type { AbstractLocationTransformer } from '../transformer';
 import type { WorldCountry } from '../util/world-country';
-import { WorldCountryUtil } from '../util/world-country';
 import type { WorldCountryState } from '../util/world-country-state';
-import { WorldCountryStateUtil } from '../util/world-country-state';
 import { AbstractCommand } from './abstract.command';
 
 export abstract class AbstractLocationCommand<
@@ -45,7 +45,7 @@ export abstract class AbstractLocationCommand<
                         location.countryCode = country.cca2;
                         location.country = country.name.common;
                     }
-                } catch (err) {
+                } catch (err: any) {
                     this.getLogger().error(err, { location });
                 }
             }
@@ -62,7 +62,7 @@ export abstract class AbstractLocationCommand<
                         location.state = state.name;
                         location.stateCode = state.stateCode;
                     }
-                } catch (err) {
+                } catch (err: any) {
                     this.getLogger().error(err, { location });
                 }
             }

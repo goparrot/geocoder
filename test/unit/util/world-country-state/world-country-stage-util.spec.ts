@@ -1,5 +1,5 @@
-import type { WorldCountryState } from '../../../../src/util/world-country-state';
 import { WorldCountryStateUtil } from '../../../../src/util/world-country-state';
+import type { WorldCountryState } from '../../../../src/util/world-country-state';
 
 describe('WorldCountryStateUtil (unit)', () => {
     const worldCountryStateFixture: WorldCountryState = {

@@ -79,7 +79,7 @@ export class HereLocationTransformer extends AbstractLocationTransformer<HerePro
     }
 
     private getAdditionalDataByKey(key: HereOneResultAddressAdditionalDataType['key']): HereOneResultAddressAdditionalDataType['value'] | undefined {
-        const data: HereOneResultAddressAdditionalDataType | undefined = this.getLocationAddress().AdditionalData!.find<HereOneResultAddressAdditionalDataType>(
+        const data: HereOneResultAddressAdditionalDataType | undefined = this.getLocationAddress().AdditionalData?.find<HereOneResultAddressAdditionalDataType>(
             (element: HereOneResultAddressAdditionalDataType): element is HereOneResultAddressAdditionalDataType => key === element.key,
         );
 

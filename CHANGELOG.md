@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.2.1](https://github.com/goparrot/geocoder/compare/v4.2.0...v4.2.1) (2021-10-15)
+
+### Bug Fixes
+
+*   **provider:** cannot find type definition file for heremaps ([eeacc3a](https://github.com/goparrot/geocoder/commit/eeacc3aae53017c9f00e47064c20d58f032c13a8)), closes [#109](https://github.com/goparrot/geocoder/issues/109)
+
 ## [4.2.0](https://github.com/goparrot/geocoder/compare/v4.1.0...v4.2.0) (2021-05-12)
 
 ### Features

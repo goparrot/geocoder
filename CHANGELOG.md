@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/goparrot/geocoder/compare/v4.2.1...v4.3.0) (2021-11-15)
+
+### Features
+
+*   update npm dependencies ([ae82fb7](https://github.com/goparrot/geocoder/commit/ae82fb73f61bab7f858ba3cec28ca394eadf1563))
+
 ### [4.2.1](https://github.com/goparrot/geocoder/compare/v4.2.0...v4.2.1) (2021-10-15)
 
 ### Bug Fixes

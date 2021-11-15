@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import { GeocoderException, ProviderNotRegisteredException } from '../../../src/exception';
 import { GoogleMapsProvider, HereProvider } from '../../../src/provider';
 
@@ -6,7 +6,7 @@ describe('ProviderNotRegisteredException (unit)', () => {
     let provider: GoogleMapsProvider;
 
     beforeEach(() => {
-        provider = new GoogleMapsProvider(Axios.create(), `${process.env.GOOGLE_MAPS_API_KEY}`);
+        provider = new GoogleMapsProvider(axios.create(), `${process.env.GOOGLE_MAPS_API_KEY}`);
     });
 
     describe('#constructor', () => {

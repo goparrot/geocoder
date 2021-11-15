@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
 import { MapQuestProvider } from '../../../src/provider';
@@ -17,7 +17,7 @@ describe('MapQuestProvider (integration)', () => {
         reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
 
-        client = Axios.create();
+        client = axios.create();
 
         const provider: MapQuestProvider = new MapQuestProvider(client, `${process.env.MAP_QUEST_API_KEY}`);
 

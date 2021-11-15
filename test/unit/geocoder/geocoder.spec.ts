@@ -1,9 +1,9 @@
-import Axios from 'axios';
 import type { AxiosInstance } from 'axios';
+import axios from 'axios';
 import { Geocoder } from '../../../src/geocoder';
+import type { LoggerInterface } from '../../../src/logger';
 import { NullLogger } from '../../../src/logger';
 import { HereProvider } from '../../../src/provider';
-import type { LoggerInterface } from '../../../src/logger';
 
 describe('Geocoder (unit)', () => {
     let client: AxiosInstance;
@@ -13,19 +13,22 @@ describe('Geocoder (unit)', () => {
         debug(): any {
             //
         }
+
         info(): any {
             //
         }
+
         warn(): any {
             //
         }
+
         error(): any {
             //
         }
     }
 
     beforeEach(() => {
-        client = Axios.create();
+        client = axios.create();
 
         geocoder = new Geocoder(new HereProvider(client, 'test', 'test'));
     });

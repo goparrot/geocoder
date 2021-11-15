@@ -72,7 +72,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [12, 14]
+        node-version: [12, 14, 16]
 
     steps:
       - name: Clone repository
@@ -99,6 +99,6 @@ jobs:
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
-        if: startsWith(matrix.node-version, '14')
+        if: startsWith(matrix.node-version, '16')
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

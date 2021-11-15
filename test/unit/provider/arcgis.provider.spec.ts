@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { ArcgisProvider } from '../../../src/provider';
 
@@ -7,7 +7,7 @@ describe('ArcgisProvider (unit)', () => {
     let provider: ArcgisProvider;
 
     beforeEach(() => {
-        client = Axios.create();
+        client = axios.create();
 
         provider = new ArcgisProvider(client);
     });

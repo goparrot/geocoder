@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { InvalidCredentialsException } from '../../../src/exception';
 import { MapQuestProvider } from '../../../src/provider';
@@ -8,7 +8,7 @@ describe('MapQuestProvider (unit)', () => {
     let provider: MapQuestProvider;
 
     beforeEach(() => {
-        client = Axios.create();
+        client = axios.create();
 
         provider = new MapQuestProvider(client, 'test');
     });

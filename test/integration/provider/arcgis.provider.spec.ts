@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
 import { ArcgisProvider } from '../../../src/provider';
@@ -20,7 +20,7 @@ describe('ArcgisProvider (integration)', () => {
         suggestQuery = { ...suggestQueryFixture };
         placeDetailsQuery = { ...providerPlaceDetailsQueryFixture };
 
-        client = Axios.create();
+        client = axios.create();
 
         const provider: ArcgisProvider = new ArcgisProvider(client);
 

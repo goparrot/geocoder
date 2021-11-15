@@ -1,5 +1,5 @@
 import { placeDetailsQueryFixture } from '../model/query.fixture';
-import type { LocationInterface, PlaceDetailsQueryInterface, SuggestionInterface } from '../../../src/interface';
+import type { LocationInterface, PlaceDetailsQueryInterface, SuggestionInterface } from '../../../src';
 
 const providerRawLocationResponse: Readonly<any> = Object.freeze({
     Response: {
@@ -87,7 +87,7 @@ export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> =
 export const providerPlaceDetailsQueryFixture: Readonly<PlaceDetailsQueryInterface> = Object.freeze<PlaceDetailsQueryInterface>({
     ...placeDetailsQueryFixture,
     ...{
-        placeId: providerParsedLocationResponse[0].placeId!,
+        placeId: providerParsedLocationResponse?.[0].placeId ?? '',
     },
 });
 

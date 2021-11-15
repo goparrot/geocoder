@@ -42,9 +42,9 @@ In the code snippet below we use Google provider.
 ```typescript
 import 'reflect-metadata';
 import { Distance, Location, Geocoder, GoogleMapsProvider, Suggestion } from '@goparrot/geocoder';
-import Axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-const axios: AxiosInstance = Axios.create();
+const axios: AxiosInstance = axios.create();
 
 const provider: GoogleMapsProvider = new GoogleMapsProvider(axios, 'YOUR_API_KEY');
 
@@ -119,13 +119,13 @@ In the code snippet below we use Here provider.
 ```typescript
 import 'reflect-metadata';
 import { Location, Geocoder, HereProvider, LoggerInterface } from '@goparrot/geocoder';
-import Axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 // You can use any logger that fits the LoggerInterface
 const logger: LoggerInterface = console;
 
 // Set timeout for all requests
-const axios: AxiosInstance = Axios.create({
+const axios: AxiosInstance = axios.create({
     timeout: 5000,
 });
 
@@ -169,7 +169,7 @@ geocoder.setLogger(logger);
             withRaw: true, // default false
         });
 
-        logger.info('locations', locations);
+        logger.info('locations', { locations });
     } catch (err) {
         logger.error(err);
     }
@@ -185,7 +185,7 @@ geocoder.setLogger(logger);
             // withRaw: false, // default
         });
 
-        console.info('locations', locations);
+        console.info('locations', { locations });
     } catch (err) {
         console.error(err);
     }
@@ -235,10 +235,10 @@ when a provider returns a result.
 
 ```typescript
 import 'reflect-metadata';
-import Axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { Location, ChainProvider, HereProvider, MapQuestProvider, ProviderAggregator } from '@goparrot/geocoder';
 
-const axios: AxiosInstance = Axios.create({
+const axios: AxiosInstance = axios.create({
     timeout: 5000,
 });
 
@@ -252,7 +252,7 @@ const geocoder: ProviderAggregator = new ProviderAggregator([chainProvider]);
             address: '1158 E 89th St, Chicago, IL 60619, USA',
         });
 
-        console.info(locations);
+        console.info({ locations });
     } catch (err) {
         console.error(err);
     }
@@ -266,10 +266,10 @@ manualy decide which provider to use later on.
 
 ```typescript
 import 'reflect-metadata';
-import Axios, { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { Location, GoogleMapsProvider, HereProvider, ProviderAggregator, MapQuestProvider } from '@goparrot/geocoder';
 
-const axios: AxiosInstance = Axios.create({
+const axios: AxiosInstance = axios.create({
     timeout: 5000,
 });
 
@@ -286,7 +286,7 @@ geocoder.registerProvider(new GoogleMapsProvider(axios, 'YOUR_API_KEY'));
             address: '1158 E 89th St, Chicago, IL 60619, USA',
         });
 
-        console.info(locations);
+        console.info({ locations });
     } catch (err) {
         console.error(err);
     }

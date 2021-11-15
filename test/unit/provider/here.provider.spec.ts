@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { InvalidCredentialsException } from '../../../src/exception';
 import { HereProvider } from '../../../src/provider';
@@ -8,7 +8,7 @@ describe('HereProvider (unit)', () => {
     let provider: HereProvider;
 
     beforeEach(() => {
-        client = Axios.create();
+        client = axios.create();
 
         provider = new HereProvider(client, 'test', 'test');
     });

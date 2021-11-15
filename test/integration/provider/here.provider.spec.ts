@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
 import { HereProvider } from '../../../src/provider';
@@ -20,7 +20,7 @@ describe('HereProvider (integration)', () => {
         suggestQuery = { ...suggestQueryFixture };
         placeDetailsQuery = { ...providerPlaceDetailsQueryFixture };
 
-        client = Axios.create();
+        client = axios.create();
 
         const provider: HereProvider = new HereProvider(client, `${process.env.HERE_APP_ID}`, `${process.env.HERE_APP_CODE}`);
 

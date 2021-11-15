@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import type { AxiosInstance } from 'axios';
 import { InvalidArgumentException, InvalidCredentialsException, InvalidServerResponseException } from '../../../src/exception';
@@ -18,7 +18,7 @@ import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/sha
 import type { GeocodeQueryInterface, QueryInterface, SuggestQueryInterface } from '../../../src/interface';
 
 describe('ArcgisProvider (2e2)', () => {
-    const client: AxiosInstance = Axios.create();
+    const client: AxiosInstance = axios.create();
     const mock: MockAdapter = new MockAdapter(client);
     const provider: ArcgisProvider = new ArcgisProvider(client);
 

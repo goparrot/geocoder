@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { ProviderNotRegisteredException } from '../../../src/exception';
 import { ProviderAggregator } from '../../../src/geocoder';
@@ -7,7 +7,7 @@ import { ChainProvider, GoogleMapsProvider, MapQuestProvider } from '../../../sr
 import type { LoggerInterface } from '../../../src/logger';
 
 describe('ProviderAggregator (unit)', () => {
-    const client: AxiosInstance = Axios.create();
+    const client: AxiosInstance = axios.create();
     const mapQuestProvider: MapQuestProvider = new MapQuestProvider(client, 'test');
     const googleProvider: GoogleMapsProvider = new GoogleMapsProvider(client, 'test');
 

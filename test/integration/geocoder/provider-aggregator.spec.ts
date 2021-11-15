@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { ProviderAggregator } from '../../../src/geocoder';
 import { ArcgisProvider } from '../../../src/provider';
@@ -17,7 +17,7 @@ describe('ProviderAggregator (integration)', () => {
         reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
 
-        const client: AxiosInstance = Axios.create();
+        const client: AxiosInstance = axios.create();
 
         const provider: ArcgisProvider = new ArcgisProvider(client);
 

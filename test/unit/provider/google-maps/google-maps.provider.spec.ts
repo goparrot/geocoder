@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { InvalidCredentialsException } from '../../../../src/exception';
 import { GoogleMapsProvider } from '../../../../src/provider';
@@ -8,7 +8,7 @@ describe('GoogleMapsProvider (unit)', () => {
     let provider: GoogleMapsProvider;
 
     beforeEach(() => {
-        client = Axios.create();
+        client = axios.create();
 
         provider = new GoogleMapsProvider(client, 'test');
     });

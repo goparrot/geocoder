@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { StatelessDecider } from '../../../src/decider';
 import { ProviderNotRegisteredException } from '../../../src/exception';
@@ -12,7 +12,7 @@ describe('StatelessDecider (unit)', () => {
     beforeEach(() => {
         decider = new StatelessDecider();
 
-        const client: AxiosInstance = Axios.create();
+        const client: AxiosInstance = axios.create();
 
         mapQuestProvider = new HereProvider(client, 'test', 'test');
         googleProvider = new GoogleMapsProvider(client, 'test');

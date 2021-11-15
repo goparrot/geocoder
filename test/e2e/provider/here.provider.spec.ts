@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import type { AxiosInstance } from 'axios';
 import { AccuracyEnum } from '../../../src/model';
@@ -16,7 +16,7 @@ import { sharedAccuracyBehaviours, sharedCommandBehaviours } from '../common/sha
 import type { QueryInterface } from '../../../src/interface';
 
 describe('HereProvider (2e2)', () => {
-    const client: AxiosInstance = Axios.create();
+    const client: AxiosInstance = axios.create();
     const mock: MockAdapter = new MockAdapter(client);
     const provider: HereProvider = new HereProvider(client, 'test', 'test');
 

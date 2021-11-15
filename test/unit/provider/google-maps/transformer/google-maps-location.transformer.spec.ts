@@ -1,3 +1,4 @@
+import { gte } from 'semver';
 import { plainToClass } from 'class-transformer';
 import { GoogleMapsLocationTransformer, GoogleMapsProvider, Location } from '../../../../../src';
 
@@ -6,7 +7,11 @@ describe('GoogleMapsLocationTransformer (unit)', () => {
         it('should throw TypeError on empty raw data object', async () => {
             const transformer = new GoogleMapsLocationTransformer({});
 
-            return transformer.transform().should.be.rejectedWith(TypeError, `Cannot read property 'location' of undefined`);
+            const errorMessage = gte(process.version, '16.0.0')
+                ? `Cannot read properties of undefined (reading 'location')`
+                : `Cannot read property 'location' of undefined`;
+
+            return transformer.transform().should.be.rejectedWith(TypeError, errorMessage);
         });
 
         it('should work with minimal raw data', async () => {

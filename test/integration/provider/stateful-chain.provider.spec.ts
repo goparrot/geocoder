@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { Geocoder } from '../../../src/geocoder';
 import { AccuracyEnum } from '../../../src/model';
@@ -18,7 +18,7 @@ describe('StatefulChainProvider (integration)', () => {
         reverseQuery = { ...reverseQueryFixture };
         suggestQuery = { ...suggestQueryFixture };
 
-        client = Axios.create();
+        client = axios.create();
 
         const provider: StatefulChainProvider = new StatefulChainProvider([new ArcgisProvider(client)]);
 

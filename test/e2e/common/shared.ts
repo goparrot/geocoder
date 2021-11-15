@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import type MockAdapter from 'axios-mock-adapter';
 import {
@@ -185,7 +185,7 @@ export function sharedAccuracyBehaviours(
 
 export function sharedProvidableBehaviours(providableClass: Type<ProviderInterface & ProvidableInterface & LoggableInterface>): void {
     describe('#sharedProvidableBehaviours', () => {
-        const client: AxiosInstance = Axios.create();
+        const client: AxiosInstance = axios.create();
         const googleProvider: GoogleMapsProvider = new GoogleMapsProvider(client, 'test');
 
         let provider: ProviderInterface & ProvidableInterface & LoggableInterface;

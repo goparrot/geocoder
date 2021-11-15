@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 import { delay } from '../../../src';
 import { Geocoder } from '../../../src/geocoder';
@@ -38,7 +38,7 @@ describe('GoogleMapsProvider (integration)', () => {
 
         placeDetailsQuery = { ...providerPlaceDetailsQueryFixture };
 
-        client = Axios.create();
+        client = axios.create();
 
         const provider: GoogleMapsProvider = new GoogleMapsProvider(client, `${process.env.GOOGLE_MAPS_API_KEY}`);
 

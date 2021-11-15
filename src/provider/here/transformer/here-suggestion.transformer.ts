@@ -8,7 +8,7 @@ export class HereSuggestionTransformer extends AbstractSuggestionTransformer<Her
     }
 
     async getFormattedAddress(): Promise<string> {
-        return this.getLocationAddress().Label!;
+        return this.getLocationAddress().Label ?? '';
     }
 
     async getPlaceId(): Promise<string> {

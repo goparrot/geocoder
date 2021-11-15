@@ -82,13 +82,13 @@
         "typecheck": "tsc -p tsconfig.json --noEmit",
         "pre-commit": "git add . && run-p format:staged typecheck && run-p build:dist lint remark coverage:all",
         "prepublishOnly": "echo \"use 'npm run release:dev' or 'npm run version:stable' and make PR to master branch, CD/CI will do the rest of the work\" && exit 1",
-        "publish": "npm run build:dist && ts-node -T bin/prepublish.ts && npm publish dist",
+        "publish": "npm run build:dist && ts-node -T bin/prepublish.ts && npm publish ./dist",
         "version": "echo \"use 'npm run version:dev' or 'npm run version:stable'\" && exit 1",
         "version:dev": "standard-version --no-verify --prerelease dev --skip.changelog --skip.tag --skip.commit",
         "version:stable": "standard-version --no-verify --skip.tag && git push origin",
         "release:dev": "npm run version:dev && npm run publish -- --tag dev",
         "release:dev:dry": "npm run release:dev -- --dry-run",
-        "github-release": "conventional-github-releaser -p angular"
+        "github-release": "standard-version --no-verify --skip.bump --skip.changelog --skip.commit && git push origin --tags && conventional-github-releaser -p angular"
     },
     "peerDependencies": {
         "axios": ">=0.21.1",

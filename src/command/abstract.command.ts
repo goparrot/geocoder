@@ -1,4 +1,4 @@
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import isEmpty from 'lodash.isempty';
 import type { AxiosInstance, AxiosResponse } from 'axios';
@@ -67,7 +67,7 @@ export abstract class AbstractCommand<
     }
 
     async execute(_query: GeocoderQueryType): Promise<GeocoderResponseType[]> {
-        const query: GeocoderQueryType = plainToClass<GeocoderQueryType, GeocoderQueryType>(this.constructor.queryClass(), _query);
+        const query: GeocoderQueryType = plainToInstance<GeocoderQueryType, GeocoderQueryType>(this.constructor.queryClass(), _query);
 
         try {
             await validateOrReject(query, {

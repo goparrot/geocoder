@@ -1,4 +1,4 @@
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import type { ClassTransformOptions } from 'class-transformer';
 import { Distance } from '../model/distance';
 import type { DistanceDetailsInterface } from '../interface';
@@ -20,6 +20,6 @@ export abstract class AbstractDistanceTransformer<HttpProviderClass extends Abst
         distance.duration = await this.getDuration();
         distance.raw = this.raw;
 
-        return plainToClass<Distance<ProviderRawEntryType>, DistanceDetailsInterface<ProviderRawEntryType>>(Distance, distance, options);
+        return plainToInstance<Distance<ProviderRawEntryType>, DistanceDetailsInterface<ProviderRawEntryType>>(Distance, distance, options);
     }
 }

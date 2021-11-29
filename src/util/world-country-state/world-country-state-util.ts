@@ -1,4 +1,4 @@
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import countryStates from '../../data/country-states/country-states.json';
 import { WorldCountryState } from './world-country-state';
@@ -23,7 +23,7 @@ export class WorldCountryStateUtil {
     }
 
     static async find(_query: WorldCountryStateQueryInterface): Promise<WorldCountryState | undefined> {
-        const query: WorldCountryStateQuery = plainToClass<WorldCountryStateQuery, WorldCountryStateQueryInterface>(WorldCountryStateQuery, _query);
+        const query: WorldCountryStateQuery = plainToInstance<WorldCountryStateQuery, WorldCountryStateQueryInterface>(WorldCountryStateQuery, _query);
         const keys: Array<keyof WorldCountryStateQuery> = Object.keys(query) as unknown as Array<keyof WorldCountryStateQuery>;
 
         // clear undefined/empty values
@@ -45,7 +45,7 @@ export class WorldCountryStateUtil {
 
         const stateData: WorldCountryStateInterface | undefined = (countryStates as WorldCountryStateInterface[]).find(
             (plainState: WorldCountryStateInterface) => {
-                const state: WorldCountryState = plainToClass<WorldCountryState, WorldCountryStateInterface>(WorldCountryState, plainState);
+                const state: WorldCountryState = plainToInstance<WorldCountryState, WorldCountryStateInterface>(WorldCountryState, plainState);
 
                 return WorldCountryStateUtil.match(state, query);
             },
@@ -55,6 +55,6 @@ export class WorldCountryStateUtil {
             return;
         }
 
-        return plainToClass<WorldCountryState, WorldCountryStateInterface>(WorldCountryState, stateData);
+        return plainToInstance<WorldCountryState, WorldCountryStateInterface>(WorldCountryState, stateData);
     }
 }

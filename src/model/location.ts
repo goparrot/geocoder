@@ -1,4 +1,4 @@
-import { classToPlain, Exclude, Expose } from 'class-transformer';
+import { instanceToPlain, Exclude, Expose } from 'class-transformer';
 import type { ClassTransformOptions } from 'class-transformer';
 import type { LocationInterface } from '../interface';
 
@@ -72,6 +72,6 @@ export class Location<ProviderRawEntryType = any> implements LocationInterface<P
     }
 
     toObject(options?: ClassTransformOptions): LocationInterface<ProviderRawEntryType> {
-        return classToPlain<Location<ProviderRawEntryType>>(this, options) as LocationInterface<ProviderRawEntryType>;
+        return instanceToPlain<Location<ProviderRawEntryType>>(this, options) as LocationInterface<ProviderRawEntryType>;
     }
 }

@@ -1,4 +1,4 @@
-import { classToPlain, Exclude, Expose } from 'class-transformer';
+import { instanceToPlain, Exclude, Expose } from 'class-transformer';
 import type { ClassTransformOptions } from 'class-transformer';
 import type { SuggestionInterface } from '../interface';
 
@@ -17,6 +17,6 @@ export class Suggestion<ProviderRawEntryType = any> implements SuggestionInterfa
     raw?: ProviderRawEntryType;
 
     toObject(options?: ClassTransformOptions): SuggestionInterface<ProviderRawEntryType> {
-        return classToPlain<Suggestion<ProviderRawEntryType>>(this, options) as SuggestionInterface<ProviderRawEntryType>;
+        return instanceToPlain<Suggestion<ProviderRawEntryType>>(this, options) as SuggestionInterface<ProviderRawEntryType>;
     }
 }

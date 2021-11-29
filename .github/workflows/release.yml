@@ -35,9 +35,12 @@ jobs:
           file-url: https://unpkg.com/@goparrot/geocoder@latest/package.json
           static-checking: localIsNew
 
-      - name: Publish to NPM and create github release
+      - name: Create and push git tag, publish version to NPM and create github release
         if: steps.package-version.outputs.changed == 'true'
         run: |
+          echo "Version change found in commit ${{ steps.package-version.outputs.commit }}! New version: ${{ steps.package-version.outputs.version }} (${{ steps.package-version.outputs.type }})"
+          git tag -f v${{ steps.package-version.outputs.version }} ${{ steps.package-version.outputs.commit }}
+          git push origin v${{ steps.package-version.outputs.version }}
           npm install --progress=false --loglevel=warn --ignore-scripts
           npm run publish
           npm run github-release

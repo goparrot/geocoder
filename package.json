@@ -88,7 +88,7 @@
         "version:stable": "standard-version --no-verify --skip.tag && git push origin",
         "release:dev": "npm run version:dev && npm run publish -- --tag dev",
         "release:dev:dry": "npm run release:dev -- --dry-run",
-        "github-release": "standard-version --no-verify --skip.bump --skip.changelog --skip.commit && git push origin --tags && conventional-github-releaser -p angular"
+        "github-release": "conventional-github-releaser -p angular"
     },
     "peerDependencies": {
         "axios": ">=0.21.1",

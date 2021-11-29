@@ -1,4 +1,4 @@
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import type { ClassTransformOptions } from 'class-transformer';
 import { WorldCountryUtil } from '../util/world-country';
 import { Location } from '../model';
@@ -46,7 +46,7 @@ export abstract class AbstractLocationTransformer<HttpProviderClass extends Abst
             location.formattedAddress = location.generateFormattedAddress();
         }
 
-        return plainToClass<Location<ProviderRawEntryType>, LocationInterface<ProviderRawEntryType>>(Location, location, options);
+        return plainToInstance<Location<ProviderRawEntryType>, LocationInterface<ProviderRawEntryType>>(Location, location, options);
     }
 
     protected async getWorldCountry(query: WorldCountryQueryInterface): Promise<WorldCountry | undefined> {

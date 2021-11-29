@@ -1,4 +1,4 @@
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import countries from 'world-countries/dist/countries-unescaped.json';
 import type { Countries, Country } from 'world-countries';
@@ -30,7 +30,7 @@ export class WorldCountryUtil {
     }
 
     static async find(_query: WorldCountryQueryInterface): Promise<WorldCountry | undefined> {
-        const query: WorldCountryQuery = plainToClass<WorldCountryQuery, WorldCountryQueryInterface>(WorldCountryQuery, _query);
+        const query: WorldCountryQuery = plainToInstance<WorldCountryQuery, WorldCountryQueryInterface>(WorldCountryQuery, _query);
         const keys: Array<keyof WorldCountryQueryInterface> = Object.keys(query) as unknown as Array<keyof WorldCountryQueryInterface>;
 
         // clear undefined/empty values
@@ -51,7 +51,7 @@ export class WorldCountryUtil {
         }
 
         const countryData: Country | undefined = (countries as unknown as Countries).find((plainCountry: Country) => {
-            const country: WorldCountry = plainToClass<WorldCountry, Country>(WorldCountry, plainCountry);
+            const country: WorldCountry = plainToInstance<WorldCountry, Country>(WorldCountry, plainCountry);
 
             return WorldCountryUtil.match(country, query);
         });
@@ -60,6 +60,6 @@ export class WorldCountryUtil {
             return;
         }
 
-        return plainToClass<WorldCountry, Country>(WorldCountry, countryData);
+        return plainToInstance<WorldCountry, Country>(WorldCountry, countryData);
     }
 }

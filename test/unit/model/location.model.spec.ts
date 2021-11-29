@@ -1,4 +1,4 @@
-import { classToPlain, plainToClass } from 'class-transformer';
+import { instanceToPlain, plainToClass } from 'class-transformer';
 import { Location } from '../../../src/model';
 import { locationFixture } from '../../fixture/model/address.fixture';
 import type { LocationInterface } from '../../../src/interface';
@@ -72,19 +72,19 @@ describe('Location (unit)', () => {
         });
     });
 
-    describe('classToPlain', () => {
+    describe('instanceToPlain', () => {
         it('should use #generateFormattedAddress if formattedAddress is empty', async () => {
             delete location.formattedAddress;
             delete location.postalCode;
             delete location.country;
 
-            const addressPlainObject: LocationInterface = classToPlain<Location>(location) as LocationInterface;
+            const addressPlainObject: LocationInterface = instanceToPlain<Location>(location) as LocationInterface;
 
             return (addressPlainObject.formattedAddress as string).should.be.deep.eq('1158 E 89th St, Chicago, IL, US');
         });
 
         it('should not generate street property', async () => {
-            const addressPlainObject: any = classToPlain<Location>(location) as LocationInterface;
+            const addressPlainObject: any = instanceToPlain<Location>(location) as LocationInterface;
 
             return (typeof addressPlainObject.street).should.be.eq('undefined');
         });

@@ -1,4 +1,4 @@
-import { plainToClass } from 'class-transformer';
+import { plainToInstance } from 'class-transformer';
 import type { ClassTransformOptions } from 'class-transformer';
 import { Suggestion } from '../model';
 import type { SuggestionInterface } from '../interface';
@@ -20,6 +20,6 @@ export abstract class AbstractSuggestionTransformer<
         suggestion.placeId = await this.getPlaceId();
         suggestion.raw = this.raw;
 
-        return plainToClass<Suggestion<ProviderRawEntryType>, SuggestionInterface<ProviderRawEntryType>>(Suggestion, suggestion, options);
+        return plainToInstance<Suggestion<ProviderRawEntryType>, SuggestionInterface<ProviderRawEntryType>>(Suggestion, suggestion, options);
     }
 }

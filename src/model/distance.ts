@@ -1,4 +1,4 @@
-import { classToPlain, Exclude, Expose } from 'class-transformer';
+import { instanceToPlain, Exclude, Expose } from 'class-transformer';
 import type { ClassTransformOptions } from 'class-transformer';
 import type { DistanceDetailsInterface } from '../interface';
 
@@ -17,6 +17,6 @@ export class Distance<ProviderRawEntryType = any> implements DistanceDetailsInte
     raw?: ProviderRawEntryType;
 
     toObject(options?: ClassTransformOptions): DistanceDetailsInterface<ProviderRawEntryType> {
-        return classToPlain<Distance<ProviderRawEntryType>>(this, options) as DistanceDetailsInterface<ProviderRawEntryType>;
+        return instanceToPlain<Distance<ProviderRawEntryType>>(this, options) as DistanceDetailsInterface<ProviderRawEntryType>;
     }
 }

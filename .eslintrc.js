@@ -7,5 +7,6 @@ module.exports = {
         // rules to override.
         // '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/restrict-template-expressions': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
     },
 };

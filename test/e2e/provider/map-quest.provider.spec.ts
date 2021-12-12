@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import type { AxiosInstance } from 'axios';
 import { AccuracyEnum } from '../../../src/model';
-import { GoogleMapsSuggestCommand, MapQuestGeocodeCommand, MapQuestProvider, MapQuestReverseCommand } from '../../../src/provider';
+import { MapQuestGeocodeCommand, MapQuestProvider, MapQuestReverseCommand, MapQuestSuggestCommand } from '../../../src/provider';
 import { geocodeQueryFixture, reverseQueryFixture, suggestQueryFixture } from '../../fixture/model/query.fixture';
 import {
     providerParsedGeocodeResponse,
@@ -79,7 +79,7 @@ describe('MapQuestProvider (2e2)', () => {
     });
 
     describe.skip('#suggest', () => {
-        const url: string = GoogleMapsSuggestCommand.getUrl();
+        const url: string = MapQuestSuggestCommand.getUrl();
 
         sharedBehaviours(url, 'suggest', suggestQueryFixture, providerRawSuggestResponse, providerParsedSuggestResponse);
 

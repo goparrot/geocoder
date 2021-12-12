@@ -17,13 +17,13 @@ export class GoogleMapsGeocodeCommand extends GoogleMapsLocationCommandMixin(Geo
     }
 
     protected async buildQuery(query: GeocodeQuery): Promise<GoogleMapsGeocodeQueryInterface> {
-        const components: Map<string, string> = new Map();
+        const components = new Map<string, string>();
 
         if (query.postalCode) {
             components.set('postal_code', query.postalCode);
         }
 
-        const country: string | undefined = query.countryCode || query.country;
+        const country = query.countryCode || query.country;
         if (country) {
             components.set('country', country);
         }
@@ -36,7 +36,7 @@ export class GoogleMapsGeocodeCommand extends GoogleMapsLocationCommandMixin(Geo
         const providerQuery: GoogleMapsGeocodeQueryInterface = {
             key: this.apiKey,
             address: query.address,
-            components: [...components].map<string>((value: [string, string]) => `${value[0]}:${value[1]}`).join('|'),
+            components: [...components].map<string>(([key, value]) => `${key}:${value}`).join('|'),
             language: query.language,
             limit: query.limit,
             sensor: false,

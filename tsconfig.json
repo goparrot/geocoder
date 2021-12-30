@@ -3,7 +3,7 @@
         "module": "commonjs",
         "target": "es2018",
         "moduleResolution": "node",
-        "lib": ["es2018"],
+        "lib": ["es2018", "dom"],
         "outDir": "dist/node",
         "baseUrl": "src",
         "incremental": true,

@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
 
@@ -24,14 +24,14 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
 
       - name: Read node version from `.nvmrc` file
         id: nvmrc
         uses: browniebroke/read-nvmrc-action@v1
 
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ steps.nvmrc.outputs.node_version }}
 
@@ -49,14 +49,14 @@ jobs:
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
 
       - name: Read node version from `.nvmrc` file
         id: nvmrc
         uses: browniebroke/read-nvmrc-action@v1
 
       - name: Use Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ steps.nvmrc.outputs.node_version }}
 
@@ -72,14 +72,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [12, 14, 16]
+        node-version: [12, 14, 16, 18]
 
     steps:
       - name: Clone repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -99,6 +99,6 @@ jobs:
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
-        if: startsWith(matrix.node-version, '16')
+        if: startsWith(matrix.node-version, '18')
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

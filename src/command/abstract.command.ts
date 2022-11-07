@@ -42,7 +42,7 @@ export abstract class AbstractCommand<
         throw new Error('AbstractCommand.getMaxAccuracy: not implemented');
     }
 
-    static getUrl(): string {
+    static getUrl(..._args: (string | number)[]): string {
         throw new Error('AbstractCommand.getUrl: not implemented');
     }
 

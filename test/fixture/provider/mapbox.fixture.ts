@@ -1,0 +1,242 @@
+import type { LocationInterface } from '../../../src/interface';
+
+const providerRawLocationResponse: Readonly<any> = Object.freeze({
+    type: 'FeatureCollection',
+    query: ['1158', 'e', '89th', 'st'],
+    features: [
+        {
+            id: 'address.5265545100228456',
+            type: 'Feature',
+            place_type: ['address'],
+            relevance: 1,
+            properties: {
+                accuracy: 'interpolated',
+            },
+            text_en: 'East 89th Street',
+            place_name_en: '1158 East 89th Street, Brooklyn, New York 11236, United States',
+            text: 'East 89th Street',
+            place_name: '1158 East 89th Street, Brooklyn, New York 11236, United States',
+            center: [-73, 40],
+            geometry: {
+                type: 'Point',
+                coordinates: [-73, 40],
+                interpolated: true,
+            },
+            address: '1158',
+            context: [
+                {
+                    id: 'neighborhood.86969580',
+                    text_en: 'Canarsie',
+                    text: 'Canarsie',
+                },
+                {
+                    id: 'postcode.27905772',
+                    text_en: '11236',
+                    text: '11236',
+                },
+                {
+                    id: 'locality.66915052',
+                    wikidata: 'Q18419',
+                    text_en: 'Brooklyn',
+                    language_en: 'en',
+                    text: 'Brooklyn',
+                    language: 'en',
+                },
+                {
+                    id: 'place.233720044',
+                    wikidata: 'Q60',
+                    text_en: 'New York City',
+                    language_en: 'en',
+                    text: 'New York City',
+                    language: 'en',
+                },
+                {
+                    id: 'district.12379884',
+                    wikidata: 'Q11980692',
+                    text_en: 'Kings County',
+                    language_en: 'en',
+                    text: 'Kings County',
+                    language: 'en',
+                },
+                {
+                    id: 'region.107756',
+                    short_code: 'US-NY',
+                    wikidata: 'Q1384',
+                    text_en: 'New York',
+                    language_en: 'en',
+                    text: 'New York',
+                    language: 'en',
+                },
+                {
+                    id: 'country.8940',
+                    short_code: 'us',
+                    wikidata: 'Q30',
+                    text_en: 'United States',
+                    language_en: 'en',
+                    text: 'United States',
+                    language: 'en',
+                },
+            ],
+        },
+        {
+            id: 'address.3893236254861400',
+            type: 'Feature',
+            place_type: ['address'],
+            relevance: 1,
+            properties: {
+                accuracy: 'interpolated',
+            },
+            text_en: 'East 89th Street',
+            place_name_en: '1158 East 89th Street, Kansas City, Missouri 64131, United States',
+            text: 'East 89th Street',
+            place_name: '1158 East 89th Street, Kansas City, Missouri 64131, United States',
+            center: [-94, 38],
+            geometry: {
+                type: 'Point',
+                coordinates: [-94, 38],
+                interpolated: true,
+            },
+            address: '1158',
+            context: [
+                {
+                    id: 'neighborhood.357616876',
+                    text_en: 'Legacy East',
+                    text: 'Legacy East',
+                },
+                {
+                    id: 'postcode.222269164',
+                    text_en: '64131',
+                    text: '64131',
+                },
+                {
+                    id: 'place.368363756',
+                    wikidata: 'Q41819',
+                    text_en: 'Kansas City',
+                    language_en: 'en',
+                    text: 'Kansas City',
+                    language: 'en',
+                },
+                {
+                    id: 'district.11241196',
+                    wikidata: 'Q127238',
+                    text_en: 'Jackson County',
+                    language_en: 'en',
+                    text: 'Jackson County',
+                    language: 'en',
+                },
+                {
+                    id: 'region.271596',
+                    short_code: 'US-MO',
+                    wikidata: 'Q1581',
+                    text_en: 'Missouri',
+                    language_en: 'en',
+                    text: 'Missouri',
+                    language: 'en',
+                },
+                {
+                    id: 'country.8940',
+                    short_code: 'us',
+                    wikidata: 'Q30',
+                    text_en: 'United States',
+                    language_en: 'en',
+                    text: 'United States',
+                    language: 'en',
+                },
+            ],
+        },
+        {
+            id: 'address.1114623853463594',
+            type: 'Feature',
+            place_type: ['address'],
+            relevance: 1,
+            properties: {
+                accuracy: 'interpolated',
+            },
+            text_en: 'East 89th Street',
+            place_name_en: '1158 East 89th Street, Chicago, Illinois 60619, United States',
+            text: 'East 89th Street',
+            place_name: '1158 East 89th Street, Chicago, Illinois 60619, United States',
+            center: [-87, 41],
+            geometry: {
+                type: 'Point',
+                coordinates: [-87, 41],
+                interpolated: true,
+                omitted: true,
+            },
+            address: '1158',
+            context: [
+                {
+                    id: 'neighborhood.79842540',
+                    text_en: 'Burnside',
+                    text: 'Burnside',
+                },
+                {
+                    id: 'postcode.208121580',
+                    text_en: '60619',
+                    text: '60619',
+                },
+                {
+                    id: 'place.59328748',
+                    wikidata: 'Q1297',
+                    text_en: 'Chicago',
+                    language_en: 'en',
+                    text: 'Chicago',
+                    language: 'en',
+                },
+                {
+                    id: 'district.5162732',
+                    wikidata: 'Q108418',
+                    text_en: 'Cook County',
+                    language_en: 'en',
+                    text: 'Cook County',
+                    language: 'en',
+                },
+                {
+                    id: 'region.17644',
+                    short_code: 'US-IL',
+                    wikidata: 'Q1204',
+                    text_en: 'Illinois',
+                    language_en: 'en',
+                    text: 'Illinois',
+                    language: 'en',
+                },
+                {
+                    id: 'country.8940',
+                    short_code: 'us',
+                    wikidata: 'Q30',
+                    text_en: 'United States',
+                    language_en: 'en',
+                    text: 'United States',
+                    language: 'en',
+                },
+            ],
+        },
+    ],
+    attribution:
+        'NOTICE: © 2022 Mapbox and its suppliers. All rights reserved. Use of this data is subject to the Mapbox Terms of Service (https://www.mapbox.com/about/maps/). This response and the information it contains may not be retained. POI(s) provided by Foursquare.',
+});
+
+const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
+    {
+        formattedAddress: '1158 East 89th Street, Brooklyn, New York 11236, United States',
+        latitude: -73.901804,
+        longitude: 40.635302,
+        country: 'United States',
+        countryCode: 'US',
+        state: 'New York',
+        stateCode: 'NY',
+        city: 'New York City',
+        postalCode: '11236',
+        streetName: 'East 89th Street',
+        houseNumber: '1158',
+        placeId: 'address.5265545100228456',
+        provider: 'MapboxProvider',
+        raw: providerRawLocationResponse.features[0],
+    },
+]);
+
+export const providerRawGeocodeResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
+
+export const providerRawReverseResponse: Readonly<any> = providerRawLocationResponse;
+export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;

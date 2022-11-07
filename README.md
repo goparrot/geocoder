@@ -215,7 +215,7 @@ Legend:
 | [Google Maps](https://developers.google.com/maps/documentation/geocoding/)                | ✅      | ✅      | ✅      | ✅            | ✅       |
 | [Here](https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html) | ✅      | ✅      | ✅      | ✅            | 🔍       |
 | [LocationIQ](https://locationiq.com/docs)                                                 | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
-| [Mapbox](https://docs.mapbox.com/api)                                                     | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
+| [Mapbox](https://docs.mapbox.com/api)                                                     | ✅      | ✅      | 🔍️     | 🚫            | 🔍       |
 | [MapQuest](http://developer.mapquest.com/web/products/dev-services/geocoding-ws)          | ✅      | ✅      | 🚫️     | 🚫            | 🔍       |
 | [Mapzen](https://www.mapzen.com/documentation/)                                           | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |
 | [Nominatim](https://nominatim.org/release-docs/develop/)                                  | 🆘      | 🆘️     | 🔍️     | 🔍            | 🔍       |

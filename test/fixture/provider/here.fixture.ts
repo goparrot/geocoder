@@ -49,7 +49,7 @@ const providerRawLocationResponse: Readonly<any> = Object.freeze({
     },
 });
 
-const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
+const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface[]>([
     {
         latitude: 41.7332449,
         longitude: -87.5960168,
@@ -75,7 +75,7 @@ export const providerRawReverseResponse: Readonly<any> = providerRawLocationResp
 export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = providerParsedLocationResponse;
 
 export const providerRawSuggestResponse: Readonly<any> = providerRawLocationResponse;
-export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
+export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface[]>([
     {
         formattedAddress: providerRawLocationResponse.Response.View[0].Result[0].Location.Address.Label,
         placeId: providerRawLocationResponse.Response.View[0].Result[0].Location.LocationId,

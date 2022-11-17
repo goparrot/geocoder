@@ -40,7 +40,7 @@ const providerRawLocationResponse: Readonly<any> = Object.freeze({
     ],
 });
 
-const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
+const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface[]>([
     {
         latitude: 40.635334,
         longitude: -73.901844,
@@ -157,7 +157,7 @@ export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
     ],
 });
 
-export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
+export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface[]>([
     {
         formattedAddress: '1158 E 89th St, Chicago, IL 60619-7017',
         placeId: providerRawSuggestResponse.results[0].id,

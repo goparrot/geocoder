@@ -37,7 +37,7 @@ export const providerRawGeocodeResponse: Readonly<any> = Object.freeze({
     ],
 });
 
-export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
+export const providerParsedGeocodeResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface[]>([
     {
         formattedAddress: '1158 E 89th St, Chicago, IL, 60619, USA',
         latitude: 41.733182329890155,
@@ -89,7 +89,7 @@ export const providerRawReverseResponse: Readonly<any> = Object.freeze({
     },
 });
 
-export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
+export const providerParsedReverseResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface[]>([
     {
         formattedAddress: '250 W 18th St, New York, NY, 10011, USA',
         latitude: 40.74185,
@@ -128,7 +128,7 @@ export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
     ],
 });
 
-export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
+export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface[]>([
     {
         formattedAddress: '1158 E 89th St, Brooklyn, NY, 11236, USA',
         placeId: 'dHA9MCNsb2M9NTAxMzE2MCNsbmc9MzMjaG49MTE1OCNsYnM9MTA5OjEwNDI0MzI0',

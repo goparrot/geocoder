@@ -86,7 +86,7 @@ const providerRawLocationResponse: Readonly<any> = Object.freeze({
     status: 'OK',
 });
 
-const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface>([
+const providerParsedLocationResponse: ReadonlyArray<LocationInterface> = Object.freeze<LocationInterface[]>([
     {
         formattedAddress: '80 Cranberry St, Brooklyn, NY 11201, USA',
         latitude: 40.6993821,
@@ -158,7 +158,7 @@ export const providerRawSuggestResponse: Readonly<any> = Object.freeze({
     status: 'OK',
 });
 
-export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface>([
+export const providerParsedSuggestResponse: ReadonlyArray<SuggestionInterface> = Object.freeze<SuggestionInterface[]>([
     {
         formattedAddress: providerRawSuggestResponse.predictions[0].description,
         placeId: providerRawSuggestResponse.predictions[0].place_id,

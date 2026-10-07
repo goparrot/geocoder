@@ -8,7 +8,7 @@ on:
 
 jobs:
   commitlint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Clone repository
@@ -20,7 +20,7 @@ jobs:
         uses: wagoid/commitlint-github-action@v2
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Clone repository
@@ -45,7 +45,7 @@ jobs:
         run: npm run lint
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Clone repository
@@ -67,7 +67,7 @@ jobs:
         run: npm run build:dist
 
   coverage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     strategy:
       fail-fast: false
